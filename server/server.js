@@ -7,16 +7,25 @@ const bodyParser = require('body-parser');
 
 // import parsing from './api';
 // const parsing = require('./api.js');
-const { parsing } = require('../server/api.js');
+const parsing = require('../server/api.js');
+
+// pending이라는것 실행 찾아보기!!!!!!!!!!!!!
+const parsingData = async () => {
+  const parsed = await parsing();
+  // console.log(parsed, 'ssss');
+};
+
+// console.log(parsingData(), 'ssss');
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(cors());
 
-app.use(express.static(__dirname + './client/public/index.html'));
+// app.use(express.static(__dirname + './client/public/index.html'));
 
 app.get('/api', (req, res) => {
-  parsing().then((response) => {
+  // console.log(req.body);
+  parsingData().then((response) => {
     res.send(response);
   });
 });

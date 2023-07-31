@@ -18,15 +18,19 @@ const getHTML = async () => {
 const parsing = async () => {
   // 위에서 추출한 HTML 전체 가져오기
   const html = await getHTML();
+
   // JQuery처럼 사용하기 위해 '$'에 cheerio를 로드한다.
   const $ = cheerio.load(html.data);
+  // console.log(html.data);
 
-  let dataArr = [];
-  const $cheesebon = $('#place-main-section-root > section > div > div ');
+  const dataArr = [];
+  // div하나가 빠져서 자꾸 빈배열이 나온것이다...ㅅㅂ
+  // const $cheesebon = $('#place-main-section-root > section > div > div ');
+  const $cheesebon = $('#place-main-section-root > div > section > div > div ');
+  // console.log($cheesebon);
 
   $cheesebon.each((idx, node) => {
     const Title = $(node).find('.Fc1rA').text();
-
     // const Img = $(node)
     //   .find('.K0PDV._div')
     //   .attr('style')
@@ -37,17 +41,22 @@ const parsing = async () => {
     const Time = $(node).find('.U7pYf').text().substring(0, 12);
     const Number = $(node).find('.xlx7Q').text();
 
-    dataArr.push({
-      Title: Title,
-      // Img,
-      Address: Address,
-      Time: Time,
-      Number: Number,
-    });
+    // 빈 값 리턴
+    if (Title !== '') {
+      dataArr.push(Title);
+    } else if (Address !== '' && Time !== '' && Number !== '') {
+      dataArr.push(Address, Number, Time);
+    }
+
+    // 오브젝트 형식으로 배열에 담기
+    // dataArr.push({
+    //   Title,
+    //   Address,
+    //   Time,
+    //   Number,
+    // });
   });
   console.log(dataArr);
-
-  // dataArr를 JSON 형식으로 변환
-  // const plz = JSON.parse(dataArr);
+  return dataArr;
 };
-module.exports = { parsing };
+module.exports = parsing;
