@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import CommonStyles from '../../utils/CommonStyles';
 import Storeimg from '../../public/assets/Storeimg.jpg';
-import axios from 'axios';
 import styled from 'styled-components';
 import InformationApi from '../../components/Location/InformationApi';
+import Map from '../../components/Location/Map';
 
 function Location() {
   const [Data, setData] = useState([]);
+
   useEffect(() => {
     const requestOptions = {
       method: 'GET',
@@ -18,18 +19,17 @@ function Location() {
       .then((data) => setData(data));
   }, []);
 
+  // axios로 server에서 json 자동 변환에서 에러가 뜨고 막혀서 json파일을 따로 만들어서 fetch 방법을 사용함
   // const fetchStoreInformations = async () => {
   //   try {
-  //     const { data } = await axios.get('/api/chessebon');
+  //     const { data } = await axios.get('http://localhost:5000/api');
   //     console.log(data);
   //     setData(data);
-  //     console.log(Data);
   //   } catch (error) {
   //     let message = 'Unknown Error';
   //     if (error instanceof Error) message = error.message;
   //     console.log(message);
   //   }
-  //   console.log(Data);
   // };
 
   // useEffect(() => {
@@ -42,14 +42,18 @@ function Location() {
         <LocationSection>
           <LocationTxt>매장안내</LocationTxt>
           <LocationvView>
+            <LocationImfor>
+              {Data.map((post) => {
+                return <InformationApi key={post.id} post={post} />;
+              })}
+            </LocationImfor>
             <LocationImgSection>
               <LocationImfor1>
-                {Data.map((post) => {
-                  return <InformationApi key={post.id} post={post} />;
-                })}
                 <LocationImg src={Storeimg} />
               </LocationImfor1>
-              <LocationImfor2>{/* <Map /> */}</LocationImfor2>
+              <LocationImfor2>
+                <Map />
+              </LocationImfor2>
             </LocationImgSection>
           </LocationvView>
         </LocationSection>
@@ -79,10 +83,15 @@ export const LocationvView = styled.div`
   margin: 0 auto;
 `;
 export const LocationImgSection = styled.div`
+  display: flex;
   margin: 0 0 15px 0;
-  width: 500px;
+  /* width: 500px; */
   overflow: hidden;
 `;
+export const LocationImfor = styled.div`
+  /* display: flex; */
+`;
+
 export const LocationImfor1 = styled.div`
   float: left;
 `;
@@ -91,9 +100,13 @@ export const LocationImg = styled.img`
   left: 0;
   right: 0;
   bottom: 0;
-  width: 100%;
+  width: 95%;
   height: 100%;
-  -o-object-fit: cover;
-  object-fit: cover;
+  margin-right: 10px;
+  object-fit: contain;
 `;
-export const LocationImfor2 = styled.div``;
+export const LocationImfor2 = styled.div`
+  width: 110%;
+  float: right;
+  height: 100%;
+`;

@@ -9,19 +9,27 @@ const parsing = require('../server/api.js');
 const fs = require('fs');
 
 const InformationJSON = fs.readFileSync('./Information.json');
-// const newsData = JSON.parse(newsData)
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // cors
 app.use(cors());
 
+// 이 부분은 필요없다
 const parsingData = async () => {
   const parsed = await parsing();
-  console.log(parsed, 'fff');
+  // console.log(parsed, 'fff');
 };
 
 // app.use(express.static(__dirname + './client/public/index.html'));
+
+// app.get('/api', (req, res) => {
+//   // res.json(parsingData());
+//   parsingData().then((response) => {
+//     res.send(response);
+//   });
+//   // res.send(parsingData);
+// });
 
 app.get('/api', (req, res) => {
   res.send(InformationJSON);

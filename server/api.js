@@ -1,11 +1,7 @@
 const axios = require('axios');
-// import axios from 'axios';
-// import { Cheerio } from 'cheerio';
-// import cheerio from 'cheerio';
 const cheerio = require('cheerio');
 const fs = require('fs');
 const { DefaultDeserializer } = require('v8');
-
 const getHTML = async () => {
   try {
     return await axios.get(
@@ -26,7 +22,8 @@ const parsing = async () => {
   // console.log(html.data);
 
   const dataArr = [];
-  const dataPath = './information.json';
+  const dataPath = './Information.json';
+
   // div하나가 빠져서 자꾸 빈배열이 나온것이다...ㅅㅂ
   // const $cheesebon = $('#place-main-section-root > section > div > div ');
   const $cheesebon = $('#place-main-section-root > div > section > div > div ');
