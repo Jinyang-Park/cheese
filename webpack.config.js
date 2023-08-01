@@ -54,8 +54,8 @@ module.exports = {
   devServer: {
     proxy: {
       '/api': {
-        // target: 'http://localhost:5000',
-        target: 'https://search.naver.com',
+        target: 'http://localhost:5000',
+        // target: 'https://search.naver.com',
         changeOrigin: true,
         pathRewrite: {
           '^/api': '',

@@ -3,27 +3,43 @@ import CommonStyles from '../../utils/CommonStyles';
 import Storeimg from '../../public/assets/Storeimg.jpg';
 import axios from 'axios';
 import styled from 'styled-components';
+import InformationApi from '../../components/Location/InformationApi';
 
 function Location() {
   const [Data, setData] = useState([]);
-
-  const fetchStoreInformations = async () => {
-    try {
-      const { data } = await axios.get('/api');
-      console.log(data);
-      setData(data);
-      console.log(Data);
-    } catch (error) {
-      let message = 'Unknown Error';
-      if (error instanceof Error) message = error.message;
-      console.log(message);
-    }
-    console.log(Data);
-  };
-
   useEffect(() => {
-    fetchStoreInformations();
+    const requestOptions = {
+      method: 'GET',
+      Headers: { 'Content-Type': 'application/json' },
+      redirect: 'follow',
+    };
+    fetch('http://localhost:5000/api', requestOptions)
+      .then((response) => response.json())
+      .then((data) => setData(data));
   }, []);
+  // const requestOptions = {
+  //   method: 'GET',
+  //   Headers: { 'Content-Type': 'application/json' },
+  //   redirect: 'follow',
+  // };
+
+  // const fetchStoreInformations = async () => {
+  //   try {
+  //     const { data } = await axios.get('/api/chessebon');
+  //     console.log(data);
+  //     setData(data);
+  //     console.log(Data);
+  //   } catch (error) {
+  //     let message = 'Unknown Error';
+  //     if (error instanceof Error) message = error.message;
+  //     console.log(message);
+  //   }
+  //   console.log(Data);
+  // };
+
+  // useEffect(() => {
+  //   fetchStoreInformations();
+  // }, []);
 
   return (
     <>
@@ -33,9 +49,9 @@ function Location() {
           <LocationvView>
             <LocationImgSection>
               <LocationImfor1>
-                {/* {Data.map((post) => {
-                  return <div>{post.Title}</div>;
-                })} */}
+                {Data.map((post) => {
+                  return <InformationApi key={post.id} post={post} />;
+                })}
                 <LocationImg src={Storeimg} />
               </LocationImfor1>
               <LocationImfor2>{/* <Map /> */}</LocationImfor2>
