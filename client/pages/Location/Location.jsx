@@ -17,11 +17,6 @@ function Location() {
       .then((response) => response.json())
       .then((data) => setData(data));
   }, []);
-  // const requestOptions = {
-  //   method: 'GET',
-  //   Headers: { 'Content-Type': 'application/json' },
-  //   redirect: 'follow',
-  // };
 
   // const fetchStoreInformations = async () => {
   //   try {

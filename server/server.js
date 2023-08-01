@@ -24,12 +24,7 @@ const parsingData = async () => {
 // app.use(express.static(__dirname + './client/public/index.html'));
 
 app.get('/api', (req, res) => {
-  // res.json(parsingData());
   res.send(InformationJSON);
-  // parsingData().then((response) => {
-  //   res.send(response);
-  // });
-  // res.send(parsingData);
 });
 
 app.listen(PORT, () => {
