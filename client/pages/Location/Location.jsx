@@ -7,7 +7,10 @@ import Map from '../../components/Location/Map';
 
 function Location() {
   const [Data, setData] = useState([]);
-
+  // const a = Data[0];
+  // const b = Data[1];
+  // const sumData = Object.assign({}, a, b);
+  // console.log(sumData);
   useEffect(() => {
     const requestOptions = {
       method: 'GET',
@@ -42,15 +45,17 @@ function Location() {
         <LocationSection>
           <LocationTxt>매장안내</LocationTxt>
           <LocationvView>
-            <LocationImfor>
-              {Data.map((post) => {
-                return <InformationApi key={post.id} post={post} />;
-              })}
-            </LocationImfor>
             <LocationImgSection>
-              <LocationImfor1>
-                <LocationImg src={Storeimg} />
-              </LocationImfor1>
+              <LocationWrap>
+                <LocationImfor1>
+                  <LocationImg src={Storeimg} />
+                </LocationImfor1>
+                <LocationImfor>
+                  {Data.map((post) => {
+                    return <InformationApi key={post.id} post={post} />;
+                  })}
+                </LocationImfor>
+              </LocationWrap>
               <LocationImfor2>
                 <Map />
               </LocationImfor2>
@@ -69,7 +74,10 @@ export const LocationSection = styled.section`
   min-height: calc(100vh - 161px);
   padding-top: 60px;
 `;
-
+export const LocationWrap = styled.div`
+  display: flex;
+  padding-bottom: 50px;
+`;
 export const LocationTxt = styled.h1`
   padding-top: 100px;
   margin: 0 0 100px;
@@ -83,30 +91,30 @@ export const LocationvView = styled.div`
   margin: 0 auto;
 `;
 export const LocationImgSection = styled.div`
-  display: flex;
+  /* display: flex; */
   margin: 0 0 15px 0;
   /* width: 500px; */
   overflow: hidden;
 `;
 export const LocationImfor = styled.div`
-  /* display: flex; */
+  width: calc(100% - 300px);
 `;
 
 export const LocationImfor1 = styled.div`
+  width: 500px;
+  margin: 0 50px 0px 0;
+  position: relative;
+  /* padding-top: 100%;
+  overflow: hidden; */
   float: left;
 `;
 export const LocationImg = styled.img`
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 95%;
+  width: 100%;
   height: 100%;
-  margin-right: 10px;
   object-fit: contain;
 `;
 export const LocationImfor2 = styled.div`
-  width: 110%;
+  margin-bottom: 50px;
+  width: 100%;
   float: right;
-  height: 100%;
 `;

@@ -6,7 +6,7 @@ export default function Map() {
 
     const mapOptions = {
       center: new naver.maps.LatLng(36.63674569999992, 127.46559329999975),
-      zoom: 15,
+      zoom: 19,
     };
 
     const marker = new naver.maps.Marker({

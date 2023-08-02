@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const parsing = require('../server/api.js');
 const fs = require('fs');
 
-const InformationJSON = fs.readFileSync('./Information.json');
+const InformationJSON = fs.readFileSync('./CheeseInformation.json');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,13 +22,11 @@ const parsingData = async () => {
 };
 
 // app.use(express.static(__dirname + './client/public/index.html'));
-
-// app.get('/api', (req, res) => {
-//   // res.json(parsingData());
-//   parsingData().then((response) => {
-//     res.send(response);
-//   });
-//   // res.send(parsingData);
+// app.get('/api', async (req, res) => {
+//   // res.json({ users: ['userOne', 'userTwo'] });
+//   res.send(parsing());
+//   parsing().then((response) => res.send(response));
+//   // console.log(response);
 // });
 
 app.get('/api', (req, res) => {
