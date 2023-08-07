@@ -43,7 +43,6 @@ export default function Map({ post }) {
           '  bottom: -8px;',
           '  left: 35%;',
           '  border-width: 10px 10px 0;',
-
           '  border-style: solid;',
           '  border-color: #000000 transparent transparent;',
           '}',
