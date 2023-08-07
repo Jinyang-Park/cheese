@@ -3,6 +3,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // const CopyPlugin = require('copy-webpack-plugin');
 
+// const config = {
+//   iconPath: 'node_modules/react-icons',
+// };
 module.exports = {
   mode: 'development', // 실서비스: production
   resolve: {
@@ -34,6 +37,18 @@ module.exports = {
         test: /\.(jpg|png|svg)$/,
         use: ['file-loader'],
       },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+      // {
+      //   test: /react-icons\/(.)*(.js)$/,
+      //   loader: 'babel-loader',
+      //   query: {
+      //     presets: ['es2015', 'react'],
+      //   },
+      //   include: config.iconPath,
+      // },
     ],
   },
   plugins: [
@@ -54,8 +69,8 @@ module.exports = {
   devServer: {
     proxy: {
       '/api': {
-        // target: 'http://localhost:5000',
-        target: 'https://search.naver.com',
+        target: 'http://localhost:5000',
+        // target: 'https://search.naver.com',
         changeOrigin: true,
         pathRewrite: {
           '^/api': '',

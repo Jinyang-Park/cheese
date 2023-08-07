@@ -1,8 +1,7 @@
 const axios = require('axios');
-// import axios from 'axios';
-// import { Cheerio } from 'cheerio';
-// import cheerio from 'cheerio';
 const cheerio = require('cheerio');
+const fs = require('fs');
+const { DefaultDeserializer } = require('v8');
 
 const getHTML = async () => {
   try {
@@ -23,7 +22,10 @@ const parsing = async () => {
   const $ = cheerio.load(html.data);
   // console.log(html.data);
 
+  const dataObject = {};
   const dataArr = [];
+  const dataPath = './CheeseInformation.json';
+
   // div하나가 빠져서 자꾸 빈배열이 나온것이다...ㅅㅂ
   // const $cheesebon = $('#place-main-section-root > section > div > div ');
   const $cheesebon = $('#place-main-section-root > div > section > div > div ');
@@ -36,18 +38,19 @@ const parsing = async () => {
     //   .attr('style')
     //   .match(/url\(["']?(.*?)["']?\)/)[1];
     // console.log(Img);
-
     const Address = $(node).find('.LDgIH').text();
     const Time = $(node).find('.U7pYf').text().substring(0, 12);
     const Number = $(node).find('.xlx7Q').text();
 
     // 빈 값 리턴
     if (Title !== '') {
-      dataArr.push(Title);
+      dataObject.Title = Title;
     } else if (Address !== '' && Time !== '' && Number !== '') {
-      dataArr.push(Address, Number, Time);
+      dataObject.Address = Address;
+      dataObject.Time = Time;
+      dataObject.Number = Number;
+      // dataArr2.push({ Address, Number, Time });
     }
-
     // 오브젝트 형식으로 배열에 담기
     // dataArr.push({
     //   Title,
@@ -56,7 +59,10 @@ const parsing = async () => {
     //   Number,
     // });
   });
+  // console.log(dataObject);
+  dataArr.push(dataObject);
   console.log(dataArr);
-  return dataArr;
+  // console.log(dataArr2);
+  return fs.writeFileSync(dataPath, JSON.stringify(dataArr));
 };
 module.exports = parsing;
