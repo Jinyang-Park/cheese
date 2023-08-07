@@ -29,12 +29,24 @@ export default function Map({ post }) {
 
       icon: {
         content: [
-          '<div class="markerContainer" style="display: flex; padding:5px 19px 5px 30px; border-radius:23px; border: 2px solid #000000;     align-items: center; background: #fff;">',
+          '<div class="markerContainer" style="display: flex; padding:5px 19px 5px 30px; border-radius:23px; border: 2px solid #000000; align-items: center; background: #fff;">',
+
           '<div class="makercircle" style="display:table; margin-left: -20px; padding:7px; border-radius:15px;  background: #000000;">',
           '<img src="https://img.icons8.com/?size=15&id=QqI85B8zokhd&format=png" style="filter: invert(100%) sepia(96%) saturate(1%) hue-rotate(9deg) brightness(104%) contrast(100%);"/>',
           // postTitle,
           '</div>',
           '<h3 style="margin-left: 10px">치즈본</h3>',
+          '<style>',
+          '.markerContainer::after {',
+          '  content: "";',
+          '  position: absolute;',
+          '  bottom: -8px;',
+          '  left: 35%;',
+          '  border-width: 10px 10px 0;',
+
+          '  border-style: solid;',
+          '  border-color: #000000 transparent transparent;',
+          '}',
           '</div>',
         ].join(''),
         size: new naver.maps.Size(38, 58),
