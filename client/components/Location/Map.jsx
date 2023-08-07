@@ -2,17 +2,15 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 export default function Map({ post }) {
-  console.log(post);
   useEffect(() => {
     const { naver } = window;
 
-    // 지도의 위치, 위도 경도 파라미터로 넣어줌
+    // 지도의 위치, 위도 경도
     const location = new naver.maps.LatLng(
       36.63674569999992,
       127.46559329999975
     );
 
-    const setloacation = new naver.maps.LatLng();
     const map = new naver.maps.Map('map', {
       center: location,
       zoom: 18,
@@ -24,7 +22,7 @@ export default function Map({ post }) {
       },
     });
 
-    var infowindow = new naver.maps.InfoWindow();
+    // 이미지 마커 생성
     const markerOptions = {
       position: location,
       map: map,
@@ -44,16 +42,23 @@ export default function Map({ post }) {
       },
     };
 
-    naver.maps.Event.addListener(markerOptions, 'click', function (e) {
-      url =
+    // 마커 클릭 시 치즈본 지도 맵으로 이동
+    const makerClickHandler = function (e) {
+      const url =
         'https://map.naver.com/v5/search/%EC%B9%98%EC%A6%88%EB%B3%B8/place/1573099360?entry=plt&c=15.67,0,0,3,dh&isCorrectAnswer=true';
 
-      infowindow.open(url);
-    });
-    // naver.maps.Event.addListener(map, 'click', function (e) {
-    //   map.setPosition(e.coord);
-    // });
+      window.open(url);
+    };
+
+    // marker에 markerOptions을 넣어줌
     const maker = new naver.maps.Marker(markerOptions);
+
+    // 마커 클릭시 markerOptions과 마커이벤트핸들러 작동
+    const Linkurl = new naver.maps.Event.addListener(
+      maker,
+      'click',
+      makerClickHandler
+    );
   }, []);
 
   return (
@@ -64,4 +69,3 @@ export default function Map({ post }) {
     ></div>
   );
 }
-// https://map.naver.com/v5/search/%EC%B9%98%EC%A6%88%EB%B3%B8/place/1573099360?entry=plt&c=15.67,0,0,3,dh&isCorrectAnswer=true
