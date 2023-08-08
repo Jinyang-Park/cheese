@@ -6,19 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>hello</title>
     <!-- <link rel="favicon" href="./favicon/cheesebonfavicon.png" /> -->
-  </head>
-  <body>
-    <div id="root"></div>
-
-    <!-- <script type="text/javascript" src="../dist/app.js"></script> -->
-    <!-- <script type="text/javascript" src="axios.min.js"></script> -->
     <script
       type="text/javascript"
       src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=s0rdb64iko"
     ></script>
     <!-- <script
-      type="text/javascript"
-      src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=%REACT_APP_NAVER_CLIENTID%"
+      crossorigin="anonymous"
+      src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=<%= htmlWebpackPlugin.options.env.REACT_APP_NAVER_CLIENT_ID %>"
     ></script> -->
-  </body>
+
+    <div id="root"></div>
+  </head>
+  <body></body>
 </html>

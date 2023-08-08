@@ -7,10 +7,7 @@ import Map from '../../components/Location/Map';
 
 function Location() {
   const [Data, setData] = useState([]);
-  // const a = Data[0];
-  // const b = Data[1];
-  // const sumData = Object.assign({}, a, b);
-  // console.log(sumData);
+
   useEffect(() => {
     const requestOptions = {
       method: 'GET',
