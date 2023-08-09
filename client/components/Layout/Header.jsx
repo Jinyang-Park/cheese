@@ -39,8 +39,10 @@ export default function Header() {
 
             <S.HeaderLoginSection>
               <S.Loginli>
-                <S.LoginImg src={Flower} />
-                <S.LoginliTxt>LOGIN</S.LoginliTxt>
+                <Link to={'/Login'}>
+                  <S.LoginImg src={Flower} />
+                  <S.LoginliTxt>LOGIN</S.LoginliTxt>
+                </Link>
               </S.Loginli>
               <S.Loginli>
                 <S.LoginImg src={Leaf} />

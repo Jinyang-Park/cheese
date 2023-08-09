@@ -69,14 +69,14 @@ export default Location;
 export const LocationSection = styled.section`
   position: relative;
   min-height: calc(100vh - 161px);
-  padding-top: 60px;
+  /* padding-top: 60px; */
 `;
 export const LocationWrap = styled.div`
   display: flex;
   padding-bottom: 50px;
 `;
 export const LocationTxt = styled.h1`
-  padding-top: 100px;
+  padding-top: 200px;
   margin: 0 0 100px;
   text-align: center;
   font-size: 1.75em;
