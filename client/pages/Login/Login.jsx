@@ -1,25 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import CommonStyles from '../../utils/CommonStyles';
 import { Link } from 'react-router-dom';
+import LoginValidation from '../../common/LoginValidation';
 
 function Login() {
+  const [values, setValues] = useState({
+    email: '',
+    password: '',
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const handleInput = (event) => {
+    setValues((prev) => ({
+      ...prev,
+      [event.target.name]: [event.target.value],
+    }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setErrors(LoginValidation(values));
+  };
   return (
     <CommonStyles>
       <LoginWrap>
         <LoginTitle>로그인</LoginTitle>
-        <LoginForm>
+        <LoginForm action='' onSubmit={handleSubmit}>
           <LoginEmailDiv>
             <LoginEmailLabel htmlFor='email'>이메일</LoginEmailLabel>
-            <LoginEmailInput type='email' />
+            <LoginEmailInput
+              type='email'
+              name='email'
+              placeholder='이메일을 입력해주세요.'
+              onChange={handleInput}
+            />
           </LoginEmailDiv>
 
           <LoginPasswordDiv>
             <LoginPasswordLabel htmlFor='password'>비밀번호</LoginPasswordLabel>
-            <LoginPasswordInput type='password' />
+            <LoginPasswordInput
+              type='password'
+              name='password'
+              placeholder='비밀번호를 입력해주세요.'
+              onChange={handleInput}
+            />
           </LoginPasswordDiv>
 
-          <LoginBtn>로그인</LoginBtn>
+          <LoginBtn type='submit'>로그인</LoginBtn>
           <Link to={'/Signup'}>
             <RegisterBtn>회원가입</RegisterBtn>
           </Link>
@@ -55,7 +84,7 @@ export const LoginEmailDiv = styled.div`
   padding: 15px 0;
 `;
 export const LoginEmailLabel = styled.label`
-  width: 20%;
+  width: 25%;
   min-width: 60px;
   display: inline-block;
 `;
@@ -66,11 +95,7 @@ export const LoginEmailInput = styled.input`
   margin-top: -5px;
   background-color: inherit;
   border: 1px solid #ddd;
-
-  /* ::placeholder {
-    font-size: 13px;
-    color: #494848;
-  } */
+  padding-left: 5px;
 `;
 //패스워드
 export const LoginPasswordDiv = styled.div`
@@ -80,7 +105,7 @@ export const LoginPasswordDiv = styled.div`
   padding: 15px 0;
 `;
 export const LoginPasswordLabel = styled.label`
-  width: 20%;
+  width: 25%;
   min-width: 60px;
   display: inline-block;
 `;
@@ -91,6 +116,7 @@ export const LoginPasswordInput = styled.input`
   margin-top: -5px;
   background-color: inherit;
   border: 1px solid #ddd;
+  padding-left: 5px;
 `;
 //로그인 버튼
 export const LoginBtn = styled.button`
