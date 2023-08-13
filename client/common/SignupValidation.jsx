@@ -1,7 +1,19 @@
 import { emailRegex, passwordRegex } from './util';
 
-function LoginValidation(values) {
+function SignUpValidation(values) {
+  if (!values) {
+    // values 객체가 undefined인 경우
+    console.error('values 객체를 확인해주세요');
+    return {};
+  }
+
   let error = {};
+
+  if (values.name === '') {
+    error.name = '사용자 이름을 입력해주세요.';
+  } else {
+    error.name = '';
+  }
 
   if (values.email === '') {
     error.email = '사용자 아이디를 입력해주세요.';
@@ -19,6 +31,14 @@ function LoginValidation(values) {
   } else {
     error.password = '';
   }
+
+  if (values.confirmpassword === '') {
+    error.confirmpassword = '비밀번호를 정확히 입력해주세요';
+  } else if (values.confirmpassword !== values.password) {
+    error.confirmpassword = '비밀번호가 일치하지 않습니다.';
+  } else {
+    error.confirmpassword = '';
+  }
   return error;
 }
-export default LoginValidation;
+export default SignUpValidation;

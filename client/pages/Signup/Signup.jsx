@@ -1,43 +1,81 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import CommonStyles from '../../utils/CommonStyles';
 import { Link } from 'react-router-dom';
+import SignUpValidation from '../../common/SignupValidation';
 
 function Signup() {
+  const [values, setValues] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmpassword: '',
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const handleInput = (event) => {
+    setValues((prev) => ({
+      ...prev,
+      [event.target.name]: [event.target.value],
+    }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setErrors(SignUpValidation(values));
+  };
   return (
     <CommonStyles>
       <LoginWrap>
         <LoginTitle>회원가입</LoginTitle>
-        <LoginForm>
+        <LoginForm action='' onSubmit={handleSubmit}>
           <LoginNameDiv>
             <LoginNameLabel htmlFor='Name'>이름</LoginNameLabel>
-            <LoginNameInput type='Name' placeholder='이름을 입력해주세요.' />
+            <LoginNameInput
+              type='Name'
+              name='name'
+              placeholder='이름을 입력해주세요.'
+              onChange={handleInput}
+            />
+            {errors.name && <ErrorSpan>{errors.name}</ErrorSpan>}
           </LoginNameDiv>
 
           <LoginEmailDiv>
             <LoginEmailLabel htmlFor='email'>이메일</LoginEmailLabel>
             <LoginEmailInput
               type='email'
+              name='email'
               placeholder='이메일을 입력해주세요.'
+              onChange={handleInput}
             />
+            {errors.email && <ErrorSpan>{errors.email}</ErrorSpan>}
           </LoginEmailDiv>
 
           <LoginPasswordDiv>
             <LoginPasswordLabel htmlFor='password'>비밀번호</LoginPasswordLabel>
             <LoginPasswordInput
               type='password'
+              name='password'
               placeholder='비밀번호를 입력해주세요.'
+              onChange={handleInput}
             />
+            {errors.password && <ErrorSpan>{errors.password}</ErrorSpan>}
           </LoginPasswordDiv>
 
           <LoginPasswordDiv>
-            <LoginPasswordLabel htmlFor='password'>
+            <LoginPasswordLabel htmlFor='confirmpassword'>
               비밀번호 확인
             </LoginPasswordLabel>
             <LoginPasswordInput
               type='password'
+              name='confirmpassword'
               placeholder='비밀번호를 다시 한 번 입력해주세요.'
+              onChange={handleInput}
             />
+            {errors.confirmpassword && (
+              <ErrorSpan>{errors.confirmpassword}</ErrorSpan>
+            )}
           </LoginPasswordDiv>
 
           <LoginBtn>가입하기</LoginBtn>
@@ -53,12 +91,13 @@ function Signup() {
 export default Signup;
 export const LoginWrap = styled.div`
   padding-top: 200px;
-  margin: 0 0 100px;
+  /* margin: 0 0 100px; */
   width: 94%;
   max-width: 480px;
   margin: 0 auto;
   margin-top: 20px;
   text-align: center;
+  margin-bottom: 65px;
 `;
 export const LoginTitle = styled.h1`
   text-align: center;
@@ -83,7 +122,8 @@ export const LoginNameLabel = styled.label`
 export const LoginNameInput = styled.input`
   border-radius: 5px;
   height: 43px;
-  width: calc(80% - 10px);
+  /* width: calc(80% - 10px); */
+  width: 100%;
   margin-top: -5px;
   background-color: inherit;
   border: 1px solid #ddd;
@@ -105,7 +145,8 @@ export const LoginEmailLabel = styled.label`
 export const LoginEmailInput = styled.input`
   border-radius: 5px;
   height: 43px;
-  width: calc(80% - 10px);
+  /* width: calc(80% - 10px); */
+  width: 100%;
   margin-top: -5px;
   background-color: inherit;
   border: 1px solid #ddd;
@@ -126,7 +167,8 @@ export const LoginPasswordLabel = styled.label`
 export const LoginPasswordInput = styled.input`
   border-radius: 5px;
   height: 43px;
-  width: calc(80% - 10px);
+  width: 100%;
+  /* width: calc(80% - 10px); */
   margin-top: -5px;
   background-color: inherit;
   border: 1px solid #ddd;
@@ -139,7 +181,7 @@ export const LoginBtn = styled.button`
   border: 1px solid #ffdb7e;
   color: #846e23;
   width: 100%;
-  max-width: 300px;
+  max-width: 480px;
   padding: 15px;
   margin-top: 30px;
   border-radius: 500px;
@@ -151,8 +193,12 @@ export const RegisterBtn = styled.button`
   border: 1px solid #000;
   color: #fff;
   width: 100%;
-  max-width: 300px;
+  max-width: 480px;
   padding: 15px;
   border-radius: 500px;
   margin-top: 10px;
+`;
+export const ErrorSpan = styled.span`
+  font-size: 14px;
+  color: #ddd;
 `;
