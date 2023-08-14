@@ -32,6 +32,17 @@ const db = mysql.createConnection({
 //   const parsed = await parsing();
 // };
 
+app.post('/singup', (req, res) => {
+  const sql = 'INSERT INTO login (`name`, `email`, `password`) VALUES (?)';
+  const values = [req.body.name, req.body.email, req.body.password];
+  db.query(sql, [values], (err, data) => {
+    if (err) {
+      return res.json('Error');
+    }
+    return res.json(data);
+  });
+});
+
 // Location 으로 InfromationJSON 전달
 app.get('/api', (req, res) => {
   res.send(InformationJSON);

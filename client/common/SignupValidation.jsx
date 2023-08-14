@@ -32,13 +32,13 @@ function SignUpValidation(values) {
     error.password = '';
   }
 
-  if (values.confirmpassword === '') {
-    error.confirmpassword = '비밀번호를 정확히 입력해주세요';
-  } else if (values.confirmpassword !== values.password) {
-    error.confirmpassword = '비밀번호가 일치하지 않습니다.';
-  } else {
-    error.confirmpassword = '';
-  }
+  // if (values.confirmpassword === '') {
+  //   error.confirmpassword = '비밀번호를 정확히 입력해주세요';
+  // } else if (values.confirmpassword !== values.password) {
+  //   error.confirmpassword = '비밀번호가 일치하지 않습니다.';
+  // } else {
+  //   error.confirmpassword = '';
+  // }
   return error;
 }
 export default SignUpValidation;

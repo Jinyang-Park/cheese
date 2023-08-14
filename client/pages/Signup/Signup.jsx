@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import CommonStyles from '../../utils/CommonStyles';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SignUpValidation from '../../common/SignupValidation';
+import axios from 'axios';
 
 function Signup() {
   const [values, setValues] = useState({
     name: '',
     email: '',
     password: '',
-    confirmpassword: '',
+    // confirmpassword: '',
   });
 
+  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
 
   const handleInput = (event) => {
@@ -19,11 +21,22 @@ function Signup() {
       ...prev,
       [event.target.name]: [event.target.value],
     }));
+    // console.log(values);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setErrors(SignUpValidation(values));
+    const err = SignUpValidation(values);
+    setErrors(err);
+    // console.log(values);
+    if (errors.name === '' && errors.email === '' && errors.password === '') {
+      axios
+        .post('http://localhost:5000/singup', values)
+        .then((res) => {
+          navigate('/');
+        })
+        .catch((err) => console.log(err));
+    }
   };
   return (
     <CommonStyles>
@@ -63,7 +76,7 @@ function Signup() {
             {errors.password && <ErrorSpan>{errors.password}</ErrorSpan>}
           </LoginPasswordDiv>
 
-          <LoginPasswordDiv>
+          {/* <LoginPasswordDiv>
             <LoginPasswordLabel htmlFor='confirmpassword'>
               비밀번호 확인
             </LoginPasswordLabel>
@@ -76,7 +89,7 @@ function Signup() {
             {errors.confirmpassword && (
               <ErrorSpan>{errors.confirmpassword}</ErrorSpan>
             )}
-          </LoginPasswordDiv>
+          </LoginPasswordDiv> */}
 
           <LoginBtn>가입하기</LoginBtn>
           <Link to={'/'}>
