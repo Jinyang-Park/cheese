@@ -2,56 +2,45 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import CommonStyles from '../../utils/CommonStyles';
 import { Link, useNavigate } from 'react-router-dom';
-import SignUpValidation from '../../common/SignupValidation';
 import axios from 'axios';
+import useAuth from '../../hooks/useAuth';
 
 function Signup() {
-  const [values, setValues] = useState({
-    name: '',
-    email: '',
-    password: '',
-    // confirmpassword: '',
-  });
+  const auth = useAuth();
 
-  const navigate = useNavigate();
-  const [errors, setErrors] = useState({});
-
-  const handleInput = (event) => {
-    setValues((prev) => ({
-      ...prev,
-      [event.target.name]: [event.target.value],
-    }));
-    // console.log(values);
-  };
-
-  const handleSubmit = (event) => {
+  const submitHandler = (event) => {
     event.preventDefault();
-    const err = SignUpValidation(values);
-    setErrors(err);
-    // console.log(values);
-    if (errors.name === '' && errors.email === '' && errors.password === '') {
-      axios
-        .post('http://localhost:5000/singup', values)
-        .then((res) => {
-          navigate('/');
-        })
-        .catch((err) => console.log(err));
-    }
+
+    // 이메일, 비밀번호 유효성 검사 확인
+    if (!auth.checkValidation()) return;
+
+    // 비밀번호 일치여부 확인
+    if (!auth.checkValidationForSignUp()) return;
+
+    axios
+      .post('http://localhost:5000/singup', {
+        Email: auth.email,
+        UserName: auth.name,
+        Password: auth.password,
+        Confirmpassword: auth.confirmPassword,
+      })
+      .then(() => {
+        console.log('user!!');
+      });
   };
   return (
     <CommonStyles>
       <LoginWrap>
         <LoginTitle>회원가입</LoginTitle>
-        <LoginForm action='' onSubmit={handleSubmit}>
+        <LoginForm onSubmit={submitHandler}>
           <LoginNameDiv>
             <LoginNameLabel htmlFor='Name'>이름</LoginNameLabel>
             <LoginNameInput
               type='Name'
               name='name'
               placeholder='이름을 입력해주세요.'
-              onChange={handleInput}
+              onChange={auth.changeName}
             />
-            {errors.name && <ErrorSpan>{errors.name}</ErrorSpan>}
           </LoginNameDiv>
 
           <LoginEmailDiv>
@@ -60,9 +49,9 @@ function Signup() {
               type='email'
               name='email'
               placeholder='이메일을 입력해주세요.'
-              onChange={handleInput}
+              onChange={auth.changeEmail}
             />
-            {errors.email && <ErrorSpan>{errors.email}</ErrorSpan>}
+            {/* {errors.email && <ErrorSpan>{errors.email}</ErrorSpan>} */}
           </LoginEmailDiv>
 
           <LoginPasswordDiv>
@@ -71,12 +60,12 @@ function Signup() {
               type='password'
               name='password'
               placeholder='비밀번호를 입력해주세요.'
-              onChange={handleInput}
+              onChange={auth.changePassword}
             />
-            {errors.password && <ErrorSpan>{errors.password}</ErrorSpan>}
+            {/* {errors.password && <ErrorSpan>{errors.password}</ErrorSpan>} */}
           </LoginPasswordDiv>
 
-          {/* <LoginPasswordDiv>
+          <LoginPasswordDiv>
             <LoginPasswordLabel htmlFor='confirmpassword'>
               비밀번호 확인
             </LoginPasswordLabel>
@@ -84,12 +73,9 @@ function Signup() {
               type='password'
               name='confirmpassword'
               placeholder='비밀번호를 다시 한 번 입력해주세요.'
-              onChange={handleInput}
+              onChange={auth.changeConfirmPassword}
             />
-            {errors.confirmpassword && (
-              <ErrorSpan>{errors.confirmpassword}</ErrorSpan>
-            )}
-          </LoginPasswordDiv> */}
+          </LoginPasswordDiv>
 
           <LoginBtn>가입하기</LoginBtn>
           <Link to={'/'}>

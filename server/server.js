@@ -32,14 +32,34 @@ const db = mysql.createConnection({
 //   const parsed = await parsing();
 // };
 
+// app.post('/singup', (req, res) => {
+//   const sql = 'INSERT INTO login (`name`, `email`, `password`) VALUES (?)';
+//   const values = [req.body.name, req.body.email, req.body.password];
+//   db.query(sql, [values], (err, data) => {
+//     if (err) {
+//       return res.json('Error');
+//     }
+//     return res.json(data);
+//   });
+// });
+
 app.post('/singup', (req, res) => {
-  const sql = 'INSERT INTO login (`name`, `email`, `password`) VALUES (?)';
-  const values = [req.body.name, req.body.email, req.body.password];
-  db.query(sql, [values], (err, data) => {
+  const sentEmail = req.body.Email;
+  const sentUserName = req.body.UserName;
+  const sentPassword = req.body.Password;
+  const sentConfirmpassword = req.body.Confirmpassword;
+
+  const SQL =
+    'INSERT INTO Users (email, username, password, confirmpassword) VALUES (?,?,?,?)';
+  const values = [sentEmail, sentUserName, sentPassword, sentConfirmpassword];
+
+  db.query(SQL, values, (err, results) => {
     if (err) {
-      return res.json('Error');
+      res.send(err);
+    } else {
+      console.log('success');
+      res.send({ message: 'User added!' });
     }
-    return res.json(data);
   });
 });
 
