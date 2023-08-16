@@ -15,17 +15,16 @@ const InformationJSON = fs.readFileSync('./CheeseInformation.json');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// cors
-app.use(cors());
-app.use(express.json());
-
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: '',
-  database: 'singup',
+  password: 'Wlsdid!92',
+  database: 'singupdb',
 });
 
+// cors
+app.use(express.json());
+app.use(cors());
 // axios로 받을때 작성했던 코드
 // pending이 떠서 await 비동기 처리함
 // const parsingData = async () => {
@@ -49,10 +48,12 @@ app.post('/singup', (req, res) => {
   const sentPassword = req.body.Password;
   const sentConfirmpassword = req.body.Confirmpassword;
 
+  // 데이터베이스 테이블 유저
   const SQL =
-    'INSERT INTO Users (email, username, password, confirmpassword) VALUES (?,?,?,?)';
+    'INSERT INTO users (email, username, password, confirmpassword) VALUES (?,?,?,?)';
   const values = [sentEmail, sentUserName, sentPassword, sentConfirmpassword];
 
+  // sql문을 쿼리로 실행
   db.query(SQL, values, (err, results) => {
     if (err) {
       res.send(err);

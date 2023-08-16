@@ -20,7 +20,7 @@ function Signup() {
     axios
       .post('http://localhost:5000/singup', {
         Email: auth.email,
-        UserName: auth.name,
+        UserName: auth.UserName,
         Password: auth.password,
         Confirmpassword: auth.confirmPassword,
       })
@@ -32,7 +32,7 @@ function Signup() {
     <CommonStyles>
       <LoginWrap>
         <LoginTitle>회원가입</LoginTitle>
-        <LoginForm onSubmit={submitHandler}>
+        <LoginForm>
           <LoginNameDiv>
             <LoginNameLabel htmlFor='Name'>이름</LoginNameLabel>
             <LoginNameInput
@@ -77,7 +77,7 @@ function Signup() {
             />
           </LoginPasswordDiv>
 
-          <LoginBtn>가입하기</LoginBtn>
+          <LoginBtn onClick={submitHandler}>가입하기</LoginBtn>
           <Link to={'/'}>
             <RegisterBtn>로그인</RegisterBtn>
           </Link>

@@ -1,11 +1,11 @@
 import { useRef, useState } from 'react';
 import { emailRegex, passwordRegex, nameRegex } from '../common/util';
 
-const useAuth = (values) => {
+const useAuth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [name, setName] = useState('');
+  const [userName, setUserName] = useState('');
   // const emailRef = useRef(null);
   // const passwordRef = useRef(null);
   // const confirmPasswordRef = useRef(null);
@@ -27,17 +27,17 @@ const useAuth = (values) => {
 
   // 이름 입력받는 함수
   const changeName = (event) => {
-    setName(event.target.value);
+    setUserName(event.target.value);
   };
 
   // 이메일, 비밀번호 유효성 검사하는 함수
   const checkValidation = () => {
     const checkEmailValidation = email.match(emailRegex);
     const checkPasswordValidation = password.match(passwordRegex);
-    const checkNameValidation = name.match(nameRegex);
+    const checkNameValidation = userName.match(nameRegex);
     // 이름
-    if (!name || !checkNameValidation) {
-      if (!name) {
+    if (!userName || !checkNameValidation) {
+      if (!userName) {
         alert('이름을 입력해주세요.');
         return false;
       } else {
@@ -97,7 +97,7 @@ const useAuth = (values) => {
     setPassword,
     confirmPassword,
     setConfirmPassword,
-    setName,
+    setUserName,
     changeName,
     // emailRef,
     // passwordRef,
