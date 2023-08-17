@@ -97,6 +97,7 @@ const useAuth = () => {
     setPassword,
     confirmPassword,
     setConfirmPassword,
+    userName,
     setUserName,
     changeName,
     // emailRef,

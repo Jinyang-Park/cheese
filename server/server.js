@@ -15,6 +15,7 @@ const InformationJSON = fs.readFileSync('./CheeseInformation.json');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// MYSQL
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -22,48 +23,55 @@ const db = mysql.createConnection({
   database: 'singupdb',
 });
 
+// connetct를 추가해야 된다.
+db.connect();
+
 // cors
 app.use(express.json());
 app.use(cors());
+// db.query('select * from users', (err, results, fields) => {
+//   if (err) {
+//     console.log(err);
+//   }
+//   console.log(results);
+// });
+
+// db.end();
+
 // axios로 받을때 작성했던 코드
 // pending이 떠서 await 비동기 처리함
 // const parsingData = async () => {
 //   const parsed = await parsing();
 // };
 
-// app.post('/singup', (req, res) => {
-//   const sql = 'INSERT INTO login (`name`, `email`, `password`) VALUES (?)';
-//   const values = [req.body.name, req.body.email, req.body.password];
-//   db.query(sql, [values], (err, data) => {
-//     if (err) {
-//       return res.json('Error');
-//     }
-//     return res.json(data);
-//   });
-// });
-
-app.post('/singup', (req, res) => {
+// MYSQL 회원가입
+app.post('/signup', (req, res) => {
   const sentEmail = req.body.Email;
   const sentUserName = req.body.UserName;
   const sentPassword = req.body.Password;
-  const sentConfirmpassword = req.body.Confirmpassword;
-
+  // console.log(sentEmail);
   // 데이터베이스 테이블 유저
-  const SQL =
-    'INSERT INTO users (email, username, password, confirmpassword) VALUES (?,?,?,?)';
-  const values = [sentEmail, sentUserName, sentPassword, sentConfirmpassword];
+  // const SQL = `INSERT INTO users (email, username, password) VALUES (?,?,?)`;
 
   // sql문을 쿼리로 실행
-  db.query(SQL, values, (err, results) => {
-    if (err) {
-      res.send(err);
-    } else {
-      console.log('success');
-      res.send({ message: 'User added!' });
+  db.query(
+    'INSERT INTO users (email, username, password) values (?,?,?)',
+    [sentEmail, sentUserName, sentPassword],
+    (err, results) => {
+      if (err) {
+        console.log('err');
+        res.send(err);
+      } else {
+        console.log('success');
+        res.send({ message: 'User added!' });
+      }
     }
-  });
+  );
 });
 
+// MYSQL 로그인
+app.post('/login', (req, res) => {});
+// 크롤링 JSON
 // Location 으로 InfromationJSON 전달
 app.get('/api', (req, res) => {
   res.send(InformationJSON);

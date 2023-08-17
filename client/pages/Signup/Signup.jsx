@@ -7,6 +7,7 @@ import useAuth from '../../hooks/useAuth';
 
 function Signup() {
   const auth = useAuth();
+  const navigate = useNavigate();
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -18,14 +19,14 @@ function Signup() {
     if (!auth.checkValidationForSignUp()) return;
 
     axios
-      .post('http://localhost:5000/singup', {
+      .post('http://localhost:5000/signup', {
         Email: auth.email,
-        UserName: auth.UserName,
+        UserName: auth.userName,
         Password: auth.password,
-        Confirmpassword: auth.confirmPassword,
       })
       .then(() => {
-        console.log('user!!');
+        navigate('/Login');
+        // console.log('user!!');
       });
   };
   return (
@@ -76,7 +77,6 @@ function Signup() {
               onChange={auth.changeConfirmPassword}
             />
           </LoginPasswordDiv>
-
           <LoginBtn onClick={submitHandler}>가입하기</LoginBtn>
           <Link to={'/'}>
             <RegisterBtn>로그인</RegisterBtn>
