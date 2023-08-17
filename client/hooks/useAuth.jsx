@@ -30,11 +30,10 @@ const useAuth = () => {
     setUserName(event.target.value);
   };
 
-  // 이메일, 비밀번호 유효성 검사하는 함수
-  const checkValidation = () => {
-    const checkEmailValidation = email.match(emailRegex);
-    const checkPasswordValidation = password.match(passwordRegex);
+  // 이름 유효성 검사 함수
+  const checkNameValidation = () => {
     const checkNameValidation = userName.match(nameRegex);
+
     // 이름
     if (!userName || !checkNameValidation) {
       if (!userName) {
@@ -45,6 +44,12 @@ const useAuth = () => {
         return false;
       }
     }
+  };
+
+  // 이메일, 비밀번호 유효성 검사하는 함수
+  const checkValidation = () => {
+    const checkEmailValidation = email.match(emailRegex);
+    const checkPasswordValidation = password.match(passwordRegex);
 
     // 이메일
     if (!email || !checkEmailValidation) {
@@ -108,6 +113,7 @@ const useAuth = () => {
     changeConfirmPassword,
     checkValidation,
     checkValidationForSignUp,
+    checkNameValidation,
   };
 };
 

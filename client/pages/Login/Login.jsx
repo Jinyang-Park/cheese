@@ -1,48 +1,53 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import CommonStyles from '../../utils/CommonStyles';
-import { Link } from 'react-router-dom';
-import LoginValidation from '../../common/LoginValidation';
-// import useAuth from '../../hooks/useAuth';
-// import checkValidation from '../../hooks/checkValidation';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import useAuth from '../../hooks/useAuth';
 
 function Login() {
-  // const auth = useAuth();
+  const auth = useAuth();
+  const navigate = useNavigate();
 
-  const [values, setValues] = useState({
-    email: '',
-    password: '',
-  });
-
-  const [errors, setErrors] = useState({});
-
-  const handleInput = (event) => {
-    setValues((prev) => ({
-      ...prev,
-      [event.target.name]: [event.target.value],
-    }));
-  };
-
-  const handleSubmit = (event) => {
+  const submitLoginHandler = (event) => {
     event.preventDefault();
-    setErrors(LoginValidation(values));
+
+    // 이메일, 비밀번호 유효성 검사 확인
+    if (!auth.checkValidation()) return;
+
+    axios
+      .post('http://localhost:5000/login', {
+        Email: auth.email,
+        Password: auth.password,
+      })
+      .then((response) => {
+        // 입력한 이메일 주소가 일치하지 않을 경우
+        // 만약 response.data.message가 뜨면 alert이 뜸
+        if (response.data.message) {
+          alert('회원을 찾을 수 없습니다. 회원가입을 먼저 진행해 주세요.');
+          navigate('/Signup');
+        } else {
+          console.log(response);
+          alert('환영합니다!');
+          auth.setEmail('');
+          auth.setPassword('');
+          navigate('/');
+        }
+      });
   };
   return (
     <CommonStyles>
       <LoginWrap>
         <LoginTitle>로그인</LoginTitle>
-        <LoginForm action='' onSubmit={handleSubmit}>
+        <LoginForm>
           <LoginEmailDiv>
             <LoginEmailLabel htmlFor='email'>이메일</LoginEmailLabel>
             <LoginEmailInput
               type='email'
               name='email'
               placeholder='이메일을 입력해주세요.'
-              onChange={handleInput}
-              // onChange={auth.changeEmail}
-              // valueRef={auth.emailRef}
+              onChange={auth.changeEmail}
             />
-            {errors.email && <ErrorSpan>{errors.email}</ErrorSpan>}
           </LoginEmailDiv>
 
           <LoginPasswordDiv>
@@ -51,14 +56,11 @@ function Login() {
               type='password'
               name='password'
               placeholder='비밀번호를 입력해주세요.'
-              onChange={handleInput}
-              // onChange={auth.changePassword}
-              // valueRef={auth.passwordRef}
+              onChange={auth.changePassword}
             />
-            {errors.password && <ErrorSpan>{errors.password}</ErrorSpan>}
           </LoginPasswordDiv>
 
-          <LoginBtn type='submit'>로그인</LoginBtn>
+          <LoginBtn onClick={submitLoginHandler}>로그인</LoginBtn>
           <Link to={'/Signup'}>
             <RegisterBtn>회원가입</RegisterBtn>
           </Link>

@@ -9,8 +9,11 @@ function Signup() {
   const auth = useAuth();
   const navigate = useNavigate();
 
-  const submitHandler = (event) => {
+  const submitSingupHandler = (event) => {
     event.preventDefault();
+
+    // 이름 유효성 검사 확인
+    if (!auth.checkNameValidation()) return;
 
     // 이메일, 비밀번호 유효성 검사 확인
     if (!auth.checkValidation()) return;
@@ -52,7 +55,6 @@ function Signup() {
               placeholder='이메일을 입력해주세요.'
               onChange={auth.changeEmail}
             />
-            {/* {errors.email && <ErrorSpan>{errors.email}</ErrorSpan>} */}
           </LoginEmailDiv>
 
           <LoginPasswordDiv>
@@ -63,7 +65,6 @@ function Signup() {
               placeholder='비밀번호를 입력해주세요.'
               onChange={auth.changePassword}
             />
-            {/* {errors.password && <ErrorSpan>{errors.password}</ErrorSpan>} */}
           </LoginPasswordDiv>
 
           <LoginPasswordDiv>
@@ -77,8 +78,8 @@ function Signup() {
               onChange={auth.changeConfirmPassword}
             />
           </LoginPasswordDiv>
-          <LoginBtn onClick={submitHandler}>가입하기</LoginBtn>
-          <Link to={'/'}>
+          <LoginBtn onClick={submitSingupHandler}>가입하기</LoginBtn>
+          <Link to={'/Login'}>
             <RegisterBtn>로그인</RegisterBtn>
           </Link>
         </LoginForm>
@@ -196,8 +197,4 @@ export const RegisterBtn = styled.button`
   padding: 15px;
   border-radius: 500px;
   margin-top: 10px;
-`;
-export const ErrorSpan = styled.span`
-  font-size: 14px;
-  color: #ddd;
 `;

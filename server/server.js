@@ -70,7 +70,28 @@ app.post('/signup', (req, res) => {
 });
 
 // MYSQL 로그인
-app.post('/login', (req, res) => {});
+app.post('/login', (req, res) => {
+  const sentEmail = req.body.Email;
+  const sentPassword = req.body.Password;
+
+  db.query(
+    'SELECT * FROM users WHERE email = ? && password = ?',
+    [sentEmail, sentPassword],
+    (err, results) => {
+      if (err) {
+        console.log('err');
+        res.send(err);
+      }
+      if (results.length > 0) {
+        res.send(results);
+      } else {
+        // 입력한 이메일 주소가 일치하지 않을 경우
+        console.log('user-not-found');
+        res.send({ message: 'user-not-found' });
+      }
+    }
+  );
+});
 // 크롤링 JSON
 // Location 으로 InfromationJSON 전달
 app.get('/api', (req, res) => {
