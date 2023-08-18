@@ -27,9 +27,17 @@ function Signup() {
         UserName: auth.userName,
         Password: auth.password,
       })
-      .then(() => {
-        navigate('/Login');
-        // console.log('user!!');
+      .then((res) => {
+        if (res.data.message.includes('user-added')) {
+          alert('회원가입을 성공하였습니다.');
+          navigate('/Login');
+        } else if (res.data.message.includes('already-in-use')) {
+          alert('이미 가입된 계정입니다.');
+          auth.setUserName('');
+          auth.setEmail('');
+          auth.setPassword('');
+          auth.setConfirmPassword('');
+        }
       });
   };
   return (
@@ -44,6 +52,7 @@ function Signup() {
               name='name'
               placeholder='이름을 입력해주세요.'
               onChange={auth.changeName}
+              ref={auth.nameRef}
             />
           </LoginNameDiv>
 
@@ -54,6 +63,7 @@ function Signup() {
               name='email'
               placeholder='이메일을 입력해주세요.'
               onChange={auth.changeEmail}
+              ref={auth.emailRef}
             />
           </LoginEmailDiv>
 
@@ -64,6 +74,7 @@ function Signup() {
               name='password'
               placeholder='비밀번호를 입력해주세요.'
               onChange={auth.changePassword}
+              ref={auth.passwordRef}
             />
           </LoginPasswordDiv>
 
@@ -76,6 +87,7 @@ function Signup() {
               name='confirmpassword'
               placeholder='비밀번호를 다시 한 번 입력해주세요.'
               onChange={auth.changeConfirmPassword}
+              ref={auth.confirmPasswordRef}
             />
           </LoginPasswordDiv>
           <LoginBtn onClick={submitSingupHandler}>가입하기</LoginBtn>

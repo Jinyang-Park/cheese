@@ -20,14 +20,15 @@ function Login() {
         Email: auth.email,
         Password: auth.password,
       })
-      .then((response) => {
-        // 입력한 이메일 주소가 일치하지 않을 경우
-        // 만약 response.data.message가 뜨면 alert이 뜸
-        if (response.data.message) {
+      .then((res) => {
+        console.log(res);
+        const message = res.data.message || '';
+
+        if (message.includes('user-not-found')) {
           alert('회원을 찾을 수 없습니다. 회원가입을 먼저 진행해 주세요.');
           navigate('/Signup');
         } else {
-          console.log(response);
+          window.sessionStorage.setItem();
           alert('환영합니다!');
           auth.setEmail('');
           auth.setPassword('');
@@ -47,6 +48,7 @@ function Login() {
               name='email'
               placeholder='이메일을 입력해주세요.'
               onChange={auth.changeEmail}
+              ref={auth.emailRef}
             />
           </LoginEmailDiv>
 
@@ -57,6 +59,7 @@ function Login() {
               name='password'
               placeholder='비밀번호를 입력해주세요.'
               onChange={auth.changePassword}
+              ref={auth.passwordRef}
             />
           </LoginPasswordDiv>
 

@@ -6,10 +6,9 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const parsing = require('../server/api.js');
 const fs = require('fs');
-
-// mysql
 const mysql = require('mysql');
 
+// JSON 파일
 const InformationJSON = fs.readFileSync('./CheeseInformation.json');
 
 app.use(bodyParser.json());
@@ -29,6 +28,7 @@ db.connect();
 // cors
 app.use(express.json());
 app.use(cors());
+
 // db.query('select * from users', (err, results, fields) => {
 //   if (err) {
 //     console.log(err);
@@ -44,26 +44,40 @@ app.use(cors());
 //   const parsed = await parsing();
 // };
 
-// MYSQL 회원가입
+// MYSQL 회원가입 및 이메일 중복 검사
 app.post('/signup', (req, res) => {
   const sentEmail = req.body.Email;
   const sentUserName = req.body.UserName;
   const sentPassword = req.body.Password;
-  // console.log(sentEmail);
-  // 데이터베이스 테이블 유저
-  // const SQL = `INSERT INTO users (email, username, password) VALUES (?,?,?)`;
 
   // sql문을 쿼리로 실행
+
+  // 먼저 이메일 중복 검사 실행
   db.query(
-    'INSERT INTO users (email, username, password) values (?,?,?)',
-    [sentEmail, sentUserName, sentPassword],
-    (err, results) => {
+    'SELECT COUNT(*) as count FROM users WHERE email = ?',
+    [sentEmail],
+    (err, rows, fields) => {
       if (err) {
-        console.log('err');
-        res.send(err);
+        console.error(err);
+        res.status(500).send({ message: 'Database error' });
+      } else if (rows[0].count > 0) {
+        // 이미 존재하는 이메일인 경우 처리
+        res.send({ message: 'already-in-use' });
       } else {
-        console.log('success');
-        res.send({ message: 'User added!' });
+        // 이메일이 중복되지 않은 경우 회원가입 진행
+        db.query(
+          'INSERT INTO users (email, username, password) values (?,?,?)',
+          [sentEmail, sentUserName, sentPassword],
+          (err, results) => {
+            if (err) {
+              console.log('err');
+              res.send(err);
+            } else {
+              console.log('success');
+              res.send({ message: 'user-added' });
+            }
+          }
+        );
       }
     }
   );
@@ -81,17 +95,17 @@ app.post('/login', (req, res) => {
       if (err) {
         console.log('err');
         res.send(err);
-      }
-      if (results.length > 0) {
+      } else if (results.length > 0) {
         res.send(results);
       } else {
         // 입력한 이메일 주소가 일치하지 않을 경우
-        console.log('user-not-found');
+        // console.log('user-not-found');
         res.send({ message: 'user-not-found' });
       }
     }
   );
 });
+
 // 크롤링 JSON
 // Location 으로 InfromationJSON 전달
 app.get('/api', (req, res) => {
