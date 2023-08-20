@@ -21,14 +21,11 @@ function Login() {
         Password: auth.password,
       })
       .then((res) => {
-        console.log(res);
         const message = res.data.message || '';
-
         if (message.includes('user-not-found')) {
           alert('회원을 찾을 수 없습니다. 회원가입을 먼저 진행해 주세요.');
           navigate('/Signup');
         } else {
-          window.sessionStorage.setItem();
           alert('환영합니다!');
           auth.setEmail('');
           auth.setPassword('');
@@ -40,7 +37,7 @@ function Login() {
     <CommonStyles>
       <LoginWrap>
         <LoginTitle>로그인</LoginTitle>
-        <LoginForm>
+        <LoginForm onClick={submitLoginHandler}>
           <LoginEmailDiv>
             <LoginEmailLabel htmlFor='email'>이메일</LoginEmailLabel>
             <LoginEmailInput
@@ -63,7 +60,7 @@ function Login() {
             />
           </LoginPasswordDiv>
 
-          <LoginBtn onClick={submitLoginHandler}>로그인</LoginBtn>
+          <LoginBtn type='submit'>로그인</LoginBtn>
           <Link to={'/Signup'}>
             <RegisterBtn>회원가입</RegisterBtn>
           </Link>
