@@ -9,6 +9,8 @@ function Login() {
   const auth = useAuth();
   const navigate = useNavigate();
 
+  axios.defaults.withCredentials = true;
+
   const submitLoginHandler = (event) => {
     event.preventDefault();
 
@@ -25,10 +27,11 @@ function Login() {
         if (message.includes('user-not-found')) {
           alert('회원을 찾을 수 없습니다. 회원가입을 먼저 진행해 주세요.');
           navigate('/Signup');
-        } else {
+        } else if (message.includes('success')) {
           alert('환영합니다!');
-          auth.setEmail('');
-          auth.setPassword('');
+          console.log(res.data.message);
+          // auth.setEmail('');
+          // auth.setPassword('');
           navigate('/');
         }
       });
@@ -37,7 +40,7 @@ function Login() {
     <CommonStyles>
       <LoginWrap>
         <LoginTitle>로그인</LoginTitle>
-        <LoginForm onClick={submitLoginHandler}>
+        <LoginForm onSubmit={submitLoginHandler}>
           <LoginEmailDiv>
             <LoginEmailLabel htmlFor='email'>이메일</LoginEmailLabel>
             <LoginEmailInput

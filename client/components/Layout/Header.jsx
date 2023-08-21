@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import * as S from './Header.style';
 import Logo from '../../public/assets/logo.png';
 import Flower from '../../public/assets/flower.png';
@@ -6,8 +6,36 @@ import Leaf from '../../public/assets/leaf.png';
 import Door from '../../public/assets/door.png';
 import { Link } from 'react-router-dom';
 import CommonStyles from '../../utils/CommonStyles';
+import axios from 'axios';
 
 export default function Header() {
+  const [checkAuth, setCheckAuth] = useState(false);
+
+  axios.defaults.withCredentials = true;
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:5000/header')
+      .then((res) => {
+        const message = res.data.message || '';
+        if (message.includes('success')) {
+          setCheckAuth(true);
+        } else {
+          setCheckAuth(false);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  const handleDelete = () => {
+    axios
+      .post('http://localhost:5000/logout') // 변경된 부분
+      .then((res) => {
+        location.reload(true);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <>
       <S.HeaderWrapper>
@@ -38,12 +66,21 @@ export default function Header() {
             </S.HeaderPageSection>
 
             <S.HeaderLoginSection>
-              <S.Loginli>
-                <Link to={'/Login'}>
-                  <S.LoginImg src={Flower} />
-                  <S.LoginliTxt>LOGIN</S.LoginliTxt>
-                </Link>
-              </S.Loginli>
+              {checkAuth ? (
+                <S.Loginli>
+                  <Link to={'/Login'}>
+                    <S.LoginImg src={Flower} />
+                    <S.LoginliTxt onClick={handleDelete}>LOGOUT</S.LoginliTxt>
+                  </Link>
+                </S.Loginli>
+              ) : (
+                <S.Loginli>
+                  <Link to={'/Login'}>
+                    <S.LoginImg src={Flower} />
+                    <S.LoginliTxt>LOGIN</S.LoginliTxt>
+                  </Link>
+                </S.Loginli>
+              )}
               <S.Loginli>
                 <S.LoginImg src={Leaf} />
                 <S.MypageliTxt>MY PAGE</S.MypageliTxt>

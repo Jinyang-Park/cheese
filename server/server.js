@@ -6,13 +6,47 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const parsing = require('../server/api.js');
 const fs = require('fs');
+// MYSQL
 const mysql = require('mysql');
+
+// 로그인 쿠키
+const cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken');
 
 // JSON 파일
 const InformationJSON = fs.readFileSync('./CheeseInformation.json');
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
+
+// app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// cors
+app.use(express.json());
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST'],
+    //서버간의 통신에서 쿠키를 사용하기 때문 true로 설정
+    credentials: true,
+  })
+);
+
+// const corsOptions = {
+//   origin: 'http://localhost:3000',
+//   methods: ['GET', 'POST'],
+//   allowedHeaders: ['Content-Type'],
+//   credentials: true,
+// };
+
+// app.use(cors(corsOptions));
+
+// app.use((_req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+//   res.header('Access-Control-Allow-Methods', 'GET');
+// })
 
 // MYSQL
 const db = mysql.createConnection({
@@ -24,10 +58,6 @@ const db = mysql.createConnection({
 
 // connetct를 추가해야 된다.
 db.connect();
-
-// cors
-app.use(express.json());
-app.use(cors());
 
 // db.query('select * from users', (err, results, fields) => {
 //   if (err) {
@@ -43,6 +73,28 @@ app.use(cors());
 // const parsingData = async () => {
 //   const parsed = await parsing();
 // };
+
+// verifyUser
+const verifyUser = (req, res, next) => {
+  // const token = req.cooies.token; // 에러의 원인
+  const token = req.cookies.token;
+  if (!token) {
+    return res.send({ message: 'not-authenticated' });
+  } else {
+    jwt.verify(token, 'jwt-secret-key', (err, decoded) => {
+      if (err) {
+        return res.send({ message: 'Token is not okay' });
+      } else {
+        req.name = decoded.name;
+        next();
+      }
+    });
+  }
+};
+// 메인화면
+app.get('/header', verifyUser, (req, res) => {
+  return res.send({ message: 'success', name: req.name });
+});
 
 // MYSQL 회원가입 및 이메일 중복 검사
 app.post('/signup', (req, res) => {
@@ -71,7 +123,6 @@ app.post('/signup', (req, res) => {
           (err, results) => {
             if (err) {
               console.log('err');
-              res.send(err);
             } else {
               console.log('success');
               res.send({ message: 'user-added' });
@@ -95,15 +146,27 @@ app.post('/login', (req, res) => {
       if (err) {
         console.log('err');
         res.send(err);
-      } else if (results.length > 0) {
-        res.send(results);
+      }
+      if (results.length > 0) {
+        // 성공했을 경우
+        const name = results[0].username;
+        const token = jwt.sign({ name }, 'jwt-secret-key', {
+          expiresIn: '1d',
+        });
+        res.cookie('token', token);
+        res.send({ message: 'success' });
       } else {
         // 입력한 이메일 주소가 일치하지 않을 경우
-        // console.log('user-not-found');
         res.send({ message: 'user-not-found' });
       }
     }
   );
+});
+
+// MYSQL 로그아웃
+app.post('/logout', (req, res) => {
+  res.clearCookie('token');
+  return res.send({ message: 'success' });
 });
 
 // 크롤링 JSON

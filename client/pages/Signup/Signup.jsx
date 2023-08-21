@@ -44,7 +44,7 @@ function Signup() {
     <CommonStyles>
       <LoginWrap>
         <LoginTitle>회원가입</LoginTitle>
-        <LoginForm>
+        <LoginForm onSubmit={submitSingupHandler}>
           <LoginNameDiv>
             <LoginNameLabel htmlFor='Name'>이름</LoginNameLabel>
             <LoginNameInput
@@ -90,7 +90,7 @@ function Signup() {
               ref={auth.confirmPasswordRef}
             />
           </LoginPasswordDiv>
-          <LoginBtn onClick={submitSingupHandler}>가입하기</LoginBtn>
+          <LoginBtn type='submit'>가입하기</LoginBtn>
           <Link to={'/Login'}>
             <RegisterBtn>로그인</RegisterBtn>
           </Link>
