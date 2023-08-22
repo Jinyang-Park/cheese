@@ -34,20 +34,6 @@ app.use(
   })
 );
 
-// const corsOptions = {
-//   origin: 'http://localhost:3000',
-//   methods: ['GET', 'POST'],
-//   allowedHeaders: ['Content-Type'],
-//   credentials: true,
-// };
-
-// app.use(cors(corsOptions));
-
-// app.use((_req, res, next) => {
-//   res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-//   res.header('Access-Control-Allow-Methods', 'GET');
-// })
-
 // MYSQL
 const db = mysql.createConnection({
   host: 'localhost',
@@ -76,21 +62,31 @@ db.connect();
 
 // verifyUser
 const verifyUser = (req, res, next) => {
-  // const token = req.cooies.token; // 에러의 원인
+  // const token = req.cooies.token; // 스펠링이 에러의 원인
   const token = req.cookies.token;
+  // token이 없을 경우
   if (!token) {
     return res.send({ message: 'not-authenticated' });
   } else {
     jwt.verify(token, 'jwt-secret-key', (err, decoded) => {
+      // 에러일 경우
       if (err) {
         return res.send({ message: 'Token is not okay' });
       } else {
+        // token이 존재할 경우
+        // req.name은 로그인(모든 유효성 검사에 통과한)이 될 경우 그 유저의 UserName이다.
+        // 로그인 부분에서  const name = results[0].username; 모든것이 일치할 경우 0번째의 인덱스인 username을 가져오는것이다.
+        // const token = jwt.sign({ name })는 구조 분해 할당이 아닌 const person1 = { name: name, age: age } 이런식으로
+        // name 키를 가지고 있고 원래 변수 name의 값을 포함하는것이다.
+        // const token = jwt.sign({ name }, 'jwt-secret-key', { expiresIn: '1d',});
         req.name = decoded.name;
+        // console.log(req.name); // 로그인시 username이 찍힌다.
         next();
       }
     });
   }
 };
+
 // 메인화면
 app.get('/header', verifyUser, (req, res) => {
   return res.send({ message: 'success', name: req.name });
@@ -175,6 +171,7 @@ app.get('/api', (req, res) => {
   res.send(InformationJSON);
 });
 
+// PORT 확인
 app.listen(PORT, () => {
   console.log(`Server is running on port {PORT}`);
 });
