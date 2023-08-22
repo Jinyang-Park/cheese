@@ -1,11 +1,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-// const CopyPlugin = require('copy-webpack-plugin');
+// const webpack = require('webpack');
+// const Dotenv = require('dotenv-webpack');
 
-// const config = {
-//   iconPath: 'node_modules/react-icons',
-// };
 module.exports = {
   mode: 'development', // 실서비스: production
   resolve: {
@@ -19,10 +17,6 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'), // 빌드 위치
     publicPath: '/',
   },
-  // externals: {
-  //   // axios 써드파디 라이브러리는 패키지로 제공될때 이미 빌드 과정을 거쳤기 때문에 빌드 프로세스에서 제외하는것이 좋다.
-  //   axios: 'axios', // axios
-  // },
   module: {
     rules: [
       {
@@ -41,32 +35,32 @@ module.exports = {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
-      // {
-      //   test: /react-icons\/(.)*(.js)$/,
-      //   loader: 'babel-loader',
-      //   query: {
-      //     presets: ['es2015', 'react'],
-      //   },
-      //   include: config.iconPath,
-      // },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './client/public/index.html', // 템플릿 설정
       minify: true, // 압축 설정
+
+      // template에 해당하는 파일에 dotenv 사용을 위한 설정
+      // env: {
+      //   REACT_APP_NAVER_CLIENT_ID: process.env.REACT_APP_NAVER_CLIENT_ID,
+      // },
     }),
     new CleanWebpackPlugin(),
-    // new CopyPlugin({
-    //   patterns: [
-    //     {
-    //       from: './node_modules/axios/dist/axios.min.js',
-    //       to: './axios.min.js',
-    //     },
-    //   ],
+    // dotenv 사용을 위한 설정
+    // new webpack.DefinePlugin({
+    //   'process.env': JSON.stringify(process.env),
     // }),
+    // new Dotenv(),
   ],
   devServer: {
+    client: {
+      overlay: {
+        errors: true,
+        warnings: false,
+      },
+    },
     proxy: {
       '/api': {
         target: 'http://localhost:5000',

@@ -7,10 +7,7 @@ import Map from '../../components/Location/Map';
 
 function Location() {
   const [Data, setData] = useState([]);
-  // const a = Data[0];
-  // const b = Data[1];
-  // const sumData = Object.assign({}, a, b);
-  // console.log(sumData);
+
   useEffect(() => {
     const requestOptions = {
       method: 'GET',
@@ -72,14 +69,14 @@ export default Location;
 export const LocationSection = styled.section`
   position: relative;
   min-height: calc(100vh - 161px);
-  padding-top: 60px;
+  /* padding-top: 60px; */
 `;
 export const LocationWrap = styled.div`
   display: flex;
   padding-bottom: 50px;
 `;
 export const LocationTxt = styled.h1`
-  padding-top: 100px;
+  padding-top: 200px;
   margin: 0 0 100px;
   text-align: center;
   font-size: 1.75em;
