@@ -4,12 +4,13 @@ import Logo from '../../public/assets/logo.png';
 import Flower from '../../public/assets/flower.png';
 import Leaf from '../../public/assets/leaf.png';
 import Door from '../../public/assets/door.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import CommonStyles from '../../utils/CommonStyles';
 import axios from 'axios';
 
 export default function Header() {
   const [checkAuth, setCheckAuth] = useState(false);
+  const navigate = useNavigate();
 
   axios.defaults.withCredentials = true;
 
@@ -25,13 +26,16 @@ export default function Header() {
         }
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [navigate]);
 
   const handleDelete = () => {
     axios
       .post('http://localhost:5000/logout') // 변경된 부분
       .then((res) => {
-        location.reload(true);
+        // location.reload();
+        setCheckAuth(false);
+        alert('로그아웃 되었습니다. 다시 만나요!');
+        navigate('/');
       })
       .catch((err) => console.log(err));
   };
@@ -67,11 +71,9 @@ export default function Header() {
 
             <S.HeaderLoginSection>
               {checkAuth ? (
-                <S.Loginli>
-                  <Link to={'/Login'}>
-                    <S.LoginImg src={Flower} />
-                    <S.LoginliTxt onClick={handleDelete}>LOGOUT</S.LoginliTxt>
-                  </Link>
+                <S.Loginli onClick={handleDelete}>
+                  <S.LoginImg src={Flower} />
+                  <S.LoginliTxt>LOGOUT</S.LoginliTxt>
                 </S.Loginli>
               ) : (
                 <S.Loginli>
@@ -81,6 +83,26 @@ export default function Header() {
                   </Link>
                 </S.Loginli>
               )}
+              {/* 로그인 시 */}
+              {/* {checkAuth && (
+                <S.Loginli>
+                  <S.LoginImg src={Flower} />
+                  <S.LoginliTxt onClick={handleDelete(true)}>
+                    LOGOUT
+                  </S.LoginliTxt>
+                </S.Loginli>
+              )} */}
+
+              {/* 비 로그인 시 */}
+              {/* {!checkAuth && (
+                <S.Loginli>
+                  <Link to={'/Login'}>
+                    <S.LoginImg src={Flower} />
+                    <S.LoginliTxt>LOGIN</S.LoginliTxt>
+                  </Link>
+                </S.Loginli>
+              )} */}
+
               <S.Loginli>
                 <S.LoginImg src={Leaf} />
                 <S.MypageliTxt>MY PAGE</S.MypageliTxt>
