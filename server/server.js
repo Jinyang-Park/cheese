@@ -45,6 +45,7 @@ const db = mysql.createConnection({
 // connetct를 추가해야 된다.
 db.connect();
 
+// 초반에 mysql 코드
 // db.query('select * from users', (err, results, fields) => {
 //   if (err) {
 //     console.log(err);
