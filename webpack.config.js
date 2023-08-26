@@ -1,13 +1,26 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-// const webpack = require('webpack');
+const webpack = require('webpack');
 // const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   mode: 'development', // 실서비스: production
   resolve: {
     extensions: ['.js', '.jsx'],
+    fallback: {
+      http: require.resolve('stream-http'),
+      https: require.resolve('https-browserify'),
+      crypto: require.resolve('crypto-browserify'),
+      stream: require.resolve('stream-browserify'),
+      os: require.resolve('os-browserify/browser'),
+      url: require.resolve('url'),
+      assert: require.resolve('assert'),
+      util: require.resolve('util/'),
+    },
+    // alias: {
+    //   './App': path.resolve(__dirname, 'client/App'),
+    // },
   },
   entry:
     // 합쳐질 파일 요소들 입력
@@ -53,7 +66,22 @@ module.exports = {
     //   'process.env': JSON.stringify(process.env),
     // }),
     // new Dotenv(),
+    new webpack.ProvidePlugin({
+      Buffer: ['buffer', 'Buffer'],
+      process: 'process/browser',
+    }),
   ],
+  // resolve: {
+  //   fallback: {
+  //     http: require.resolve('stream-http'),
+  //     https: require.resolve('https-browserify'),
+  //     crypto: require.resolve('crypto-browserify'),
+  //     stream: require.resolve('stream-browserify'),
+  //     os: require.resolve('os-browserify/browser'),
+  //     url: require.resolve('url'),
+  //     assert: require.resolve('assert'),
+  //   },
+  // },
   devServer: {
     client: {
       overlay: {
