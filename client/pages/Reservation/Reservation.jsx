@@ -1,24 +1,30 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import checkLogin from '../../hooks/CheckLogin';
 import CommonStyles from './../../utils/CommonStyles';
 import styled from 'styled-components';
 import Butterfly from '../../public/assets/Butterfly.png';
 import Home from '../../public/assets/Home2.png';
+import checkLogin from './../../hooks/useCheckLogin';
 
 function Reservation() {
-  const result = checkLogin();
+  const checkLoggedIn = checkLogin();
   const navigate = useNavigate();
 
   //router.js:311  You should call navigate() in a React.useEffect(), not when your component is first rendered. 이 에러가 떠서 useEffect에 일단 넣음
-  useEffect(() => {
-    if (result.loggedIn) {
-      console.log(result.name);
-    } else {
-      console.log('Not logged in');
-      navigate('/Login');
-    }
-  }, []);
+
+  const goToLogin = () => {
+    alert('로그인 후 서비스를 이용해 주세요');
+    navigate('/Login');
+  };
+  // useEffect(() => {
+  //   // checkLogin 훅에서 loggedIn true이면 유저 네임
+  //   if (checkLoggedIn.loggedIn) {
+  //     console.log(checkLoggedIn.name);
+  //   } else {
+  //     console.log('Not logged in');
+  //     navigate('/Login');
+  //   }
+  // }, []);
 
   return (
     <CommonStyles>
@@ -30,7 +36,15 @@ function Reservation() {
           {/*웨딩 케이크 */}
           <ReserveWeddingLi>
             <ReservationImg src={Butterfly} />
-            <ReWeddingBtn>웨딩 케이크 상담 예약</ReWeddingBtn>
+
+            {/*비 로그인 시 버튼 클릭 후 로그인 이동*/}
+            {!checkLoggedIn.loggedIn ? (
+              <ReWeddingBtn type='button' onClick={goToLogin}>
+                웨딩 케이크 상담 예약
+              </ReWeddingBtn>
+            ) : (
+              <ReWeddingBtn type='button'>웨딩 케이크 상담 예약</ReWeddingBtn>
+            )}
             <ReWeddingP>
               웨딩 케이크는 상담을 통해
               <br />
@@ -38,16 +52,25 @@ function Reservation() {
             </ReWeddingP>
             <ReWeddingModalBtn>웨딩 케이크 상담 예약이란?</ReWeddingModalBtn>
           </ReserveWeddingLi>
+
           {/* 케이크 */}
           <ReserveWeddingLi>
             <ReservationImg2 src={Home} />
-            <ReWeddingBtn>웨딩 케이크 상담 예약</ReWeddingBtn>
+
+            {/*비 로그인 시 버튼 클릭 후 로그인 이동*/}
+            {!checkLoggedIn.loggedIn ? (
+              <ReWeddingBtn type='button' onClick={goToLogin}>
+                케이크 예약
+              </ReWeddingBtn>
+            ) : (
+              <ReWeddingBtn type='button'>케이크 예약</ReWeddingBtn>
+            )}
             <ReWeddingP>
-              웨딩 케이크는 상담을 통해
+              일반 케이크는 상담 없이
               <br />
-              예약을 진행합니다
+              온라인 예약으로 진행합니다
             </ReWeddingP>
-            <ReWeddingModalBtn>웨딩 케이크 상담 예약이란?</ReWeddingModalBtn>
+            <ReWeddingModalBtn>케이크 예약이란?</ReWeddingModalBtn>
           </ReserveWeddingLi>
         </ReservationUl>
       </ReservationSection>
@@ -103,6 +126,10 @@ export const ReWeddingBtn = styled.button`
   border-radius: 100px;
   background-color: transparent;
   margin-top: 20px;
+  &::after {
+    content: '(클릭!)';
+    margin-left: 5px;
+  }
 `;
 export const ReWeddingP = styled.p`
   line-height: 22px;
