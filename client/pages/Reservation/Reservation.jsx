@@ -5,10 +5,13 @@ import styled from 'styled-components';
 import Butterfly from '../../public/assets/Butterfly.png';
 import Home from '../../public/assets/Home2.png';
 import checkLogin from './../../hooks/useCheckLogin';
+import useModal from '../../hooks/useModal';
+import Modal from './Modal';
 
 function Reservation() {
   const checkLoggedIn = checkLogin();
   const navigate = useNavigate();
+  const { isOpenModal, clickModal, closeModal } = useModal();
 
   //router.js:311  You should call navigate() in a React.useEffect(), not when your component is first rendered. 이 에러가 떠서 useEffect에 일단 넣음
 
@@ -25,56 +28,73 @@ function Reservation() {
   //     navigate('/Login');
   //   }
   // }, []);
+  const openModalClick = () => {
+    clickModal();
+  };
 
   return (
-    <CommonStyles>
-      <ReservationWrap>
-        <ReservationTitle>예약</ReservationTitle>
-      </ReservationWrap>
-      <ReservationSection>
-        <ReservationUl>
-          {/*웨딩 케이크 */}
-          <ReserveWeddingLi>
-            <ReservationImg src={Butterfly} />
+    <>
+      {/* 모달 */}
+      {isOpenModal && (
+        <Modal closeModal={closeModal} title='웨딩 케이크 상담 예약이란?' />
+      )}
+      <CommonStyles>
+        <ReservationWrap>
+          <ReservationTitle>예약</ReservationTitle>
+        </ReservationWrap>
+        <ReservationSection>
+          <ReservationUl>
+            {/*웨딩 케이크 */}
+            <ReserveWeddingLi>
+              <ReservationImg src={Butterfly} />
 
-            {/*비 로그인 시 버튼 클릭 후 로그인 이동*/}
-            {!checkLoggedIn.loggedIn ? (
-              <ReWeddingBtn type='button' onClick={goToLogin}>
-                웨딩 케이크 상담 예약
-              </ReWeddingBtn>
-            ) : (
-              <ReWeddingBtn type='button'>웨딩 케이크 상담 예약</ReWeddingBtn>
-            )}
-            <ReWeddingP>
-              웨딩 케이크는 상담을 통해
-              <br />
-              예약을 진행합니다
-            </ReWeddingP>
-            <ReWeddingModalBtn>웨딩 케이크 상담 예약이란?</ReWeddingModalBtn>
-          </ReserveWeddingLi>
+              {/*비 로그인 시 버튼 클릭 후 로그인 이동*/}
+              {!checkLoggedIn.loggedIn ? (
+                <ReWeddingBtn type='button' onClick={goToLogin}>
+                  웨딩 케이크 상담 예약
+                </ReWeddingBtn>
+              ) : (
+                <ReWeddingBtn type='button'>웨딩 케이크 상담 예약</ReWeddingBtn>
+              )}
+              <ReWeddingP>
+                웨딩 케이크는 상담을 통해
+                <br />
+                예약을 진행합니다
+              </ReWeddingP>
 
-          {/* 케이크 */}
-          <ReserveWeddingLi>
-            <ReservationImg2 src={Home} />
+              <ReWeddingModalBtn
+                type='웨딩 케이크 상담 예약이란?'
+                onClick={openModalClick}
+              >
+                웨딩 케이크 상담 예약이란?
+              </ReWeddingModalBtn>
+            </ReserveWeddingLi>
 
-            {/*비 로그인 시 버튼 클릭 후 로그인 이동*/}
-            {!checkLoggedIn.loggedIn ? (
-              <ReWeddingBtn type='button' onClick={goToLogin}>
-                케이크 예약
-              </ReWeddingBtn>
-            ) : (
-              <ReWeddingBtn type='button'>케이크 예약</ReWeddingBtn>
-            )}
-            <ReWeddingP>
-              일반 케이크는 상담 없이
-              <br />
-              온라인 예약으로 진행합니다
-            </ReWeddingP>
-            <ReWeddingModalBtn>케이크 예약이란?</ReWeddingModalBtn>
-          </ReserveWeddingLi>
-        </ReservationUl>
-      </ReservationSection>
-    </CommonStyles>
+            {/* 케이크 */}
+            <ReserveWeddingLi>
+              <ReservationImg2 src={Home} />
+
+              {/*비 로그인 시 버튼 클릭 후 로그인 이동*/}
+              {!checkLoggedIn.loggedIn ? (
+                <ReWeddingBtn type='button' onClick={goToLogin}>
+                  케이크 예약
+                </ReWeddingBtn>
+              ) : (
+                <ReWeddingBtn type='button'>케이크 예약</ReWeddingBtn>
+              )}
+              <ReWeddingP>
+                일반 케이크는 상담 없이
+                <br />
+                온라인 예약으로 진행합니다
+              </ReWeddingP>
+              <ReWeddingModalBtn onClick={openModalClick}>
+                케이크 예약이란?
+              </ReWeddingModalBtn>
+            </ReserveWeddingLi>
+          </ReservationUl>
+        </ReservationSection>
+      </CommonStyles>
+    </>
   );
 }
 
