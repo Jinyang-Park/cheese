@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { GrClose } from 'react-icons/gr';
 import { CakeModalList, CupcakeModalList } from '../../common/modalList';
 
-const Modal = ({ closeModal, title }) => {
-  const WeddingCakeInfo = title === '웨딩 케이크 상담 예약이란?';
+const Modal = ({ closeModal, selectedTitle }) => {
+  const WeddingCakeInfo = selectedTitle === '웨딩 케이크 상담 예약이란?';
 
   return (
     <ModalBox>

@@ -11,7 +11,7 @@ import Modal from './Modal';
 function Reservation() {
   const checkLoggedIn = checkLogin();
   const navigate = useNavigate();
-  const { isOpenModal, clickModal, closeModal } = useModal();
+  const { isOpenModal, selectedTitle, clickModal, closeModal } = useModal();
 
   //router.js:311  You should call navigate() in a React.useEffect(), not when your component is first rendered. 이 에러가 떠서 useEffect에 일단 넣음
 
@@ -28,15 +28,18 @@ function Reservation() {
   //     navigate('/Login');
   //   }
   // }, []);
-  const openModalClick = () => {
-    clickModal();
+  const openWeddingModalClick = () => {
+    clickModal('웨딩 케이크 상담 예약이란?');
+  };
+  const openCakeModalClick = () => {
+    clickModal('케이크 예약이란?');
   };
 
   return (
     <>
       {/* 모달 */}
       {isOpenModal && (
-        <Modal closeModal={closeModal} title='웨딩 케이크 상담 예약이란?' />
+        <Modal closeModal={closeModal} selectedTitle={selectedTitle} />
       )}
       <CommonStyles>
         <ReservationWrap>
@@ -62,10 +65,7 @@ function Reservation() {
                 예약을 진행합니다
               </ReWeddingP>
 
-              <ReWeddingModalBtn
-                type='웨딩 케이크 상담 예약이란?'
-                onClick={openModalClick}
-              >
+              <ReWeddingModalBtn onClick={openWeddingModalClick}>
                 웨딩 케이크 상담 예약이란?
               </ReWeddingModalBtn>
             </ReserveWeddingLi>
@@ -87,7 +87,7 @@ function Reservation() {
                 <br />
                 온라인 예약으로 진행합니다
               </ReWeddingP>
-              <ReWeddingModalBtn onClick={openModalClick}>
+              <ReWeddingModalBtn onClick={openCakeModalClick}>
                 케이크 예약이란?
               </ReWeddingModalBtn>
             </ReserveWeddingLi>
