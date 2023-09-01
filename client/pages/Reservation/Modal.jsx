@@ -18,11 +18,23 @@ const Modal = ({ closeModal, selectedTitle }) => {
                   <ModalcloseBtn onClick={closeModal} />
                   <ModalReserveInfo>
                     <ModalUl>
-                      <ModalWarings>{cake.warnings}</ModalWarings>
-                      <ModalWaringsInfo>
-                        사전 예약은 픽업 희망일 기준 2일~7일 전 까지 가능합니다.
-                      </ModalWaringsInfo>
+                      {cake.description.map((list) => {
+                        return (
+                          <>
+                            <ModalLi key={list.id}>{list.number}</ModalLi>
+                            <Modallip>{list.content}</Modallip>
+                          </>
+                        );
+                      })}
                     </ModalUl>
+                    <ModalWarings>{cake.warnings}</ModalWarings>
+                    {cake.warningsdescription.map((list) => {
+                      return (
+                        <>
+                          <ModalWaringsInfo>{list.content}</ModalWaringsInfo>
+                        </>
+                      );
+                    })}
                   </ModalReserveInfo>
                 </>
               );
@@ -36,12 +48,11 @@ const Modal = ({ closeModal, selectedTitle }) => {
                   <ModalTitle>{cup.title}</ModalTitle>
                   <ModalcloseBtn onClick={closeModal} />
                   <ModalReserveInfo>
-                    <ModalUl>
-                      <ModalWarings>주문시 유의사항</ModalWarings>
-                      <ModalWaringsInfo>
-                        사전 예약은 픽업 희망일 기준 2일~7일 전 까지 가능합니다.
-                      </ModalWaringsInfo>
-                    </ModalUl>
+                    <ModalUl></ModalUl>
+                    <ModalWarings>주문시 유의사항</ModalWarings>
+                    <ModalWaringsInfo>
+                      사전 예약은 픽업 희망일 기준 2일~7일 전 까지 가능합니다.
+                    </ModalWaringsInfo>
                   </ModalReserveInfo>
                 </>
               );
@@ -79,6 +90,7 @@ export const ModalWrap = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  padding-bottom: 50px;
 `;
 export const ModalTitle = styled.h2`
   position: absolute;
@@ -87,8 +99,8 @@ export const ModalTitle = styled.h2`
   height: 80px;
   line-height: 80px;
   text-align: center;
-  font-size: 2rem;
-  font-weight: 500;
+  font-size: 1.2rem;
+  font-weight: 600;
   width: 100%;
 `;
 export const ModalcloseBtn = styled(GrClose)`
@@ -102,22 +114,46 @@ export const ModalcloseBtn = styled(GrClose)`
 `;
 export const ModalReserveInfo = styled.div`
   width: 90%;
-  max-width: 500px;
+  max-width: 550px;
   height: calc(100% - 80px);
   margin: 0 auto;
-  margin-top: 80px;
+  margin-top: 110px;
 `;
 export const ModalUl = styled.ul`
   margin-top: 50px;
-  padding-bottom: 50px;
+  padding-bottom: 30px;
+`;
+export const ModalLi = styled.li`
+  background-color: #f1e5a8;
+  float: left;
+  width: 20px;
+  height: 20px;
+  border-radius: 100px;
+  /* display: inline-block; */
+  text-align: center;
+  font-size: 1rem;
+  line-height: 20px;
+`;
+export const Modallip = styled.p`
+  line-height: 20px;
+  padding-left: 40px;
+  margin-bottom: 20px;
 `;
 export const ModalWarings = styled.h3`
   border-top: 1px solid #ddd;
   padding-top: 30px;
   margin-bottom: 15px;
-  font-weight: 500;
+  font-weight: 600;
 `;
 export const ModalWaringsInfo = styled.p`
   margin-bottom: 10px;
+  font-size: 15px;
   padding-left: 10px;
+  letter-spacing: -0.75px;
+
+  &::before {
+    content: '-';
+    margin-left: -10px;
+    margin-right: 5px;
+  }
 `;
