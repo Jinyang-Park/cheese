@@ -31,7 +31,7 @@ const Modal = ({ closeModal, selectedTitle }) => {
                     {cake.warningsdescription.map((list) => {
                       return (
                         <>
-                          <ModalWaringsInfo>{list.content}</ModalWaringsInfo>
+                          <ModalWaringsInfo>{list}</ModalWaringsInfo>
                         </>
                       );
                     })}
@@ -48,11 +48,24 @@ const Modal = ({ closeModal, selectedTitle }) => {
                   <ModalTitle>{cup.title}</ModalTitle>
                   <ModalcloseBtn onClick={closeModal} />
                   <ModalReserveInfo>
-                    <ModalUl></ModalUl>
-                    <ModalWarings>주문시 유의사항</ModalWarings>
-                    <ModalWaringsInfo>
-                      사전 예약은 픽업 희망일 기준 2일~7일 전 까지 가능합니다.
-                    </ModalWaringsInfo>
+                    <ModalUl>
+                      {cup.description.map((list) => {
+                        return (
+                          <>
+                            <ModalLi key={list.id}>{list.number}</ModalLi>
+                            <Modallip>{list.content}</Modallip>
+                          </>
+                        );
+                      })}
+                    </ModalUl>
+                    <ModalWarings>{cup.warnings}</ModalWarings>
+                    {cup.warningsdescription.map((list) => {
+                      return (
+                        <>
+                          <ModalWaringsInfo>{list}</ModalWaringsInfo>
+                        </>
+                      );
+                    })}
                   </ModalReserveInfo>
                 </>
               );
