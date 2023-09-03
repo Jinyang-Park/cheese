@@ -19,15 +19,7 @@ function Reservation() {
     alert('로그인 후 서비스를 이용해 주세요');
     navigate('/Login');
   };
-  // useEffect(() => {
-  //   // checkLogin 훅에서 loggedIn true이면 유저 네임
-  //   if (checkLoggedIn.loggedIn) {
-  //     console.log(checkLoggedIn.name);
-  //   } else {
-  //     console.log('Not logged in');
-  //     navigate('/Login');
-  //   }
-  // }, []);
+
   const openWeddingModalClick = () => {
     clickModal('웨딩 케이크 상담 예약이란?');
   };
@@ -57,7 +49,12 @@ function Reservation() {
                   웨딩 케이크 상담 예약
                 </ReWeddingBtn>
               ) : (
-                <ReWeddingBtn type='button'>웨딩 케이크 상담 예약</ReWeddingBtn>
+                <ReWeddingBtn
+                  type='button'
+                  onClick={() => navigate(`/Reservation/date`)}
+                >
+                  웨딩 케이크 상담 예약
+                </ReWeddingBtn>
               )}
               <ReWeddingP>
                 웨딩 케이크는 상담을 통해

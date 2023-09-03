@@ -41,7 +41,7 @@ export const CupcakeModalList = [
       },
       {
         number: '2',
-        content: '케이크 단을 선택해주세요.',
+        content: '케이크를 선택해주세요..',
       },
       {
         number: '3',

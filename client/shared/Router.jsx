@@ -7,6 +7,7 @@ import Location from './../pages/Location/Location';
 import Header from './../components/Layout/Header';
 import Login from '../pages/Login/Login';
 import Signup from './../pages/Signup/Signup';
+import Date from '../pages/Date/Date';
 
 const Router = () => {
   return (
@@ -15,6 +16,7 @@ const Router = () => {
       <Routes>
         <Route path='/' element={<Main />}></Route>
         <Route path='/Reservation' element={<Reservation />}></Route>
+        <Route path='/Reservation/date' element={<Date />}></Route>
         <Route path='/Menu' element={<Menu />}></Route>
         <Route path='/Location' element={<Location />}></Route>
         <Route path='/Login' element={<Login />}></Route>
