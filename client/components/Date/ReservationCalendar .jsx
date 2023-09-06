@@ -6,6 +6,10 @@ import 'react-calendar/dist/Calendar.css';
 function ReservationCalendar() {
   const [value, onChange] = useState(new Date());
 
+  const tileDisabled = ({ date }) => {
+    return date.getDay() === 0 || date.getDay() === 1;
+  };
+
   return (
     <div>
       <Calendar
@@ -14,6 +18,7 @@ function ReservationCalendar() {
         showNeighboringMonth={false} //  이전, 이후 달의 날짜는 보이지 않도록 설정
         next2Label={null} // >> 화살표 없앰
         prev2Label={null} // << 화살표 없앰
+        tileDisabled={tileDisabled}
         value={value}
       />
     </div>

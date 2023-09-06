@@ -2,6 +2,8 @@ import React from 'react';
 import CommonStyles from '../../utils/CommonStyles';
 import styled from 'styled-components';
 import ReservationCalendar from '../../components/Date/ReservationCalendar ';
+import ReservationTimetable from '../../components/Date/ReservationTimetable';
+import { PiWarningCircleFill } from 'react-icons/pi';
 
 function Date() {
   return (
@@ -23,9 +25,52 @@ function Date() {
         <ReservationDateWrap>
           <ReservationDate>
             <ReservationCalendar />
+            {/* 선택, 비활성화 버튼 */}
+            <ReservationSelect>
+              <ReservationUl>
+                <ReservationLi>
+                  <ReservationSelectBtn></ReservationSelectBtn>
+                  선택
+                </ReservationLi>
+                <ReservationLi>
+                  <ReservationDisabledBtn></ReservationDisabledBtn>
+                  불가
+                </ReservationLi>
+              </ReservationUl>
+            </ReservationSelect>
           </ReservationDate>
+          {/* 시간 버튼 */}
+          <ReservationTime>
+            <ReservationTimetable />
+          </ReservationTime>
+          {/* 선택, 비활성화 버튼 */}
+          <ReservationSelect2>
+            <ReservationUl>
+              <ReservationLi>
+                <ReservationSelectBtn></ReservationSelectBtn>
+                선택
+              </ReservationLi>
+              <ReservationLi>
+                <ReservationDisabledBtn></ReservationDisabledBtn>
+                불가
+              </ReservationLi>
+            </ReservationUl>
+          </ReservationSelect2>
+          {/*예약 주의사항 */}
         </ReservationDateWrap>
+        <ReservationInfo>
+          <ReservationFlex>
+            <PiWarningIcon />
+            <ReservationInfoH2>예약주의사항</ReservationInfoH2>
+          </ReservationFlex>
+          <ReservationInfoP>
+            예약은 최소 2일 전 ~ 최대 7일 전에만 가능합니다. (휴무일 일,월 제외)
+          </ReservationInfoP>
+        </ReservationInfo>
         {/* 예약  버튼*/}
+        <ReservationBtnWrap>
+          <ReservationBtn>예약시간 설정하기</ReservationBtn>
+        </ReservationBtnWrap>
       </ReservationInner>
     </CommonStyles>
   );
@@ -88,11 +133,100 @@ export const ReservationStep2Li = styled.li`
 `;
 export const ReservationA = styled.a``;
 export const ReservationDateWrap = styled.div`
+  display: flex;
+  padding-bottom: 100px;
   border: 3px solid #f1e4ab;
   border-width: 0 3px 3px 3px;
 `;
 export const ReservationDate = styled.div`
   width: 700px;
-  float: left;
+  /* float: left; */
   padding: 20px;
+`;
+export const ReservationSelect = styled.div`
+  position: absolute;
+  text-align: right;
+  width: 48%;
+  top: 550px;
+  margin-bottom: 20px;
+  display: inline-block;
+`;
+export const ReservationSelect2 = styled.div`
+  position: absolute;
+  text-align: right;
+  width: 100%;
+  top: 340px;
+  margin-bottom: 20px;
+  display: inline-block;
+`;
+export const ReservationUl = styled.ul`
+  width: 90%;
+  margin: 0 auto;
+`;
+export const ReservationLi = styled.li`
+  display: inline-block;
+  line-height: 20px;
+`;
+export const ReservationSelectBtn = styled.div`
+  border-radius: 50px;
+  background-color: #ffa0c5;
+  width: 20px;
+  height: 20px;
+  margin: 0 10px 0 0;
+  float: left;
+`;
+export const ReservationDisabledBtn = styled.div`
+  border-radius: 50px;
+  background-color: #ddd;
+  width: 20px;
+  height: 20px;
+  margin: 0 10px 0 20px;
+  float: left;
+`;
+export const ReservationTime = styled.div`
+  /* width: calc(100% - 780px); */
+  /* float: right; */
+  padding: 20px 20px 30px 30px;
+  margin-top: 10px;
+`;
+export const ReservationInfo = styled.div`
+  position: absolute;
+  top: 590px;
+  padding-left: 20px;
+  /* text-indent: -10px; */
+  margin: 20px 0 30px;
+`;
+export const ReservationInfoH2 = styled.h2`
+  padding-left: 8px;
+  line-height: 30px;
+  height: 30px;
+  margin-bottom: 20px;
+  font-weight: 400;
+  text-indent: 0;
+`;
+export const ReservationInfoP = styled.p`
+  margin-bottom: 5px;
+  line-height: 1.6;
+`;
+export const PiWarningIcon = styled(PiWarningCircleFill)`
+  font-size: 30px;
+  color: #ffa0c5;
+`;
+export const ReservationFlex = styled.div`
+  display: flex;
+`;
+export const ReservationBtnWrap = styled.div`
+  text-align: center;
+  margin: 50px auto 20px;
+`;
+export const ReservationBtn = styled.button`
+  background: #ffdb7e;
+  border: 1px solid #ffdb7e;
+  color: #846e23;
+  width: 100%;
+  max-width: 240px;
+  padding: 15px;
+  margin: 3px 1px;
+  border-radius: 500px;
+  font-size: 1em;
 `;
