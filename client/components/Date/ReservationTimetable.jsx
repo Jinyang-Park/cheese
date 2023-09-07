@@ -1,56 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { reservationselecttime } from '../../common/reservationselecttime';
 
 function ReservationTimetable() {
+  const [selectedTime, setSelectedTime] = useState(null);
+
+  //time을 인자로 전달하는 이유는 클릭된 버튼의 시간 정보를 추적
+  const handleClick = (time) => {
+    setSelectedTime(time);
+  };
+
   return (
     <ReservationtimetableUl>
       <ReservationtimetableLi>
-        <ReservationInput type='radio' name='time' id='time' />
-        <ReservationLabel for='time'>12:00</ReservationLabel>
-      </ReservationtimetableLi>
-      <ReservationtimetableLi>
-        <ReservationInput type='radio' name='time' id='time2' />
-        <ReservationLabel for='time2'>12:30</ReservationLabel>
-      </ReservationtimetableLi>
-      <ReservationtimetableLi>
-        <ReservationInput type='radio' name='time' id='time3' />
-        <ReservationLabel for='time3'>13:00</ReservationLabel>
-      </ReservationtimetableLi>
-      <ReservationtimetableLi>
-        <ReservationInput type='radio' name='time' id='time4' />
-        <ReservationLabel for='time4'>13:30</ReservationLabel>
-      </ReservationtimetableLi>
-      <ReservationtimetableLi>
-        <ReservationInput type='radio' name='time' id='time5' />
-        <ReservationLabel for='time5'>14:00</ReservationLabel>
-      </ReservationtimetableLi>
-      <ReservationtimetableLi>
-        <ReservationInput type='radio' name='time' id='time6' />
-        <ReservationLabel for='time6'>14:30</ReservationLabel>
-      </ReservationtimetableLi>
-      <ReservationtimetableLi>
-        <ReservationInput type='radio' name='time' id='time7' />
-        <ReservationLabel for='time7'>15:00</ReservationLabel>
-      </ReservationtimetableLi>
-      <ReservationtimetableLi>
-        <ReservationInput type='radio' name='time' id='time8' />
-        <ReservationLabel for='time8'>15:30</ReservationLabel>
-      </ReservationtimetableLi>
-      <ReservationtimetableLi>
-        <ReservationInput type='radio' name='time' id='time9' />
-        <ReservationLabel for='time9'>16:00</ReservationLabel>
-      </ReservationtimetableLi>
-      <ReservationtimetableLi>
-        <ReservationInput type='radio' name='time' id='time10' />
-        <ReservationLabel for='time10'>16:30</ReservationLabel>
-      </ReservationtimetableLi>
-      <ReservationtimetableLi>
-        <ReservationInput type='radio' name='time' id='time11' />
-        <ReservationLabel for='time11'>17:00</ReservationLabel>
-      </ReservationtimetableLi>
-      <ReservationtimetableLi>
-        <ReservationInput type='radio' name='time' id='time12' />
-        <ReservationLabel for='time12'>17:30</ReservationLabel>
+        {reservationselecttime.map((time) => {
+          return (
+            <>
+              <ReservationtimeBtn
+                key={time.id}
+                type='button'
+                onClick={() => handleClick(time)}
+                style={{
+                  backgroundColor:
+                    selectedTime === time ? '#ffa0c5' : 'transparent',
+                  color: selectedTime === time ? '#ffffff' : '#000000',
+                }}
+              >
+                {time.time}
+              </ReservationtimeBtn>
+            </>
+          );
+        })}
       </ReservationtimetableLi>
     </ReservationtimetableUl>
   );
@@ -62,19 +42,19 @@ export const ReservationtimetableUl = styled.ul`
   margin-bottom: 20px;
 `;
 export const ReservationtimetableLi = styled.li`
-  /* width: calc(25% - 10px); */
-  padding: 10px 5px;
   float: left;
 `;
-export const ReservationInput = styled.input`
-  display: none;
-`;
-export const ReservationLabel = styled.label`
+
+export const ReservationtimeBtn = styled.button`
   width: 135px;
+  margin: 8.5px;
   height: 60px;
   line-height: 60px;
   display: inline-block;
   border: 1px solid #ddd;
   text-align: center;
   cursor: pointer;
+  &:hover {
+    border: 1px solid #ffa0c5;
+  }
 `;

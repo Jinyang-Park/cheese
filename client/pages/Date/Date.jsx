@@ -64,7 +64,7 @@ function Date() {
             <ReservationInfoH2>예약주의사항</ReservationInfoH2>
           </ReservationFlex>
           <ReservationInfoP>
-            예약은 최소 2일 전 ~ 최대 7일 전에만 가능합니다. (휴무일 일,월 제외)
+            예약은 최소 2일 전 ~ 최대 7일 전에만 가능합니다.
           </ReservationInfoP>
         </ReservationInfo>
         {/* 예약  버튼*/}

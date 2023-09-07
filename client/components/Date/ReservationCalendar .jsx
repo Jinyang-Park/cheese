@@ -6,9 +6,10 @@ import 'react-calendar/dist/Calendar.css';
 function ReservationCalendar() {
   const [value, onChange] = useState(new Date());
 
-  const tileDisabled = ({ date }) => {
-    return date.getDay() === 0 || date.getDay() === 1;
-  };
+  // 일, 월 비활성화 코드
+  // const tileDisabled = ({ date }) => {
+  //   return date.getDay() === 0 || date.getDay() === 1;
+  // };
 
   return (
     <div>
@@ -18,7 +19,12 @@ function ReservationCalendar() {
         showNeighboringMonth={false} //  이전, 이후 달의 날짜는 보이지 않도록 설정
         next2Label={null} // >> 화살표 없앰
         prev2Label={null} // << 화살표 없앰
-        tileDisabled={tileDisabled}
+        // tileDisabled={tileDisabled}
+        // 현재 날짜로부터 2일 후부터 7일 전까지만 선택 가능
+        // 2일 후 부터 선택 가능
+        minDate={new Date(new Date().getTime() + 2 * 24 * 60 * 60 * 1000)}
+        // 2일 후 부터 7일 전까지만 선택 가능
+        maxDate={new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000)}
         value={value}
       />
     </div>
