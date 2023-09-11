@@ -20,7 +20,7 @@ function ReservationCalendar() {
         next2Label={null} // >> 화살표 없앰
         prev2Label={null} // << 화살표 없앰
         // tileDisabled={tileDisabled}
-        // 현재 날짜로부터 2일 후부터 7일 전까지만 선택 가능
+        // 현재 날짜로부터 2일 후부터 7일 지만 선택 가능
         // 2일 후 부터 선택 가능
         minDate={new Date(new Date().getTime() + 2 * 24 * 60 * 60 * 1000)}
         // 2일 후 부터 7일 전까지만 선택 가능
