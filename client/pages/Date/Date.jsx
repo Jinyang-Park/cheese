@@ -4,8 +4,19 @@ import styled from 'styled-components';
 import ReservationCalendar from '../../components/Date/ReservationCalendar ';
 import ReservationTimetable from '../../components/Date/ReservationTimetable';
 import { PiWarningCircleFill } from 'react-icons/pi';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCalendar } from '../../redux/modules/ReservationsDT';
 
 function Date() {
+  const selectdate = useSelector((state) => state.ReservationsDT);
+
+  console.log(selectdate);
+  const dispatch = useDispatch();
+
+  const hanldeReservationButtonClick = (event) => {
+    event.preventDefault();
+    dispatch(getCalendar);
+  };
   return (
     <CommonStyles>
       <ReservationWrap>
@@ -69,7 +80,9 @@ function Date() {
         </ReservationInfo>
         {/* 예약  버튼*/}
         <ReservationBtnWrap>
-          <ReservationBtn>예약시간 설정하기</ReservationBtn>
+          <ReservationBtn onClick={hanldeReservationButtonClick}>
+            예약시간 설정하기
+          </ReservationBtn>
         </ReservationBtnWrap>
       </ReservationInner>
     </CommonStyles>
