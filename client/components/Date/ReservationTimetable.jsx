@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { reservationselecttime } from '../../common/reservationselecttime';
+import { useDispatch } from 'react-redux';
+import { selectTime } from '../../redux/modules/ReservationsDT';
 
 function ReservationTimetable() {
   const [selectedTime, setSelectedTime] = useState(null);
-
+  const dispatch = useDispatch();
   //time을 인자로 전달하는 이유는 클릭된 버튼의 시간 정보를 추적
   const handleClick = (time) => {
+    dispatch(selectTime(time));
     setSelectedTime(time);
   };
 

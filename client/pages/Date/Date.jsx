@@ -5,17 +5,15 @@ import ReservationCalendar from '../../components/Date/ReservationCalendar ';
 import ReservationTimetable from '../../components/Date/ReservationTimetable';
 import { PiWarningCircleFill } from 'react-icons/pi';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCalendar } from '../../redux/modules/ReservationsDT';
 
 function Date() {
   const selectdate = useSelector((state) => state.ReservationsDT);
 
-  console.log(selectdate);
   const dispatch = useDispatch();
 
   const hanldeReservationButtonClick = (event) => {
     event.preventDefault();
-    dispatch(getCalendar);
+    dispatch(getCalendar());
   };
   return (
     <CommonStyles>

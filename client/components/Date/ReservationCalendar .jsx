@@ -2,15 +2,21 @@ import React, { useState } from 'react';
 import moment from 'moment';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import { useDispatch } from 'react-redux';
+import { selectCalendar } from '../../redux/modules/ReservationsDT';
 
 function ReservationCalendar() {
   const [value, onChange] = useState(new Date());
-
+  const dispatch = useDispatch();
   // 일, 월 비활성화 코드
   // const tileDisabled = ({ date }) => {
   //   return date.getDay() === 0 || date.getDay() === 1;
   // };
-
+  const handleCalendarClick = (selectedDate) => {
+    // console.log(selectedDate);
+    console.log(moment(value).format('YYYY년 MM월 DD일'));
+    dispatch(selectCalendar(selectedDate));
+  };
   return (
     <div>
       <Calendar
@@ -26,6 +32,7 @@ function ReservationCalendar() {
         // 2일 후 부터 7일 전까지만 선택 가능
         maxDate={new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000)}
         value={value}
+        onClickDay={(selectedDate) => handleCalendarClick(selectedDate)}
       />
     </div>
   );
