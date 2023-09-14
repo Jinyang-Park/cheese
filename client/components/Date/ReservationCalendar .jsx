@@ -8,14 +8,17 @@ import { selectCalendar } from '../../redux/modules/ReservationsDT';
 function ReservationCalendar() {
   const [value, onChange] = useState(new Date());
   const dispatch = useDispatch();
+
   // 일, 월 비활성화 코드
   // const tileDisabled = ({ date }) => {
   //   return date.getDay() === 0 || date.getDay() === 1;
   // };
+
   const handleCalendarClick = (selectedDate) => {
-    // console.log(selectedDate);
-    console.log(moment(value).format('YYYY년 MM월 DD일'));
-    dispatch(selectCalendar(selectedDate));
+    // 클리한 달력 날짜를 2023년 09월 15일로 포맷팅해서 dispatch로 보낸다.
+    const formattedDate = moment(selectedDate).format('YYYY년 MM월 DD일');
+    console.log(formattedDate);
+    dispatch(selectCalendar(formattedDate));
   };
   return (
     <div>

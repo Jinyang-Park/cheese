@@ -9,6 +9,7 @@ function ReservationTimetable() {
   const dispatch = useDispatch();
   //time을 인자로 전달하는 이유는 클릭된 버튼의 시간 정보를 추적
   const handleClick = (time) => {
+    console.log(time.time);
     dispatch(selectTime(time));
     setSelectedTime(time);
   };

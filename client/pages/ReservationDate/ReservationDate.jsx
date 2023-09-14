@@ -4,16 +4,21 @@ import styled from 'styled-components';
 import ReservationCalendar from '../../components/Date/ReservationCalendar ';
 import ReservationTimetable from '../../components/Date/ReservationTimetable';
 import { PiWarningCircleFill } from 'react-icons/pi';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 
-function Date() {
-  const selectdate = useSelector((state) => state.ReservationsDT);
+function ReservationDate() {
+  // 여러 개의 상태 값을 선택하고 싶을 때는 useSelector를 여러 번 사용하면 됩니다
+  const ReservationCakeTime = useSelector((state) => state.ReservationsDT.time);
+  const ReservationCakeDate = useSelector(
+    (state) => state.ReservationsDT.formattedDate
+  );
 
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const hanldeReservationButtonClick = (event) => {
     event.preventDefault();
-    dispatch(getCalendar());
+    navigate('/Reservation/date/menupick');
   };
   return (
     <CommonStyles>
@@ -32,7 +37,7 @@ function Date() {
         </ReservationTabUl>
         {/* 예약 날짜, 시간 */}
         <ReservationDateWrap>
-          <ReservationDate>
+          <ReservationDatediv>
             <ReservationCalendar />
             {/* 선택, 비활성화 버튼 */}
             <ReservationSelect>
@@ -47,7 +52,7 @@ function Date() {
                 </ReservationLi>
               </ReservationUl>
             </ReservationSelect>
-          </ReservationDate>
+          </ReservationDatediv>
           {/* 시간 버튼 */}
           <ReservationTime>
             <ReservationTimetable />
@@ -87,7 +92,7 @@ function Date() {
   );
 }
 
-export default Date;
+export default ReservationDate;
 
 export const ReservationWrap = styled.div`
   position: relative;
@@ -149,7 +154,7 @@ export const ReservationDateWrap = styled.div`
   border: 3px solid #f1e4ab;
   border-width: 0 3px 3px 3px;
 `;
-export const ReservationDate = styled.div`
+export const ReservationDatediv = styled.div`
   width: 700px;
   /* float: left; */
   padding: 20px;

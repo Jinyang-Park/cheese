@@ -1,5 +1,3 @@
-import moment from 'moment';
-
 // 1. action items
 // 달력
 const SELECT_CALENDAR = 'SELECT_CALENDAR';
@@ -12,12 +10,12 @@ const DELETE_TIME = 'DELETE_TIME';
 
 // 달력
 // 2. action creators(1)
-export const selectCalendar = (selectedDate) => {
+export const selectCalendar = (formattedDate) => {
   // 클릭한 날짜를 UTC로 변환
   // const utcDate = moment(selectedDate).utc().toDate();
   return {
     type: SELECT_CALENDAR,
-    payload: selectedDate,
+    payload: formattedDate,
   };
 };
 
@@ -30,10 +28,10 @@ export const selectCalendar = (selectedDate) => {
 // };
 
 // 3. action creators(3)
-export const deleteCalendar = (selectedDate) => {
+export const deleteCalendar = (formattedDate) => {
   return {
     type: DELETE_CALENDAR,
-    payload: selectedDate,
+    payload: formattedDate,
   };
 };
 
@@ -61,35 +59,22 @@ export const deleteTime = (time) => {
 
 // 3. initial State => reuder를 구성할 때
 const inintialState = {
-  selectedDate: null,
+  formattedDate: null,
   time: null,
 };
 
 // 4. reducer를 만들 것
-// const ReservationsDT = (state = inintialState, action) => {
-//   switch (action.type) {
-//     case GET_CALENDAR:
-//       return [...state, action.payload];
-//     case DELETE_CALENDAR:
-//       return state.filter((item) => item.id !== action.payload);
-//     case GET_TIME:
-//       return [...state, action.payload];
-//     case DELETE_TIME:
-//       return state.filter((item) => item.id !== action.payload);
-//     default:
-//       return state;
-//   }
 const ReservationsDT = (state = inintialState, action) => {
   switch (action.type) {
     case 'SELECT_CALENDAR':
       // 캘린더 데이터 가져오기 로직
-      return { ...state, selectedDate: action.payload };
+      return { ...state, formattedDate: action.payload };
 
     case 'DELETE_CALENDAR':
       // 캘린더 데이터 삭제 로직
       // const updatedCalendar = state.selectedDate !== action.payload;
 
-      return { ...state, selectedDate: null };
+      return { ...state, formattedDate: null };
 
     case 'SELECT_TIME':
       // 시간 데이터 가져오기 로직
