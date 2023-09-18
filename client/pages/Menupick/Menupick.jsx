@@ -2,6 +2,7 @@ import React from 'react';
 import CommonStyles from '../../utils/CommonStyles';
 import styled from 'styled-components';
 import { PiWarningCircleFill } from 'react-icons/pi';
+import { CakeList } from '../../common/bakeryList';
 function Menupick() {
   return (
     <CommonStyles>
@@ -18,6 +19,14 @@ function Menupick() {
             <ReservationA>메뉴선택</ReservationA>
           </ReservationStep2Li>
         </ReservationTabUl>
+        {CakeList.map((cake) => {
+          return (
+            <>
+              <CakeImg src={cake.image} />
+              <Cakename>{cake.Koname}</Cakename>
+            </>
+          );
+        })}
       </ReservationInner>
     </CommonStyles>
   );
@@ -176,3 +185,11 @@ export const ReservationBtn = styled.button`
   border-radius: 500px;
   font-size: 1em;
 `;
+export const CakeImg = styled.img`
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  margin-top: 8px;
+  margin: 0 auto;
+`;
+export const Cakename = styled.h1``;
