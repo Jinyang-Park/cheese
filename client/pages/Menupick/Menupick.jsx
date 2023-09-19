@@ -19,14 +19,21 @@ function Menupick() {
             <ReservationA>메뉴선택</ReservationA>
           </ReservationStep2Li>
         </ReservationTabUl>
-        {CakeList.map((cake) => {
-          return (
-            <>
-              <CakeImg src={cake.image} />
-              <Cakename>{cake.Koname}</Cakename>
-            </>
-          );
-        })}
+        <ReservationDateWrap>
+          <ReservationMenuList>
+            {CakeList.map((cake) => {
+              return (
+                <CakeLi>
+                  <CakeDiv>
+                    <CakeImg src={cake.img} />
+                  </CakeDiv>
+                  <Cakename>{cake.Koname}</Cakename>
+                  <Cakeprice>{cake.price}</Cakeprice>
+                </CakeLi>
+              );
+            })}
+          </ReservationMenuList>
+        </ReservationDateWrap>
       </ReservationInner>
     </CommonStyles>
   );
@@ -56,14 +63,13 @@ export const ReservationTabUl = styled.ul`
   column-gap: 0;
 `;
 export const ReservationStepLi = styled.li`
-  border-radius: 10px 0 0 0;
+  background-color: #000;
+  border-bottom: 5px solid #f1e4ab;
   text-align: center;
   height: 44px;
   line-height: 44px;
-  background-color: #f1e4ab;
-  border-bottom: 5px solid #f1e4ab;
-  color: #000;
-  font-weight: 500;
+  color: #fff;
+  border-radius: 10px 0 0 0;
   &::before {
     content: 'STEP01';
     margin-right: 5px;
@@ -72,13 +78,14 @@ export const ReservationStepLi = styled.li`
   }
 `;
 export const ReservationStep2Li = styled.li`
-  background-color: #000;
-  border-bottom: 5px solid #f1e4ab;
+  border-radius: 0 10px 0 0;
   text-align: center;
   height: 44px;
   line-height: 44px;
-  color: #fff;
-  border-radius: 0 10px 0 0;
+  background-color: #f1e4ab;
+  border-bottom: 5px solid #f1e4ab;
+  color: #000;
+  font-weight: 500;
   &::before {
     content: 'STEP02';
     margin-right: 5px;
@@ -88,7 +95,6 @@ export const ReservationStep2Li = styled.li`
 `;
 export const ReservationA = styled.a``;
 export const ReservationDateWrap = styled.div`
-  display: flex;
   padding-bottom: 100px;
   border: 3px solid #f1e4ab;
   border-width: 0 3px 3px 3px;
@@ -185,11 +191,40 @@ export const ReservationBtn = styled.button`
   border-radius: 500px;
   font-size: 1em;
 `;
-export const CakeImg = styled.img`
-  width: 30px;
-  height: 30px;
-  object-fit: contain;
-  margin-top: 8px;
-  margin: 0 auto;
+export const ReservationMenuList = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  -moz-column-gap: 20px;
+  column-gap: 20px;
+  padding: 20px;
 `;
-export const Cakename = styled.h1``;
+export const CakeLi = styled.li`
+  text-align: center;
+  display: inline-grid;
+  margin-bottom: 20px;
+`;
+export const CakeDiv = styled.div`
+  background-color: #ccc;
+  width: 100%;
+  margin-bottom: 10px;
+  position: relative;
+  padding-top: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+`;
+export const CakeImg = styled.img`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+`;
+export const Cakename = styled.p`
+  font-weight: 400;
+  margin-bottom: 5px;
+`;
+export const Cakeprice = styled.p`
+  font-weight: 100;
+`;
