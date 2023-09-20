@@ -2,10 +2,12 @@ import React from 'react';
 import CommonStyles from '../../utils/CommonStyles';
 import styled from 'styled-components';
 import { PiWarningCircleFill } from 'react-icons/pi';
-import { CakeList } from '../../common/bakeryList';
+import { CakeList } from '../../common/CakeList';
+
 function Menupick() {
   return (
     <CommonStyles>
+      console.log(bakeryList);
       <ReservationWrap>
         <ReservationTitle>예약</ReservationTitle>
       </ReservationWrap>
@@ -213,13 +215,13 @@ export const CakeDiv = styled.div`
   border-radius: 10px;
 `;
 export const CakeImg = styled.img`
-  position: absolute;
+  /* position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   width: 100%;
-  height: auto;
+  height: auto; */
 `;
 export const Cakename = styled.p`
   font-weight: 400;

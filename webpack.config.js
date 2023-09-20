@@ -48,6 +48,11 @@ module.exports = {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
+      {
+        test: /\.json$/,
+        loader: 'json5-loader',
+        type: 'javascript/auto',
+      },
     ],
   },
   plugins: [

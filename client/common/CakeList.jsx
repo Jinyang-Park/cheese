@@ -7,7 +7,7 @@ export const CakeList = [
     detail: '치즈본 시그니쳐 크림 삼단 케이크',
     date: '2023-06-25',
     price: '150,000',
-    img: '../assets/Cakeassets/ChocoClassiccake.png',
+    img: '/assets/Cakeassets/ChocoClassiccake.jpg',
   },
   {
     id: 2,
@@ -18,7 +18,7 @@ export const CakeList = [
       '부드러운 초코크림에 초코칩 토핑으로 더욱 깊은 초코맛을 즐길 수 있는 삼단 케이크',
     date: '2023-06-25',
     price: '150,000',
-    image: '/assets/Cakeassets/ChocolateFudgeCake.jpg',
+    img: '/assets/Cakeassets/ChocolateFudgeCake.jpg',
   },
   {
     id: 3,

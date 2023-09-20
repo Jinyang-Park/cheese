@@ -7,7 +7,7 @@ import Door from '../../public/assets/door.png';
 import { Link, useNavigate } from 'react-router-dom';
 import CommonStyles from '../../utils/CommonStyles';
 import axios from 'axios';
-import cake from '';
+
 export default function Header() {
   const [checkAuth, setCheckAuth] = useState(false);
   const navigate = useNavigate();
@@ -47,7 +47,6 @@ export default function Header() {
           <S.LogoSection>
             <Link to={'/'}>
               <S.LogoImg src={Logo} />
-              <S.LogoImg src={cake} />
             </Link>
           </S.LogoSection>
 

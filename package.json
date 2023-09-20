@@ -45,6 +45,8 @@
     "fs": "^0.0.1-security",
     "html-webpack-plugin": "^5.5.3",
     "http-proxy-middleware": "^2.0.6",
+    "json-loader": "^0.5.7",
+    "json5-loader": "^4.0.1",
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-calendar": "^4.6.0",
