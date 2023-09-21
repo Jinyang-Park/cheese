@@ -42,17 +42,25 @@ module.exports = {
       },
       {
         test: /\.(jpg|png|svg)$/,
-        use: ['file-loader'],
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'assets', // 이미지가 저장될 경로를 지정합니다.
+            },
+          },
+        ],
       },
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
-      {
-        test: /\.json$/,
-        loader: 'json5-loader',
-        type: 'javascript/auto',
-      },
+      // {
+      //   test: /\.json$/,
+      //   loader: 'json5-loader',
+      //   type: 'javascript/auto',
+      // },
     ],
   },
   plugins: [

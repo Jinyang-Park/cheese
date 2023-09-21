@@ -7,7 +7,6 @@ import { CakeList } from '../../common/CakeList';
 function Menupick() {
   return (
     <CommonStyles>
-      console.log(bakeryList);
       <ReservationWrap>
         <ReservationTitle>예약</ReservationTitle>
       </ReservationWrap>
@@ -29,6 +28,7 @@ function Menupick() {
                   <CakeDiv>
                     <CakeImg src={cake.img} />
                   </CakeDiv>
+                  <Cakename>{cake.img}</Cakename>
                   <Cakename>{cake.Koname}</Cakename>
                   <Cakeprice>{cake.price}</Cakeprice>
                 </CakeLi>
