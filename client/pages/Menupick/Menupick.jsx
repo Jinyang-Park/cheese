@@ -26,9 +26,8 @@ function Menupick() {
               return (
                 <CakeLi>
                   <CakeDiv>
-                    <CakeImg src={cake.img} />
+                    <CakeImg src={cake.image} />
                   </CakeDiv>
-                  <Cakename>{cake.img}</Cakename>
                   <Cakename>{cake.Koname}</Cakename>
                   <Cakeprice>{cake.price}</Cakeprice>
                 </CakeLi>
@@ -215,13 +214,14 @@ export const CakeDiv = styled.div`
   border-radius: 10px;
 `;
 export const CakeImg = styled.img`
-  /* position: absolute;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   width: 100%;
-  height: auto; */
+  height: auto;
+  object-fit: contain;
 `;
 export const Cakename = styled.p`
   font-weight: 400;

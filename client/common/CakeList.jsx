@@ -7,7 +7,7 @@ export const CakeList = [
     detail: '치즈본 시그니쳐 크림 삼단 케이크',
     date: '2023-06-25',
     price: '150,000',
-    img: 'https://img-app.knotted-order.com/products/33/33.thumb?1687220714',
+    image: 'https://i.ibb.co/mRcRShS/Choco-Classic.jpg',
   },
   {
     id: 2,
@@ -18,7 +18,7 @@ export const CakeList = [
       '부드러운 초코크림에 초코칩 토핑으로 더욱 깊은 초코맛을 즐길 수 있는 삼단 케이크',
     date: '2023-06-25',
     price: '150,000',
-    img: '../../public/assets/ChocolateFudgeCake.jpg',
+    image: 'https://i.ibb.co/QmftnRz/Chocolate-Fudge-Cake.jpg',
   },
   {
     id: 3,
@@ -28,7 +28,7 @@ export const CakeList = [
     detail: '무화과와 치즈본 시그니쳐 크림 돔 케이크',
     date: '2023-06-25',
     price: '45,000',
-    image: '/assets/Cakeassets/FigDomeCake.jpg',
+    image: 'https://i.ibb.co/646mnzM/Fig-Dome-Cake.jpg',
   },
   {
     id: 4,
@@ -38,7 +38,7 @@ export const CakeList = [
     detail: '상큼한 레몬과 얼그레이가 조화로운 삼단 케이크',
     date: '2023-06-25',
     price: '150,000',
-    image: '/assets/Cakeassets/LemonEarlGreyCake.jpg',
+    image: 'https://i.ibb.co/QQHHRt3/Lemon-Earl-Grey-Cake.jpg',
   },
   {
     id: 5,
@@ -48,7 +48,7 @@ export const CakeList = [
     detail: '살살 녹는 머랭과 상큼한 딸기가 만난 삼단 케이크',
     date: '2023-06-25',
     price: '150,000',
-    image: '/assets/Cakeassets/MeringueStrawberryShortcake.jpg',
+    image: 'https://i.ibb.co/MnHFksf/Meringue-Strawberry-Shortcake.jpg',
   },
   {
     id: 6,
@@ -58,7 +58,7 @@ export const CakeList = [
     detail: '우유맛이 가득한 삼단 생크림 케이크',
     date: '2023-06-25',
     price: '180,000',
-    image: '/assets/Cakeassets/ChocoClassiccake.jpg',
+    image: 'https://i.ibb.co/WzZbDV5/Milk-Cream-Cake.jpg',
   },
   {
     id: 7,
@@ -68,7 +68,7 @@ export const CakeList = [
     detail: '민트와 초코가 만난 돔 케이크',
     date: '2023-06-25',
     price: '45,000',
-    image: '/assets/Cakeassets/MintChocoDomeCake.jpg',
+    image: 'https://i.ibb.co/Dg3SYrc/Mint-Choco-Dome-Cake.jpg',
   },
   {
     id: 8,
@@ -78,7 +78,7 @@ export const CakeList = [
     detail: '블루베리, 라즈베리, 크랜베리, 스트로베리가 들어간 삼단 케이크',
     date: '2023-06-25',
     price: '170,000',
-    image: '/assets/Cakeassets/MixBerryCake.jpg',
+    image: 'https://i.ibb.co/hK0wNTD/Mix-Berry-Cake.jpg',
   },
   {
     id: 9,
@@ -88,7 +88,7 @@ export const CakeList = [
     detail: '레드벨벳과 크림치즈로 가득한 사단 케이크',
     date: '2023-06-25',
     price: '230,000',
-    image: '/assets/Cakeassets/RedVelevetCreamcheeseFrostingCake.jpg',
+    image: 'https://i.ibb.co/BqgTYn9/Red-Velevet-Creamcheese-Frosting-Cake.jpg',
   },
   {
     id: 10,
@@ -98,7 +98,7 @@ export const CakeList = [
     detail: '스트로베리 잼이 들어간 삼단 케이크',
     date: '2023-06-25',
     price: '150,000',
-    image: '/assets/Cakeassets/VictoriaSpongeCake.jpg',
+    image: 'https://i.ibb.co/2jbfG6L/Victoria-Sponge-Cake.jpg',
   },
   {
     id: 1,
@@ -109,7 +109,7 @@ export const CakeList = [
     date: '2023-06-25',
     price: '150,000',
     piece: 30,
-    image: '/assets/Cupcakeassets/BerryPistachioFingercake.jpg',
+    image: 'https://i.ibb.co/vBQ3hy7/Berry-Pistachio-Fingercake.jpg',
   },
   {
     id: 2,
@@ -120,7 +120,7 @@ export const CakeList = [
     date: '2023-06-25',
     price: '100,000',
     piece: 30,
-    image: '/assets/Cupcakeassets/CaramelChocolateCupCake.jpg',
+    image: 'https://i.ibb.co/tx5RzVb/Caramel-Chocolate-Cup-Cake.jpg',
   },
   {
     id: 3,
@@ -132,7 +132,7 @@ export const CakeList = [
     date: '2023-06-25',
     price: '110,000',
     piece: 30,
-    image: '/assets/Cupcakeassets/cherryChocoFingerCake.jpg',
+    image: 'https://i.ibb.co/tJjbwWW/cherry-Choco-Finger-Cake.jpg',
   },
   {
     id: 4,
@@ -143,7 +143,7 @@ export const CakeList = [
     date: '2023-06-25',
     price: '110,000',
     piece: 30,
-    image: '/assets/Cupcakeassets/ClassicVailaFingerCake.jpg',
+    image: 'https://i.ibb.co/b6hWRgM/Classic-Vaila-Finger-Cake.jpg',
   },
   {
     id: 5,
@@ -154,7 +154,7 @@ export const CakeList = [
     date: '2023-06-25',
     price: '120,000',
     piece: 30,
-    image: '/assets/Cupcakeassets/LemonFingerCake.jpg',
+    image: 'https://i.ibb.co/dJCHXnd/Lemon-Finger-Cake.jpg',
   },
   {
     id: 6,
@@ -165,7 +165,7 @@ export const CakeList = [
     date: '2023-06-25',
     price: '100,000',
     piece: 30,
-    image: '/assets/Cupcakeassets/MilkCreamCupCake.jpg',
+    image: 'https://i.ibb.co/QP6gBhC/Milk-Cream-Cup-Cake.jpg',
   },
   {
     id: 7,
@@ -176,7 +176,7 @@ export const CakeList = [
     date: '2023-06-25',
     price: '120,000',
     piece: 30,
-    image: '/assets/Cupcakeassets/OrangeCheddarCupCake.jpg',
+    image: 'https://i.ibb.co/WKwwPb0/Orange-Cheddar-Cup-Cake.jpg',
   },
   {
     id: 8,
@@ -187,7 +187,7 @@ export const CakeList = [
     date: '2023-06-25',
     price: '120,000',
     piece: 30,
-    image: '/assets/Cupcakeassets/RedVeleteFingerCake.jpg',
+    image: 'https://i.ibb.co/Y0trkdf/Red-Velete-Finger-Cake.jpg',
   },
   {
     id: 9,
@@ -198,7 +198,7 @@ export const CakeList = [
     date: '2023-06-25',
     price: '100,000',
     piece: 30,
-    image: '/assets/Cupcakeassets/StrawberryCupCake.jpg',
+    image: 'https://i.ibb.co/bXH9JrB/Strawberry-Cup-Cake.jpg',
   },
   {
     id: 10,
@@ -209,6 +209,6 @@ export const CakeList = [
     date: '2023-06-25',
     price: '120,000',
     piece: 30,
-    image: '/assets/Cupcakeassets/VictoriaSpongeFingerCake.jpg',
+    image: 'https://i.ibb.co/2ZnHjGt/Victoria-Sponge-Finger-Cake.jpg',
   },
 ];
