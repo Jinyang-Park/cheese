@@ -19,66 +19,76 @@ function Menupick() {
       : CakeList.filter((item) => item.category === selectedCategory);
 
   return (
-    <CommonStyles>
-      <ReservationWrap>
-        <ReservationTitle>예약</ReservationTitle>
-      </ReservationWrap>
-      <ReservationInner>
-        {/* 오더 탭 */}
-        <ReservationTabUl>
-          <ReservationStepLi>
-            <ReservationA>일자선택</ReservationA>
-          </ReservationStepLi>
-          <ReservationStep2Li>
-            <ReservationA>메뉴선택</ReservationA>
-          </ReservationStep2Li>
-        </ReservationTabUl>
-        {/* 검색, 필터 */}
-        <ReservtionCategory>
-          <CategoryBtn
-            onClick={() => handleCategoryChange('전체')}
-            // useState의 기본값이 전체로 되어있기 때문에 selectedCategory도 전체의 인자를 가지고 있어 active가 먹히는것이다.
-            className={selectedCategory === '전체' ? 'active' : ''}
-          >
-            전체
-          </CategoryBtn>
-          <CategoryBtn
-            onClick={() => handleCategoryChange('케이크')}
-            className={selectedCategory === '케이크' ? 'active' : ''}
-          >
-            케이크
-          </CategoryBtn>
-          <CategoryBtn
-            onClick={() => handleCategoryChange('컵케이크')}
-            className={selectedCategory === '컵케이크' ? 'active' : ''}
-          >
-            컵케이크
-          </CategoryBtn>
-          <CategoryBtn
-            onClick={() => handleCategoryChange('핑거 케이크')}
-            className={selectedCategory === '핑거 케이크' ? 'active' : ''}
-          >
-            핑거 케이크
-          </CategoryBtn>
-        </ReservtionCategory>
-        <ReservationDateWrap>
-          {/* 더미데이터 뿌려지는 부분 */}
-          <ReservationMenuList>
-            {filtereditems.map((cake) => {
-              return (
-                <CakeLi key={cake.id}>
-                  <CakeDiv>
-                    <CakeImg src={cake.image} />
-                  </CakeDiv>
-                  <Cakename>{cake.Koname}</Cakename>
-                  <Cakeprice>{cake.price}</Cakeprice>
-                </CakeLi>
-              );
-            })}
-          </ReservationMenuList>
-        </ReservationDateWrap>
-      </ReservationInner>
-    </CommonStyles>
+    <>
+      <CommonStyles>
+        <ReservationWrap>
+          <ReservationTitle>예약</ReservationTitle>
+        </ReservationWrap>
+        <ReservationInner>
+          {/* 오더 탭 */}
+          <ReservationTabUl>
+            <ReservationStepLi>
+              <ReservationA>일자선택</ReservationA>
+            </ReservationStepLi>
+            <ReservationStep2Li>
+              <ReservationA>메뉴선택</ReservationA>
+            </ReservationStep2Li>
+          </ReservationTabUl>
+          {/* 검색 */}
+          <ReservationDateWrap>
+            <CategorySearch>
+              <CategorySearchBox>
+                <SearchInput type='text' />
+                <SearchBtn type='button'>검색</SearchBtn>
+              </CategorySearchBox>
+            </CategorySearch>
+            {/* 필터 */}
+            <ReservtionCategory>
+              <CategoryBtn
+                onClick={() => handleCategoryChange('전체')}
+                // useState의 기본값이 전체로 되어있기 때문에 selectedCategory도 전체의 인자를 가지고 있어 active가 먹히는것이다.
+                className={selectedCategory === '전체' ? 'active' : ''}
+              >
+                전체
+              </CategoryBtn>
+              <CategoryBtn
+                onClick={() => handleCategoryChange('케이크')}
+                className={selectedCategory === '케이크' ? 'active' : ''}
+              >
+                케이크
+              </CategoryBtn>
+              <CategoryBtn
+                onClick={() => handleCategoryChange('컵케이크')}
+                className={selectedCategory === '컵케이크' ? 'active' : ''}
+              >
+                컵케이크
+              </CategoryBtn>
+              <CategoryBtn
+                onClick={() => handleCategoryChange('핑거 케이크')}
+                className={selectedCategory === '핑거 케이크' ? 'active' : ''}
+              >
+                핑거 케이크
+              </CategoryBtn>
+            </ReservtionCategory>
+
+            {/* 더미데이터 뿌려지는 부분 */}
+            <ReservationMenuList>
+              {filtereditems.map((cake) => {
+                return (
+                  <CakeLi key={cake.id}>
+                    <CakeDiv>
+                      <CakeImg src={cake.image} />
+                    </CakeDiv>
+                    <Cakename>{cake.Koname}</Cakename>
+                    <Cakeprice>{cake.price}</Cakeprice>
+                  </CakeLi>
+                );
+              })}
+            </ReservationMenuList>
+          </ReservationDateWrap>
+        </ReservationInner>
+      </CommonStyles>
+    </>
   );
 }
 
@@ -294,3 +304,21 @@ export const CategoryBtn = styled.button`
     border: 1px solid black;
   }
 `;
+export const CategorySearch = styled.div`
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+`;
+export const CategorySearchBox = styled.div`
+  margin: 0 auto;
+  border-radius: 100px;
+  height: 35px;
+  padding: 5px 10px;
+  background-color: #ebebeb;
+`;
+
+export const SearchInput = styled.input`
+  background-color: transparent;
+  width: calc(100% - 50px);
+  height: 35px;
+`;
+export const SearchBtn = styled.button``;
