@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CommonStyles from '../../utils/CommonStyles';
 import styled from 'styled-components';
 import { PiWarningCircleFill } from 'react-icons/pi';
 import { CakeList } from '../../common/CakeList';
 
 function Menupick() {
+  const [selectedCategory, setSelectedCategory] = useState('전체');
+
+  // 카테고리 변경하는 함수
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+  };
+
+  // 필터링 함수
+  const filtereditems =
+    selectedCategory === '전체'
+      ? CakeList
+      : CakeList.filter((item) => item.category === selectedCategory);
+
   return (
     <CommonStyles>
       <ReservationWrap>
@@ -20,11 +33,40 @@ function Menupick() {
             <ReservationA>메뉴선택</ReservationA>
           </ReservationStep2Li>
         </ReservationTabUl>
+        {/* 검색, 필터 */}
+        <ReservtionCategory>
+          <CategoryBtn
+            onClick={() => handleCategoryChange('전체')}
+            // useState의 기본값이 전체로 되어있기 때문에 selectedCategory도 전체의 인자를 가지고 있어 active가 먹히는것이다.
+            className={selectedCategory === '전체' ? 'active' : ''}
+          >
+            전체
+          </CategoryBtn>
+          <CategoryBtn
+            onClick={() => handleCategoryChange('케이크')}
+            className={selectedCategory === '케이크' ? 'active' : ''}
+          >
+            케이크
+          </CategoryBtn>
+          <CategoryBtn
+            onClick={() => handleCategoryChange('컵케이크')}
+            className={selectedCategory === '컵케이크' ? 'active' : ''}
+          >
+            컵케이크
+          </CategoryBtn>
+          <CategoryBtn
+            onClick={() => handleCategoryChange('핑거 케이크')}
+            className={selectedCategory === '핑거 케이크' ? 'active' : ''}
+          >
+            핑거 케이크
+          </CategoryBtn>
+        </ReservtionCategory>
         <ReservationDateWrap>
+          {/* 더미데이터 뿌려지는 부분 */}
           <ReservationMenuList>
-            {CakeList.map((cake) => {
+            {filtereditems.map((cake) => {
               return (
-                <CakeLi>
+                <CakeLi key={cake.id}>
                   <CakeDiv>
                     <CakeImg src={cake.image} />
                   </CakeDiv>
@@ -229,4 +271,26 @@ export const Cakename = styled.p`
 `;
 export const Cakeprice = styled.p`
   font-weight: 100;
+`;
+export const ReservtionCategory = styled.div`
+  min-height: 30px;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  word-break: keep-all;
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+`;
+export const CategoryBtn = styled.button`
+  padding: 0 15px;
+  cursor: pointer;
+  height: 30px;
+  line-height: 30px;
+  background-color: transparent;
+
+  &.active {
+    border-radius: 50px;
+    border: 1px solid black;
+  }
 `;

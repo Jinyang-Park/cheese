@@ -1,7 +1,8 @@
 export const CakeList = [
   {
     id: 1,
-    type: 'Cake',
+    type: 'cake',
+    category: '케이크',
     Enname: 'Classic Cream Cake',
     Koname: '클래식 크림 케이크',
     detail: '치즈본 시그니쳐 크림 삼단 케이크',
@@ -11,7 +12,8 @@ export const CakeList = [
   },
   {
     id: 2,
-    type: 'Cake',
+    type: 'cake',
+    category: '케이크',
     Enname: 'Chocolate Fudge Cakes',
     Koname: '초콜릿 퍼지 케이크',
     detail:
@@ -22,7 +24,8 @@ export const CakeList = [
   },
   {
     id: 3,
-    type: 'Cake',
+    type: 'cake',
+    category: '케이크',
     Enname: 'Fig Dome Cake',
     Koname: '무화과 돔 케이크',
     detail: '무화과와 치즈본 시그니쳐 크림 돔 케이크',
@@ -32,7 +35,8 @@ export const CakeList = [
   },
   {
     id: 4,
-    type: 'Cake',
+    type: 'cake',
+    category: '케이크',
     Enname: 'Lemon Earl Grey Cake',
     Koname: '레몬 얼그레이 케이크',
     detail: '상큼한 레몬과 얼그레이가 조화로운 삼단 케이크',
@@ -42,7 +46,8 @@ export const CakeList = [
   },
   {
     id: 5,
-    type: 'Cake',
+    type: 'cake',
+    category: '케이크',
     Enname: 'Meringue Strawberry Cake',
     Koname: '머랭 스토로베리 케이크',
     detail: '살살 녹는 머랭과 상큼한 딸기가 만난 삼단 케이크',
@@ -52,7 +57,8 @@ export const CakeList = [
   },
   {
     id: 6,
-    type: 'Cake',
+    type: 'cake',
+    category: '케이크',
     Enname: 'Milk Cream Cake',
     Koname: '우유 생크림 케이크',
     detail: '우유맛이 가득한 삼단 생크림 케이크',
@@ -62,7 +68,8 @@ export const CakeList = [
   },
   {
     id: 7,
-    type: 'Cake',
+    type: 'cake',
+    category: '케이크',
     Ename: 'Mint Choco Dome Cake',
     Koname: '민트초코 돔 케이크',
     detail: '민트와 초코가 만난 돔 케이크',
@@ -72,7 +79,8 @@ export const CakeList = [
   },
   {
     id: 8,
-    type: 'Cake',
+    type: 'cake',
+    category: '케이크',
     Enname: 'MixBerry Cake',
     Koname: '믹스베리 케이크',
     detail: '블루베리, 라즈베리, 크랜베리, 스트로베리가 들어간 삼단 케이크',
@@ -82,7 +90,8 @@ export const CakeList = [
   },
   {
     id: 9,
-    type: 'Cake',
+    type: 'cake',
+    category: '케이크',
     Enname: 'Red Velevet Cream Cake',
     Koname: '레드벨벳 크림 케이크',
     detail: '레드벨벳과 크림치즈로 가득한 사단 케이크',
@@ -92,7 +101,8 @@ export const CakeList = [
   },
   {
     id: 10,
-    type: 'Cake',
+    type: 'cake',
+    category: '케이크',
     Enname: 'Victoria Sponge Cake',
     Koname: '빅토리아 스펀지 케이크',
     detail: '스트로베리 잼이 들어간 삼단 케이크',
@@ -103,6 +113,7 @@ export const CakeList = [
   {
     id: 1,
     type: 'Fingercake',
+    category: '핑거 케이크',
     Enname: 'Berry Pistachio Finger Cake',
     Koname: '스토로베리 피스타치오 핑거 케이크',
     detail: '상큼한 딸기와 담백한 피스타치오가 만난 핑거 케이크 ',
@@ -114,6 +125,7 @@ export const CakeList = [
   {
     id: 2,
     type: 'Cupcake',
+    category: '컵케이크',
     Enname: 'Caramel Chocolate CupCake',
     Koname: ' 카라멜 초콜릿 컵케이크',
     detail: '초코칩이 들어간 카라멜 컵케이크 ',
@@ -125,6 +137,7 @@ export const CakeList = [
   {
     id: 3,
     type: 'Fingercake',
+    category: '핑거 케이크',
     Enname: 'Cherry Choco Finger Cake',
     Koname: ' 체리 초코 핑거 케이크',
     detail:
@@ -137,6 +150,7 @@ export const CakeList = [
   {
     id: 4,
     type: 'Fingercake',
+    category: '핑거 케이크',
     Enname: 'Classic Vanilla Finger Cake',
     Koname: '클래식 바닐라 핑거 케이크',
     detail: '바닐라 빈이 씹히는 클래식 핑거 케이크',
@@ -148,6 +162,7 @@ export const CakeList = [
   {
     id: 5,
     type: 'Fingercake',
+    category: '핑거 케이크',
     Enname: 'Lemon Finger Cake',
     Koname: '레몬 핑거 케이크',
     detail: '레몬 크림과 슬라이스 레몬이 씹히는 상큼한 핑거 케이크',
@@ -159,6 +174,7 @@ export const CakeList = [
   {
     id: 6,
     type: 'Cupcake',
+    category: '컵케이크',
     Enname: 'Milk Cream CupCake',
     Koname: '우유 생크림 컵케이크',
     detail: '우유맛이 가득한 삼단 생크림 컵케이크',
@@ -170,6 +186,7 @@ export const CakeList = [
   {
     id: 7,
     type: 'Cupcake',
+    category: '컵케이크',
     Enname: 'Orange Cheddar Cheese CupCake',
     Koname: '오렌지 체다치즈 컵케이크',
     detail: '짭짤한 체다와 상큼한 오렌지가 만난 컵케이크',
@@ -181,6 +198,7 @@ export const CakeList = [
   {
     id: 8,
     type: 'Fingercake',
+    category: '핑거 케이크',
     Enname: 'Fig Red Velevet Finger Cake',
     Koname: '무화과 레드벨벳 핑거 케이크',
     detail: '무화과와 레드벨벳이 만난 핑거 케이크',
@@ -192,6 +210,7 @@ export const CakeList = [
   {
     id: 9,
     type: 'Cupcake',
+    category: '컵케이크',
     Enname: 'Strawberry CupCake',
     Koname: '스트로베리 컵케이크',
     detail: '클래식 스트로베리 컵케이크',
@@ -203,6 +222,7 @@ export const CakeList = [
   {
     id: 10,
     type: 'Fingercake',
+    category: '핑거 케이크',
     Enname: 'Victoria Sponge Finger Cake',
     Koname: '빅토리아 스펀지 핑거 케이크',
     detail: '생 딸기와 잼이 들어간 핑거 케이크',
