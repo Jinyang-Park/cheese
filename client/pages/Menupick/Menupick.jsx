@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import CommonStyles from '../../utils/CommonStyles';
 import styled from 'styled-components';
 import { PiWarningCircleFill } from 'react-icons/pi';
+import { FiSearch } from 'react-icons/fi';
 import { CakeList } from '../../common/CakeList';
 
 function Menupick() {
@@ -39,7 +40,9 @@ function Menupick() {
             <CategorySearch>
               <CategorySearchBox>
                 <SearchInput type='text' />
-                <SearchBtn type='button'>검색</SearchBtn>
+                <SearchBtn type='button'>
+                  <SearchIcon />
+                </SearchBtn>
               </CategorySearchBox>
             </CategorySearch>
             {/* 필터 */}
@@ -312,13 +315,26 @@ export const CategorySearchBox = styled.div`
   margin: 0 auto;
   border-radius: 100px;
   height: 35px;
-  padding: 5px 10px;
+  padding: 2px 20px;
   background-color: #ebebeb;
+  display: flex;
+  align-items: center;
 `;
 
 export const SearchInput = styled.input`
   background-color: transparent;
   width: calc(100% - 50px);
   height: 35px;
+  outline: none;
 `;
-export const SearchBtn = styled.button``;
+export const SearchBtn = styled.button`
+  background-color: transparent;
+`;
+export const SearchIcon = styled(FiSearch)`
+  width: 30px;
+  height: 35px;
+  margin-left: 20px;
+  font-size: 0;
+  background-size: 25px auto;
+  float: right;
+`;
