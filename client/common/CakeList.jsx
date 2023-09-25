@@ -111,7 +111,7 @@ export const CakeList = [
     image: 'https://i.ibb.co/2jbfG6L/Victoria-Sponge-Cake.jpg',
   },
   {
-    id: 1,
+    id: 11,
     type: 'Fingercake',
     category: '핑거 케이크',
     Enname: 'Berry Pistachio Finger Cake',
@@ -123,7 +123,7 @@ export const CakeList = [
     image: 'https://i.ibb.co/vBQ3hy7/Berry-Pistachio-Fingercake.jpg',
   },
   {
-    id: 2,
+    id: 12,
     type: 'Cupcake',
     category: '컵케이크',
     Enname: 'Caramel Chocolate CupCake',
@@ -135,7 +135,7 @@ export const CakeList = [
     image: 'https://i.ibb.co/tx5RzVb/Caramel-Chocolate-Cup-Cake.jpg',
   },
   {
-    id: 3,
+    id: 13,
     type: 'Fingercake',
     category: '핑거 케이크',
     Enname: 'Cherry Choco Finger Cake',
@@ -148,7 +148,7 @@ export const CakeList = [
     image: 'https://i.ibb.co/tJjbwWW/cherry-Choco-Finger-Cake.jpg',
   },
   {
-    id: 4,
+    id: 14,
     type: 'Fingercake',
     category: '핑거 케이크',
     Enname: 'Classic Vanilla Finger Cake',
@@ -160,7 +160,7 @@ export const CakeList = [
     image: 'https://i.ibb.co/b6hWRgM/Classic-Vaila-Finger-Cake.jpg',
   },
   {
-    id: 5,
+    id: 15,
     type: 'Fingercake',
     category: '핑거 케이크',
     Enname: 'Lemon Finger Cake',
@@ -172,7 +172,7 @@ export const CakeList = [
     image: 'https://i.ibb.co/dJCHXnd/Lemon-Finger-Cake.jpg',
   },
   {
-    id: 6,
+    id: 16,
     type: 'Cupcake',
     category: '컵케이크',
     Enname: 'Milk Cream CupCake',
@@ -184,7 +184,7 @@ export const CakeList = [
     image: 'https://i.ibb.co/QP6gBhC/Milk-Cream-Cup-Cake.jpg',
   },
   {
-    id: 7,
+    id: 17,
     type: 'Cupcake',
     category: '컵케이크',
     Enname: 'Orange Cheddar Cheese CupCake',
@@ -196,7 +196,7 @@ export const CakeList = [
     image: 'https://i.ibb.co/WKwwPb0/Orange-Cheddar-Cup-Cake.jpg',
   },
   {
-    id: 8,
+    id: 18,
     type: 'Fingercake',
     category: '핑거 케이크',
     Enname: 'Fig Red Velevet Finger Cake',
@@ -208,7 +208,7 @@ export const CakeList = [
     image: 'https://i.ibb.co/Y0trkdf/Red-Velete-Finger-Cake.jpg',
   },
   {
-    id: 9,
+    id: 19,
     type: 'Cupcake',
     category: '컵케이크',
     Enname: 'Strawberry CupCake',
@@ -220,7 +220,7 @@ export const CakeList = [
     image: 'https://i.ibb.co/bXH9JrB/Strawberry-Cup-Cake.jpg',
   },
   {
-    id: 10,
+    id: 20,
     type: 'Fingercake',
     category: '핑거 케이크',
     Enname: 'Victoria Sponge Finger Cake',

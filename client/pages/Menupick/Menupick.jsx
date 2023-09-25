@@ -6,7 +6,11 @@ import { FiSearch } from 'react-icons/fi';
 import { CakeList } from '../../common/CakeList';
 
 function Menupick() {
+  // 카테고리
   const [selectedCategory, setSelectedCategory] = useState('전체');
+  // 검색어 필터링
+  // searchKeywords의 기본값을 "" 해놓은 이유는 검색값을 다 지웠을때 전체 조회가능하기 때문
+  const [searchKeyword, setSearchKeyword] = useState('');
 
   // 카테고리 변경하는 함수
   const handleCategoryChange = (category) => {
@@ -19,6 +23,11 @@ function Menupick() {
       ? CakeList
       : CakeList.filter((item) => item.category === selectedCategory);
 
+  // 검색어 아이콘 함수
+  const handleSearch = () => {
+    setSearchKeyword(searchKeyword);
+    console.log('29번줄이야', searchKeyword);
+  };
   return (
     <>
       <CommonStyles>
@@ -39,10 +48,13 @@ function Menupick() {
           <ReservationDateWrap>
             <CategorySearch>
               <CategorySearchBox>
-                <SearchInput type='text' />
-                <SearchBtn type='button'>
-                  <SearchIcon />
-                </SearchBtn>
+                <SearchInput
+                  type='text'
+                  onChange={(e) => {
+                    setSearchKeyword(e.target.value);
+                  }}
+                />
+                <SearchIcon onClick={handleSearch} />
               </CategorySearchBox>
             </CategorySearch>
             {/* 필터 */}
@@ -76,17 +88,26 @@ function Menupick() {
 
             {/* 더미데이터 뿌려지는 부분 */}
             <ReservationMenuList>
-              {filtereditems.map((cake) => {
-                return (
-                  <CakeLi key={cake.id}>
-                    <CakeDiv>
-                      <CakeImg src={cake.image} />
-                    </CakeDiv>
-                    <Cakename>{cake.Koname}</Cakename>
-                    <Cakeprice>{cake.price}</Cakeprice>
-                  </CakeLi>
-                );
-              })}
+              {filtereditems
+                .filter((filtercake) => {
+                  if (searchKeyword === '') {
+                    return true;
+                  } else if (filtercake.Koname.includes(searchKeyword)) {
+                    console.log('96', filtercake.Koname);
+                    return true;
+                  }
+                })
+                .map((cake) => {
+                  return (
+                    <CakeLi key={cake.id}>
+                      <CakeDiv>
+                        <CakeImg src={cake.image} />
+                      </CakeDiv>
+                      <Cakename>{cake.Koname}</Cakename>
+                      <Cakeprice>{cake.price}</Cakeprice>
+                    </CakeLi>
+                  );
+                })}
             </ReservationMenuList>
           </ReservationDateWrap>
         </ReservationInner>
@@ -327,13 +348,11 @@ export const SearchInput = styled.input`
   height: 35px;
   outline: none;
 `;
-export const SearchBtn = styled.button`
-  background-color: transparent;
-`;
 export const SearchIcon = styled(FiSearch)`
   width: 30px;
   height: 35px;
   margin-left: 20px;
+  cursor: pointer;
   font-size: 0;
   background-size: 25px auto;
   float: right;
