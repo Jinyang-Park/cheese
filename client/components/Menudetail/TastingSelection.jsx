@@ -14,7 +14,7 @@ function TastingSelection() {
     <>
       <CakedetailTastingSelection>
         <CakedetailTastingSelectionTitle>
-          테이스팅 선택(3가지맛 선택 필수)
+          테이스팅 선택 (기본 3가지 맛 선택 필수)
         </CakedetailTastingSelectionTitle>
         <CakeToggle onClick={toggleTastingSelection}>
           {isOpen ? <CakedetailDownIcon /> : <CakedetailUpIcon />}
