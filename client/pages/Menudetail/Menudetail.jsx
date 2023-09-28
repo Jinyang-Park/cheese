@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import CommonStyles from '../../utils/CommonStyles';
 import styled from 'styled-components';
-
+import { AiOutlineDown } from 'react-icons/ai';
+import { AiOutlineUp } from 'react-icons/ai';
+import SelectedLayers from '../../components/Menudetail/SelectedLayers';
+import TastingSelection from '../../components/Menudetail/TastingSelection';
 function Menudetail() {
   // usevaigater로 케익의 정보를 받아오는 로직
   const location = useLocation();
   const cake = location.state.cake;
 
+  // 토글 메뉴
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleAllergydeescrption = () => {
+    setIsOpen(!isOpen);
+  };
   return (
     <>
       <CommonStyles>
@@ -24,35 +33,48 @@ function Menudetail() {
               <ReservationA>메뉴선택</ReservationA>
             </ReservationStep2Li>
           </ReservationTabUl>
-          <CakedetailInner>
-            {/*이미지 란 */}
-            <CakedetailInform01>
-              <CakedetailImgDiv>
-                <CakedetailImg src={cake.image} />
-              </CakedetailImgDiv>
-            </CakedetailInform01>
-            {/*케익이름, 영어이름, 가격 정보란 */}
-            <CakedetailInform02>
-              <CakedetailPrice>
-                <CakedatailTitleLi>
-                  <CakedetailH2>{cake.Koname}</CakedetailH2>
-                  <CakedeatailLi>{cake.Enname}</CakedeatailLi>
-                  <CakedeatailLi>{cake.price}원</CakedeatailLi>
-                </CakedatailTitleLi>
-              </CakedetailPrice>
-              {/*케익 정보, 알레르기란 */}
-              <CakedetailInformation>
-                <CakedeatailLitxt>{cake.detail}</CakedeatailLitxt>
-                <CakedetailAllergy>
-                  <CakedetailAllergycause>
-                    알레르기 유발 원인
-                  </CakedetailAllergycause>
-                  <CakedetailInput />
-                  <CakedetailLable></CakedetailLable>
-                </CakedetailAllergy>
-              </CakedetailInformation>
-            </CakedetailInform02>
-          </CakedetailInner>
+          <ReservationDateWrap>
+            <CakedetailInner>
+              {/*이미지 란 */}
+              <CakedetailInform01>
+                <CakedetailImgDiv>
+                  <CakedetailImg src={cake.image} />
+                </CakedetailImgDiv>
+              </CakedetailInform01>
+              {/*케익이름, 영어이름, 가격 정보란 */}
+              <CakedetailInform02>
+                <CakedetailPrice>
+                  <CakedatailTitleLi>
+                    <CakedetailH2>{cake.Koname}</CakedetailH2>
+                    <CakedeatailLi>{cake.Enname}</CakedeatailLi>
+                    <CakedeatailLi>{cake.price}원</CakedeatailLi>
+                  </CakedatailTitleLi>
+                </CakedetailPrice>
+                {/*케익 정보, 알레르기란 */}
+                <CakedetailInformation>
+                  <CakedeatailLitxt>{cake.detail}</CakedeatailLitxt>
+                  <CakedetailAllergy>
+                    <CakedetailAllergycause>
+                      알레르기 유발 원인
+                    </CakedetailAllergycause>
+                    {/*아이콘 클릭시 드롭다운 되면서 해당 알러지정보 나오는 로직 */}
+                    <CakedetailIcon onClick={toggleAllergydeescrption}>
+                      {isOpen ? <CakedetailDownIcon /> : <CakedetailUpIcon />}
+                    </CakedetailIcon>
+                  </CakedetailAllergy>
+                  {isOpen && (
+                    <CakedetailAllergydes>
+                      {cake.allergy.join(', ')}
+                    </CakedetailAllergydes>
+                  )}
+                </CakedetailInformation>
+                {/*케이크 단 선택란 */}
+                <SelectedLayers />
+                {/*테이스팅 단 선택란 */}
+                <TastingSelection />
+              </CakedetailInform02>
+            </CakedetailInner>
+          </ReservationDateWrap>
         </ReservationInner>
       </CommonStyles>
     </>
@@ -122,6 +144,11 @@ export const CakedetailInner = styled.div`
   -moz-column-gap: 40px;
   column-gap: 40px;
 `;
+export const ReservationDateWrap = styled.div`
+  padding-bottom: 100px;
+  border: 3px solid #f1e4ab;
+  border-width: 0 3px 3px 3px;
+`;
 export const CakedetailInform01 = styled.div``;
 export const CakedetailImgDiv = styled.div`
   margin: 0 auto;
@@ -162,13 +189,32 @@ export const CakedeatailLitxt = styled.li`
 export const CakedetailAllergy = styled.li`
   position: relative;
   border-top: 1px solid #ebebeb;
-  padding: 10px 0;
+  padding: 15px 0;
   line-height: 26px;
+  display: flex;
 `;
 export const CakedetailAllergycause = styled.h3`
   font-size: 18px;
   font-weight: 500;
   display: inline-block;
 `;
-export const CakedetailInput = styled.input``;
-export const CakedetailLable = styled.label``;
+export const CakedetailDownIcon = styled(AiOutlineDown)`
+  position: absolute;
+  right: 0;
+  padding: 0 15px;
+  color: #959595;
+  width: 20px;
+  height: 20px;
+`;
+export const CakedetailUpIcon = styled(AiOutlineUp)`
+  position: absolute;
+  right: 0;
+  padding: 0 15px;
+  color: #959595;
+  width: 20px;
+  height: 20px;
+`;
+export const CakedetailAllergydes = styled.p`
+  margin-bottom: 15px;
+`;
+export const CakedetailIcon = styled.div``;

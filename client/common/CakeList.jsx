@@ -9,7 +9,7 @@ export const CakeList = [
     date: '2023-06-25',
     price: '150,000',
     image: 'https://i.ibb.co/mRcRShS/Choco-Classic.jpg',
-    allergy: ['밀', '우유', '대두', '계란', '돼지고기함유'],
+    allergy: ['밀', '우유', '대두', '계란', '돼지고기 함유'],
   },
   {
     id: 2,
@@ -22,7 +22,7 @@ export const CakeList = [
     date: '2023-06-25',
     price: '150,000',
     image: 'https://i.ibb.co/QmftnRz/Chocolate-Fudge-Cake.jpg',
-    allergy: ['밀', '우유', '대두', '계란', '돼지고기함유'],
+    allergy: ['밀', '우유', '대두', '계란', '돼지고기 함유'],
   },
   {
     id: 3,
@@ -34,7 +34,7 @@ export const CakeList = [
     date: '2023-06-25',
     price: '45,000',
     image: 'https://i.ibb.co/646mnzM/Fig-Dome-Cake.jpg',
-    allergy: ['밀', '우유', '대두', '계란', '돼지고기함유', '무화과'],
+    allergy: ['밀', '우유', '대두', '계란', '돼지고기 함유', '무화과'],
   },
   {
     id: 4,
@@ -46,7 +46,7 @@ export const CakeList = [
     date: '2023-06-25',
     price: '150,000',
     image: 'https://i.ibb.co/QQHHRt3/Lemon-Earl-Grey-Cake.jpg',
-    allergy: ['밀', '우유', '대두', '계란', '돼지고기함유'],
+    allergy: ['밀', '우유', '대두', '계란', '돼지고기 함유'],
   },
   {
     id: 5,
@@ -58,7 +58,7 @@ export const CakeList = [
     date: '2023-06-25',
     price: '150,000',
     image: 'https://i.ibb.co/MnHFksf/Meringue-Strawberry-Shortcake.jpg',
-    allergy: ['밀', '우유', '대두', '계란', '돼지고기함유'],
+    allergy: ['밀', '우유', '대두', '계란', '돼지고기 함유'],
   },
   {
     id: 6,
@@ -70,7 +70,7 @@ export const CakeList = [
     date: '2023-06-25',
     price: '180,000',
     image: 'https://i.ibb.co/WzZbDV5/Milk-Cream-Cake.jpg',
-    allergy: ['밀', '우유', '대두', '계란', '돼지고기함유'],
+    allergy: ['밀', '우유', '대두', '계란', '돼지고기 함유'],
   },
   {
     id: 7,
@@ -82,7 +82,7 @@ export const CakeList = [
     date: '2023-06-25',
     price: '45,000',
     image: 'https://i.ibb.co/Dg3SYrc/Mint-Choco-Dome-Cake.jpg',
-    allergy: ['밀', '우유', '대두', '계란', '돼지고기함유'],
+    allergy: ['밀', '우유', '대두', '계란', '돼지고기 함유'],
   },
   {
     id: 8,
@@ -94,7 +94,7 @@ export const CakeList = [
     date: '2023-06-25',
     price: '170,000',
     image: 'https://i.ibb.co/hK0wNTD/Mix-Berry-Cake.jpg',
-    allergy: ['밀', '우유', '대두', '계란', '돼지고기함유', '베리류'],
+    allergy: ['밀', '우유', '대두', '계란', '돼지고기 함유', '베리류'],
   },
   {
     id: 9,
@@ -106,7 +106,7 @@ export const CakeList = [
     date: '2023-06-25',
     price: '230,000',
     image: 'https://i.ibb.co/BqgTYn9/Red-Velevet-Creamcheese-Frosting-Cake.jpg',
-    allergy: ['밀', '우유', '대두', '계란', '돼지고기함유'],
+    allergy: ['밀', '우유', '대두', '계란', '돼지고기 함유'],
   },
   {
     id: 10,
@@ -118,7 +118,7 @@ export const CakeList = [
     date: '2023-06-25',
     price: '150,000',
     image: 'https://i.ibb.co/2jbfG6L/Victoria-Sponge-Cake.jpg',
-    allergy: ['밀', '우유', '대두', '계란', '돼지고기함유'],
+    allergy: ['밀', '우유', '대두', '계란', '돼지고기 함유'],
   },
   {
     id: 11,
@@ -131,7 +131,7 @@ export const CakeList = [
     price: '150,000',
     piece: 30,
     image: 'https://i.ibb.co/vBQ3hy7/Berry-Pistachio-Fingercake.jpg',
-    allergy: ['밀', '우유', '대두', '계란', '돼지고기함유', '피스타치오'],
+    allergy: ['밀', '우유', '대두', '계란', '돼지고기 함유', '피스타치오'],
   },
   {
     id: 12,
@@ -144,7 +144,7 @@ export const CakeList = [
     price: '100,000',
     piece: 30,
     image: 'https://i.ibb.co/tx5RzVb/Caramel-Chocolate-Cup-Cake.jpg',
-    allergy: ['밀', '우유', '대두', '계란', '돼지고기함유'],
+    allergy: ['밀', '우유', '대두', '계란', '돼지고기 함유'],
   },
   {
     id: 13,
@@ -158,7 +158,7 @@ export const CakeList = [
     price: '110,000',
     piece: 30,
     image: 'https://i.ibb.co/tJjbwWW/cherry-Choco-Finger-Cake.jpg',
-    allergy: ['밀', '우유', '대두', '계란', '돼지고기함유', '체리'],
+    allergy: ['밀', '우유', '대두', '계란', '돼지고기 함유', '체리'],
   },
   {
     id: 14,
@@ -171,7 +171,7 @@ export const CakeList = [
     price: '110,000',
     piece: 30,
     image: 'https://i.ibb.co/b6hWRgM/Classic-Vaila-Finger-Cake.jpg',
-    allergy: ['밀', '우유', '대두', '계란', '돼지고기함유'],
+    allergy: ['밀', '우유', '대두', '계란', '돼지고기 함유'],
   },
   {
     id: 15,
@@ -184,7 +184,7 @@ export const CakeList = [
     price: '120,000',
     piece: 30,
     image: 'https://i.ibb.co/dJCHXnd/Lemon-Finger-Cake.jpg',
-    allergy: ['밀', '우유', '대두', '계란', '돼지고기함유'],
+    allergy: ['밀', '우유', '대두', '계란', '돼지고기 함유'],
   },
   {
     id: 16,
@@ -197,7 +197,7 @@ export const CakeList = [
     price: '100,000',
     piece: 30,
     image: 'https://i.ibb.co/QP6gBhC/Milk-Cream-Cup-Cake.jpg',
-    allergy: ['밀', '우유', '대두', '계란', '돼지고기함유'],
+    allergy: ['밀', '우유', '대두', '계란', '돼지고기 함유'],
   },
   {
     id: 17,
@@ -210,7 +210,7 @@ export const CakeList = [
     price: '120,000',
     piece: 30,
     image: 'https://i.ibb.co/WKwwPb0/Orange-Cheddar-Cup-Cake.jpg',
-    allergy: ['밀', '우유', '대두', '계란', '돼지고기함유'],
+    allergy: ['밀', '우유', '대두', '계란', '돼지고기 함유'],
   },
   {
     id: 18,
@@ -223,7 +223,7 @@ export const CakeList = [
     price: '120,000',
     piece: 30,
     image: 'https://i.ibb.co/Y0trkdf/Red-Velete-Finger-Cake.jpg',
-    allergy: ['밀', '우유', '대두', '계란', '돼지고기함유', '무화과'],
+    allergy: ['밀', '우유', '대두', '계란', '돼지고기 함유', '무화과'],
   },
   {
     id: 19,
@@ -236,7 +236,7 @@ export const CakeList = [
     price: '100,000',
     piece: 30,
     image: 'https://i.ibb.co/bXH9JrB/Strawberry-Cup-Cake.jpg',
-    allergy: ['밀', '우유', '대두', '계란', '돼지고기함유'],
+    allergy: ['밀', '우유', '대두', '계란', '돼지고기 함유'],
   },
   {
     id: 20,
@@ -249,6 +249,6 @@ export const CakeList = [
     price: '120,000',
     piece: 30,
     image: 'https://i.ibb.co/2ZnHjGt/Victoria-Sponge-Finger-Cake.jpg',
-    allergy: ['밀', '우유', '대두', '계란', '돼지고기함유'],
+    allergy: ['밀', '우유', '대두', '계란', '돼지고기 함유'],
   },
 ];
