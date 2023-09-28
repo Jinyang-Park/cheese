@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { PiWarningCircleFill } from 'react-icons/pi';
 import { FiSearch } from 'react-icons/fi';
 import { CakeList } from '../../common/CakeList';
+import { useNavigate } from 'react-router-dom';
 
 function Menupick() {
   // 카테고리
@@ -11,6 +12,9 @@ function Menupick() {
   // 검색어 필터링
   // searchKeywords의 기본값을 "" 해놓은 이유는 검색값을 다 지웠을때 전체 조회가능하기 때문
   const [searchKeyword, setSearchKeyword] = useState('');
+
+  // navaigate
+  const navigate = useNavigate();
 
   // 카테고리 변경하는 함수
   const handleCategoryChange = (category) => {
@@ -26,8 +30,8 @@ function Menupick() {
   // 검색어 아이콘 함수
   const handleSearch = () => {
     setSearchKeyword(searchKeyword);
-    console.log('29번줄이야', searchKeyword);
   };
+
   return (
     <>
       <CommonStyles>
@@ -93,18 +97,27 @@ function Menupick() {
                   if (searchKeyword === '') {
                     return true;
                   } else if (filtercake.Koname.includes(searchKeyword)) {
-                    console.log('96', filtercake.Koname);
+                    // console.log('96', filtercake.Koname);
                     return true;
                   }
                 })
                 .map((cake) => {
                   return (
                     <CakeLi key={cake.id}>
-                      <CakeDiv>
-                        <CakeImg src={cake.image} />
-                      </CakeDiv>
-                      <Cakename>{cake.Koname}</Cakename>
-                      <Cakeprice>{cake.price}</Cakeprice>
+                      <CakeClickWrap
+                        onClick={() =>
+                          navigate(
+                            `/Reservation/date/menupick/Menudetail/${cake.id}`,
+                            { state: { cake } }
+                          )
+                        }
+                      >
+                        <CakeDiv>
+                          <CakeImg src={cake.image} />
+                        </CakeDiv>
+                        <Cakename>{cake.Koname}</Cakename>
+                        <Cakeprice>{cake.price}</Cakeprice>
+                      </CakeClickWrap>
                     </CakeLi>
                   );
                 })}
@@ -279,6 +292,9 @@ export const CakeLi = styled.li`
   text-align: center;
   display: inline-grid;
   margin-bottom: 20px;
+`;
+export const CakeClickWrap = styled.div`
+  cursor: pointer;
 `;
 export const CakeDiv = styled.div`
   background-color: #ccc;
