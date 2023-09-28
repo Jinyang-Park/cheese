@@ -35,7 +35,6 @@ export const Cakedetailselectelayer = styled.div`
   padding: 15px 0;
   line-height: 26px;
   display: flex;
-  align-items: center;
 `;
 export const CakeToggle = styled.div``;
 export const CakedetaillayerBtn = styled.button`
