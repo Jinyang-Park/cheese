@@ -6,16 +6,27 @@ import { AiOutlineDown } from 'react-icons/ai';
 import { AiOutlineUp } from 'react-icons/ai';
 import SelectedLayers from '../../components/Menudetail/SelectedLayers';
 import TastingSelection from '../../components/Menudetail/TastingSelection';
+import QuantitySelection from '../../components/Menudetail/QuantitySelection';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../redux/modules/ReservationsQuantity';
 function Menudetail() {
   // usevaigater로 케익의 정보를 받아오는 로직
   const location = useLocation();
   const cake = location.state.cake;
+
+  // dispatch 로직
+  const dispatch = useDispatch();
 
   // 토글 메뉴
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleAllergydeescrption = () => {
     setIsOpen(!isOpen);
+  };
+
+  // 주문하기 dispacth로직
+  const handleAddtoCartClick = () => {
+    dispatch(addToCart({ ...state, quantity }));
   };
   return (
     <>
@@ -72,8 +83,14 @@ function Menudetail() {
                 <SelectedLayers />
                 {/*테이스팅 단 선택란 */}
                 <TastingSelection />
+                {/*수량 선택란 */}
+                <QuantitySelection cake={cake} />
               </CakedetailInform02>
             </CakedetailInner>
+            {/*주문하기 버튼 */}
+            <TotallOrderBtnWrap>
+              <OrderBtn onClick={handleAddtoCartClick}>주문하기</OrderBtn>
+            </TotallOrderBtnWrap>
           </ReservationDateWrap>
         </ReservationInner>
       </CommonStyles>
@@ -145,7 +162,6 @@ export const CakedetailInner = styled.div`
   column-gap: 40px;
 `;
 export const ReservationDateWrap = styled.div`
-  padding-bottom: 100px;
   border: 3px solid #f1e4ab;
   border-width: 0 3px 3px 3px;
 `;
@@ -218,3 +234,18 @@ export const CakedetailAllergydes = styled.p`
   margin-bottom: 15px;
 `;
 export const CakedetailIcon = styled.div``;
+export const TotallOrderBtnWrap = styled.div`
+  text-align: center;
+  margin: 50px auto 20px;
+`;
+export const OrderBtn = styled.button`
+  background: #ffdb7e;
+  border: 1px solid #ffdb7e;
+  color: #846e23;
+  width: 100%;
+  max-width: 240px;
+  padding: 15px;
+  margin: 3px 1px;
+  border-radius: 500px;
+  font-size: 1em;
+`;
