@@ -19,6 +19,9 @@ function SelectedLayers() {
       </Cakedetailselectelayer>
       {isOpen && (
         <>
+          <Cakedetailselectdes>
+            웨딩 케이크는 3단을 추천합니다.
+          </Cakedetailselectdes>
           <CakedetaillayerBtn>1단</CakedetaillayerBtn>
           <CakedetaillayerBtn>2단</CakedetaillayerBtn>
           <CakedetaillayerBtn>3단</CakedetaillayerBtn>
@@ -66,4 +69,10 @@ export const CakedetailUpIcon = styled(AiOutlineUp)`
   color: #959595;
   width: 20px;
   height: 20px;
+`;
+export const Cakedetailselectdes = styled.h3`
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 15px;
+  color: #7c7a7a;
 `;

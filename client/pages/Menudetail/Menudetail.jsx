@@ -231,7 +231,10 @@ export const CakedetailUpIcon = styled(AiOutlineUp)`
   height: 20px;
 `;
 export const CakedetailAllergydes = styled.p`
+  font-size: 16px;
+  font-weight: 500;
   margin-bottom: 15px;
+  color: #7c7a7a;
 `;
 export const CakedetailIcon = styled.div``;
 export const TotallOrderBtnWrap = styled.div`

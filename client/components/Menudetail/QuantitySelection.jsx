@@ -24,14 +24,18 @@ function QuantitySelection({ cake }) {
 
   // +,- 버튼으로 수량 변경하는 함수.
   const IncreseQuantity = () => {
-    setQuantity(quantity + 1);
+    if (quantity >= 5) {
+      alert(`5개 이상의 케이크 예약은 상담을 통해 진행합니다.`);
+    } else {
+      setQuantity(quantity + 1);
 
-    // Update the total price
-    const newTotal = cake.price * (quantity + 1);
-    setTotal(newTotal);
+      // Update the total price
+      const newTotal = cake.price * (quantity + 1);
+      setTotal(newTotal);
 
-    dispatch(addToCart({ ...product, quantity: quantity + 1 }, newTotal));
-    console.log(quantity, newTotal);
+      dispatch(addToCart({ ...product, quantity: quantity + 1 }, newTotal));
+      console.log(quantity, newTotal);
+    }
   };
 
   const DecreaseQuantity = () => {
@@ -45,6 +49,32 @@ function QuantitySelection({ cake }) {
       console.log(quantity, newTotal);
     }
   };
+
+  // input 수량 함수 로직
+  const handleChangeQuantityInput = (e) => {
+    let newValue = parseInt(e.target.value);
+
+    if (isNaN(newValue)) {
+      newValue = '';
+      setQuantity(newValue);
+    } else if (newValue === 0) {
+      return false;
+    }
+
+    // 수량이 5개 이상일때 얼럿창
+    if (newValue >= 5) {
+      alert(`5개 이상의 케이크 예약은 상담을 통해 진행합니다.`);
+    }
+    setQuantity(newValue);
+
+    // input에 수량을 적으면 가격에 변동이 없었다
+    // 위에처럼 아래 로직을 추가하였더니 정상 작동되었다.
+    const newTotal = cake.price * newValue;
+    setTotal(newTotal);
+
+    dispatch(addToCart({ ...product, quantity: quantity + 1 }, newTotal));
+    console.log(quantity, newTotal);
+  };
   return (
     <>
       <TotallQuantitySelectionWrap>
@@ -55,7 +85,7 @@ function QuantitySelection({ cake }) {
           />
           <TotallQuantityInput
             value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
+            onChange={handleChangeQuantityInput}
           />
           <TotallPlusBtnIcon onClick={IncreseQuantity} />
           <TotallQuantity>{total.toLocaleString()}원</TotallQuantity>

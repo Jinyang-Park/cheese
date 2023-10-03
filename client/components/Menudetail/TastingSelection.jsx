@@ -22,6 +22,10 @@ function TastingSelection() {
       </CakedetailTastingSelection>
       {isOpen && (
         <>
+          <Cakedetailselectdes>
+            웨딩 케이크 상담 예약 시 선택하신 3가지 맛을 볼 수 있습니다.
+            (테이스팅 후 원하시는 맛으로 변경 가능합니다.)
+          </Cakedetailselectdes>
           <CakedeTastingSelectionBtn>클래식 크림</CakedeTastingSelectionBtn>
           <CakedeTastingSelectionBtn>초코</CakedeTastingSelectionBtn>
           <CakedeTastingSelectionBtn>레몬 얼그레이</CakedeTastingSelectionBtn>
@@ -79,4 +83,10 @@ export const CakedetailUpIcon = styled(AiOutlineUp)`
   color: #959595;
   width: 20px;
   height: 20px;
+`;
+export const Cakedetailselectdes = styled.h3`
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 15px;
+  color: #7c7a7a;
 `;
