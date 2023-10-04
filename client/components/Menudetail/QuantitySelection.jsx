@@ -22,6 +22,10 @@ function QuantitySelection({ cake }) {
   // 이 부분은 실제 store의 구조에 따라 달라질 수 있습니다.
   const product = useSelector((state) => state.payload);
 
+  // 케익 선택 Redux store 가져오는 로직
+  const layerState = useSelector((state) => state.ReservationsLayer);
+  console.log(layerState);
+
   // +,- 버튼으로 수량 변경하는 함수.
   const IncreseQuantity = () => {
     if (quantity >= 5) {
@@ -29,9 +33,11 @@ function QuantitySelection({ cake }) {
     } else {
       setQuantity(quantity + 1);
 
-      // Update the total price
+      // 최종 가격 로직
       const newTotal = cake.price * (quantity + 1);
       setTotal(newTotal);
+
+      // 케이크 단 선택 dispatch
 
       dispatch(addToCart({ ...product, quantity: quantity + 1 }, newTotal));
       console.log(quantity, newTotal);
@@ -41,7 +47,8 @@ function QuantitySelection({ cake }) {
   const DecreaseQuantity = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
-      // Update the total price
+
+      // 최종 가격 로직
       const newTotal = cake.price * (quantity - 1);
       setTotal(newTotal);
 

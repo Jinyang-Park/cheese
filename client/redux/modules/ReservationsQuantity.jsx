@@ -20,7 +20,7 @@ export const deleteToCart = (product, total) => {
 };
 
 // 3. initial State => reuder를 구성할 때
-const inintialState = [];
+const inintialState = {};
 
 // 4. reducer를 만들 것
 const ReservationsQuantity = (state = inintialState, action) => {

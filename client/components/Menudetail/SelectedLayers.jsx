@@ -2,12 +2,24 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { AiOutlineDown } from 'react-icons/ai';
 import { AiOutlineUp } from 'react-icons/ai';
+import { CakeLayer } from '../../common/CakeList';
+import { useDispatch } from 'react-redux';
+import { updateCart } from '../../redux/modules/ReservationsLayer';
 function SelectedLayers() {
   // 토글 메뉴
   const [isOpen, setIsOpen] = useState(false);
+  // 케익 단 선택시 컬러 변경
+  const [selectedLayer, setSeletedLayer] = useState(null);
+
+  const dispatch = useDispatch();
 
   const toggleCakelayer = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleClickLayer = (layer) => {
+    dispatch(updateCart(layer));
+    setSeletedLayer(layer);
   };
   return (
     <>
@@ -22,9 +34,24 @@ function SelectedLayers() {
           <Cakedetailselectdes>
             웨딩 케이크는 3단을 추천합니다.
           </Cakedetailselectdes>
-          <CakedetaillayerBtn>1단</CakedetaillayerBtn>
-          <CakedetaillayerBtn>2단</CakedetaillayerBtn>
-          <CakedetaillayerBtn>3단</CakedetaillayerBtn>
+          {CakeLayer.map((layer) => {
+            return (
+              <>
+                <CakedetaillayerBtn
+                  key={layer.id}
+                  type='button'
+                  onClick={() => handleClickLayer(layer)}
+                  style={{
+                    backgroundColor:
+                      selectedLayer === layer ? '#ffa0c5' : 'transparent',
+                    color: selectedLayer === layer ? '#ffffff' : '#ffa0c5',
+                  }}
+                >
+                  {layer.Layer}
+                </CakedetaillayerBtn>
+              </>
+            );
+          })}
         </>
       )}
     </>

@@ -252,3 +252,20 @@ export const CakeList = [
     allergy: ['밀', '우유', '대두', '계란', '돼지고기 함유'],
   },
 ];
+export const CakeLayer = [
+  {
+    id: 1,
+    Layer: '1단',
+    price: '5000',
+  },
+  {
+    id: 2,
+    Layer: '2단',
+    price: '10000',
+  },
+  {
+    id: 3,
+    Layer: '3단',
+    price: '0',
+  },
+];
