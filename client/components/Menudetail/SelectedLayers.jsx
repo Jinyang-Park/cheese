@@ -21,6 +21,7 @@ function SelectedLayers() {
     dispatch(updateCart(layer));
     setSeletedLayer(layer);
   };
+
   return (
     <>
       <Cakedetailselectelayer>

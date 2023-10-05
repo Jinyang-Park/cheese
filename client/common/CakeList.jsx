@@ -256,7 +256,7 @@ export const CakeLayer = [
   {
     id: 1,
     Layer: '1단',
-    price: '5000',
+    price: '15000',
   },
   {
     id: 2,

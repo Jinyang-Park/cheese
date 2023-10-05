@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { AiOutlineMinusCircle } from 'react-icons/ai';
@@ -16,15 +16,30 @@ function QuantitySelection({ cake }) {
   // cake을 받아와서 cake.price를 기본값으로 넣어준다.
   const [total, setTotal] = useState(cake.price);
 
+  // 케익 숫자 변수 state
+  const [changedPrice, setChangedPrice] = useState(0);
+
   const dispatch = useDispatch();
 
   // 여기서 product 정보를 Redux store에서 가져옵니다.
   // 이 부분은 실제 store의 구조에 따라 달라질 수 있습니다.
   const product = useSelector((state) => state.payload);
+  console.log(product);
 
   // 케익 선택 Redux store 가져오는 로직
   const layerState = useSelector((state) => state.ReservationsLayer);
-  console.log(layerState);
+
+  useEffect(() => {
+    if (layerState.length > 0) {
+      setChangedPrice(layerState[layerState.length - 1].price);
+    }
+  }, [layerState]);
+
+  // useEffect(() => {}, [
+  //   IncreseQuantity,
+  //   DecreaseQuantity,
+  //   handleChangeQuantityInput,
+  // ]);
 
   // +,- 버튼으로 수량 변경하는 함수.
   const IncreseQuantity = () => {
@@ -34,7 +49,7 @@ function QuantitySelection({ cake }) {
       setQuantity(quantity + 1);
 
       // 최종 가격 로직
-      const newTotal = cake.price * (quantity + 1);
+      const newTotal = cake.price * (quantity + 1) - changedPrice;
       setTotal(newTotal);
 
       // 케이크 단 선택 dispatch
@@ -49,7 +64,7 @@ function QuantitySelection({ cake }) {
       setQuantity(quantity - 1);
 
       // 최종 가격 로직
-      const newTotal = cake.price * (quantity - 1);
+      const newTotal = cake.price * (quantity - 1) - changedPrice;
       setTotal(newTotal);
 
       dispatch(deleteToCart({ ...product, quantity: quantity - 1 }, newTotal));
@@ -76,12 +91,20 @@ function QuantitySelection({ cake }) {
 
     // input에 수량을 적으면 가격에 변동이 없었다
     // 위에처럼 아래 로직을 추가하였더니 정상 작동되었다.
-    const newTotal = cake.price * newValue;
+    const newTotal = cake.price * newValue - changedPrice;
     setTotal(newTotal);
 
     dispatch(addToCart({ ...product, quantity: quantity + 1 }, newTotal));
     console.log(quantity, newTotal);
   };
+
+  // 다시다시다시다싯다ㅏ시시시시
+  useEffect(() => {
+    // 'changedPrice'가 변경될 때마다 'total' 값을 다시 계산합니다.
+    const newTotal = cake.price * quantity - changedPrice;
+
+    setTotal(newTotal);
+  }, [changedPrice]);
   return (
     <>
       <TotallQuantitySelectionWrap>
