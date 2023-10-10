@@ -1,15 +1,50 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { AiOutlineDown } from 'react-icons/ai';
 import { AiOutlineUp } from 'react-icons/ai';
+import { CakeTasting } from '../../common/CakeList';
+import { useDispatch } from 'react-redux';
+import { updateTasting } from '../../redux/modules/ReservationsTastingSelection';
 
 function TastingSelection() {
   // 토글 메뉴
   const [isOpen, setIsOpen] = useState(false);
 
+  // 테이스팅 선택시 컬러 변경
+  const [selectedTasting, setSelectedTasting] = useState([]);
+
+  const dispatch = useDispatch();
+
   const toggleTastingSelection = () => {
     setIsOpen(!isOpen);
   };
+
+  // 버튼 여러개 선택 가능한 로직
+  const handleClickTast = (e) => {
+    // 사용자가 클릭한 DOM 요소 즉, 버튼 요소를 가르킴
+    const selected = e.target.innerText;
+    // 현재 클릭한 테이스팅 이름이 (selected) 이미 선택된 테이스팅 목록인 selectedTasting에 있는지 확인
+    if (selectedTasting.includes(selected)) {
+      // 만약 목록에 있다면 해당 테이스팅을 목록에서 제거한다.
+      // 현재 클릭한 테이스팅과 다른 모든 테이스팅만 새로운 배열을 만듬
+      setSelectedTasting((prev) =>
+        prev.filter((notTasting) => notTasting !== selected)
+      );
+    } else {
+      if (selectedTasting.length >= 3) {
+        alert('최대 3개까지만 선택 가능합니다.');
+        return;
+      }
+      // 새 배열을 setSelectedTasting 이용하여 상태 업데이트 함
+      setSelectedTasting((prev) => [...prev, selected]);
+    }
+  };
+
+  useEffect(() => {
+    dispatch(updateTasting(selectedTasting));
+    console.log(updateTasting(selectedTasting));
+  }, [selectedTasting, dispatch]);
+
   return (
     <>
       <CakedetailTastingSelection>
@@ -26,19 +61,23 @@ function TastingSelection() {
             웨딩 케이크 상담 예약 시 선택하신 3가지 맛을 볼 수 있습니다.
             (테이스팅 후 원하시는 맛으로 변경 가능합니다.)
           </Cakedetailselectdes>
-          <CakedeTastingSelectionBtn>클래식 크림</CakedeTastingSelectionBtn>
-          <CakedeTastingSelectionBtn>초코</CakedeTastingSelectionBtn>
-          <CakedeTastingSelectionBtn>레몬 얼그레이</CakedeTastingSelectionBtn>
-          <CakedeTastingSelectionBtn>머랭 스트로베리</CakedeTastingSelectionBtn>
-          <CakedeTastingSelectionBtn>민트</CakedeTastingSelectionBtn>
-          <CakedeTastingSelectionBtn>믹스베리</CakedeTastingSelectionBtn>
-          <CakedeTastingSelectionBtn>레드벨벳</CakedeTastingSelectionBtn>
-          <CakedeTastingSelectionBtn>우유 생크림</CakedeTastingSelectionBtn>
-          <CakedeTastingSelectionBtn>카라멜 초콜릿</CakedeTastingSelectionBtn>
-          <CakedeTastingSelectionBtn>
-            스트로베리 피스타치오
-          </CakedeTastingSelectionBtn>
-          <CakedeTastingSelectionBtn>오렌지 체다치즈</CakedeTastingSelectionBtn>
+          {CakeTasting.map((tast) => {
+            return (
+              <>
+                <CakedeTastingSelectionBtn
+                  key={tast.id}
+                  type='button'
+                  className={
+                    // 각 버튼은 자신의 텍스트(즉, 자신의 '테이스팅'값)선택된 테이스팅 목록 selectedTasting에 포함되어 있는 경우 'active' 클래스 이름을 가져 css 변경
+                    selectedTasting.includes(tast.Tasting) ? 'active' : ''
+                  }
+                  onClick={handleClickTast}
+                >
+                  {tast.Tasting}
+                </CakedeTastingSelectionBtn>
+              </>
+            );
+          })}
         </>
       )}
     </>
@@ -62,6 +101,10 @@ export const CakedeTastingSelectionBtn = styled.button`
   margin-right: 15px;
   background-color: transparent;
   margin-bottom: 15px;
+  &.active {
+    background-color: #ffa0c5;
+    color: #ffffff;
+  }
 `;
 export const CakedetailTastingSelectionTitle = styled.h3`
   font-size: 18px;

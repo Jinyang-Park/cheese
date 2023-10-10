@@ -269,3 +269,49 @@ export const CakeLayer = [
     price: '0',
   },
 ];
+export const CakeTasting = [
+  {
+    id: 1,
+    Tasting: '클래식 크림',
+  },
+  {
+    id: 2,
+    Tasting: '초코',
+  },
+  {
+    id: 3,
+    Tasting: '레몬 얼그레이',
+  },
+  {
+    id: 4,
+    Tasting: '머랭 스트로베리',
+  },
+  {
+    id: 5,
+    Tasting: '민트',
+  },
+  {
+    id: 6,
+    Tasting: '믹스베리',
+  },
+  {
+    id: 7,
+    Tasting: '레드벨벳',
+  },
+  {
+    id: 8,
+    Tasting: '우유 생크림',
+  },
+  {
+    id: 9,
+    Tasting: '카라멜 초콜릿',
+  },
+  {
+    id: 10,
+    Tasting: '스트로베리 피스타치오',
+  },
+  {
+    id: 11,
+    Tasting: '오렌지 체다치즈',
+  },
+];

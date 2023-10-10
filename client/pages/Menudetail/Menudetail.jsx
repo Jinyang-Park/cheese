@@ -7,8 +7,8 @@ import { AiOutlineUp } from 'react-icons/ai';
 import SelectedLayers from '../../components/Menudetail/SelectedLayers';
 import TastingSelection from '../../components/Menudetail/TastingSelection';
 import QuantitySelection from '../../components/Menudetail/QuantitySelection';
-import { useDispatch } from 'react-redux';
-import { addToCart } from '../../redux/modules/ReservationsQuantity';
+import { useDispatch, useSelector } from 'react-redux';
+
 function Menudetail() {
   // usevaigater로 케익의 정보를 받아오는 로직
   const location = useLocation();
@@ -17,6 +17,18 @@ function Menudetail() {
   // dispatch 로직
   const dispatch = useDispatch();
 
+  // 선택한 테이스팅 맛 불러오기
+  const ReservationTastingSelected = useSelector(
+    (state) => state.ReservationsTastingSelection
+  );
+
+  console.log('ReservationTastingSelected', ReservationTastingSelected);
+
+  const ReservationSelectedLayer = useSelector(
+    (state) => state.ReservationsLayer
+  );
+
+  console.log(ReservationSelectedLayer);
   // 토글 메뉴
   const [isOpen, setIsOpen] = useState(false);
 
@@ -24,10 +36,8 @@ function Menudetail() {
     setIsOpen(!isOpen);
   };
 
-  // 주문하기 dispacth로직
-  const handleAddtoCartClick = () => {
-    dispatch(addToCart({ ...state, quantity }));
-  };
+  // 주문하기
+  const handlegotoCartClick = () => {};
   return (
     <>
       <CommonStyles>
@@ -89,7 +99,7 @@ function Menudetail() {
             </CakedetailInner>
             {/*주문하기 버튼 */}
             <TotallOrderBtnWrap>
-              <OrderBtn onClick={handleAddtoCartClick}>주문하기</OrderBtn>
+              <OrderBtn onClick={handlegotoCartClick}>주문하기</OrderBtn>
             </TotallOrderBtnWrap>
           </ReservationDateWrap>
         </ReservationInner>

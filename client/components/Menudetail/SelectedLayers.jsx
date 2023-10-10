@@ -20,6 +20,7 @@ function SelectedLayers() {
   const handleClickLayer = (layer) => {
     dispatch(updateCart(layer));
     setSeletedLayer(layer);
+    // console.log(updateCart(layer));
   };
 
   return (

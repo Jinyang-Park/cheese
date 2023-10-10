@@ -31,6 +31,7 @@ function QuantitySelection({ cake }) {
   useEffect(() => {
     if (layerState.length > 0) {
       setChangedPrice(layerState[layerState.length - 1].price);
+      // console.log(layerState[layerState.length - 1].price);
     }
   }, [layerState]);
 
