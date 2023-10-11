@@ -38,20 +38,18 @@ function SelectedLayers() {
           </Cakedetailselectdes>
           {CakeLayer.map((layer) => {
             return (
-              <>
-                <CakedetaillayerBtn
-                  key={layer.id}
-                  type='button'
-                  onClick={() => handleClickLayer(layer)}
-                  style={{
-                    backgroundColor:
-                      selectedLayer === layer ? '#ffa0c5' : 'transparent',
-                    color: selectedLayer === layer ? '#ffffff' : '#ffa0c5',
-                  }}
-                >
-                  {layer.Layer}
-                </CakedetaillayerBtn>
-              </>
+              <CakedetaillayerBtn
+                key={layer.id}
+                type='button'
+                onClick={() => handleClickLayer(layer)}
+                style={{
+                  backgroundColor:
+                    selectedLayer === layer ? '#ffa0c5' : 'transparent',
+                  color: selectedLayer === layer ? '#ffffff' : '#ffa0c5',
+                }}
+              >
+                {layer.Layer}
+              </CakedetaillayerBtn>
             );
           })}
         </>

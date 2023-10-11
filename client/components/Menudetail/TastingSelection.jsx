@@ -41,9 +41,11 @@ function TastingSelection() {
   };
 
   useEffect(() => {
+    // if (selectedTasting.length > 0) {
     dispatch(updateTasting(selectedTasting));
     console.log(updateTasting(selectedTasting));
-  }, [selectedTasting, dispatch]);
+    // }
+  }, [selectedTasting]);
 
   return (
     <>
@@ -63,19 +65,17 @@ function TastingSelection() {
           </Cakedetailselectdes>
           {CakeTasting.map((tast) => {
             return (
-              <>
-                <CakedeTastingSelectionBtn
-                  key={tast.id}
-                  type='button'
-                  className={
-                    // 각 버튼은 자신의 텍스트(즉, 자신의 '테이스팅'값)선택된 테이스팅 목록 selectedTasting에 포함되어 있는 경우 'active' 클래스 이름을 가져 css 변경
-                    selectedTasting.includes(tast.Tasting) ? 'active' : ''
-                  }
-                  onClick={handleClickTast}
-                >
-                  {tast.Tasting}
-                </CakedeTastingSelectionBtn>
-              </>
+              <CakedeTastingSelectionBtn
+                key={tast.id}
+                type='button'
+                className={
+                  // 각 버튼은 자신의 텍스트(즉, 자신의 '테이스팅'값)선택된 테이스팅 목록 selectedTasting에 포함되어 있는 경우 'active' 클래스 이름을 가져 css 변경
+                  selectedTasting.includes(tast.Tasting) ? 'active' : ''
+                }
+                onClick={handleClickTast}
+              >
+                {tast.Tasting}
+              </CakedeTastingSelectionBtn>
             );
           })}
         </>

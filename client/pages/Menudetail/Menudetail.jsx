@@ -22,13 +22,13 @@ function Menudetail() {
     (state) => state.ReservationsTastingSelection
   );
 
-  console.log('ReservationTastingSelected', ReservationTastingSelected);
+  console.log('테이스팅 선택 로그', ReservationTastingSelected);
 
   const ReservationSelectedLayer = useSelector(
     (state) => state.ReservationsLayer
   );
 
-  console.log(ReservationSelectedLayer);
+  console.log('단 선택 로그', ReservationSelectedLayer);
   // 토글 메뉴
   const [isOpen, setIsOpen] = useState(false);
 
