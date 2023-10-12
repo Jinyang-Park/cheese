@@ -41,10 +41,10 @@ function TastingSelection() {
   };
 
   useEffect(() => {
-    // if (selectedTasting.length > 0) {
-    dispatch(updateTasting(selectedTasting));
-    console.log(updateTasting(selectedTasting));
-    // }
+    if (selectedTasting.length > 0) {
+      dispatch(updateTasting(selectedTasting));
+      console.log(updateTasting(selectedTasting));
+    }
   }, [selectedTasting]);
 
   return (
