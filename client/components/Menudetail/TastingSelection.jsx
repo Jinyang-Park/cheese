@@ -41,11 +41,13 @@ function TastingSelection() {
   };
 
   useEffect(() => {
+    //선택된 테이스팅 정보(selectedTasting)의 길이가 0보다 큰 경우에만 dispatch 함수를 호출하도록 조건문을 추가
+    //따라서 선택된 테이스팅 정보가 없을 때는 dispatch 함수를 건너뛰게 됩니다.
     if (selectedTasting.length > 0) {
       dispatch(updateTasting(selectedTasting));
       console.log(updateTasting(selectedTasting));
     }
-  }, [selectedTasting]);
+  }, [selectedTasting, dispatch]);
 
   return (
     <>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import CommonStyles from '../../utils/CommonStyles';
 import styled from 'styled-components';
 import { AiOutlineDown } from 'react-icons/ai';
@@ -13,6 +13,8 @@ function Menudetail() {
   // usevaigater로 케익의 정보를 받아오는 로직
   const location = useLocation();
   const cake = location.state.cake;
+
+  const navigate = useNavigate();
 
   // dispatch 로직
   const dispatch = useDispatch();
@@ -37,7 +39,21 @@ function Menudetail() {
   };
 
   // 주문하기
-  const handlegotoCartClick = () => {};
+  const handlegotoCartClick = () => {
+    // ReservationSelectedLayer,ReservationTastingSelected가 콘솔로그로 찍으면 [] 빈배열로 찍힌다
+    // 배열이 비어있는지 확인하기 위해서 length의 값으로 체크하는 조건문 추가
+    if (ReservationSelectedLayer.length === 0) {
+      alert('케이크 단을 선택해주세요.');
+      return;
+    } else if (ReservationTastingSelected.length === 0) {
+      alert('테이스팅 3가지 맛을 선택해주세요.');
+      return;
+    } else if (ReservationTastingSelected.length < 3) {
+      alert('테이스팅 3가지 맛을 선택해주세요. ');
+      return;
+    }
+    navigate('/Cart');
+  };
   return (
     <>
       <CommonStyles>

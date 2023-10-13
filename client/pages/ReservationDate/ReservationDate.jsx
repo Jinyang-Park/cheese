@@ -15,11 +15,18 @@ function ReservationDate() {
     (state) => state.ReservationsDT.formattedDate
   );
 
+  console.log(ReservationCakeDate, ReservationCakeTime);
+
   const navigate = useNavigate();
 
-  const hanldeReservationButtonClick = (event) => {
-    event.preventDefault();
-    navigate('/Reservation/date/menupick');
+  const hanldeReservationButtonClick = () => {
+    // ReservationCakeDate, ReservationCakeTime 콘솔로그 찍으면 null 이라고 뜬다 그래서 조건문 추가
+    if (ReservationCakeTime == null || ReservationCakeDate == null) {
+      alert('예약시간을 선택해주세요.');
+      return;
+    } else {
+      navigate('/Reservation/date/menupick');
+    }
   };
   return (
     <CommonStyles>
