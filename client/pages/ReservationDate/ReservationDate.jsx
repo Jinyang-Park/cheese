@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CommonStyles from '../../utils/CommonStyles';
 import styled from 'styled-components';
 import ReservationCalendar from '../../components/Date/ReservationCalendar ';
 import ReservationTimetable from '../../components/Date/ReservationTimetable';
 import { PiWarningCircleFill } from 'react-icons/pi';
 import { useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation, Prompt } from 'react-router-dom';
+import history from '../../common/history';
 
 function ReservationDate() {
   // 여러 개의 상태 값을 선택하고 싶을 때는 useSelector를 여러 번 사용하면 됩니다
@@ -28,6 +29,22 @@ function ReservationDate() {
       navigate('/Reservation/date/menupick');
     }
   };
+
+  useEffect(() => {
+    const listenBackEvent = () => {
+      if (window.confirm('진행중인 예약 정보가 초기화 됩니다.')) {
+      } else {
+        navigate('/');
+      }
+    };
+    const historyEvent = history.listen(({ action }) => {
+      if (action === 'POP') {
+        window.confirm('진행중인 예약 정보가 초기화 됩니다.');
+      }
+    });
+    return historyEvent;
+  }, []);
+
   return (
     <CommonStyles>
       <ReservationWrap>
