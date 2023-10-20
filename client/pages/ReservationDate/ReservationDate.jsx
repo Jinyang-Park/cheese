@@ -30,21 +30,55 @@ function ReservationDate() {
     }
   };
 
-  useEffect(() => {
-    const listenBackEvent = () => {
-      if (window.confirm('진행중인 예약 정보가 초기화 됩니다.')) {
-      } else {
-        navigate('/');
-      }
-    };
-    const historyEvent = history.listen(({ action }) => {
-      if (action === 'POP') {
-        window.confirm('진행중인 예약 정보가 초기화 됩니다.');
-      }
-    });
-    return historyEvent;
-  }, []);
+  // useEffect(() => {
+  //   // const listenBackEvent = () => {
+  //   //   if (window.confirm('진행중인 예약 정보가 초기화 됩니다.')) {
+  //   //   } else {
+  //   //     navigate('/');
+  //   //   }
+  //   // };
+  //   const historyEvent = history.listen(({ action }) => {
+  //     if (action === 'POP') {
+  //       window.confirm('진행중인 예약 정보가 초기화 됩니다.');
+  //       navigate('/');
+  //     } else {
+  //       return () => {
+  //         historyEvent();
+  //       };
+  //     }
+  //   });
+  // }, []);
+  // useEffect(() => {
+  //   const handleBackEvent = (e) => {
+  //     const userResponse = window.confirm(
+  //       '진행중인 예약 정보가 초기화 됩니다.'
+  //     );
+  //     if (!userResponse) {
+  //       e.preventDefault();
+  //       return (e.returnValue = '');
+  //     } else {
+  //       navigate('/Reservation');
+  //     }
+  //   };
+  //   window.addEventListener('beforeunload', handleBackEvent);
 
+  //   return () => {
+  //     window.removeEventListener('beforeunload', handleBackEvent);
+  //   };
+  // }, [navigate]);
+  useEffect(() => {
+    const confirmMessage = 'Are you sure you want to leave this page?';
+
+    const handleBeforeUnload = (e) => {
+      e.returnValue = confirmMessage;
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
   return (
     <CommonStyles>
       <ReservationWrap>
