@@ -19,7 +19,8 @@ const checkLogin = () => {
 
   // 만료 기간이 지났거나 변경된 토큰이면 예외 처리
   try {
-    const decoded = jwt.decode(token, 'jwt-secret-key');
+    const decoded = jwt.decode(token, process.env.REACT_APP_ACCESS_SECRET);
+
     // 해당 username 콘솔로그
     // console.log(decoded.name);
     // exp가 현재 시간보다 작으면 false

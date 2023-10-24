@@ -5,7 +5,7 @@ import ReservationCalendar from '../../components/Date/ReservationCalendar ';
 import ReservationTimetable from '../../components/Date/ReservationTimetable';
 import { PiWarningCircleFill } from 'react-icons/pi';
 import { useSelector } from 'react-redux';
-import { useNavigate, useLocation, Prompt } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import history from '../../common/history';
 
 function ReservationDate() {
@@ -31,22 +31,19 @@ function ReservationDate() {
   };
 
   // useEffect(() => {
-  //   // const listenBackEvent = () => {
-  //   //   if (window.confirm('진행중인 예약 정보가 초기화 됩니다.')) {
-  //   //   } else {
-  //   //     navigate('/');
-  //   //   }
-  //   // };
+  //   const listenBackEvent = () => {
+  //     if (window.confirm('진행중인 예약 정보가 초기화 됩니다.')) {
+  //       // navigate('/');
+  //     } else {
+  //       navigate('/');
+  //     }
+  //   };
   //   const historyEvent = history.listen(({ action }) => {
   //     if (action === 'POP') {
-  //       window.confirm('진행중인 예약 정보가 초기화 됩니다.');
-  //       navigate('/');
-  //     } else {
-  //       return () => {
-  //         historyEvent();
-  //       };
+  //       listenBackEvent();
   //     }
   //   });
+  //   return historyEvent();
   // }, []);
   // useEffect(() => {
   //   const handleBackEvent = (e) => {
@@ -66,17 +63,15 @@ function ReservationDate() {
   //     window.removeEventListener('beforeunload', handleBackEvent);
   //   };
   // }, [navigate]);
+  const preventClose = (e) => {
+    e.preventDefault();
+    e.returnValue = '떠날것이냐'; // for chrome. deprectaed.
+  };
+
   useEffect(() => {
-    const confirmMessage = 'Are you sure you want to leave this page?';
-
-    const handleBeforeUnload = (e) => {
-      e.returnValue = confirmMessage;
-    };
-
-    window.addEventListener('beforeunload', handleBeforeUnload);
-
+    window.addEventListener('beforeunload', preventClose);
     return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener('beforeunload', preventClose);
     };
   }, []);
   return (

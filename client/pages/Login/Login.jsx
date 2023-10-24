@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import CommonStyles from '../../utils/CommonStyles';
 import { Link, useNavigate } from 'react-router-dom';
@@ -29,9 +29,6 @@ function Login() {
           navigate('/Signup');
         } else if (message.includes('success')) {
           alert('환영합니다!');
-          // console.log(res.data.message);
-          // auth.setEmail('');
-          // auth.setPassword('');
           navigate('/');
         }
       });

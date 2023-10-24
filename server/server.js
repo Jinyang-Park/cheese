@@ -3,16 +3,19 @@ const path = require('path');
 const PORT = process.env.PORT || 5000;
 const app = express();
 const cors = require('cors');
-const bodyParser = require('body-parser');
-const parsing = require('../server/api.js');
+// const bodyParser = require('body-parser');
+// const parsing = require('../server/api.js');
 const fs = require('fs');
+
+// 서버에서 환경변수 사용시 코드 추가
+require('dotenv').config();
+
 // MYSQL
 const mysql = require('mysql');
 
 // 로그인 쿠키
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
-
 // JSON 파일
 const InformationJSON = fs.readFileSync('./CheeseInformation.json');
 
@@ -45,16 +48,6 @@ const db = mysql.createConnection({
 // connetct를 추가해야 된다.
 db.connect();
 
-// 초반에 mysql 코드
-// db.query('select * from users', (err, results, fields) => {
-//   if (err) {
-//     console.log(err);
-//   }
-//   console.log(results);
-// });
-
-// db.end();
-
 // axios로 받을때 작성했던 코드
 // pending이 떠서 await 비동기 처리함
 // const parsingData = async () => {
@@ -65,11 +58,12 @@ db.connect();
 const verifyUser = (req, res, next) => {
   // const token = req.cooies.token; // 스펠링이 에러의 원인
   const token = req.cookies.token;
+
   // token이 없을 경우
   if (!token) {
-    return res.send({ message: 'not-authenticated' });
+    return res.status(401).json({ message: 'not-authenticated' });
   } else {
-    jwt.verify(token, 'jwt-secret-key', (err, decoded) => {
+    jwt.verify(token, process.env.REACT_APP_ACCESS_SECRET, (err, decoded) => {
       // 에러일 경우
       if (err) {
         return res.send({ message: 'Token is not okay' });
@@ -81,7 +75,7 @@ const verifyUser = (req, res, next) => {
         // name 키를 가지고 있고 원래 변수 name의 값을 포함하는것이다.
         // const token = jwt.sign({ name }, 'jwt-secret-key', { expiresIn: '1d',});
         req.name = decoded.name;
-        // console.log(req.name); // 로그인시 username이 찍힌다.
+        console.log(req.name); // 로그인시 username이 찍힌다.
         next();
       }
     });
@@ -147,7 +141,7 @@ app.post('/login', (req, res) => {
       if (results.length > 0) {
         // 성공했을 경우
         const name = results[0].username;
-        const token = jwt.sign({ name }, 'jwt-secret-key', {
+        const token = jwt.sign({ name }, process.env.REACT_APP_ACCESS_SECRET, {
           expiresIn: '1d',
         });
         res.cookie('token', token);
@@ -174,5 +168,5 @@ app.get('/api', (req, res) => {
 
 // PORT 확인
 app.listen(PORT, () => {
-  console.log(`Server is running on port {PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });

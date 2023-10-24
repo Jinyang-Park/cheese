@@ -2,7 +2,9 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const webpack = require('webpack');
-// const Dotenv = require('dotenv-webpack');
+// const dotenv = require('dotenv-webpack');
+const Dotenv = require('dotenv-webpack');
+// dotenv.config();
 
 module.exports = {
   mode: 'development', // 실서비스: production
@@ -67,34 +69,19 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './client/public/index.html', // 템플릿 설정
       minify: true, // 압축 설정
-
-      // template에 해당하는 파일에 dotenv 사용을 위한 설정
-      // env: {
-      //   REACT_APP_NAVER_CLIENT_ID: process.env.REACT_APP_NAVER_CLIENT_ID,
-      // },
     }),
+    new Dotenv(),
     new CleanWebpackPlugin(),
     // dotenv 사용을 위한 설정
-    // new webpack.DefinePlugin({
-    //   'process.env': JSON.stringify(process.env),
-    // }),
-    // new Dotenv(),
+    // new webpack.EnvironmentPlugin([
+    //   'REACT_APP_NAVER_CLIENT_ID',
+    //   'REACT_APP_ACCESS_SECRET',
+    // ]),
     new webpack.ProvidePlugin({
       Buffer: ['buffer', 'Buffer'],
       process: 'process/browser',
     }),
   ],
-  // resolve: {
-  //   fallback: {
-  //     http: require.resolve('stream-http'),
-  //     https: require.resolve('https-browserify'),
-  //     crypto: require.resolve('crypto-browserify'),
-  //     stream: require.resolve('stream-browserify'),
-  //     os: require.resolve('os-browserify/browser'),
-  //     url: require.resolve('url'),
-  //     assert: require.resolve('assert'),
-  //   },
-  // },
   devServer: {
     client: {
       overlay: {
