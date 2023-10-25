@@ -13,7 +13,6 @@ function Menudetail() {
   // usevaigater로 케익의 정보를 받아오는 로직
   const location = useLocation();
   const cake = location.state.cake;
-
   const navigate = useNavigate();
 
   // dispatch 로직
