@@ -3,7 +3,6 @@ import CommonStyles from '../../utils/CommonStyles';
 import styled from 'styled-components';
 
 function Main() {
-  console.log(process.env.REACT_APP_ACCESS_SECRET);
   return (
     <>
       <CommonStyles>

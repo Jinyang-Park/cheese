@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import * as S from './Header.style';
 import Logo from '../../public/assets/logo.png';
 import Flower from '../../public/assets/flower.png';
@@ -7,9 +7,10 @@ import Door from '../../public/assets/door.png';
 import { Link, useNavigate } from 'react-router-dom';
 import CommonStyles from '../../utils/CommonStyles';
 import axios from 'axios';
+import { AuthContext } from '../../contexts/AuthContext';
 
 export default function Header() {
-  const [checkAuth, setCheckAuth] = useState(false);
+  const { checkAuth, setCheckAuth } = useContext(AuthContext);
   const navigate = useNavigate();
 
   axios.defaults.withCredentials = true;
@@ -30,7 +31,7 @@ export default function Header() {
 
   const handleDelete = () => {
     axios
-      .post('http://localhost:5000/logout') // 변경된 부분
+      .post('http://localhost:5000/logout', { userId }) // 변경된 부분
       .then((res) => {
         // location.reload();
         setCheckAuth(false);
