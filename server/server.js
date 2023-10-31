@@ -162,7 +162,7 @@ app.post('/login', (req, res) => {
             { name },
             process.env.REACT_APP_ACCESS_SECRET,
             {
-              expiresIn: '15m',
+              expiresIn: '1m',
               issuer: 'About Tech',
             }
           );
@@ -171,7 +171,7 @@ app.post('/login', (req, res) => {
             { name },
             process.env.REACT_APP_REFRESH_SECERT,
             {
-              expiresIn: '14d',
+              expiresIn: '5m',
               issuer: 'About Tech',
             }
           );
@@ -181,7 +181,7 @@ app.post('/login', (req, res) => {
           await db.query(
             `INSERT INTO 
                 tokens(content, userId)
-                VALUE 
+                VALUES
                 (?, ?);`,
             [refreshToken, userId]
           );

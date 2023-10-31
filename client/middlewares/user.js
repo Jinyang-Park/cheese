@@ -4,9 +4,6 @@ require('dotenv').config();
 // MYSQL
 const mysql = require('mysql');
 
-// 로그인 쿠키
-const cookieParser = require('cookie-parser');
-
 // MYSQL
 const db = mysql.createConnection({
   host: 'localhost',
@@ -23,6 +20,7 @@ module.exports = {
     // access token 자체가 없는 경우엔 에러(401)를 반환
     try {
       if (req.cookies.accessToken === undefined) {
+        console.log(req.cookies.accessToken);
         throw Error('API 사용 권한이 없습니다.');
       }
 
@@ -51,7 +49,7 @@ module.exports = {
                 { name },
                 process.env.REACT_APP_ACCESS_SECRET,
                 {
-                  expiresIn: '15m',
+                  expiresIn: '1m',
                   issuer: 'About Tech',
                 }
               );
@@ -64,9 +62,9 @@ module.exports = {
               // case3: accsess Token은 유효하지만, refresh token은 만료된 경우
               const newRefreshToken = jwt.sign(
                 {},
-                process.env.REACT_APP_REFRESH_SECERT,
+                process.env.REACT_APP_REFRESH_SECRET,
                 {
-                  expiresIn: '14d',
+                  expiresIn: '5m',
                   issuer: 'About Tech',
                 }
               );
@@ -76,7 +74,7 @@ module.exports = {
                 `
                 INSERT INTO 
                 tokens(content, userId)
-                VALUE 
+                VALUES 
                 (?, ?);`,
                 [newRefreshToken, userId]
               );
