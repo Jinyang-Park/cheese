@@ -18,16 +18,17 @@ db.connect();
 module.exports = {
   async checkTokens(req, res, next) {
     // access token 자체가 없는 경우엔 에러(401)를 반환
+    console.log('user', req.cookies.accessToken);
     try {
       if (req.cookies.accessToken === undefined) {
-        console.log(req.cookies.accessToken);
         throw Error('API 사용 권한이 없습니다.');
       }
 
       const accessToken = verifyToken(req.cookies.accessToken);
+      console.log('user', req.cookies.accessToken);
       // 나중에 값을 변경하려고 시도하고 있으므로 변수를 상수로 선언함
-      let refreshToken;
-      //  const refreshToken = verifyToken(req.cookies.refresh);
+      // let refreshToken;s
+      const refreshToken = verifyToken(req.cookies.refreshToken);
 
       // 실제로 DB 조회
       if (req.cookies.refreshToken !== undefined) {
@@ -44,9 +45,12 @@ module.exports = {
               throw Error('API 사용 권한이 없습니다.');
             } else {
               //case2: access Token은 만료됐지만, refresh Token은 유효한 경우
+              /**
+               *  DB를 조회해서 payload에 담을 값들을 가져오는 로직
+               */
               const name = results[0].username;
               const newAccessToken = jwt.sign(
-                { name },
+                { name, userId },
                 process.env.REACT_APP_ACCESS_SECRET,
                 {
                   expiresIn: '1m',

@@ -16,7 +16,6 @@ const mysql = require('mysql');
 // 로그인 쿠키
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
-const { checkTokens } = require('../client/middlewares/user');
 const { verifyToken } = require('../client/utils/jwt');
 
 // JSON 파일
@@ -85,7 +84,7 @@ db.connect();
 // };
 
 // /header 라우트
-app.get('/header', checkTokens, (req, res) => {
+app.get('/header', verifyToken, (req, res) => {
   if (req.user) {
     res.status(200).send({ message: 'success' });
   } else {
@@ -159,7 +158,7 @@ app.post('/login', (req, res) => {
 
           // access Token 발급
           const accessToken = jwt.sign(
-            { name },
+            { name, userId },
             process.env.REACT_APP_ACCESS_SECRET,
             {
               expiresIn: '1m',
@@ -168,7 +167,7 @@ app.post('/login', (req, res) => {
           );
 
           const refreshToken = jwt.sign(
-            { name },
+            { name, userId },
             process.env.REACT_APP_REFRESH_SECERT,
             {
               expiresIn: '5m',
