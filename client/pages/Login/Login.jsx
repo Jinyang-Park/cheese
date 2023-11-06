@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import CommonStyles from '../../utils/CommonStyles';
 import { Link, useNavigate } from 'react-router-dom';
@@ -11,6 +11,7 @@ function Login() {
 
   axios.defaults.withCredentials = true;
 
+  // 서버 응답 추가 코드문
   const submitLoginHandler = (event) => {
     event.preventDefault();
 
@@ -23,19 +24,43 @@ function Login() {
         Password: auth.password,
       })
       .then((res) => {
-        const message = res.data.message || '';
-        if (message.includes('user-not-found')) {
+        if (res.status === 200) {
+          alert('환영합니다!');
+          navigate('/');
+        }
+      })
+      .catch((err) => {
+        if (err.response && err.response.status === 401) {
           alert('회원을 찾을 수 없습니다. 회원가입을 먼저 진행해 주세요.');
           navigate('/Signup');
-        } else if (message.includes('success')) {
-          alert('환영합니다!');
-          // console.log(res.data.message);
-          // auth.setEmail('');
-          // auth.setPassword('');
-          navigate('/');
         }
       });
   };
+
+  // 서버 응답 코드 추가하지 않은 코드문
+  // const submitLoginHandler = (event) => {
+  //   event.preventDefault();
+
+  //   // 이메일, 비밀번호 유효성 검사 확인
+  //   if (!auth.checkValidation()) return;
+
+  //   axios
+  //     .post('http://localhost:5000/login', {
+  //       Email: auth.email,
+  //       Password: auth.password,
+  //     })
+  //     .then((res) => {
+  //       const message = res.data.message || '';
+  //       if (message.includes('user-not-found')) {
+  //         alert('회원을 찾을 수 없습니다. 회원가입을 먼저 진행해 주세요.');
+  //         navigate('/Signup');
+  //       } else if (message.includes('success')) {
+  //         alert('환영합니다!');
+  //         navigate('/');
+  //       }
+  //     });
+  // };
+
   return (
     <CommonStyles>
       <LoginWrap>

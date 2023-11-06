@@ -66,12 +66,12 @@ const verifyUser = (req, res, next) => {
   const token = req.cookies.token;
   // token이 없을 경우
   if (!token) {
-    return res.send({ message: 'not-authenticated' });
+    return res.status(401).send({ message: 'not-authenticated' });
   } else {
     jwt.verify(token, 'jwt-secret-key', (err, decoded) => {
       // 에러일 경우
       if (err) {
-        return res.send({ message: 'Token is not okay' });
+        return res.status(401).send({ message: 'Token is not okay' });
       } else {
         // token이 존재할 경우
         // req.name은 로그인(모든 유효성 검사에 통과한)이 될 경우 그 유저의 UserName이다.
@@ -89,7 +89,7 @@ const verifyUser = (req, res, next) => {
 
 // 메인화면
 app.get('/header', verifyUser, (req, res) => {
-  return res.send({ message: 'success', name: req.name });
+  return res.status(200).send({ message: 'success', name: req.name });
 });
 
 // MYSQL 회원가입 및 이메일 중복 검사
@@ -150,10 +150,10 @@ app.post('/login', (req, res) => {
           expiresIn: '1d',
         });
         res.cookie('token', token);
-        res.send({ message: 'success' });
+        res.status(200).send({ message: 'success' });
       } else {
         // 입력한 이메일 주소가 일치하지 않을 경우
-        res.send({ message: 'user-not-found' });
+        res.status(401).send({ message: 'user-not-found' });
       }
     }
   );
@@ -162,7 +162,7 @@ app.post('/login', (req, res) => {
 // MYSQL 로그아웃
 app.post('/logout', (req, res) => {
   res.clearCookie('token');
-  return res.send({ message: 'success' });
+  return res.status(200).send({ message: 'success' });
 });
 
 // 크롤링 JSON

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import * as S from './Header.style';
 import Logo from '../../public/assets/logo.png';
 import Flower from '../../public/assets/flower.png';
@@ -7,38 +7,69 @@ import Door from '../../public/assets/door.png';
 import { Link, useNavigate } from 'react-router-dom';
 import CommonStyles from '../../utils/CommonStyles';
 import axios from 'axios';
+import { AuthContext } from '../../contexts/AuthContext';
 
 export default function Header() {
-  const [checkAuth, setCheckAuth] = useState(false);
+  const { checkAuth, setCheckAuth } = useContext(AuthContext);
   const navigate = useNavigate();
 
   axios.defaults.withCredentials = true;
 
+  // 서버 응답 추가 코드문
   useEffect(() => {
     axios
       .get('http://localhost:5000/header')
       .then((res) => {
-        const message = res.data.message || '';
-        if (message.includes('success')) {
+        if (res.status === 200) {
           setCheckAuth(true);
-        } else {
-          setCheckAuth(false);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        if (err.response && err.response.status === 401) {
+          setCheckAuth(false);
+        }
+      });
   }, [navigate]);
 
   const handleDelete = () => {
     axios
-      .post('http://localhost:5000/logout') // 변경된 부분
+      .post('http://localhost:5000/logout')
       .then((res) => {
-        // location.reload();
-        setCheckAuth(false);
-        alert('로그아웃 되었습니다. 다시 만나요!');
-        navigate('/');
+        if (res.status === 200) {
+          setCheckAuth(false);
+          alert('로그아웃 되었습니다. 다시 만나요!');
+          navigate('/');
+        }
       })
       .catch((err) => console.log(err));
   };
+
+  // 서버 응답 코드 추가하지 않은 코드문
+  // useEffect(() => {
+  //   axios
+  //     .get('http://localhost:5000/header')
+  //     .then((res) => {
+  //       const message = res.data.message || '';
+  //       if (message.includes('success')) {
+  //         setCheckAuth(true);
+  //       } else {
+  //         setCheckAuth(false);
+  //       }
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, [navigate]);
+
+  // const handleDelete = () => {
+  //   axios
+  //     .post('http://localhost:5000/logout') // 변경된 부분
+  //     .then((res) => {
+  //       // location.reload();
+  //       setCheckAuth(false);
+  //       alert('로그아웃 되었습니다. 다시 만나요!');
+  //       navigate('/');
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
 
   return (
     <>
