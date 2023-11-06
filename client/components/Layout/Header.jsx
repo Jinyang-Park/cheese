@@ -15,31 +15,61 @@ export default function Header() {
 
   axios.defaults.withCredentials = true;
 
+  // 서버 응답 추가 코드문
   useEffect(() => {
     axios
       .get('http://localhost:5000/header')
       .then((res) => {
-        const message = res.data.message || '';
-        if (message.includes('success')) {
+        if (res.status === 200) {
           setCheckAuth(true);
-        } else {
-          setCheckAuth(false);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        if (err.response && err.response.status === 401) {
+          setCheckAuth(false);
+        }
+      });
   }, [navigate]);
 
   const handleDelete = () => {
     axios
-      .post('http://localhost:5000/logout', { userId }) // 변경된 부분
+      .post('http://localhost:5000/logout')
       .then((res) => {
-        // location.reload();
-        setCheckAuth(false);
-        alert('로그아웃 되었습니다. 다시 만나요!');
-        navigate('/');
+        if (res.status === 200) {
+          setCheckAuth(false);
+          alert('로그아웃 되었습니다. 다시 만나요!');
+          navigate('/');
+        }
       })
       .catch((err) => console.log(err));
   };
+
+  // 서버 응답 코드 추가하지 않은 코드문
+  // useEffect(() => {
+  //   axios
+  //     .get('http://localhost:5000/header')
+  //     .then((res) => {
+  //       const message = res.data.message || '';
+  //       if (message.includes('success')) {
+  //         setCheckAuth(true);
+  //       } else {
+  //         setCheckAuth(false);
+  //       }
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, [navigate]);
+
+  // const handleDelete = () => {
+  //   axios
+  //     .post('http://localhost:5000/logout') // 변경된 부분
+  //     .then((res) => {
+  //       // location.reload();
+  //       setCheckAuth(false);
+  //       alert('로그아웃 되었습니다. 다시 만나요!');
+  //       navigate('/');
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
 
   return (
     <>

@@ -3,20 +3,15 @@ const path = require('path');
 const PORT = process.env.PORT || 5000;
 const app = express();
 const cors = require('cors');
-// const bodyParser = require('body-parser');
-// const parsing = require('../server/api.js');
+const bodyParser = require('body-parser');
+const parsing = require('../server/api.js');
 const fs = require('fs');
-
-// 서버에서 환경변수 사용시 코드 추가
-require('dotenv').config();
-
 // MYSQL
 const mysql = require('mysql');
 
 // 로그인 쿠키
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
-const { verifyToken } = require('../client/utils/jwt');
 
 // JSON 파일
 const InformationJSON = fs.readFileSync('./CheeseInformation.json');
@@ -24,6 +19,7 @@ const InformationJSON = fs.readFileSync('./CheeseInformation.json');
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: true }));
 
+// app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // cors
@@ -49,6 +45,15 @@ const db = mysql.createConnection({
 // connetct를 추가해야 된다.
 db.connect();
 
+// db.query('select * from users', (err, results, fields) => {
+//   if (err) {
+//     console.log(err);
+//   }
+//   console.log(results);
+// });
+
+// db.end();
+
 // axios로 받을때 작성했던 코드
 // pending이 떠서 await 비동기 처리함
 // const parsingData = async () => {
@@ -56,40 +61,35 @@ db.connect();
 // };
 
 // verifyUser
-// const verifyUser = (req, res, next) => {
-//   // const token = req.cooies.token; // 스펠링이 에러의 원인
-//   const token = req.cookies.token;
-
-//   // token이 없을 경우
-//   if (!token) {
-//     return res.status(401).json({ message: 'not-authenticated' });
-//   } else {
-//     jwt.verify(token, process.env.REACT_APP_ACCESS_SECRET, (err, decoded) => {
-//       // 에러일 경우
-//       if (err) {
-//         return res.send({ message: 'Token is not okay' });
-//       } else {
-//         // token이 존재할 경우
-//         // req.name은 로그인(모든 유효성 검사에 통과한)이 될 경우 그 유저의 UserName이다.
-//         // 로그인 부분에서  const name = results[0].username; 모든것이 일치할 경우 0번째의 인덱스인 username을 가져오는것이다.
-//         // const token = jwt.sign({ name })는 구조 분해 할당이 아닌 const person1 = { name: name, age: age } 이런식으로
-//         // name 키를 가지고 있고 원래 변수 name의 값을 포함하는것이다.
-//         // const token = jwt.sign({ name }, 'jwt-secret-key', { expiresIn: '1d',});
-//         req.name = decoded.name;
-//         console.log(req.name); // 로그인시 username이 찍힌다.
-//         next();
-//       }
-//     });
-//   }
-// };
-
-// /header 라우트
-app.get('/header', verifyToken, (req, res) => {
-  if (req.user) {
-    res.status(200).send({ message: 'success' });
+const verifyUser = (req, res, next) => {
+  // const token = req.cooies.token; // 스펠링이 에러의 원인
+  const token = req.cookies.token;
+  // token이 없을 경우
+  if (!token) {
+    return res.status(401).send({ message: 'not-authenticated' });
   } else {
-    res.status(401).send({ message: 'not-authenticated' });
+    jwt.verify(token, 'jwt-secret-key', (err, decoded) => {
+      // 에러일 경우
+      if (err) {
+        return res.status(401).send({ message: 'Token is not okay' });
+      } else {
+        // token이 존재할 경우
+        // req.name은 로그인(모든 유효성 검사에 통과한)이 될 경우 그 유저의 UserName이다.
+        // 로그인 부분에서  const name = results[0].username; 모든것이 일치할 경우 0번째의 인덱스인 username을 가져오는것이다.
+        // const token = jwt.sign({ name })는 구조 분해 할당이 아닌 const person1 = { name: name, age: age } 이런식으로
+        // name 키를 가지고 있고 원래 변수 name의 값을 포함하는것이다.
+        // const token = jwt.sign({ name }, 'jwt-secret-key', { expiresIn: '1d',});
+        req.name = decoded.name;
+        // console.log(req.name); // 로그인시 username이 찍힌다.
+        next();
+      }
+    });
   }
+};
+
+// 메인화면
+app.get('/header', verifyUser, (req, res) => {
+  return res.status(200).send({ message: 'success', name: req.name });
 });
 
 // MYSQL 회원가입 및 이메일 중복 검사
@@ -138,71 +138,22 @@ app.post('/login', (req, res) => {
   db.query(
     'SELECT * FROM users WHERE email = ? && password = ?',
     [sentEmail, sentPassword],
-    async (error, results) => {
-      // DB 쿼리 에러 발생 시
-      if (error) {
-        console.log(error);
-        res.status(500).send({ message: 'database-error' });
+    (err, results) => {
+      if (err) {
+        console.log('err');
+        res.send(err);
       }
-
-      // 일칯하는 호원정보를 찾지 못할 경우
-      if (results.length < 0) {
-        return res.send({ message: 'user-not-found' });
-      }
-
-      // 일치하는 회원 정보를 찾을 경우
-      else if (results.length > 0) {
-        try {
-          const userId = results[0].id; // 사용자 ID 저장
-          const name = results[0].username;
-
-          // access Token 발급
-          const accessToken = jwt.sign(
-            { name, userId },
-            process.env.REACT_APP_ACCESS_SECRET,
-            {
-              expiresIn: '1m',
-              issuer: 'About Tech',
-            }
-          );
-
-          const refreshToken = jwt.sign(
-            { name, userId },
-            process.env.REACT_APP_REFRESH_SECERT,
-            {
-              expiresIn: '5m',
-              issuer: 'About Tech',
-            }
-          );
-
-          // DB에 refresh 토큰 삽입
-          // 비동기 함수인 await를 사용하려면, 해당 콜백 함수 async로 선언해야된다.
-          await db.query(
-            `INSERT INTO 
-                tokens(content, userId)
-                VALUES
-                (?, ?);`,
-            [refreshToken, userId]
-          );
-
-          // token 전송
-          res.cookie('accessToken', accessToken, {
-            secure: false,
-            httpOnly: true,
-          });
-
-          res.cookie('refreshToken', refreshToken, {
-            secure: false,
-            httpOnly: true,
-          });
-
-          res.status(200).send({ message: 'success' });
-        } catch (error) {
-          console.log(error);
-          res.status(500).send({ message: 'server-error' });
-        }
+      if (results.length > 0) {
+        // 성공했을 경우
+        const name = results[0].username;
+        const token = jwt.sign({ name }, 'jwt-secret-key', {
+          expiresIn: '1d',
+        });
+        res.cookie('token', token);
+        res.status(200).send({ message: 'success' });
       } else {
-        return res.status(400).send({ message: 'user-not-found' });
+        // 입력한 이메일 주소가 일치하지 않을 경우
+        res.status(401).send({ message: 'user-not-found' });
       }
     }
   );
@@ -210,25 +161,8 @@ app.post('/login', (req, res) => {
 
 // MYSQL 로그아웃
 app.post('/logout', (req, res) => {
-  // 사용자 ID 추출
-  const userId = req.body.userId;
-
-  // DB에서 해당 사용자의 토근 정보 삭제
-  db.query(
-    'DELETE FROM tokens WHERE userId = ?',
-    [userId],
-    (error, results) => {
-      if (error) {
-        console.log(error);
-        return res.status(500).send({ message: 'server-error' });
-      }
-    }
-  );
-  // 클라이언트의 쿠키 삭제
-  res.clearCookie('accessToken');
-  res.clearCookie('refreshToken');
-
-  return res.send({ message: 'success' });
+  res.clearCookie('token');
+  return res.status(200).send({ message: 'success' });
 });
 
 // 크롤링 JSON
@@ -239,5 +173,5 @@ app.get('/api', (req, res) => {
 
 // PORT 확인
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port {PORT}`);
 });
