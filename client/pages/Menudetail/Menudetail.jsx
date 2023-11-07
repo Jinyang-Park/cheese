@@ -23,13 +23,15 @@ function Menudetail() {
     (state) => state.ReservationsTastingSelection
   );
 
-  console.log('테이스팅 선택 로그', ReservationTastingSelected);
+  // console.log('테이스팅 선택 로그', ReservationTastingSelected);
 
+  // 선택한 레이어 불러오기
   const ReservationSelectedLayer = useSelector(
     (state) => state.ReservationsLayer
   );
 
-  console.log('단 선택 로그', ReservationSelectedLayer);
+  // console.log('단 선택 로그', ReservationSelectedLayer);
+
   // 토글 메뉴
   const [isOpen, setIsOpen] = useState(false);
 
@@ -51,7 +53,14 @@ function Menudetail() {
       alert('테이스팅 3가지 맛을 선택해주세요. ');
       return;
     }
-    navigate('/Cart');
+    if (
+      window.confirm(
+        '해당 상품을 장바구니에 담았습니다.장바구니로 가시겠습니까?'
+      )
+    ) {
+      navigate(`/Cart/`);
+    }
+    return;
   };
   return (
     <>

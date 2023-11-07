@@ -25,6 +25,17 @@ function QuantitySelection({ cake }) {
   // 이 부분은 실제 store의 구조에 따라 달라질 수 있습니다.
   const product = useSelector((state) => state.payload);
 
+  // 1. 단은 선택하지 않았을때 가격
+  // 2. 수량을 조절하지 않았을때 갯수
+  // 3. 단을 선택했을때의 가격
+  // 4. useEffect 훅은 changedPrice가 업데이트 될 때마다 실행됩니다. 따라서 단을 선택하여 가격이 변동하면 changedPrice가 업데이트되고, 이에 따라 Redux의 상태도 새로운 가격을 반영하여 업데이트 됩니다.
+  useEffect(() => {
+    const newTotal = cake.price * quantity - changedPrice * quantity;
+    dispatch(
+      addToCart({ quantity, newTotal, image: cake.image, name: cake.Koname })
+    );
+  }, [changedPrice]);
+
   // 케익 선택 Redux store 가져오는 로직
   const layerState = useSelector((state) => state.ReservationsLayer);
 
@@ -50,7 +61,17 @@ function QuantitySelection({ cake }) {
 
       // 케이크 단 선택 dispatch
 
-      dispatch(addToCart({ ...product, quantity: newQuantity }, newTotal));
+      dispatch(
+        addToCart(
+          {
+            ...product,
+            quantity: newQuantity,
+            image: cake.image,
+            name: cake.Koname,
+          },
+          newTotal
+        )
+      );
       console.log(quantity, newTotal);
     }
   };
@@ -65,7 +86,17 @@ function QuantitySelection({ cake }) {
       const newTotal = cake.price * newQuantity - changedPrice * newQuantity;
       setTotal(newTotal);
 
-      dispatch(deleteToCart({ ...product, quantity: newQuantity }, newTotal));
+      dispatch(
+        deleteToCart(
+          {
+            ...product,
+            quantity: newQuantity,
+            image: cake.image,
+            name: cake.Koname,
+          },
+          newTotal
+        )
+      );
       console.log(quantity, newTotal);
     }
   };
@@ -92,7 +123,17 @@ function QuantitySelection({ cake }) {
     const newTotal = cake.price * newValue - changedPrice * newValue;
     setTotal(newTotal);
 
-    dispatch(addToCart({ ...product, quantity: newValue }, newTotal));
+    dispatch(
+      addToCart(
+        {
+          ...product,
+          quantity: newValue,
+          image: cake.image,
+          name: cake.Koname,
+        },
+        newTotal
+      )
+    );
     console.log(quantity, newTotal);
   };
 
