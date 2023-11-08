@@ -1,16 +1,9 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import CommonStyles from '../../utils/CommonStyles';
+import ReservationSetDT from '../../components/Cart/ReservationSetDT';
 
 function ShoppingCart() {
-  const ReservationSetTime = useSelector((state) => state.ReservationsDT.time);
-  const ReservationSetlDate = useSelector(
-    (state) => state.ReservationsDT.formattedDate
-  );
-  console.log(ReservationSetTime.time, ReservationSetlDate);
-  const CartItems = useSelector((state) => state.ReservationsQuantity);
-  console.log(CartItems);
   return (
     <>
       <CommonStyles>
@@ -25,12 +18,13 @@ function ShoppingCart() {
             </ReservationStepLi>
           </ReservationTabUl>
           <ReservationDateWrap>
-            <ReservationDate>
+            <ReservationSetDT />
+            {/* <ReservationDate>
               <ReservationFinalDate>{ReservationSetlDate}</ReservationFinalDate>
               <ReservationFinalTime>
                 {ReservationSetTime.time}
               </ReservationFinalTime>
-            </ReservationDate>
+            </ReservationDate> */}
           </ReservationDateWrap>
         </ReservationInner>
       </CommonStyles>
@@ -82,15 +76,4 @@ export const CakedetailInner = styled.div`
 export const ReservationDateWrap = styled.div`
   border: 3px solid #f1e4ab;
   border-width: 0 3px 3px 3px;
-`;
-export const ReservationDate = styled.div``;
-export const ReservationFinalDate = styled.h3`
-  font-size: 18px;
-  font-weight: 500;
-  display: inline-block;
-`;
-export const ReservationFinalTime = styled.h3`
-  font-size: 18px;
-  font-weight: 500;
-  display: inline-block;
 `;
