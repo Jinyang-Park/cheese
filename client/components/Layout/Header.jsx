@@ -38,6 +38,7 @@ export default function Header() {
         if (res.status === 200) {
           setCheckAuth(false);
           alert('로그아웃 되었습니다. 다시 만나요!');
+          localStorage.clear();
           navigate('/');
         }
       })

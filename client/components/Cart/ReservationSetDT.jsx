@@ -20,16 +20,20 @@ function ReservationSetDT() {
         '예약 날짜 및 시간을 변경하시겠습니까? 진행중인 예약 정보가 초기화 됩니다. '
       )
     ) {
+      // 확인을 눌르면 모든 예약 정보 삭제
+      localStorage.clear();
       navigate(`/Reservation/date`);
     }
   };
   return (
-    <ReservationDate>
-      <ReservationTitle>치즈본</ReservationTitle>
-      <ReservationFinalDate>{ReservationSetlDate}</ReservationFinalDate>
-      <ReservationFinalTime>{ReservationSetTime.time}</ReservationFinalTime>
-      <ChangeDTBtn onClick={handlegotoDateClick}>변경</ChangeDTBtn>
-    </ReservationDate>
+    <ReservationBox>
+      <ReservationDate>
+        <ReservationTitle>치즈본</ReservationTitle>
+        <ReservationFinalDate>{ReservationSetlDate}</ReservationFinalDate>
+        <ReservationFinalTime>{ReservationSetTime.time}</ReservationFinalTime>
+        <ChangeDTBtn onClick={handlegotoDateClick}>변경</ChangeDTBtn>
+      </ReservationDate>
+    </ReservationBox>
   );
 }
 
@@ -37,8 +41,14 @@ export default ReservationSetDT;
 export const ReservationDate = styled.div`
   border: 1px solid #ffdb7e;
   width: 100%;
-  padding: 15px;
-  border-radius: 500px;
+  /* padding: 15px;
+  border-radius: 500px; */
+  border-radius: 100px;
+  height: 45px;
+  padding: 8px 20px;
+`;
+export const ReservationBox = styled.div`
+  padding: 10px;
 `;
 export const ReservationTitle = styled.h3`
   margin-left: 20px;

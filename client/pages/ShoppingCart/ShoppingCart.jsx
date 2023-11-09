@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import CommonStyles from '../../utils/CommonStyles';
 import ReservationSetDT from '../../components/Cart/ReservationSetDT';
+import { useSelector } from 'react-redux';
+import ReservationItem from '../../components/Cart/ReservationItem';
 
 function ShoppingCart() {
+  const [getItemInfo, setGetItemInfo] = useState(0);
+
+  const CartItems = useSelector((state) => state.ReservationsQuantity);
+  console.log(CartItems);
+
+  useEffect(() => {
+    if (CartItems.length > 0) {
+      setGetItemInfo(CartItems.length - 1);
+    }
+  }, [CartItems]);
+  console.log(CartItems[getItemInfo]);
+
   return (
     <>
       <CommonStyles>
@@ -19,12 +33,9 @@ function ShoppingCart() {
           </ReservationTabUl>
           <ReservationDateWrap>
             <ReservationSetDT />
-            {/* <ReservationDate>
-              <ReservationFinalDate>{ReservationSetlDate}</ReservationFinalDate>
-              <ReservationFinalTime>
-                {ReservationSetTime.time}
-              </ReservationFinalTime>
-            </ReservationDate> */}
+            {CartItems.map((item) => {
+              return <ReservationItem key={item.id} item={item} />;
+            })}
           </ReservationDateWrap>
         </ReservationInner>
       </CommonStyles>

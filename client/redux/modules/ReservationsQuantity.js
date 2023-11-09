@@ -4,18 +4,18 @@ const ADD_TO_CART = 'ADD_TO_CART';
 const DELETE_TO_CART = 'DELETE_TO_CART';
 
 // 2. action creators(1)
-export const addToCart = (product, total) => {
+export const addToCart = (product) => {
   return {
     type: ADD_TO_CART,
-    payload: { product, total },
+    payload: product,
   };
 };
 
 // 2. action creators(2)
-export const deleteToCart = (product, total) => {
+export const deleteToCart = (product) => {
   return {
     type: DELETE_TO_CART,
-    payload: { product, total },
+    payload: product,
   };
 };
 
