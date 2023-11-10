@@ -5,6 +5,8 @@ import { PiWarningCircleFill } from 'react-icons/pi';
 import { FiSearch } from 'react-icons/fi';
 import { CakeList } from '../../common/CakeList';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { reset, setCake } from '../../redux/modules/ReservationsCakeDetail';
 
 function Menupick() {
   // 카테고리
@@ -32,6 +34,7 @@ function Menupick() {
     setSearchKeyword(searchKeyword);
   };
 
+  const dispatch = useDispatch();
   return (
     <>
       <CommonStyles>
@@ -105,12 +108,19 @@ function Menupick() {
                   return (
                     <CakeLi key={cake.id}>
                       <CakeClickWrap
-                        onClick={() =>
+                        onClick={() => {
+                          // 상태 초기화
+                          dispatch(reset());
+
+                          // cake 전체를 상태에 저장
+                          dispatch(setCake(cake));
+
+                          // 페이지 이동 및 cake 정보 넘겨주기
                           navigate(
                             `/Reservation/date/menupick/Menudetail/${cake.id}`,
                             { state: { cake } }
-                          )
-                        }
+                          );
+                        }}
                       >
                         <CakeDiv>
                           <CakeImg src={cake.image} />

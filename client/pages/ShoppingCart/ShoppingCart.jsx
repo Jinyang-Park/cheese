@@ -6,17 +6,11 @@ import { useSelector } from 'react-redux';
 import ReservationItem from '../../components/Cart/ReservationItem';
 
 function ShoppingCart() {
-  const [getItemInfo, setGetItemInfo] = useState(0);
-
-  const CartItems = useSelector((state) => state.ReservationsQuantity);
+  // const { cake } = useSelector((state) => state.ReservationsCakeDetail);
+  const CartItems = useSelector((state) => state.ReservationsCakeDetail);
   console.log(CartItems);
-
-  useEffect(() => {
-    if (CartItems.length > 0) {
-      setGetItemInfo(CartItems.length - 1);
-    }
-  }, [CartItems]);
-  console.log(CartItems[getItemInfo]);
+  console.log(CartItems.cake.Koname);
+  console.log(CartItems.cake.image);
 
   return (
     <>

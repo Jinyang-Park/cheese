@@ -3,7 +3,7 @@ import styled from 'styled-components';
 function ReservationItem({ item }) {
   return (
     <CartItemUl>
-      <CartItemli>{item.name}</CartItemli>
+      <CartItemli>{item}</CartItemli>
     </CartItemUl>
   );
 }

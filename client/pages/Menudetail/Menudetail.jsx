@@ -19,18 +19,7 @@ function Menudetail() {
   const dispatch = useDispatch();
 
   // 선택한 테이스팅 맛 불러오기
-  const ReservationTastingSelected = useSelector(
-    (state) => state.ReservationsTastingSelection
-  );
-
-  // console.log('테이스팅 선택 로그', ReservationTastingSelected);
-
-  // 선택한 레이어 불러오기
-  const ReservationSelectedLayer = useSelector(
-    (state) => state.ReservationsLayer
-  );
-
-  // console.log('단 선택 로그', ReservationSelectedLayer);
+  const ReservationLT = useSelector((state) => state.ReservationsCakeDetail);
 
   // 토글 메뉴
   const [isOpen, setIsOpen] = useState(false);
@@ -43,13 +32,10 @@ function Menudetail() {
   const handlegotoCartClick = () => {
     // ReservationSelectedLayer,ReservationTastingSelected가 콘솔로그로 찍으면 [] 빈배열로 찍힌다
     // 배열이 비어있는지 확인하기 위해서 length의 값으로 체크하는 조건문 추가
-    if (ReservationSelectedLayer.length === 0) {
+    if (ReservationLT.layer === null) {
       alert('케이크 단을 선택해주세요.');
       return;
-    } else if (ReservationTastingSelected.length === 0) {
-      alert('테이스팅 3가지 맛을 선택해주세요.');
-      return;
-    } else if (ReservationTastingSelected.length < 3) {
+    } else if (ReservationLT.taste.length < 3) {
       alert('테이스팅 3가지 맛을 선택해주세요. ');
       return;
     }
