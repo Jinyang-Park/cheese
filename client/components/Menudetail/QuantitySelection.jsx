@@ -18,10 +18,14 @@ function QuantitySelection({ cake }) {
 
   // 케이크의 기본 가격 상태 설정
   useEffect(() => {
+    // 케이크 단이 선택하면 layer.price를 빼준다.
     if (layer !== null) {
       dispatch(setPrice(cake.price * quantity - layer.price * quantity));
     } else {
-      dispatch(setPrice(cake.price));
+      // 1. 주석 처리된 코드는 input으로 가격을 변동할때 바로바로 변하지 않았다.
+      // 2. input으로 넣은 수량이 변경되면 기존 케이크의 가격과 곱해줘서 리덕스로 디스패치로 넘겨준다.
+      // dispatch(setPrice(cake.price));
+      dispatch(setPrice(cake.price * quantity));
     }
   }, [cake, layer, quantity]);
 
@@ -64,7 +68,6 @@ function QuantitySelection({ cake }) {
 
     if (isNaN(newValue)) {
       newValue = '';
-      dispatch(setQuantity(newValue));
     } else if (newValue === 0) {
       return false;
     }
@@ -76,12 +79,12 @@ function QuantitySelection({ cake }) {
     }
     dispatch(setQuantity(newValue));
 
-    // input에 수량을 적으면 가격에 변동이 있다
-    if (layer) {
-      dispatch(setPrice(cake.price * newValue - layer.price * newValue));
-    } else {
-      dispatch(setPrice(cake.price * newValue));
-    }
+    //   // input에 수량을 적으면 가격에 변동이 있다
+    //   if (layer) {
+    //     dispatch(setPrice(cake.price * newValue - layer.price * newValue));
+    //   } else {
+    //     dispatch(setPrice(cake.price * newValue));
+    //   }
   };
 
   return (

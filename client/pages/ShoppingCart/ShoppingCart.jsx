@@ -6,12 +6,10 @@ import { useSelector } from 'react-redux';
 import ReservationItem from '../../components/Cart/ReservationItem';
 
 function ShoppingCart() {
-  // const { cake } = useSelector((state) => state.ReservationsCakeDetail);
-  const CartItems = useSelector((state) => state.ReservationsCakeDetail);
-  console.log(CartItems);
-  console.log(CartItems.cake.Koname);
-  console.log(CartItems.cake.image);
-
+  // initialState의 cart 배열에 넣어준다.
+  // 배열로 들어가서 map을 통과할 수 있다.
+  const { cart } = useSelector((state) => state.ReservationsCakeDetail);
+  console.log(cart);
   return (
     <>
       <CommonStyles>
@@ -27,7 +25,7 @@ function ShoppingCart() {
           </ReservationTabUl>
           <ReservationDateWrap>
             <ReservationSetDT />
-            {CartItems.map((item) => {
+            {cart.map((item) => {
               return <ReservationItem key={item.id} item={item} />;
             })}
           </ReservationDateWrap>

@@ -8,6 +8,7 @@ import SelectedLayers from '../../components/Menudetail/SelectedLayers';
 import TastingSelection from '../../components/Menudetail/TastingSelection';
 import QuantitySelection from '../../components/Menudetail/QuantitySelection';
 import { useDispatch, useSelector } from 'react-redux';
+import { addToCart } from '../../redux/modules/ReservationsCakeDetail';
 
 function Menudetail() {
   // usevaigater로 케익의 정보를 받아오는 로직
@@ -18,8 +19,12 @@ function Menudetail() {
   // dispatch 로직
   const dispatch = useDispatch();
 
-  // 선택한 테이스팅 맛 불러오기
-  const ReservationLT = useSelector((state) => state.ReservationsCakeDetail);
+  // 1. 컴포넌트가 처음 렌더링 될 떄 useSelector가 호출되어 리덕스 상태를 가져온다.
+  // 2. 상태가 업데이트되면 useSelector 다시 호출되어 새로운 상태를 가져온다.
+  // 선택한 테이스팅 맛, 가격, 수량 등등 불러오기
+  const { layer, price, quantity, tastes } = useSelector(
+    (state) => state.ReservationsCakeDetail
+  );
 
   // 토글 메뉴
   const [isOpen, setIsOpen] = useState(false);
@@ -30,12 +35,11 @@ function Menudetail() {
 
   // 주문하기
   const handlegotoCartClick = () => {
-    // ReservationSelectedLayer,ReservationTastingSelected가 콘솔로그로 찍으면 [] 빈배열로 찍힌다
-    // 배열이 비어있는지 확인하기 위해서 length의 값으로 체크하는 조건문 추가
-    if (ReservationLT.layer === null) {
+    if (layer === null) {
       alert('케이크 단을 선택해주세요.');
       return;
-    } else if (ReservationLT.taste.length < 3) {
+      // tastes &&를 추가하여 tastes가 undefined 또는 null이 아닌 경우에만 length 속성을 확인하도록 수정
+    } else if (!tastes || tastes.length < 3) {
       alert('테이스팅 3가지 맛을 선택해주세요. ');
       return;
     }
@@ -44,6 +48,8 @@ function Menudetail() {
         '해당 상품을 장바구니에 담았습니다.장바구니로 가시겠습니까?'
       )
     ) {
+      // 만약 조건문에 다 통과되면 cake, lyaer, price, quantity가 업데이트 되므로 useSelector가 새로 호출이 되며 addToCart액션을 디스패치하여 액션의 payload에는 업데이트 된 cake, layer, price, quantity, tastes 포함된다.
+      dispatch(addToCart(cake, layer, price, quantity, tastes));
       navigate(`/Cart/`);
     }
     return;

@@ -63,17 +63,17 @@ function ReservationDate() {
   //     window.removeEventListener('beforeunload', handleBackEvent);
   //   };
   // }, [navigate]);
-  const preventClose = (e) => {
-    e.preventDefault();
-    e.returnValue = '떠날것이냐'; // for chrome. deprectaed.
-  };
+  // const preventClose = (e) => {
+  //   e.preventDefault();
+  //   e.returnValue = '떠날것이냐'; // for chrome. deprectaed.
+  // };
 
-  useEffect(() => {
-    window.addEventListener('beforeunload', preventClose);
-    return () => {
-      window.removeEventListener('beforeunload', preventClose);
-    };
-  }, []);
+  // useEffect(() => {
+  //   window.addEventListener('beforeunload', preventClose);
+  //   return () => {
+  //     window.removeEventListener('beforeunload', preventClose);
+  //   };
+  // }, []);
   return (
     <CommonStyles>
       <ReservationWrap>

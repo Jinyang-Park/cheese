@@ -7,6 +7,8 @@ const SET_PRICE = 'SET_PRICE';
 const RESET = 'RESET';
 // 케익의 이미지와 이름의 정보를 상태에 저장해야 된다
 const SET_CAKE = 'SET_CAKE';
+// 장바구니에 담기
+const ADD_TO_CART = 'ADD_TO_CART';
 
 // 2. action creators
 export const setLayer = (layer) => {
@@ -50,13 +52,28 @@ export const setCake = (cake) => {
   };
 };
 
+// addToCart에 클릭한 케이크의 정보와 케이크단, 가격, 수량, 테이스팅 맛을 같이 payload로 전달해준다.
+export const addToCart = (cake, layer, price, quantity, tastes) => {
+  return {
+    type: ADD_TO_CART,
+    payload: {
+      ...cake,
+      layer,
+      price,
+      quantity,
+      tastes,
+    },
+  };
+};
+
 // 3.initial state
 const initialState = {
   layer: null,
-  taste: [],
+  tastes: [],
   quantity: 1,
   price: 0,
   cake: null,
+  cart: [], // 장바구니를 배열로 추가합니다.
 };
 
 // 4. reducer
@@ -70,7 +87,7 @@ const ReservationsCakeDetail = (state = initialState, action) => {
     case SET_TASTE:
       return {
         ...state,
-        taste: action.payload,
+        tastes: action.payload,
       };
     case SET_QUANTITY:
       return {
@@ -86,6 +103,11 @@ const ReservationsCakeDetail = (state = initialState, action) => {
       return {
         ...state,
         cake: action.payload, // cake 전체를 상태에 저장합니다.
+      };
+    case ADD_TO_CART:
+      return {
+        ...state,
+        cart: [...state.cart, action.payload], // 케이크를 장바구니에 추가합니다.
       };
     case RESET:
       return initialState;
