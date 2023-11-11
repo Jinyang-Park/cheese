@@ -4,12 +4,15 @@ import CommonStyles from '../../utils/CommonStyles';
 import ReservationSetDT from '../../components/Cart/ReservationSetDT';
 import { useSelector } from 'react-redux';
 import ReservationItem from '../../components/Cart/ReservationItem';
+import { useNavigate } from 'react-router-dom';
 
 function ShoppingCart() {
   // initialState의 cart 배열에 넣어준다.
   // 배열로 들어가서 map을 통과할 수 있다.
   const { cart } = useSelector((state) => state.ReservationsCakeDetail);
-  console.log(cart);
+
+  // navaigate
+  const navigate = useNavigate();
   return (
     <>
       <CommonStyles>
@@ -28,6 +31,20 @@ function ShoppingCart() {
             {cart.map((item) => {
               return <ReservationItem key={item.id} item={item} />;
             })}
+            <CartTotalWrap>
+              <CartTotalPriceTitle>합계금액</CartTotalPriceTitle>
+              <CartTotalPrice>420,000원</CartTotalPrice>
+            </CartTotalWrap>
+            <CartItemBtnWrap>
+              <CartItemAddToProuductBtn
+                onClick={() => {
+                  navigate(`/Reservation/date/menupick/`);
+                }}
+              >
+                예약상품추가
+              </CartItemAddToProuductBtn>
+              <CartItemOrderBtn>결제하기</CartItemOrderBtn>
+            </CartItemBtnWrap>
           </ReservationDateWrap>
         </ReservationInner>
       </CommonStyles>
@@ -79,4 +96,48 @@ export const CakedetailInner = styled.div`
 export const ReservationDateWrap = styled.div`
   border: 3px solid #f1e4ab;
   border-width: 0 3px 3px 3px;
+`;
+export const CartItemBtnWrap = styled.div`
+  text-align: center;
+  margin: 50px auto 20px;
+`;
+export const CartItemAddToProuductBtn = styled.button`
+  background: #ebebeb;
+  border: 1px solid #ebebeb;
+  color: #846e23;
+  width: 100%;
+  max-width: 240px;
+  padding: 15px;
+  margin: 3px 1px;
+  border-radius: 500px;
+  font-size: 1em;
+`;
+export const CartItemOrderBtn = styled.button`
+  background: #ffdb7e;
+  border: 1px solid #ffdb7e;
+  color: #846e23;
+  width: 100%;
+  max-width: 240px;
+  padding: 15px;
+  margin: 3px 1px;
+  border-radius: 500px;
+  font-size: 1em;
+`;
+export const CartTotalWrap = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 25px;
+  margin-top: 10px;
+`;
+export const CartTotalPriceTitle = styled.h3`
+  font-size: 16px;
+  font-weight: 400;
+  display: inline-block;
+`;
+export const CartTotalPrice = styled.h3`
+  margin-left: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  display: inline-block;
 `;

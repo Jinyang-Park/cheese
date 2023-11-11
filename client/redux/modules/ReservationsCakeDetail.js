@@ -9,6 +9,8 @@ const RESET = 'RESET';
 const SET_CAKE = 'SET_CAKE';
 // 장바구니에 담기
 const ADD_TO_CART = 'ADD_TO_CART';
+// 장바구니 특정 아이템 삭제
+const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 
 // 2. action creators
 export const setLayer = (layer) => {
@@ -52,6 +54,12 @@ export const setCake = (cake) => {
   };
 };
 
+export const removeFromCart = (cakeId) => {
+  return {
+    type: REMOVE_FROM_CART,
+    payload: cakeId,
+  };
+};
 // addToCart에 클릭한 케이크의 정보와 케이크단, 가격, 수량, 테이스팅 맛을 같이 payload로 전달해준다.
 export const addToCart = (cake, layer, price, quantity, tastes) => {
   return {
@@ -110,7 +118,15 @@ const ReservationsCakeDetail = (state = initialState, action) => {
         cart: [...state.cart, action.payload], // 케이크를 장바구니에 추가합니다.
       };
     case RESET:
-      return initialState;
+      return {
+        ...initialState,
+        cart: state.cart, // cart 상태는 유지합니다.
+      };
+    case REMOVE_FROM_CART:
+      return {
+        ...state,
+        cart: state.cart.filter((cake) => cake.id !== action.payload),
+      };
     default:
       return state;
   }

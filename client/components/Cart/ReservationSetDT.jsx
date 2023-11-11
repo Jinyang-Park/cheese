@@ -48,10 +48,11 @@ export const ReservationDate = styled.div`
   padding: 8px 20px;
 `;
 export const ReservationBox = styled.div`
-  padding: 10px;
+  padding: 15px 10px;
+  border-bottom: 2px solid #ebebeb;
 `;
 export const ReservationTitle = styled.h3`
-  margin-left: 20px;
+  margin-left: 10px;
   font-size: 16px;
   font-weight: 600;
   display: inline-block;

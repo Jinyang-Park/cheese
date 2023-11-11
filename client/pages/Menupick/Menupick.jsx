@@ -126,7 +126,7 @@ function Menupick() {
                           <CakeImg src={cake.image} />
                         </CakeDiv>
                         <Cakename>{cake.Koname}</Cakename>
-                        <Cakeprice>{cake.price}</Cakeprice>
+                        <Cakeprice>{cake.price}원</Cakeprice>
                       </CakeClickWrap>
                     </CakeLi>
                   );
