@@ -10,6 +10,7 @@ function ShoppingCart() {
   // initialState의 cart 배열에 넣어준다.
   // 배열로 들어가서 map을 통과할 수 있다.
   const { cart } = useSelector((state) => state.ReservationsCakeDetail);
+  // console.log(cart[0].total);
 
   // navaigate
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ function ShoppingCart() {
             })}
             <CartTotalWrap>
               <CartTotalPriceTitle>합계금액</CartTotalPriceTitle>
-              <CartTotalPrice>420,000원</CartTotalPrice>
+              <CartTotalPrice>원</CartTotalPrice>
             </CartTotalWrap>
             <CartItemBtnWrap>
               <CartItemAddToProuductBtn

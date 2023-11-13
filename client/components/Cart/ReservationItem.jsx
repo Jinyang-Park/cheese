@@ -8,6 +8,7 @@ import {
   decreaseQuantity,
   increaseQuantity,
   removeFromCart,
+  setCartItemQuantity,
   setPrice,
   setQuantity,
 } from '../../redux/modules/ReservationsCakeDetail';
@@ -16,35 +17,37 @@ function ReservationItem({ item }) {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(setPrice(item.price * quantity));
-  }, [item, quantity]);
+  // useEffect(() => {
+  //   dispatch(setPrice(item.price * quantity));
+  // }, [item, quantity]);
 
   // 케익 디테일 상태를 가져오는 로직
-  const { quantity, price } = useSelector(
+  const { quantity, cart } = useSelector(
     (state) => state.ReservationsCakeDetail
   );
+
   // + 버튼을 눌렀을 때
   const IncreseCartQuantity = () => {
-    if (quantity >= 5) {
-      alert(`5개 이상의 케이크 예약은 상담을 통해 진행합니다.`);
+    const cartItem = cart.find((cake) => cake.id === item.id);
+    if (cartItem && cartItem.quantity < 5) {
+      dispatch(increaseQuantity(item.id));
     } else {
-      // 수량을 증가시키고 가격을 업데이트 한다.
-      dispatch(increaseQuantity(item.id, quantity + 1));
+      alert(`5개 이상의 케이크 예약은 상담을 통해 진행합니다.`);
     }
   };
+
   // - 버튼을 눌렀을 때
   const DecreaseCartQuantity = () => {
-    if (quantity > 1) {
-      // 수량을 감소시키고 가격을 업데이트 한다.
-      dispatch(decreaseQuantity(item.id, quantity - 1));
+    const cartItem = cart.find((cake) => cake.id === item.id);
+    if (cartItem && cartItem.quantity > 1) {
+      dispatch(decreaseQuantity(item.id));
     }
   };
 
   // input 수량 함수 로직
   const handleCartChangeQuantityInput = (e) => {
     let newValue = parseInt(e.target.value);
-
+    console.log(newValue);
     if (isNaN(newValue)) {
       newValue = '';
     } else if (newValue === 0) {
@@ -55,7 +58,7 @@ function ReservationItem({ item }) {
       alert(`5개 이상의 케이크 예약은 상담을 통해 진행합니다.`);
       return;
     }
-    dispatch(setQuantity(newValue));
+    dispatch(setCartItemQuantity(item.id, newValue, item.price * newValue));
   };
 
   return (
@@ -70,17 +73,19 @@ function ReservationItem({ item }) {
       <CartItemRightWrap>
         <TotallMinusIcon
           onClick={DecreaseCartQuantity}
-          disabled={quantity === 1}
+          disabled={item.quantity === 1}
         />
         <CartItemInput
-          value={quantity}
+          value={item.quantity}
           onChange={handleCartChangeQuantityInput}
         />
         {/* {item.quantity} */}
         <TotallPlusBtnIcon onClick={IncreseCartQuantity} />
       </CartItemRightWrap>
       <CartItemMiddleWrap>
-        <CartItemli>{item.price.toLocaleString()}원</CartItemli>
+        <CartItemli>
+          {item.total ? item.total.toLocaleString() : 0}원
+        </CartItemli>
       </CartItemMiddleWrap>
       <CancelIcon onClick={() => dispatch(removeFromCart(item.id))} />
     </CartItemUl>

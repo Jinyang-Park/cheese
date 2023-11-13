@@ -15,6 +15,8 @@ const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 const INCREASE_TO_CART = 'INCREASE_TO_CART';
 const DECREASE_TO_CART = 'DECREASE_TO_CART';
 const SET_CART_ITEM_QUANTITY = 'SET_CART_ITEM_QUANTITY';
+// 케익 한개의 가격 저장
+const SET_UNIT_PRICE = 'SET_UNIT_PRICE';
 
 // 2. action creators
 export const setLayer = (layer) => {
@@ -72,8 +74,10 @@ export const addToCart = (cake, layer, price, quantity, tastes) => {
       ...cake,
       layer,
       price,
-      quantity: 1, // Add a quantity property to each cake
+      quantity,
       tastes,
+      total: price,
+      unitPrice: price / quantity,
     },
   };
 };
@@ -92,15 +96,24 @@ export const decreaseQuantity = (cakeId) => {
   };
 };
 
-export const setCartItemQuantity = (cakeId, quantity) => {
+export const setCartItemQuantity = (cakeId, quantity, price) => {
   return {
     type: SET_CART_ITEM_QUANTITY,
     payload: {
       cakeId,
       quantity,
+      price,
     },
   };
 };
+
+export const setUnitPrice = (price) => {
+  return {
+    type: SET_UNIT_PRICE,
+    payload: price,
+  };
+};
+
 // 3.initial state
 const initialState = {
   layer: null,
@@ -109,7 +122,7 @@ const initialState = {
   price: 0,
   cake: null,
   cart: [], // 장바구니를 배열로 추가합니다.
-  total: 0,
+  unitPrice: 0,
 };
 
 // 4. reducer
@@ -145,43 +158,61 @@ const ReservationsCakeDetail = (state = initialState, action) => {
         ...state,
         cart: [...state.cart, action.payload], // 케이크를 장바구니에 추가합니다.
       };
+
+    // 수량 추가
     case INCREASE_TO_CART:
-      const plus = state.cart.find((cake) => cake.id === action.payload);
-      if (plus) {
-        plus.quantity += 1;
-        // plue.quantity = plus.quantity + 1; 같은뜻
-      }
       return {
         ...state,
-        cart: [...state.cart],
-        total: state.total + plus.price,
+        cart: state.cart.map((cake) =>
+          cake.id === action.payload
+            ? {
+                ...cake,
+                quantity: cake.quantity + 1,
+                total: cake.unitPrice * (cake.quantity + 1),
+              }
+            : cake
+        ),
       };
+
+    // 수량 감소
     case DECREASE_TO_CART:
-      const minus = state.cart.find((cake) => cake.id === action.payload);
-
-      if (minus && minus.quantity > 1) {
-        minus.quantity -= 1;
-      }
       return {
         ...state,
-        cart: [...state.cart],
-        total: state.total - minus.price,
+        cart: state.cart.map((cake) =>
+          cake.id === action.payload && cake.quantity > 1
+            ? {
+                ...cake,
+                quantity: cake.quantity - 1,
+                total: cake.unitPrice * (cake.quantity - 1),
+                // total 값은 감소하기 전의 수량과 가격을 곱한 값으로 설정됨
+                // total: (cake.price / cake.quantity) * (cake.quantity - 1),
+              }
+            : cake
+        ),
       };
+    // 수량 인풋
     case SET_CART_ITEM_QUANTITY:
-      const item = state.cart.find((cake) => cake.id === action.payload);
-
-      if (item) {
-        item.quantity = action.payload.quantity;
-      }
       return {
         ...state,
-        cart: [...state.cart],
+        cart: state.cart.map((cake) =>
+          cake.id === action.payload.Id
+            ? {
+                ...cake,
+                quantity: action.payload.quantity,
+                total: action.payload.price,
+              }
+            : cake
+        ),
       };
+
+    // 리셋
     case RESET:
       return {
         ...initialState,
         cart: state.cart, // cart 상태는 유지합니다.
       };
+
+    // 상품 삭제
     case REMOVE_FROM_CART:
       return {
         ...state,
