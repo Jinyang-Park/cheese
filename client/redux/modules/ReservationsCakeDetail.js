@@ -11,6 +11,10 @@ const SET_CAKE = 'SET_CAKE';
 const ADD_TO_CART = 'ADD_TO_CART';
 // 장바구니 특정 아이템 삭제
 const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
+// 증가, 감소
+const INCREASE_TO_CART = 'INCREASE_TO_CART';
+const DECREASE_TO_CART = 'DECREASE_TO_CART';
+const SET_CART_ITEM_QUANTITY = 'SET_CART_ITEM_QUANTITY';
 
 // 2. action creators
 export const setLayer = (layer) => {
@@ -68,12 +72,35 @@ export const addToCart = (cake, layer, price, quantity, tastes) => {
       ...cake,
       layer,
       price,
-      quantity,
+      quantity: 1, // Add a quantity property to each cake
       tastes,
     },
   };
 };
 
+export const increaseQuantity = (cakeId) => {
+  return {
+    type: INCREASE_TO_CART,
+    payload: cakeId,
+  };
+};
+
+export const decreaseQuantity = (cakeId) => {
+  return {
+    type: DECREASE_TO_CART,
+    payload: cakeId,
+  };
+};
+
+export const setCartItemQuantity = (cakeId, quantity) => {
+  return {
+    type: SET_CART_ITEM_QUANTITY,
+    payload: {
+      cakeId,
+      quantity,
+    },
+  };
+};
 // 3.initial state
 const initialState = {
   layer: null,
@@ -82,6 +109,7 @@ const initialState = {
   price: 0,
   cake: null,
   cart: [], // 장바구니를 배열로 추가합니다.
+  total: 0,
 };
 
 // 4. reducer
@@ -117,6 +145,38 @@ const ReservationsCakeDetail = (state = initialState, action) => {
         ...state,
         cart: [...state.cart, action.payload], // 케이크를 장바구니에 추가합니다.
       };
+    case INCREASE_TO_CART:
+      const plus = state.cart.find((cake) => cake.id === action.payload);
+      if (plus) {
+        plus.quantity += 1;
+        // plue.quantity = plus.quantity + 1; 같은뜻
+      }
+      return {
+        ...state,
+        cart: [...state.cart],
+        total: state.total + plus.price,
+      };
+    case DECREASE_TO_CART:
+      const minus = state.cart.find((cake) => cake.id === action.payload);
+
+      if (minus && minus.quantity > 1) {
+        minus.quantity -= 1;
+      }
+      return {
+        ...state,
+        cart: [...state.cart],
+        total: state.total - minus.price,
+      };
+    case SET_CART_ITEM_QUANTITY:
+      const item = state.cart.find((cake) => cake.id === action.payload);
+
+      if (item) {
+        item.quantity = action.payload.quantity;
+      }
+      return {
+        ...state,
+        cart: [...state.cart],
+      };
     case RESET:
       return {
         ...initialState,
@@ -126,6 +186,7 @@ const ReservationsCakeDetail = (state = initialState, action) => {
       return {
         ...state,
         cart: state.cart.filter((cake) => cake.id !== action.payload),
+        total: state.total - action.payload.price * action.payload.quantity,
       };
     default:
       return state;

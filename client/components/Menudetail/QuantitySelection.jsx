@@ -123,6 +123,7 @@ export const TotallPlusBtnIcon = styled(AiOutlinePlusCircle)`
   font-size: 0;
   display: inline-block;
   transform: translate(0, 4px);
+  cursor: pointer;
 `;
 export const TotallMinusIcon = styled(AiOutlineMinusCircle)`
   border-radius: 100px;
@@ -132,6 +133,7 @@ export const TotallMinusIcon = styled(AiOutlineMinusCircle)`
   font-size: 0;
   display: inline-block;
   transform: translate(0, 4px);
+  cursor: pointer;
 
   // props로 style 주는 방법
   opacity: ${(props) => (props.disabled ? '0.3;' : '')};

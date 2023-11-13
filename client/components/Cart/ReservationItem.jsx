@@ -1,19 +1,62 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { AiOutlineMinusCircle } from 'react-icons/ai';
 import { FiX } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeFromCart } from '../../redux/modules/ReservationsCakeDetail';
+import {
+  decreaseQuantity,
+  increaseQuantity,
+  removeFromCart,
+  setPrice,
+  setQuantity,
+} from '../../redux/modules/ReservationsCakeDetail';
 function ReservationItem({ item }) {
   console.log('아이템', item);
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(setPrice(item.price * quantity));
+  }, [item, quantity]);
+
   // 케익 디테일 상태를 가져오는 로직
   const { quantity, price } = useSelector(
     (state) => state.ReservationsCakeDetail
   );
+  // + 버튼을 눌렀을 때
+  const IncreseCartQuantity = () => {
+    if (quantity >= 5) {
+      alert(`5개 이상의 케이크 예약은 상담을 통해 진행합니다.`);
+    } else {
+      // 수량을 증가시키고 가격을 업데이트 한다.
+      dispatch(increaseQuantity(item.id, quantity + 1));
+    }
+  };
+  // - 버튼을 눌렀을 때
+  const DecreaseCartQuantity = () => {
+    if (quantity > 1) {
+      // 수량을 감소시키고 가격을 업데이트 한다.
+      dispatch(decreaseQuantity(item.id, quantity - 1));
+    }
+  };
+
+  // input 수량 함수 로직
+  const handleCartChangeQuantityInput = (e) => {
+    let newValue = parseInt(e.target.value);
+
+    if (isNaN(newValue)) {
+      newValue = '';
+    } else if (newValue === 0) {
+      return false;
+    }
+
+    if (newValue > 5) {
+      alert(`5개 이상의 케이크 예약은 상담을 통해 진행합니다.`);
+      return;
+    }
+    dispatch(setQuantity(newValue));
+  };
 
   return (
     <CartItemUl>
@@ -25,10 +68,16 @@ function ReservationItem({ item }) {
         <CartItemLeftli>{item.tastes.join(', ')}</CartItemLeftli>
       </CartItemWrap>
       <CartItemRightWrap>
-        <TotallMinusIcon />
-        <CartItemInput value={item.quantity} />
+        <TotallMinusIcon
+          onClick={DecreaseCartQuantity}
+          disabled={quantity === 1}
+        />
+        <CartItemInput
+          value={quantity}
+          onChange={handleCartChangeQuantityInput}
+        />
         {/* {item.quantity} */}
-        <TotallPlusBtnIcon />
+        <TotallPlusBtnIcon onClick={IncreseCartQuantity} />
       </CartItemRightWrap>
       <CartItemMiddleWrap>
         <CartItemli>{item.price.toLocaleString()}원</CartItemli>
@@ -103,6 +152,7 @@ export const TotallPlusBtnIcon = styled(AiOutlinePlusCircle)`
   position: relative;
   font-size: 0;
   display: inline-block;
+  cursor: pointer;
 `;
 export const TotallMinusIcon = styled(AiOutlineMinusCircle)`
   border-radius: 100px;
@@ -111,6 +161,7 @@ export const TotallMinusIcon = styled(AiOutlineMinusCircle)`
   position: relative;
   font-size: 0;
   display: inline-block;
+  cursor: pointer;
 
   // props로 style 주는 방법
   opacity: ${(props) => (props.disabled ? '0.3;' : '')};
