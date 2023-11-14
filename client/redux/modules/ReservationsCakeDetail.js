@@ -11,12 +11,14 @@ const SET_CAKE = 'SET_CAKE';
 const ADD_TO_CART = 'ADD_TO_CART';
 // 장바구니 특정 아이템 삭제
 const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
+
+// 장바구니 로직에 필요한 친구들
 // 증가, 감소
 const INCREASE_TO_CART = 'INCREASE_TO_CART';
 const DECREASE_TO_CART = 'DECREASE_TO_CART';
 const SET_CART_ITEM_QUANTITY = 'SET_CART_ITEM_QUANTITY';
 // 케익 한개의 가격 저장
-const SET_UNIT_PRICE = 'SET_UNIT_PRICE';
+// const SET_UNIT_PRICE = 'SET_UNIT_PRICE';
 
 // 2. action creators
 export const setLayer = (layer) => {
@@ -96,23 +98,23 @@ export const decreaseQuantity = (cakeId) => {
   };
 };
 
-export const setCartItemQuantity = (cakeId, quantity, price) => {
+export const setCartItemQuantity = (cakeId, quantity, newprice) => {
   return {
     type: SET_CART_ITEM_QUANTITY,
     payload: {
       cakeId,
       quantity,
-      price,
+      newprice,
     },
   };
 };
 
-export const setUnitPrice = (price) => {
-  return {
-    type: SET_UNIT_PRICE,
-    payload: price,
-  };
-};
+// export const setUnitPrice = (price) => {
+//   return {
+//     type: SET_UNIT_PRICE,
+//     payload: price,
+//   };
+// };
 
 // 3.initial state
 const initialState = {
@@ -195,16 +197,30 @@ const ReservationsCakeDetail = (state = initialState, action) => {
       return {
         ...state,
         cart: state.cart.map((cake) =>
-          cake.id === action.payload.Id
+          cake.id === action.payload.cakeId
             ? {
                 ...cake,
                 quantity: action.payload.quantity,
-                total: action.payload.price,
+                total: action.payload.newprice,
               }
             : cake
         ),
       };
 
+    // // 수량 가격
+    // case SET_UNIT_PRICE:
+    //   return {
+    //     ...state,
+    //     cart: state.cart.map((cake) =>
+    //       cake.id === action.payload.Id
+    //         ? {
+    //             ...cake,
+    //             quantity: action.payload.quantity,
+    //             total: action.payload.price,
+    //           }
+    //         : cake
+    //     ),
+    //   };
     // 리셋
     case RESET:
       return {

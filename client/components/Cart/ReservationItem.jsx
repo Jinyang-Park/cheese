@@ -11,6 +11,7 @@ import {
   setCartItemQuantity,
   setPrice,
   setQuantity,
+  setUnitPrice,
 } from '../../redux/modules/ReservationsCakeDetail';
 function ReservationItem({ item }) {
   console.log('아이템', item);
@@ -18,7 +19,7 @@ function ReservationItem({ item }) {
   const dispatch = useDispatch();
 
   // useEffect(() => {
-  //   dispatch(setPrice(item.price * quantity));
+  //   dispatch(setUnitPrice(item.price * quantity));
   // }, [item, quantity]);
 
   // 케익 디테일 상태를 가져오는 로직
@@ -58,7 +59,9 @@ function ReservationItem({ item }) {
       alert(`5개 이상의 케이크 예약은 상담을 통해 진행합니다.`);
       return;
     }
-    dispatch(setCartItemQuantity(item.id, newValue, item.price * newValue));
+    // 새로운 가격을 계산
+    const newPrice = item.unitPrice * newValue;
+    dispatch(setCartItemQuantity(item.id, newValue, newPrice));
   };
 
   return (

@@ -22,7 +22,7 @@ function Menudetail() {
   // 1. 컴포넌트가 처음 렌더링 될 떄 useSelector가 호출되어 리덕스 상태를 가져온다.
   // 2. 상태가 업데이트되면 useSelector 다시 호출되어 새로운 상태를 가져온다.
   // 선택한 테이스팅 맛, 가격, 수량 등등 불러오기
-  const { layer, price, quantity, tastes } = useSelector(
+  const { layer, price, quantity, tastes, cart } = useSelector(
     (state) => state.ReservationsCakeDetail
   );
 
@@ -48,7 +48,20 @@ function Menudetail() {
         '해당 상품을 장바구니에 담았습니다.장바구니로 가시겠습니까?'
       )
     ) {
-      // 만약 조건문에 다 통과되면 cake, lyaer, price, quantity가 업데이트 되므로 useSelector가 새로 호출이 되며 addToCart액션을 디스패치하여 액션의 payload에는 업데이트 된 cake, layer, price, quantity, tastes 포함된다.
+      // if(cart.some((itme)=> itme.cake.id === cake.id))
+      // 주석처리 코드가 안된 이유
+      // 1. addtoCart 액션에서 전달받은 cake객체를 payload에 그대로 ...cake 확장하고 있다,
+      // 2. cake 객체 안에 이미 id 속성이 있으므로 addToCart함수에서 새로 생성된 id가 아닌 기존의 id가 사용된다.
+      // 3. addToCart 액션에서 새로운 아이템을 생성할 때 고유한 id를 생성하는것이 아니므로 cake 객체의 id를 사용해서 아래처럼 코드 수정함
+      // find가 아니 some을 쓴 이유
+      // 1. some 메서드는 배열 내에서 특정 조건을 만족하는 요소가 하나라도 있는지 확인 조건에 만족하는 요소를 찾으면 즉시 true반환 아니면f false
+      // 2. find 메서드는 배열 내에서 특정 조건을 만족하는 첫 번째 요소를 반환 조선을 만족하는 요소를 찾으면 즉시 그 요소를 반환 그렇지 않으면 undefined
+      // 장바구니에 특정 케이크가 있는지 없는지 확인하면 되므로 some메소드가 적절
+      if (cart.some((item) => item.id === cake.id)) {
+        alert('이미 장바구니에 해당 상품이 있습니다.');
+        return;
+      }
+      // 만약 조건문에 다 통과되면 cake, lyaer, price, quantity가 업데이트 되므로 useSelector가 새로 호출이 되며 addToCart액션을 디스패치하여 액션의 payload에는 업데이트 된 cake, layer, price, quantity, tastes 포함된다.'
       dispatch(addToCart(cake, layer, price, quantity, tastes));
       navigate(`/Cart/`);
     }

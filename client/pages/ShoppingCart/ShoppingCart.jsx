@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import CommonStyles from '../../utils/CommonStyles';
 import ReservationSetDT from '../../components/Cart/ReservationSetDT';
@@ -10,7 +10,14 @@ function ShoppingCart() {
   // initialState의 cart 배열에 넣어준다.
   // 배열로 들어가서 map을 통과할 수 있다.
   const { cart } = useSelector((state) => state.ReservationsCakeDetail);
-  // console.log(cart[0].total);
+  console.log(cart);
+
+  // 1. reduce가 처음 실행될 때, sum은 0(초기값)이고, item은 cart 배열의 첫번째 요소입니다.
+  // 2. 리듀서 함수가 실행되면서 sum + item.total의 값이 계산되고, 이 값이 다음 누산기 값으로 업데이트됩니다.
+  // 3.이후 reduce는 배열의 다음 요소에 대해 같은 작업을 수행하고, 이 과정을 배열의 모든 요소를 처리할 때까지 반복합니다.
+  // 4.모든 요소를 처리한 후 reduce는 최종 누산기 값을 반환합니다. 이 경우에는 sum이며, 이 값은 cart 배열의 모든 item.total의 합계입니다.
+  // 5.따라서 reduce를 사용하면 배열의 모든 요소를 하나의 값으로 결합할 수 있습니다. 이 예제에서는 장바구니의 모든 아이템 가격을 합산하는데 사용되었습니다.
+  const totalCost = cart.reduce((sum, item) => sum + item.total, 0);
 
   // navaigate
   const navigate = useNavigate();
@@ -34,7 +41,7 @@ function ShoppingCart() {
             })}
             <CartTotalWrap>
               <CartTotalPriceTitle>합계금액</CartTotalPriceTitle>
-              <CartTotalPrice>원</CartTotalPrice>
+              <CartTotalPrice>{totalCost.toLocaleString()}원</CartTotalPrice>
             </CartTotalWrap>
             <CartItemBtnWrap>
               <CartItemAddToProuductBtn
