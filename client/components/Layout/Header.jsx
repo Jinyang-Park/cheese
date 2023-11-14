@@ -45,6 +45,10 @@ export default function Header() {
       .catch((err) => console.log(err));
   };
 
+  const CheckToLogin = () => {
+    alert('로그인 후 서비스를 이용해 주세요');
+    navigate('/Login');
+  };
   // 서버 응답 코드 추가하지 않은 코드문
   // useEffect(() => {
   //   axios
@@ -139,10 +143,18 @@ export default function Header() {
                 <S.LoginImg src={Leaf} />
                 <S.MypageliTxt>MY PAGE</S.MypageliTxt>
               </S.Loginli>
-              <S.Loginli>
-                <S.LoginImg src={Door} />
-                <S.CartliTxt>CART</S.CartliTxt>
-              </S.Loginli>
+              {/*비 로그인 시 카트 클릭시 로그인 이동 */}
+              {!checkAuth ? (
+                <S.Loginli onClick={CheckToLogin}>
+                  <S.LoginImg src={Door} />
+                  <S.CartliTxt>CART</S.CartliTxt>
+                </S.Loginli>
+              ) : (
+                <S.Loginli onClick={() => navigate(`/Cart`)}>
+                  <S.LoginImg src={Door} />
+                  <S.CartliTxt>CART</S.CartliTxt>
+                </S.Loginli>
+              )}
             </S.HeaderLoginSection>
           </S.Nav>
         </CommonStyles>
