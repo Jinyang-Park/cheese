@@ -165,6 +165,23 @@ app.post('/logout', (req, res) => {
   return res.status(200).send({ message: 'success' });
 });
 
+// 장바구니
+app.post('/cart', (req, res) => {
+  const cart = req.body;
+
+  // cart 데이터를 MySQL에 저장하는 쿼리를 작성
+  const query = 'INSERT INTO cart (cart_data) VALUES (?)';
+
+  db.query(query, [JSON.stringify(cart)], (error, result) => {
+    if (error) {
+      console.log(error);
+      res.status(500).send({ message: 'Server Error' });
+    } else {
+      res.status(200).send({ message: 'Cart saved successfully' });
+    }
+  });
+});
+
 // 크롤링 JSON
 // Location 으로 InfromationJSON 전달
 app.get('/api', (req, res) => {

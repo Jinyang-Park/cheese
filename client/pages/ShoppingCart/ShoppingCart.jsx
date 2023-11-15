@@ -5,6 +5,7 @@ import ReservationSetDT from '../../components/Cart/ReservationSetDT';
 import { useSelector } from 'react-redux';
 import ReservationItem from '../../components/Cart/ReservationItem';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function ShoppingCart() {
   // initialState의 cart 배열에 넣어준다.
@@ -21,6 +22,15 @@ function ShoppingCart() {
 
   // navaigate
   const navigate = useNavigate();
+
+  axios.defaults.withCredentials = true;
+
+  const handlePaymentClick = () => {
+    axios
+      .post('http://localhost:5000/cart', cart)
+      .then((response) => console.log(response.data))
+      .catch((error) => console.error(error));
+  };
   return (
     <>
       <CommonStyles>
@@ -51,7 +61,9 @@ function ShoppingCart() {
               >
                 예약상품추가
               </CartItemAddToProuductBtn>
-              <CartItemOrderBtn>결제하기</CartItemOrderBtn>
+              <CartItemOrderBtn onClick={handlePaymentClick}>
+                결제하기
+              </CartItemOrderBtn>
             </CartItemBtnWrap>
           </ReservationDateWrap>
         </ReservationInner>
