@@ -28,7 +28,14 @@ function ShoppingCart() {
   const handlePaymentClick = () => {
     axios
       .post('http://localhost:5000/cart', cart)
-      .then((response) => console.log(response.data))
+      .then((response) => {
+        if (response.status === 200) {
+          window.confirm('결제를 하시겠습니까?');
+        }
+        console.log(response.data);
+        // 마이페이지로 이동 시키키 추가하기
+        navigate(`/`);
+      })
       .catch((error) => console.error(error));
   };
   return (
