@@ -2,10 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import CommonStyles from '../../utils/CommonStyles';
 import ReservationSetDT from '../../components/Cart/ReservationSetDT';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ReservationItem from '../../components/Cart/ReservationItem';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { cartReset } from '../../redux/modules/ReservationsCakeDetail';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { dtReset } from '../../redux/modules/ReservationsDT';
 
 function ShoppingCart() {
   const cart = useSelector((state) => state.ReservationsCakeDetail.cart);
@@ -24,6 +27,7 @@ function ShoppingCart() {
 
   // navaigate
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   axios.defaults.withCredentials = true;
 
@@ -38,6 +42,8 @@ function ShoppingCart() {
         // 마이페이지로 이동 시키키 추가하기
         console.log(response.data);
         navigate(`/Mypage`);
+        dispatch(cartReset());
+        dispatch(dtReset());
       })
       .catch((error) => console.error(error));
   };
@@ -56,9 +62,16 @@ function ShoppingCart() {
           </ReservationTabUl>
           <ReservationDateWrap>
             <ReservationSetDT />
-            {cart.map((item) => {
-              return <ReservationItem key={item.id} item={item} />;
-            })}
+            {cart.length === 0 ? (
+              <CartemptyWrap>
+                <CartemptyIcon />
+                <Cartemptytxt>장바구니에 담긴 상품이 없습니다.</Cartemptytxt>
+              </CartemptyWrap>
+            ) : (
+              cart.map((item) => {
+                return <ReservationItem key={item.id} item={item} />;
+              })
+            )}
             <CartTotalWrap>
               <CartTotalPriceTitle>합계금액</CartTotalPriceTitle>
               <CartTotalPrice>{totalCost.toLocaleString()}원</CartTotalPrice>
@@ -170,4 +183,22 @@ export const CartTotalPrice = styled.h3`
   font-size: 18px;
   font-weight: 600;
   display: inline-block;
+`;
+export const CartemptyWrap = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 40px;
+`;
+export const Cartemptytxt = styled.h3`
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 400;
+  display: inline-block;
+`;
+export const CartemptyIcon = styled(AiOutlineShoppingCart)`
+  width: 70px;
+  height: 70px;
+  color: #8b8b8b;
 `;

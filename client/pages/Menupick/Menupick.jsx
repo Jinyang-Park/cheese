@@ -17,6 +17,7 @@ function Menupick() {
 
   // navaigate
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // 카테고리 변경하는 함수
   const handleCategoryChange = (category) => {
@@ -34,7 +35,6 @@ function Menupick() {
     setSearchKeyword(searchKeyword);
   };
 
-  const dispatch = useDispatch();
   return (
     <>
       <CommonStyles>

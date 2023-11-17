@@ -17,8 +17,8 @@ const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 const INCREASE_TO_CART = 'INCREASE_TO_CART';
 const DECREASE_TO_CART = 'DECREASE_TO_CART';
 const SET_CART_ITEM_QUANTITY = 'SET_CART_ITEM_QUANTITY';
-// 케익 한개의 가격 저장
-// const SET_UNIT_PRICE = 'SET_UNIT_PRICE';
+// 결제 후 카트 reset
+const CART_RESRT = 'CART_RESRT';
 
 // 2. action creators
 export const setLayer = (layer) => {
@@ -109,12 +109,12 @@ export const setCartItemQuantity = (cakeId, quantity, newprice) => {
   };
 };
 
-// export const setUnitPrice = (price) => {
-//   return {
-//     type: SET_UNIT_PRICE,
-//     payload: price,
-//   };
-// };
+// 결제 후 카트 리셋
+export const cartReset = () => {
+  return {
+    type: CART_RESRT,
+  };
+};
 
 // 3.initial state
 const initialState = {
@@ -207,25 +207,17 @@ const ReservationsCakeDetail = (state = initialState, action) => {
         ),
       };
 
-    // // 수량 가격
-    // case SET_UNIT_PRICE:
-    //   return {
-    //     ...state,
-    //     cart: state.cart.map((cake) =>
-    //       cake.id === action.payload.Id
-    //         ? {
-    //             ...cake,
-    //             quantity: action.payload.quantity,
-    //             total: action.payload.price,
-    //           }
-    //         : cake
-    //     ),
-    //   };
     // 리셋
     case RESET:
       return {
         ...initialState,
         cart: state.cart, // cart 상태는 유지합니다.
+      };
+
+    // 결제 후 카트 리셋
+    case CART_RESRT:
+      return {
+        ...initialState,
       };
 
     // 상품 삭제
