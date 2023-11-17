@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import { AiOutlineDown } from 'react-icons/ai';
 import { AiOutlineUp } from 'react-icons/ai';
 import { CakeLayer } from '../../common/CakeList';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // import { updateCart } from '../../redux/modules/ReservationsLayer';
-import { setLayer } from '../../redux/modules/ReservationsCakeDetail';
+import { setLayer } from './../../redux/modules/ReservationsCakeDetail';
+
 function SelectedLayers() {
   // 토글 메뉴
   const [isOpen, setIsOpen] = useState(false);

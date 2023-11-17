@@ -8,10 +8,12 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function ShoppingCart() {
-  // initialState의 cart 배열에 넣어준다.
-  // 배열로 들어가서 map을 통과할 수 있다.
-  const { cart } = useSelector((state) => state.ReservationsCakeDetail);
-  console.log(cart);
+  const cart = useSelector((state) => state.ReservationsCakeDetail.cart);
+  // 선택한 날짜와 시간도 mysql에 보내주기 위한 로작 추가
+  const cartDT = useSelector((state) => state.ReservationsDT);
+
+  console.log('카트', cart);
+  console.log('시간날짜', cartDT);
 
   // 1. reduce가 처음 실행될 때, sum은 0(초기값)이고, item은 cart 배열의 첫번째 요소입니다.
   // 2. 리듀서 함수가 실행되면서 sum + item.total의 값이 계산되고, 이 값이 다음 누산기 값으로 업데이트됩니다.
@@ -27,14 +29,15 @@ function ShoppingCart() {
 
   const handlePaymentClick = () => {
     axios
-      .post('http://localhost:5000/cart', cart)
+      // 객체에 cart, cartDT 정보 보내주기
+      .post('http://localhost:5000/cart', { cart, cartDT })
       .then((response) => {
         if (response.status === 200) {
           window.confirm('결제를 하시겠습니까?');
         }
-        console.log(response.data);
         // 마이페이지로 이동 시키키 추가하기
-        navigate(`/`);
+        console.log(response.data);
+        navigate(`/Mypage`);
       })
       .catch((error) => console.error(error));
   };

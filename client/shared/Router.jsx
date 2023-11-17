@@ -11,6 +11,7 @@ import ReservationDate from './../pages/ReservationDate/ReservationDate';
 import Menupick from './../pages/Menupick/Menupick';
 import Menudetail from '../pages/Menudetail/Menudetail';
 import ShoppingCart from '../pages/ShoppingCart/ShoppingCart';
+import Mypage from '../pages/Mypage/Mypage';
 
 const Router = () => {
   return (
@@ -26,6 +27,7 @@ const Router = () => {
           element={<Menudetail />}
         ></Route>
         <Route path='/Cart' element={<ShoppingCart />}></Route>
+        <Route path='/Mypage' element={<Mypage />}></Route>
         <Route path='/Menu' element={<Menu />}></Route>
         <Route path='/Location' element={<Location />}></Route>
         <Route path='/Login' element={<Login />}></Route>

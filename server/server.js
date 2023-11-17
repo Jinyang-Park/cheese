@@ -177,6 +177,7 @@ app.post('/cart', (req, res) => {
       console.log(error);
       res.status(500).send({ message: 'Server Error' });
     } else {
+      console.log('cart_date', cart);
       res.status(200).send({ message: 'Cart saved successfully' });
     }
   });

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import moment from 'moment';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectCalendar } from '../../redux/modules/ReservationsDT';
 
 function ReservationCalendar() {
