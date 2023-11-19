@@ -106,6 +106,7 @@ export default function Header() {
             </S.HeaderPageSection>
 
             <S.HeaderLoginSection>
+              {/*비 로그인 시 카트 클릭시 로그인 이동 */}
               {checkAuth ? (
                 <S.Loginli onClick={handleDelete}>
                   <S.LoginImg src={Flower} />
@@ -119,42 +120,35 @@ export default function Header() {
                   </Link>
                 </S.Loginli>
               )}
-              {/* 로그인 시 */}
-              {/* {checkAuth && (
-                <S.Loginli>
-                  <S.LoginImg src={Flower} />
-                  <S.LoginliTxt onClick={handleDelete(true)}>
-                    LOGOUT
-                  </S.LoginliTxt>
-                </S.Loginli>
-              )} */}
-
-              {/* 비 로그인 시 */}
-              {/* {!checkAuth && (
-                <S.Loginli>
-                  <Link to={'/Login'}>
-                    <S.LoginImg src={Flower} />
-                    <S.LoginliTxt>LOGIN</S.LoginliTxt>
-                  </Link>
-                </S.Loginli>
-              )} */}
-
-              <S.Loginli>
-                <S.LoginImg src={Leaf} />
-                <S.MypageliTxt>MY PAGE</S.MypageliTxt>
-              </S.Loginli>
-              {/*비 로그인 시 카트 클릭시 로그인 이동 */}
               {!checkAuth ? (
-                <S.Loginli onClick={CheckToLogin}>
-                  <S.LoginImg src={Door} />
-                  <S.CartliTxt>CART</S.CartliTxt>
-                </S.Loginli>
+                <>
+                  <S.Loginli>
+                    <S.LoginImg src={Leaf} onClick={CheckToLogin} />
+                    <S.MypageliTxt>MY PAGE</S.MypageliTxt>
+                  </S.Loginli>
+                  <S.Loginli onClick={CheckToLogin}>
+                    <S.LoginImg src={Door} />
+                    <S.CartliTxt>CART</S.CartliTxt>
+                  </S.Loginli>
+                </>
               ) : (
-                <S.Loginli onClick={() => navigate(`/Cart`)}>
-                  <S.LoginImg src={Door} />
-                  <S.CartliTxt>CART</S.CartliTxt>
-                </S.Loginli>
+                <>
+                  <S.Loginli>
+                    <S.LoginImg
+                      src={Leaf}
+                      onClick={() => navigate(`/Mypage`)}
+                    />
+                    <S.MypageliTxt>MY PAGE</S.MypageliTxt>
+                  </S.Loginli>
+                  <S.Loginli onClick={() => navigate(`/Cart`)}>
+                    <S.LoginImg src={Door} />
+                    <S.CartliTxt>CART</S.CartliTxt>
+                  </S.Loginli>
+                </>
               )}
+              {/* {!checkAuth ? (
+              ) : (
+              )} */}
             </S.HeaderLoginSection>
           </S.Nav>
         </CommonStyles>

@@ -20,8 +20,6 @@ function ReservationTimetable() {
 
   //time을 인자로 전달하는 이유는 클릭된 버튼의 시간 정보를 추적
   const handleClick = (time) => {
-    // console.log('시간', time);
-    // console.log('시간의시간', time.time);
     dispatch(selectTime(time));
     setSelectedTime(time);
   };
@@ -34,9 +32,6 @@ function ReservationTimetable() {
   }, []);
 
   const FindPaymentDateTime = (formattedDate, time) => {
-    console.log('포맷데이트', formattedDate);
-    console.log('타임의타임', time);
-    console.log('타임의타임2', time.time);
     return (
       PaidTime &&
       PaidTime.some(
