@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CommonStyles from './../../utils/CommonStyles';
 import styled from 'styled-components';
 import Butterfly from '../../public/assets/Butterfly.png';
 import Home from '../../public/assets/Home2.png';
-import checkLogin from './../../hooks/useCheckLogin';
 import useModal from '../../hooks/useModal';
 import Modal from './Modal';
+import { AuthContext } from './../../contexts/AuthContext';
 
 function Reservation() {
-  const checkLoggedIn = checkLogin();
+  const { checkAuth, setCheckAuth } = useContext(AuthContext);
   const navigate = useNavigate();
   const { isOpenModal, selectedTitle, clickModal, closeModal } = useModal();
 
@@ -44,7 +44,7 @@ function Reservation() {
               <ReservationImg src={Butterfly} />
 
               {/*비 로그인 시 버튼 클릭 후 로그인 이동*/}
-              {!checkLoggedIn.loggedIn ? (
+              {!checkAuth ? (
                 <ReWeddingBtn type='button' onClick={goToLogin}>
                   웨딩 케이크 상담 예약
                 </ReWeddingBtn>
@@ -72,7 +72,7 @@ function Reservation() {
               <ReservationImg2 src={Home} />
 
               {/*비 로그인 시 버튼 클릭 후 로그인 이동*/}
-              {!checkLoggedIn.loggedIn ? (
+              {!checkAuth ? (
                 <ReWeddingBtn type='button' onClick={goToLogin}>
                   케이크 예약
                 </ReWeddingBtn>

@@ -1,72 +1,64 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { AiOutlineMinusCircle } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  addToCart,
-  deleteToCart,
-} from '../../redux/modules/ReservationsQuantity';
+  setPrice,
+  setQuantity,
+} from '../../redux/modules/ReservationsCakeDetail';
 
 function QuantitySelection({ cake }) {
-  // 기본 수량 1로 지정
-  const [quantity, setQuantity] = useState(1);
-
-  //Menudetail에서 cake(클릭한 케익의 정보) props로 보내준다.
-  // cake을 받아와서 cake.price를 기본값으로 넣어준다.
-  const [total, setTotal] = useState(cake.price);
-
-  // 케익 숫자 변수 state
-  const [changedPrice, setChangedPrice] = useState(0);
-
   const dispatch = useDispatch();
 
-  // 여기서 product 정보를 Redux store에서 가져옵니다.
-  // 이 부분은 실제 store의 구조에 따라 달라질 수 있습니다.
-  const product = useSelector((state) => state.payload);
+  // 케익 디테일 상태를 가져오는 로직
+  const { layer, quantity, price } = useSelector(
+    (state) => state.ReservationsCakeDetail
+  );
 
-  // 케익 선택 Redux store 가져오는 로직
-  const layerState = useSelector((state) => state.ReservationsLayer);
-
+  // 케이크의 기본 가격 상태 설정
   useEffect(() => {
-    if (layerState.length > 0) {
-      setChangedPrice(layerState[layerState.length - 1].price);
-      // console.log(layerState[layerState.length - 1].price);
+    // 케이크 단이 선택하면 layer.price를 빼준다.
+    if (layer !== null) {
+      dispatch(setPrice(cake.price * quantity - layer.price * quantity));
+    } else {
+      // 1. 주석 처리된 코드는 input으로 가격을 변동할때 바로바로 변하지 않았다.
+      // 2. input으로 넣은 수량이 변경되면 기존 케이크의 가격과 곱해줘서 리덕스로 디스패치로 넘겨준다.
+      // dispatch(setPrice(cake.price));
+      dispatch(setPrice(cake.price * quantity));
     }
-  }, [layerState]);
+  }, [cake, layer, quantity]);
 
-  // + 버튼으로 수량 변경하는 함수
+  // + 버튼을 눌렀을 때
   const IncreseQuantity = () => {
     if (quantity >= 5) {
       alert(`5개 이상의 케이크 예약은 상담을 통해 진행합니다.`);
     } else {
-      const newQuantity = quantity + 1;
-      setQuantity(newQuantity);
-      // console.log('수량 확인 로그', newQuantity); // 항상 올바른(새로운) 값이 출력됩니다.
-
-      //최종 가격 로직
-      const newTotal = cake.price * newQuantity - changedPrice * newQuantity;
-      setTotal(newTotal);
-
-      // 케이크 단 선택 dispatch
-
-      dispatch(addToCart({ ...product, quantity: newQuantity }, newTotal));
-      console.log(quantity, newTotal);
+      // 수량을 증가시키고 가격을 업데이트 한다.
+      dispatch(setQuantity(quantity + 1));
+      // 케이크 단을 선택 시 단 가격에 따라 가격 변동
+      if (layer) {
+        dispatch(
+          setPrice(cake.price * (quantity + 1) - layer.price * (quantity + 1))
+        );
+      } else {
+        dispatch(setPrice(cake.price * (quantity + 1)));
+      }
     }
   };
 
-  // - 버튼으로 수량 변경하는 함수
+  // - 버튼을 눌렀을 때
   const DecreaseQuantity = () => {
     if (quantity > 1) {
-      const newQuantity = quantity - 1;
-      setQuantity(newQuantity);
-
-      // 최종 가격 로직
-      const newTotal = cake.price * newQuantity - changedPrice * newQuantity;
-      setTotal(newTotal);
-
-      dispatch(deleteToCart({ ...product, quantity: newQuantity }, newTotal));
-      console.log(quantity, newTotal);
+      // 수량을 감소시키고 가격을 업데이트 한다.
+      dispatch(setQuantity(quantity - 1));
+      if (layer) {
+        dispatch(
+          setPrice(cake.price * (quantity + 1) - layer.price * (quantity + 1))
+        );
+      } else {
+        dispatch(setPrice(cake.price * (quantity - 1)));
+      }
     }
   };
 
@@ -76,33 +68,24 @@ function QuantitySelection({ cake }) {
 
     if (isNaN(newValue)) {
       newValue = '';
-      setQuantity(newValue);
     } else if (newValue === 0) {
       return false;
     }
 
     // 수량이 5개 이상일때 얼럿창
-    if (newValue >= 5) {
+    if (newValue > 5) {
       alert(`5개 이상의 케이크 예약은 상담을 통해 진행합니다.`);
+      return;
     }
-    setQuantity(newValue);
+    dispatch(setQuantity(newValue));
 
-    // input에 수량을 적으면 가격에 변동이 없었다
-    // 위에처럼 아래 로직을 추가하였더니 정상 작동되었다.
-    const newTotal = cake.price * newValue - changedPrice * newValue;
-    setTotal(newTotal);
-
-    dispatch(addToCart({ ...product, quantity: newValue }, newTotal));
-    console.log(quantity, newTotal);
+    //   // input에 수량을 적으면 가격에 변동이 있다
+    //   if (layer) {
+    //     dispatch(setPrice(cake.price * newValue - layer.price * newValue));
+    //   } else {
+    //     dispatch(setPrice(cake.price * newValue));
+    //   }
   };
-
-  //  단 선택 시 가격 변동 로직
-  useEffect(() => {
-    // 'changedPrice'가 변경될 때마다 'total' 값을 다시 계산합니다.
-    const newTotal = cake.price * quantity - changedPrice * quantity;
-    setTotal(newTotal);
-    // changedPrice, quantity 즉 가격 변동과 수량이 변경될때 마다 useEffect안의 코드가 작동한다.
-  }, [changedPrice, quantity]);
 
   return (
     <>
@@ -117,7 +100,7 @@ function QuantitySelection({ cake }) {
             onChange={handleChangeQuantityInput}
           />
           <TotallPlusBtnIcon onClick={IncreseQuantity} />
-          <TotallQuantity>{total.toLocaleString()}원</TotallQuantity>
+          <TotallQuantity>{price.toLocaleString()}원</TotallQuantity>
         </TotallQuantityDiv>
       </TotallQuantitySelectionWrap>
     </>
@@ -140,6 +123,7 @@ export const TotallPlusBtnIcon = styled(AiOutlinePlusCircle)`
   font-size: 0;
   display: inline-block;
   transform: translate(0, 4px);
+  cursor: pointer;
 `;
 export const TotallMinusIcon = styled(AiOutlineMinusCircle)`
   border-radius: 100px;
@@ -149,6 +133,7 @@ export const TotallMinusIcon = styled(AiOutlineMinusCircle)`
   font-size: 0;
   display: inline-block;
   transform: translate(0, 4px);
+  cursor: pointer;
 
   // props로 style 주는 방법
   opacity: ${(props) => (props.disabled ? '0.3;' : '')};

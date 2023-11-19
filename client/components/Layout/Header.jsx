@@ -38,12 +38,17 @@ export default function Header() {
         if (res.status === 200) {
           setCheckAuth(false);
           alert('로그아웃 되었습니다. 다시 만나요!');
+          localStorage.clear();
           navigate('/');
         }
       })
       .catch((err) => console.log(err));
   };
 
+  const CheckToLogin = () => {
+    alert('로그인 후 서비스를 이용해 주세요');
+    navigate('/Login');
+  };
   // 서버 응답 코드 추가하지 않은 코드문
   // useEffect(() => {
   //   axios
@@ -101,6 +106,7 @@ export default function Header() {
             </S.HeaderPageSection>
 
             <S.HeaderLoginSection>
+              {/*비 로그인 시 카트 클릭시 로그인 이동 */}
               {checkAuth ? (
                 <S.Loginli onClick={handleDelete}>
                   <S.LoginImg src={Flower} />
@@ -114,34 +120,35 @@ export default function Header() {
                   </Link>
                 </S.Loginli>
               )}
-              {/* 로그인 시 */}
-              {/* {checkAuth && (
-                <S.Loginli>
-                  <S.LoginImg src={Flower} />
-                  <S.LoginliTxt onClick={handleDelete(true)}>
-                    LOGOUT
-                  </S.LoginliTxt>
-                </S.Loginli>
+              {!checkAuth ? (
+                <>
+                  <S.Loginli>
+                    <S.LoginImg src={Leaf} onClick={CheckToLogin} />
+                    <S.MypageliTxt>MY PAGE</S.MypageliTxt>
+                  </S.Loginli>
+                  <S.Loginli onClick={CheckToLogin}>
+                    <S.LoginImg src={Door} />
+                    <S.CartliTxt>CART</S.CartliTxt>
+                  </S.Loginli>
+                </>
+              ) : (
+                <>
+                  <S.Loginli>
+                    <S.LoginImg
+                      src={Leaf}
+                      onClick={() => navigate(`/Mypage`)}
+                    />
+                    <S.MypageliTxt>MY PAGE</S.MypageliTxt>
+                  </S.Loginli>
+                  <S.Loginli onClick={() => navigate(`/Cart`)}>
+                    <S.LoginImg src={Door} />
+                    <S.CartliTxt>CART</S.CartliTxt>
+                  </S.Loginli>
+                </>
+              )}
+              {/* {!checkAuth ? (
+              ) : (
               )} */}
-
-              {/* 비 로그인 시 */}
-              {/* {!checkAuth && (
-                <S.Loginli>
-                  <Link to={'/Login'}>
-                    <S.LoginImg src={Flower} />
-                    <S.LoginliTxt>LOGIN</S.LoginliTxt>
-                  </Link>
-                </S.Loginli>
-              )} */}
-
-              <S.Loginli>
-                <S.LoginImg src={Leaf} />
-                <S.MypageliTxt>MY PAGE</S.MypageliTxt>
-              </S.Loginli>
-              <S.Loginli>
-                <S.LoginImg src={Door} />
-                <S.CartliTxt>CART</S.CartliTxt>
-              </S.Loginli>
             </S.HeaderLoginSection>
           </S.Nav>
         </CommonStyles>

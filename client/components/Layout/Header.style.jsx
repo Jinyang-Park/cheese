@@ -82,3 +82,4 @@ export const CartliTxt = styled.a`
   display: inline-block; */
   /* line-height: 30px; */
 `;
+export const CartWrap = styled.div``;

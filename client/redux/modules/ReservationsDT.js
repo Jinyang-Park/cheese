@@ -5,8 +5,11 @@ const SELECT_CALENDAR = 'SELECT_CALENDAR';
 const DELETE_CALENDAR = 'DELETE_CALENDAR';
 // 시간
 const SELECT_TIME = 'SELECT_TIME';
-// const UPLOAD_TIME = 'UPLOAD_TIME';
+
 const DELETE_TIME = 'DELETE_TIME';
+
+// 결제 후 달력 날짜 리셋
+const DT_RESET = 'DT_RESET';
 
 // 달력
 // 2. action creators(1)
@@ -18,14 +21,6 @@ export const selectCalendar = (formattedDate) => {
     payload: formattedDate,
   };
 };
-
-// 2. action creators(2)
-// export const upLoadCalendar = (payload) => {
-//   return {
-//     type: UPLOAD_CALENDAR,
-//     payload,
-//   };
-// };
 
 // 3. action creators(3)
 export const deleteCalendar = (formattedDate) => {
@@ -43,13 +38,6 @@ export const selectTime = (time) => {
   };
 };
 
-// export const upLoadTime = (payload) => {
-//   return {
-//     type: UPLOAD_TIME,
-//     payload,
-//   };
-// };
-
 export const deleteTime = (time) => {
   return {
     type: DELETE_TIME,
@@ -57,6 +45,11 @@ export const deleteTime = (time) => {
   };
 };
 
+export const dtReset = () => {
+  return {
+    type: DT_RESET,
+  };
+};
 // 3. initial State => reuder를 구성할 때
 const inintialState = {
   formattedDate: null,
@@ -84,6 +77,11 @@ const ReservationsDT = (state = inintialState, action) => {
       // 시간 데이터 삭제 로직
       // const updatedTime = state.item !== action.payload;
       return { ...state, time: null };
+
+    case 'DT_RESET':
+      return {
+        ...inintialState,
+      };
 
     default:
       return state;
