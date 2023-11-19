@@ -9,9 +9,6 @@ import {
   increaseQuantity,
   removeFromCart,
   setCartItemQuantity,
-  setPrice,
-  setQuantity,
-  setUnitPrice,
 } from '../../redux/modules/ReservationsCakeDetail';
 function ReservationItem({ item }) {
   console.log('아이템', item);

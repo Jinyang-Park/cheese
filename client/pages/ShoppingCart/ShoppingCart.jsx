@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import CommonStyles from '../../utils/CommonStyles';
 import ReservationSetDT from '../../components/Cart/ReservationSetDT';
@@ -9,14 +9,15 @@ import axios from 'axios';
 import { cartReset } from '../../redux/modules/ReservationsCakeDetail';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { dtReset } from '../../redux/modules/ReservationsDT';
+import { AuthContext } from '../../contexts/AuthContext';
 
 function ShoppingCart() {
+  // 결제완료 후 시간 버튼 비활성화 context api
+  const { PaidTime, setPaidTime } = useContext(AuthContext);
+
   const cart = useSelector((state) => state.ReservationsCakeDetail.cart);
   // 선택한 날짜와 시간도 mysql에 보내주기 위한 로작 추가
   const cartDT = useSelector((state) => state.ReservationsDT);
-
-  console.log('카트', cart);
-  console.log('시간날짜', cartDT);
 
   // 1. reduce가 처음 실행될 때, sum은 0(초기값)이고, item은 cart 배열의 첫번째 요소입니다.
   // 2. 리듀서 함수가 실행되면서 sum + item.total의 값이 계산되고, 이 값이 다음 누산기 값으로 업데이트됩니다.
@@ -39,14 +40,19 @@ function ShoppingCart() {
         if (response.status === 200) {
           window.confirm('결제를 하시겠습니까?');
         }
-        // 마이페이지로 이동 시키키 추가하기
         console.log(response.data);
         navigate(`/Mypage`);
         dispatch(cartReset());
         dispatch(dtReset());
+        // 서버에 결제한 날짜와 시간 정보를 저장
+        // 나는 처음에 위에 이미 정보를 저장하기 때문에 굳이 따로 저장할 필요가 없다고 생각했다.
+        // 페이지를 새로고침하거나 다른 사용자가 사이트에 접속했을 때 결제 완료된
+        // 시간과 날짜를 유지하기 위해 저장하는 방법이다.
+        axios.post('http://localhost:5000/savePaidTime', { dateTime: cartDT });
       })
       .catch((error) => console.error(error));
   };
+
   return (
     <>
       <CommonStyles>
