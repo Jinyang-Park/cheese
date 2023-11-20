@@ -1,43 +1,42 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import useAuth from './../../hooks/useAuth';
+import { AuthContext } from '../../contexts/AuthContext';
 
 function NickName() {
   const auth = useAuth();
+
+  // 유저의 id를 전역으로 쓰기 위한 context api
+  const { userId } = useContext(AuthContext);
+  console.log(userId);
 
   const [nickName, setNickName] = useState(''); // 초기 상태를 빈 문자열로 설정
   const [isEditing, setIsEditing] = useState(false); // 변경 버튼 눌르는 상태 체크
 
   const hanldeNickNameClick = (event) => {
-    console.log('1', isEditing);
     event.preventDefault();
-    console.log('2', isEditing);
+
     if (isEditing) {
-      console.log('3', isEditing);
+      // 닉네임 유효성 검사 추가
       if (!auth.checkNickNameValidation()) return;
-      console.log('4', isEditing);
       setIsEditing(false);
-      console.log('5', isEditing);
+
       // 서버 불러오기
       axios
         .post('http://localhost:5000/changeUsername', {
           NewUsername: auth.newUserNameInput,
-          Email: auth.email,
+          userId,
         })
         .then((response) => {
           if (response.status === 200) {
-            console.log(response);
             setNickName(auth.newUserNameInput);
             alert('닉네임이 변경되었습니다.');
           }
         })
         .catch((error) => console.log(error));
-      console.log('6', isEditing);
     } else {
-      console.log('7', isEditing);
       setIsEditing(true);
-      console.log('8', isEditing);
     }
   };
 

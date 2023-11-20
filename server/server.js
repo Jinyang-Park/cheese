@@ -81,6 +81,7 @@ const verifyUser = (req, res, next) => {
         // name 키를 가지고 있고 원래 변수 name의 값을 포함하는것이다.
         // const token = jwt.sign({ name }, 'jwt-secret-key', { expiresIn: '1d',});
         req.name = decoded.name;
+        req.userid = decoded.userid;
         // console.log(req.name); // 로그인시 username이 찍힌다.
         next();
       }
@@ -90,7 +91,9 @@ const verifyUser = (req, res, next) => {
 
 // 메인화면
 app.get('/header', verifyUser, (req, res) => {
-  return res.status(200).send({ message: 'success', name: req.name });
+  return res
+    .status(200)
+    .send({ message: 'success', name: req.name, userid: req.userid });
 });
 
 // MYSQL 회원가입 및 이메일 중복 검사
@@ -146,13 +149,13 @@ app.post('/login', (req, res) => {
       }
       if (results.length > 0) {
         // 성공했을 경우
-        const userId = results[0].id;
+        const userid = results[0].id;
         const name = results[0].username;
-        const token = jwt.sign({ name, userId }, 'jwt-secret-key', {
+        const token = jwt.sign({ name, userid }, 'jwt-secret-key', {
           expiresIn: '1d',
         });
         res.cookie('token', token);
-        res.status(200).send({ message: 'success' });
+        res.status(200).send({ message: 'success', userid });
       } else {
         // 입력한 이메일 주소가 일치하지 않을 경우
         res.status(401).send({ message: 'user-not-found' });
@@ -227,12 +230,12 @@ app.get('/getPaidTime', (req, res) => {
 
 // 닉네임 변경
 app.post('/changeUsername', (req, res) => {
-  const sentEmail = req.body.Email;
+  const userId = req.body.userId;
   const newUsername = req.body.NewUsername;
 
   db.query(
-    'UPDATE users SET username = ? WHERE email =?',
-    [newUsername, sentEmail],
+    'UPDATE users SET username = ? WHERE id =?',
+    [newUsername, userId],
     (error, results) => {
       if (error) {
         console.log(error);
