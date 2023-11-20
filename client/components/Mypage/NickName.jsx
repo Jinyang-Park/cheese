@@ -1,8 +1,45 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import useAuth from './../../hooks/useAuth';
+
 function NickName() {
+  const auth = useAuth();
+
   const [nickName, setNickName] = useState(''); // 초기 상태를 빈 문자열로 설정
+  const [isEditing, setIsEditing] = useState(false); // 변경 버튼 눌르는 상태 체크
+
+  const hanldeNickNameClick = (event) => {
+    console.log('1', isEditing);
+    event.preventDefault();
+    console.log('2', isEditing);
+    if (isEditing) {
+      console.log('3', isEditing);
+      if (!auth.checkNickNameValidation()) return;
+      console.log('4', isEditing);
+      setIsEditing(false);
+      console.log('5', isEditing);
+      // 서버 불러오기
+      axios
+        .post('http://localhost:5000/changeUsername', {
+          NewUsername: auth.newUserNameInput,
+          Email: auth.email,
+        })
+        .then((response) => {
+          if (response.status === 200) {
+            console.log(response);
+            setNickName(auth.newUserNameInput);
+            alert('닉네임이 변경되었습니다.');
+          }
+        })
+        .catch((error) => console.log(error));
+      console.log('6', isEditing);
+    } else {
+      console.log('7', isEditing);
+      setIsEditing(true);
+      console.log('8', isEditing);
+    }
+  };
 
   axios.defaults.withCredentials = true;
   // 서버 응답 추가 코드문
@@ -24,8 +61,19 @@ function NickName() {
     <ReservationBox>
       <ReservationDate>
         <ReservationTitle>닉네임</ReservationTitle>
-        <ReservationNickName>{nickName}님</ReservationNickName>
-        <ChangeDTBtn>변경</ChangeDTBtn>
+        {isEditing ? (
+          <ChangeNickNameInput
+            value={auth.newUserNameInput}
+            onChange={auth.changeNickName}
+            ref={auth.nickNameRef}
+          />
+        ) : (
+          <ReservationNickName>{nickName}님</ReservationNickName>
+        )}
+
+        <ChangeDTBtn onClick={hanldeNickNameClick}>
+          {isEditing ? '확인' : '변경'}
+        </ChangeDTBtn>
       </ReservationDate>
     </ReservationBox>
   );
@@ -66,3 +114,4 @@ export const ChangeDTBtn = styled.button`
   padding: 5px 0px;
   border-radius: 50px;
 `;
+export const ChangeNickNameInput = styled.input``;

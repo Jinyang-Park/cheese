@@ -12,6 +12,7 @@ const mysql = require('mysql');
 // 로그인 쿠키
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
+const { ifError } = require('assert');
 
 // JSON 파일
 const InformationJSON = fs.readFileSync('./CheeseInformation.json');
@@ -145,8 +146,9 @@ app.post('/login', (req, res) => {
       }
       if (results.length > 0) {
         // 성공했을 경우
+        const userId = results[0].id;
         const name = results[0].username;
-        const token = jwt.sign({ name }, 'jwt-secret-key', {
+        const token = jwt.sign({ name, userId }, 'jwt-secret-key', {
           expiresIn: '1d',
         });
         res.cookie('token', token);
@@ -221,6 +223,26 @@ app.get('/getPaidTime', (req, res) => {
       res.status(200).send({ dateTime: parsedResults });
     }
   });
+});
+
+// 닉네임 변경
+app.post('/changeUsername', (req, res) => {
+  const sentEmail = req.body.Email;
+  const newUsername = req.body.NewUsername;
+
+  db.query(
+    'UPDATE users SET username = ? WHERE email =?',
+    [newUsername, sentEmail],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        res.status(500).send({ message: 'Server Error' });
+      } else {
+        console.log('NewUsername changed successful');
+        res.status(200).send({ message: 'username-updated' });
+      }
+    }
+  );
 });
 
 // 크롤링 JSON
