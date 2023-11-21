@@ -29,7 +29,7 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: 'http://localhost:3000',
-    methods: ['GET', 'POST'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
     //서버간의 통신에서 쿠키를 사용하기 때문 true로 설정
     credentials: true,
   })
@@ -184,6 +184,45 @@ app.post('/cart', (req, res) => {
     } else {
       console.log('cart_date', cart);
       res.status(200).send({ message: 'Cart saved successfully' });
+    }
+  });
+});
+
+// 장바구니 정보 가져오기
+app.get('/getPaidCart', (req, res) => {
+  const query = 'SELECT * FROM cart';
+
+  db.query(query, (error, result) => {
+    if (error) {
+      console.log(error);
+      res.status(500).send({ message: 'Server Error' });
+    } else {
+      const parseCartResults = result.map((result) => {
+        return {
+          ...result,
+          cart_data: JSON.parse(result.cart_data),
+        };
+      });
+      // 결과를 클라이언트에게 반환
+      res.status(200).send({ cartdata: parseCartResults });
+    }
+  });
+});
+
+// 결제 취소
+app.delete('/delete/:id', (req, res) => {
+  const itemId = parseInt(req.params.id);
+
+  const query = 'DELETE FROM cart WHERE id = ?';
+  console.log(req.params.id);
+  db.query(query, [itemId], (error, result) => {
+    if (error) {
+      console.log(error);
+      res
+        .status(500)
+        .send({ message: 'Server Error', error: error.toString() });
+    } else {
+      res.status(200).send({ message: 'Successfully deleted' });
     }
   });
 });
