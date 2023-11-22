@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import NickName from '../../components/Mypage/NickName';
 import axios from 'axios';
 import OrderListGroup from '../../components/Mypage/OrderListGroup';
-
+import { AiOutlineShoppingCart } from 'react-icons/ai';
 function Mypage() {
   const [cartInfor, setCartInfor] = useState(null);
   console.log('cartInfor', cartInfor);
@@ -27,35 +27,6 @@ function Mypage() {
     fetchCartData();
   }, []);
 
-  // const handleOrederCancelClick = async (itemId) => {
-  //   const isConfirmed = window.confirm('주문을 취소하시겠습니까?');
-  //   if (!isConfirmed) {
-  //     return; // 사용자가 '취소'를 누르면 여기서 함수를 종료합니다.
-  //   }
-  //   try {
-  //     const response = await axios.delete(
-  //       `http://localhost:5000/delete/${itemId}`
-  //     );
-  //     if (response.status === 200) {
-  //       // 클릭한 상품이 삭제되면 fetchCartData 함수를 불러 새로 페이지를 생성한다
-  //       fetchCartData();
-
-  //       // 결제 날짜와 시간 삭제 api 호출
-  //       axios
-  //         .delete(`http://localhost:5000/deleteDateTime/${itemId}`)
-  //         .then((response) => {
-  //           if (response.status !== 200) {
-  //             console.log('Failed to delete the date and time');
-  //           }
-  //         })
-  //         .catch((error) => {
-  //           console.log('Failed to delete the date and time', error);
-  //         });
-  //     }
-  //   } catch (error) {
-  //     console.log('Failed to cancel the order', error);
-  //   }
-  // };
   return (
     <>
       <CommonStyles>
@@ -72,14 +43,23 @@ function Mypage() {
           <ReservationDateWrap>
             {/*닉네임 변경 컴포넌트 */}
             <NickName />
-            {cartInfor &&
+            {/*&& 그리고라는 논리 연산자이다. 이 연산자는 두 가지 조건이 모두 참일때 참을 반환한다.
+            cartInfor가 null이 아니고, 그리고 cartInfor의 길이가 0일 때"를 의미 */}
+            {cartInfor && cartInfor.length === 0 ? (
+              <CartemptyWrap>
+                <CartemptyIcon />
+                <Cartemptytxt>주문하신 상품이 없습니다.</Cartemptytxt>
+              </CartemptyWrap>
+            ) : (
+              cartInfor &&
               cartInfor.map((items) => (
                 <OrderListGroup
                   key={items.id}
                   items={items}
                   fetchCartData={fetchCartData}
                 />
-              ))}
+              ))
+            )}
           </ReservationDateWrap>
         </ReservationInner>
       </CommonStyles>
@@ -131,4 +111,23 @@ export const CakedetailInner = styled.div`
 export const ReservationDateWrap = styled.div`
   border: 3px solid #f1e4ab;
   border-width: 0 3px 3px 3px;
+`;
+export const CartemptyWrap = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 40px;
+`;
+export const Cartemptytxt = styled.h3`
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 400;
+  display: inline-block;
+  margin-bottom: 30px;
+`;
+export const CartemptyIcon = styled(AiOutlineShoppingCart)`
+  width: 70px;
+  height: 70px;
+  color: #8b8b8b;
 `;

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import OrderList from './OrderList';
-import { AiOutlineShoppingCart } from 'react-icons/ai';
+
 import axios from 'axios';
 
 function OrderListGroup({ items, fetchCartData }) {
@@ -53,21 +53,21 @@ function OrderListGroup({ items, fetchCartData }) {
             cartInfor null아니고 length === 0일때 즉 길이가 0일때 주문하신 상품이 없다는거를 띄워줘라
           */}
 
-        {items.cart_data.cart && items.cart_data.cart === 0 ? (
+        {/* {items.cart_data.cart && items.cart_data.cart.length === 0 ? (
           <CartemptyWrap>
             <CartemptyIcon />
             <Cartemptytxt>주문하신 상품이 없습니다.</Cartemptytxt>
           </CartemptyWrap>
-        ) : (
-          items.cart_data.cart &&
+        ) : ( */}
+        {items.cart_data.cart &&
           items.cart_data.cart.map((cart) => {
             return (
               <>
                 <OrderList key={cart.id} cart={cart} />
               </>
             );
-          })
-        )}
+          })}
+
         <OrerListBtnWrap>
           <OrderListBtn onClick={() => handleOrederCancelClick(items.id)}>
             주문 취소하기
@@ -79,24 +79,24 @@ function OrderListGroup({ items, fetchCartData }) {
 }
 
 export default OrderListGroup;
-export const CartemptyWrap = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  padding-top: 40px;
-`;
-export const Cartemptytxt = styled.h3`
-  margin-top: 20px;
-  font-size: 16px;
-  font-weight: 400;
-  display: inline-block;
-`;
-export const CartemptyIcon = styled(AiOutlineShoppingCart)`
-  width: 70px;
-  height: 70px;
-  color: #8b8b8b;
-`;
+// export const CartemptyWrap = styled.div`
+//   display: flex;
+//   align-items: center;
+//   flex-direction: column;
+//   justify-content: center;
+//   padding-top: 40px;
+// `;
+// export const Cartemptytxt = styled.h3`
+//   margin-top: 20px;
+//   font-size: 16px;
+//   font-weight: 400;
+//   display: inline-block;
+// `;
+// export const CartemptyIcon = styled(AiOutlineShoppingCart)`
+//   width: 70px;
+//   height: 70px;
+//   color: #8b8b8b;
+// `;
 export const OrderListBtn = styled.button`
   background: #ffa0c5;
   color: white;

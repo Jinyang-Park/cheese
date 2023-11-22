@@ -12,6 +12,7 @@ import Menupick from './../pages/Menupick/Menupick';
 import Menudetail from '../pages/Menudetail/Menudetail';
 import ShoppingCart from '../pages/ShoppingCart/ShoppingCart';
 import Mypage from '../pages/Mypage/Mypage';
+import MenuInformationDetail from '../pages/MenuInformationDetail/MenuInformationDetail';
 
 const Router = () => {
   return (
@@ -29,6 +30,10 @@ const Router = () => {
         <Route path='/Cart' element={<ShoppingCart />}></Route>
         <Route path='/Mypage' element={<Mypage />}></Route>
         <Route path='/Menu' element={<Menu />}></Route>
+        <Route
+          path='/Menu/menuinformationdetail/:id'
+          element={<MenuInformationDetail />}
+        ></Route>
         <Route path='/Location' element={<Location />}></Route>
         <Route path='/Login' element={<Login />}></Route>
         <Route path='/Signup' element={<Signup />}></Route>
