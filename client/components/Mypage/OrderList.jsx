@@ -1,54 +1,56 @@
 import React from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 
-function OrderList({ cart, fetchCartData }) {
-  const handleOrederCancelClick = async (itemId) => {
-    console.log(itemId);
-    try {
-      const response = await axios.delete(
-        `http://localhost:5000/delete/${itemId}`
-      );
-      if (response.status === 200) {
-        window.confirm('주문을 취소하시겠습니까?');
-        {
-          // 클릭한 상품이 삭제되면 fetchCartData 함수를 불러 새로 페이지를 생성한다
-          fetchCartData();
-        }
-      }
-    } catch (error) {
-      console.log('Failed to cancel the order', error);
-    }
-  };
+function OrderList({ cart }) {
+  console.log('카트', cart);
+
+  // const handleOrederCancelClick = async (itemId) => {
+  //   const isConfirmed = window.confirm('주문을 취소하시겠습니까?');
+  //   if (!isConfirmed) {
+  //     return; // 사용자가 '취소'를 누르면 여기서 함수를 종료합니다.
+  //   }
+  //   try {
+  //     const response = await axios.delete(
+  //       `http://localhost:5000/delete/${itemId}`
+  //     );
+  //     if (response.status === 200) {
+  //       // 클릭한 상품이 삭제되면 fetchCartData 함수를 불러 새로 페이지를 생성한다
+  //       fetchCartData();
+
+  //       // 결제 날짜와 시간 삭제 api 호출
+  //       axios
+  //         .delete(`http://localhost:5000/deleteDateTime/${itemId}`)
+  //         .then((response) => {
+  //           if (response.status !== 200) {
+  //             console.log('Failed to delete the date and time');
+  //           }
+  //         })
+  //         .catch((error) => {
+  //           console.log('Failed to delete the date and time', error);
+  //         });
+  //     }
+  //   } catch (error) {
+  //     console.log('Failed to cancel the order', error);
+  //   }
+  // };
   return (
     <>
-      {cart.cart_data.cart.map((item) => (
-        <CartItemUl key={item.id}>
-          <CartItemImg src={item.image} />
-          <CartItemWrap>
-            <CartItemliTitle>{item.Koname}</CartItemliTitle>
-            <CartItemLeftli>{item.layer.Layer}</CartItemLeftli>
-            <CartItemLeftli>/</CartItemLeftli>
-            <CartItemLeftli>{item.tastes.join(', ')}</CartItemLeftli>
-          </CartItemWrap>
-          <CartItemRightWrap>
-            <CartDateLi>예약 날짜</CartDateLi>
-            <CartOrderDate>{cart.cart_data.cartDT.formattedDate}</CartOrderDate>
-            <CartOrderDate>{cart.cart_data.cartDT.time.time}</CartOrderDate>
-            <CartItemliTitle2>{item.quantity}개</CartItemliTitle2>
-          </CartItemRightWrap>
-          <CartItemMiddleWrap>
-            <CartItemli>{item.total.toLocaleString()}원</CartItemli>
-            <OrderListBtn onClick={() => handleOrederCancelClick(cart.id)}>
-              주문 취소하기
-            </OrderListBtn>
-          </CartItemMiddleWrap>
-        </CartItemUl>
-      ))}
+      <CartItemUl>
+        <CartItemImg src={cart.image} />
+        <CartItemWrap>
+          <CartItemliTitle>{cart.Koname}</CartItemliTitle>
+          <CartItemLeftli>{cart.layer.Layer}</CartItemLeftli>
+          <CartItemLeftli>/</CartItemLeftli>
+          <CartItemLeftli>{cart.tastes.join(', ')}</CartItemLeftli>
+        </CartItemWrap>
+        <CartItemliTitle2>{cart.quantity}개</CartItemliTitle2>
+        <CartItemMiddleWrap>
+          <CartItemli>{cart.total.toLocaleString()}원</CartItemli>
+        </CartItemMiddleWrap>
+      </CartItemUl>
     </>
   );
 }
-
 export default OrderList;
 export const CartItemUl = styled.ul`
   align-items: center;
@@ -66,7 +68,7 @@ export const CartItemImg = styled.img`
   border-radius: 50px;
 `;
 export const CartItemWrap = styled.div`
-  width: 45%;
+  width: 60%;
   display: flex;
   align-items: center;
 `;
@@ -76,7 +78,7 @@ export const CartItemliTitle = styled.h3`
   display: inline-block;
 `;
 export const CartItemliTitle2 = styled.h3`
-  margin-left: 70px;
+  margin-left: 30px;
   font-size: 16px;
   font-weight: 600;
   display: inline-block;
@@ -113,13 +115,13 @@ export const CartItemInput = styled.input`
   background-color: transparent;
 `;
 export const CartItemMiddleWrap = styled.div`
-  /* width: 8%; */
+  width: 18%;
   display: flex;
   align-items: center;
   /* margin-right: -200px; */
 `;
 export const CartItemli = styled.h3`
-  margin-left: 30px;
+  margin-left: 120px;
   font-size: 16px;
   font-weight: 400;
   display: inline-block;

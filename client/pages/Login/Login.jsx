@@ -12,7 +12,6 @@ function Login() {
 
   // 유저의 id를 전역으로 쓰기 위한 context api
   const { userId, setUsetId } = useContext(AuthContext);
-  console.log(userId);
 
   const navigate = useNavigate();
 

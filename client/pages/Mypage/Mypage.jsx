@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import CommonStyles from '../../utils/CommonStyles';
 import styled from 'styled-components';
 import NickName from '../../components/Mypage/NickName';
-import OrderList from '../../components/Mypage/OrderList';
 import axios from 'axios';
+import OrderListGroup from '../../components/Mypage/OrderListGroup';
+
 function Mypage() {
   const [cartInfor, setCartInfor] = useState(null);
+  console.log('cartInfor', cartInfor);
 
   const fetchCartData = async () => {
     try {
@@ -16,17 +18,6 @@ function Mypage() {
     }
   };
 
-  // useEffect(() => {
-  //   axios
-  //     .get('http://localhost:5000/getPaidCart')
-  //     .then((response) => {
-  //       setCartInfor(response.data.cartdata);
-  //     })
-  //     .catch((error) => console.log(error));
-  // }, []);
-
-  // console.log(cartInfor);
-
   // useEffect 함수의 두 번째 인자로 빈 배열을 넣으면, 해당 컴포넌트가 처음 마운트 될 때 useEffect안의 코드를 한번만 실행
   // 여기서 fetchCartData 함수는 컴포넌트가 처음 마운트 될 때 한 번만 호출됨
   // 하지만 fetchCartData 함수는 orderList 컴포넌트에서 주문 취소 버튼이 클릭될 때마다 호출되기 때문에 실제로는 주문이 취소할때마다 장바구니 정보를 갱신한다.
@@ -36,6 +27,35 @@ function Mypage() {
     fetchCartData();
   }, []);
 
+  // const handleOrederCancelClick = async (itemId) => {
+  //   const isConfirmed = window.confirm('주문을 취소하시겠습니까?');
+  //   if (!isConfirmed) {
+  //     return; // 사용자가 '취소'를 누르면 여기서 함수를 종료합니다.
+  //   }
+  //   try {
+  //     const response = await axios.delete(
+  //       `http://localhost:5000/delete/${itemId}`
+  //     );
+  //     if (response.status === 200) {
+  //       // 클릭한 상품이 삭제되면 fetchCartData 함수를 불러 새로 페이지를 생성한다
+  //       fetchCartData();
+
+  //       // 결제 날짜와 시간 삭제 api 호출
+  //       axios
+  //         .delete(`http://localhost:5000/deleteDateTime/${itemId}`)
+  //         .then((response) => {
+  //           if (response.status !== 200) {
+  //             console.log('Failed to delete the date and time');
+  //           }
+  //         })
+  //         .catch((error) => {
+  //           console.log('Failed to delete the date and time', error);
+  //         });
+  //     }
+  //   } catch (error) {
+  //     console.log('Failed to cancel the order', error);
+  //   }
+  // };
   return (
     <>
       <CommonStyles>
@@ -52,17 +72,14 @@ function Mypage() {
           <ReservationDateWrap>
             {/*닉네임 변경 컴포넌트 */}
             <NickName />
-            {/*주문내역 컴포넌트 */}
             {cartInfor &&
-              cartInfor.map((cart) => {
-                return (
-                  <OrderList
-                    key={cart.id}
-                    cart={cart}
-                    fetchCartData={fetchCartData}
-                  />
-                );
-              })}
+              cartInfor.map((items) => (
+                <OrderListGroup
+                  key={items.id}
+                  items={items}
+                  fetchCartData={fetchCartData}
+                />
+              ))}
           </ReservationDateWrap>
         </ReservationInner>
       </CommonStyles>

@@ -32,13 +32,44 @@ function ShoppingCart() {
 
   axios.defaults.withCredentials = true;
 
+  // const handlePaymentClick = () => {
+  //   // 사용자에게 결제 확인 얼럿을 먼저 보여줍니다.
+  //   const isConfirmed = window.confirm('결제를 하시겠습니까?');
+  //   if (!isConfirmed) {
+  //     return; // 사용자가 '취소'를 누르면 여기서 함수를 종료합니다.
+  //   }
+
+  //   // 각 상품을 개별적으로 서버에 보내기
+  //  axios
+  //     // 객체에 cart, cartDT 정보 보내주기
+  //     .post('http://localhost:5000/cart', { cart, cartDT })
+  //     .then((response) => {
+  //       if (response.status === 200) {
+  //         window.confirm('결제를 하시겠습니까?');
+  //       }
+  //       console.log(response.data);
+  //       navigate(`/Mypage`);
+  //       dispatch(cartReset());
+  //       dispatch(dtReset());
+  //       // 서버에 결제한 날짜와 시간 정보를 저장
+  //       // 나는 처음에 위에 이미 정보를 저장하기 때문에 굳이 따로 저장할 필요가 없다고 생각했다.
+  //       // 페이지를 새로고침하거나 다른 사용자가 사이트에 접속했을 때 결제 완료된
+  //       // 시간과 날짜를 유지하기 위해 저장하는 방법이다.
+  //       axios.post('http://localhost:5000/savePaidTime', { dateTime: cartDT });
+  //     })
+  //     .catch((error) => console.error(error));
+  // };
   const handlePaymentClick = () => {
+    // 사용자에게 결제 확인 얼럿을 먼저 보여줍니다.
+    const isConfirmed = window.confirm('결제를 하시겠습니까?');
+    if (!isConfirmed) {
+      return; // 사용자가 '취소'를 누르면 여기서 함수를 종료합니다.
+    }
     axios
       // 객체에 cart, cartDT 정보 보내주기
       .post('http://localhost:5000/cart', { cart, cartDT })
       .then((response) => {
         if (response.status === 200) {
-          window.confirm('결제를 하시겠습니까?');
         }
         console.log(response.data);
         navigate(`/Mypage`);

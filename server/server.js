@@ -209,23 +209,57 @@ app.get('/getPaidCart', (req, res) => {
   });
 });
 
-// 결제 취소
+// 결제 상품 취소
 app.delete('/delete/:id', (req, res) => {
   const itemId = parseInt(req.params.id);
 
   const query = 'DELETE FROM cart WHERE id = ?';
-  console.log(req.params.id);
+
   db.query(query, [itemId], (error, result) => {
     if (error) {
       console.log(error);
-      res
-        .status(500)
-        .send({ message: 'Server Error', error: error.toString() });
+      res.status(500).send({ message: 'Server Error' });
     } else {
       res.status(200).send({ message: 'Successfully deleted' });
     }
   });
 });
+
+// 결제 날짜 시간 취소
+app.delete('/deleteDateTime/:id', (req, res) => {
+  const DateTimeId = parseInt(req.params.id);
+
+  const query = 'DELETE FROM paidTime WHERE id = ?';
+
+  db.query(query, [DateTimeId], (error, result) => {
+    if (error) {
+      console.log(error);
+      res.status(500).send({ message: 'Server Error' });
+    } else {
+      res.status(200).send({ message: 'Successfully deleted' });
+    }
+  });
+});
+
+// 특정 날짜,시간에 대한 모든 예약 취소
+// app.delete('/deleteAllOnDateAndTime/:date/:time', (req, res) => {
+//   const date = req.params.date;
+//   const time = req.params.time;
+//   const query =
+//     "DELETE FROM cart WHERE JSON_EXTRACT(cart_data, '$.cartDT.formattedDate') = ? AND JSON_EXTRACT(cart_data, '$.cartDT.time.time') = ?";
+//   db.query(query, [date, time], (error, result) => {
+//     if (error) {
+//       console.log(error);
+//       res.status(500).send({ message: 'Server Error' });
+//     } else {
+//       res
+//         .status(200)
+//         .send({
+//           message: 'Successfully deleted all orders on the date and time',
+//         });
+//     }
+//   });
+// });
 
 // 날짜와 시간 저장
 app.post('/savePaidTime', (req, res) => {

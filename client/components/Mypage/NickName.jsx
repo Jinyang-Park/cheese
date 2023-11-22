@@ -90,7 +90,7 @@ export const ReservationDate = styled.div`
 `;
 export const ReservationBox = styled.div`
   padding: 15px 10px;
-  border-bottom: 2px solid #ebebeb;
+  /* border-bottom: 2px solid #ebebeb; */
 `;
 export const ReservationTitle = styled.h3`
   margin-left: 10px;
