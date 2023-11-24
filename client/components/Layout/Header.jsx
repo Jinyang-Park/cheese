@@ -122,8 +122,8 @@ export default function Header() {
               )}
               {!checkAuth ? (
                 <>
-                  <S.Loginli>
-                    <S.LoginImg src={Leaf} onClick={CheckToLogin} />
+                  <S.Loginli onClick={CheckToLogin}>
+                    <S.LoginImg src={Leaf} />
                     <S.MypageliTxt>MY PAGE</S.MypageliTxt>
                   </S.Loginli>
                   <S.Loginli onClick={CheckToLogin}>
@@ -133,11 +133,8 @@ export default function Header() {
                 </>
               ) : (
                 <>
-                  <S.Loginli>
-                    <S.LoginImg
-                      src={Leaf}
-                      onClick={() => navigate(`/Mypage`)}
-                    />
+                  <S.Loginli onClick={() => navigate(`/Mypage`)}>
+                    <S.LoginImg src={Leaf} />
                     <S.MypageliTxt>MY PAGE</S.MypageliTxt>
                   </S.Loginli>
                   <S.Loginli onClick={() => navigate(`/Cart`)}>

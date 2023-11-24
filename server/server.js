@@ -241,26 +241,6 @@ app.delete('/deleteDateTime/:id', (req, res) => {
   });
 });
 
-// 특정 날짜,시간에 대한 모든 예약 취소
-// app.delete('/deleteAllOnDateAndTime/:date/:time', (req, res) => {
-//   const date = req.params.date;
-//   const time = req.params.time;
-//   const query =
-//     "DELETE FROM cart WHERE JSON_EXTRACT(cart_data, '$.cartDT.formattedDate') = ? AND JSON_EXTRACT(cart_data, '$.cartDT.time.time') = ?";
-//   db.query(query, [date, time], (error, result) => {
-//     if (error) {
-//       console.log(error);
-//       res.status(500).send({ message: 'Server Error' });
-//     } else {
-//       res
-//         .status(200)
-//         .send({
-//           message: 'Successfully deleted all orders on the date and time',
-//         });
-//     }
-//   });
-// });
-
 // 날짜와 시간 저장
 app.post('/savePaidTime', (req, res) => {
   const dateTime = req.body.dateTime;

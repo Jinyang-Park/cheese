@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CommonStyles from './../../utils/CommonStyles';
 import styled from 'styled-components';
@@ -9,7 +9,9 @@ import Modal from './Modal';
 import { AuthContext } from './../../contexts/AuthContext';
 
 function Reservation() {
-  const { checkAuth, setCheckAuth } = useContext(AuthContext);
+  const { checkAuth, setCheckAuth, ReservationCake, setReservationCake } =
+    useContext(AuthContext);
+  console.log(ReservationCake);
   const navigate = useNavigate();
   const { isOpenModal, selectedTitle, clickModal, closeModal } = useModal();
 
@@ -25,6 +27,14 @@ function Reservation() {
   };
   const openCakeModalClick = () => {
     clickModal('케이크 예약이란?');
+  };
+  const ReservationCakeClick = () => {
+    setReservationCake(true);
+    navigate(`/Reservation/date`);
+  };
+  const PickupCakeClick = () => {
+    setReservationCake(false);
+    navigate(`/Reservation/date`);
   };
 
   return (
@@ -49,10 +59,7 @@ function Reservation() {
                   웨딩 케이크 상담 예약
                 </ReWeddingBtn>
               ) : (
-                <ReWeddingBtn
-                  type='button'
-                  onClick={() => navigate(`/Reservation/date`)}
-                >
+                <ReWeddingBtn type='button' onClick={ReservationCakeClick}>
                   웨딩 케이크 상담 예약
                 </ReWeddingBtn>
               )}
@@ -77,7 +84,9 @@ function Reservation() {
                   케이크 예약
                 </ReWeddingBtn>
               ) : (
-                <ReWeddingBtn type='button'>케이크 예약</ReWeddingBtn>
+                <ReWeddingBtn type='button' onClick={PickupCakeClick}>
+                  케이크 예약
+                </ReWeddingBtn>
               )}
               <ReWeddingP>
                 일반 케이크는 상담 없이
