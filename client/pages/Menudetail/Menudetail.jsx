@@ -105,7 +105,9 @@ function Menudetail() {
                   <CakedatailTitleLi>
                     <CakedetailH2>{cake.Koname}</CakedetailH2>
                     <CakedeatailLi>{cake.Enname}</CakedeatailLi>
-                    <CakedeatailLi>{cake.price}원</CakedeatailLi>
+                    <CakedeatailLi>
+                      {Number(cake.price).toLocaleString()}원
+                    </CakedeatailLi>
                   </CakedatailTitleLi>
                 </CakedetailPrice>
                 {/*케익 정보, 알레르기란 */}

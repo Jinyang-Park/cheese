@@ -122,7 +122,10 @@ function Menu() {
                           <CakeImg src={cake.image} />
                         </CakeDiv>
                         <Cakename>{cake.Koname}</Cakename>
-                        <Cakeprice>{cake.price}원</Cakeprice>
+                        <Cakeprice>
+                          {' '}
+                          {Number(cake.price).toLocaleString()}원
+                        </Cakeprice>
                       </CakeClickWrap>
                     </CakeLi>
                   );
