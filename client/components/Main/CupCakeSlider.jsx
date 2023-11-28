@@ -94,6 +94,10 @@ export const Sliderimg = styled.img`
 `;
 export const SliderTxt = styled.div`
   margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
 `;
 export const SliderKoname = styled.p`
   font-weight: 600;

@@ -95,6 +95,9 @@ export const Sliderimg = styled.img`
   margin-bottom: 15px;
 `;
 export const SliderTxt = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-bottom: 10px;
 `;
 export const SliderWeddingCakeTtile = styled.h1`

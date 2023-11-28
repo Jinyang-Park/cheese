@@ -13,6 +13,7 @@ import Menudetail from '../pages/Menudetail/Menudetail';
 import ShoppingCart from '../pages/ShoppingCart/ShoppingCart';
 import Mypage from '../pages/Mypage/Mypage';
 import MenuInformationDetail from '../pages/MenuInformationDetail/MenuInformationDetail';
+import Footer from '../components/Layout/Footer';
 
 const Router = () => {
   return (
@@ -38,6 +39,7 @@ const Router = () => {
         <Route path='/Login' element={<Login />}></Route>
         <Route path='/Signup' element={<Signup />}></Route>
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 };

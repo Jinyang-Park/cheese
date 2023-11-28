@@ -12,12 +12,14 @@ function Main() {
         <MainImg src={CakeMain} />
       </MainWrapper>
       <CommonStyles>
-        <WeddingCakeSlider
-          weddings={CakeList.filter((cake) => cake.type === 'cake')}
-        />
-        <CupCakeSlider
-          weddings={CakeList.filter((cake) => cake.type !== 'cake')}
-        />
+        <SliderWapper>
+          <WeddingCakeSlider
+            weddings={CakeList.filter((cake) => cake.type === 'cake')}
+          />
+          <CupCakeSlider
+            weddings={CakeList.filter((cake) => cake.type !== 'cake')}
+          />
+        </SliderWapper>
       </CommonStyles>
     </>
   );
@@ -34,4 +36,7 @@ export const MainImg = styled.img`
   width: 100%;
   height: 90%;
   object-fit: contain;
+`;
+export const SliderWapper = styled.div`
+  margin-bottom: 220px;
 `;
