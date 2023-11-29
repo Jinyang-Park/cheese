@@ -31,34 +31,38 @@ export const FooterTxtWrapper = styled.div`
 `;
 export const FooterTxtdiv = styled.div`
   display: flex;
-  padding: 40px 20px 20px 20px;
+  padding: 25px 20px 10px 20px;
 `;
-export const CompanyTitle = styled.h3`
+export const CompanyTitle = styled.p`
+  font-size: 14px;
   font-weight: 500;
   color: #b9b9ba;
 `;
-export const CompanyBoss = styled.h3`
+export const CompanyBoss = styled.p`
   font-weight: 500;
-  color: #b9b9ba;
-
-  &::before {
-    content: '| ';
-    vertical-align: 1px;
-    margin: 0 30px;
-  }
-`;
-export const CompanyAddress = styled.h3`
-  font-weight: 500;
+  font-size: 14px;
   color: #b9b9ba;
 
   &::before {
     content: '| ';
     vertical-align: 1px;
-    margin: 0 30px;
+    margin: 0 20px;
   }
 `;
-export const CommpanyCopyright = styled.h3`
+export const CompanyAddress = styled.p`
   font-weight: 500;
+  font-size: 14px;
+  color: #b9b9ba;
+
+  &::before {
+    content: '| ';
+    vertical-align: 1px;
+    margin: 0 20px;
+  }
+`;
+export const CommpanyCopyright = styled.p`
+  font-weight: 500;
+  font-size: 14px;
   color: #b9b9ba;
   padding: 0px 0px 0px 20px;
 `;

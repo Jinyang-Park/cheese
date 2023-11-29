@@ -124,7 +124,7 @@ export const ReservationSection = styled.div`
 `;
 export const ReservationUl = styled.ul`
   font-size: 0;
-  margin-bottom: 80px;
+  margin-bottom: 120px;
   display: flex;
   align-items: center;
 `;

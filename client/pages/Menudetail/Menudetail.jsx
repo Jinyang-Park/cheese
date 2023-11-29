@@ -165,6 +165,7 @@ export const ReservationInner = styled.div`
   width: 1366px;
   margin: 0 auto;
   position: relative;
+  margin-bottom: 120px;
 `;
 export const ReservationTabUl = styled.ul`
   display: grid;

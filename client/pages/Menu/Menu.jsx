@@ -154,6 +154,7 @@ export const ReservationInner = styled.div`
   width: 1366px;
   margin: 0 auto;
   position: relative;
+  margin-bottom: 120px;
 `;
 export const ReservationTabUl = styled.ul`
   display: grid;
@@ -174,7 +175,7 @@ export const ReservationStep2Li = styled.li`
 `;
 export const ReservationA = styled.a``;
 export const ReservationDateWrap = styled.div`
-  padding-bottom: 100px;
+  padding-bottom: 20px;
   border: 3px solid #f1e4ab;
   border-width: 0 3px 3px 3px;
 `;
