@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 function Arrow(props) {
   const { className, style, onClick, direction } = props;
@@ -18,8 +19,9 @@ function Arrow(props) {
   );
 }
 
-function CupCakeSlider({ weddings }) {
-  console.log(weddings);
+function CupCakeSlider({ cakes }) {
+  const navigate = useNavigate();
+  // console.log(cakes);
   const settings = {
     dots: true,
     infinite: false,
@@ -56,18 +58,26 @@ function CupCakeSlider({ weddings }) {
       },
     ],
   };
+
   return (
     <SliderContainer>
       <SliderWeddingCakeTtile>BEST CUPCAKE MENU</SliderWeddingCakeTtile>
       <Slider {...settings}>
-        {weddings.map((wedding) => {
+        {cakes.map((cake) => {
           return (
-            <SliderDiv key={wedding.id}>
-              <Sliderimg src={wedding.image} />
+            <SliderDiv
+              key={cake.id}
+              onClick={() =>
+                navigate(`/Reservation/date/menupick/Menudetail/${cake.id}`, {
+                  state: { cake },
+                })
+              }
+            >
+              <Sliderimg src={cake.image} />
               <SliderTxt>
-                <SliderKoname>{wedding.Koname}</SliderKoname>
+                <SliderKoname>{cake.Koname}</SliderKoname>
                 <SliderPrice>
-                  {Number(wedding.price).toLocaleString()}원
+                  {Number(cake.price).toLocaleString()}원
                 </SliderPrice>
               </SliderTxt>
             </SliderDiv>
@@ -82,7 +92,9 @@ export default CupCakeSlider;
 export const SliderContainer = styled.div`
   margin-top: 150px;
 `;
-export const SliderDiv = styled.div``;
+export const SliderDiv = styled.div`
+  cursor: pointer;
+`;
 export const Sliderimg = styled.img`
   width: 308px;
   height: 308px;

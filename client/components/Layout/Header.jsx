@@ -1,16 +1,23 @@
 import React, { useContext, useEffect, useState } from 'react';
-import * as S from './Header.style';
+import styled from 'styled-components';
 import Logo from '../../public/assets/logo.png';
 import Flower from '../../public/assets/flower.png';
 import Leaf from '../../public/assets/leaf.png';
 import Door from '../../public/assets/door.png';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import CommonStyles from '../../utils/CommonStyles';
 import axios from 'axios';
 import { AuthContext } from '../../contexts/AuthContext';
+import { PiListBold } from 'react-icons/pi';
+import { RxCross2 } from 'react-icons/rx';
 
 export default function Header() {
   const { checkAuth, setCheckAuth } = useContext(AuthContext);
+  // 반응형 토글
+  const [isToggled, setIsToggled] = useState(false);
+  // pathname 변경 시 토글 닫아주기
+  const { pathname } = useLocation();
+  console.log(pathname);
   const navigate = useNavigate();
 
   axios.defaults.withCredentials = true;
@@ -40,6 +47,8 @@ export default function Header() {
           alert('로그아웃 되었습니다. 다시 만나요!');
           localStorage.clear();
           navigate('/');
+          // 로그아웃 되면 토글 닫아주기
+          setIsToggled(false);
         }
       })
       .catch((err) => console.log(err));
@@ -48,6 +57,8 @@ export default function Header() {
   const CheckToLogin = () => {
     alert('로그인 후 서비스를 이용해 주세요');
     navigate('/Login');
+    // Mypage나 Cart는 pathname이 바뀌면 토글 닫기
+    setIsToggled(false);
   };
   // 서버 응답 코드 추가하지 않은 코드문
   // useEffect(() => {
@@ -76,80 +87,255 @@ export default function Header() {
   //     .catch((err) => console.log(err));
   // };
 
+  // pathname이 바뀔때 마다 토클 닫아주기
+  useEffect(() => {
+    // 로고 클릭 시 토글 닫아주기
+    if (pathname === '/') {
+      setIsToggled(false);
+    } else {
+      setIsToggled(false);
+    }
+  }, [pathname]);
+
   return (
     <>
-      <S.HeaderWrapper>
+      <HeaderWrapper>
         <CommonStyles>
-          <S.LogoSection>
+          <LogoSection>
             <Link to={'/'}>
-              <S.LogoImg src={Logo} />
+              <LogoImg src={Logo} />
             </Link>
-          </S.LogoSection>
+            {/*토클*/}
+            {isToggled ? (
+              <CancelIcon
+                isToggled={isToggled}
+                onClick={() => setIsToggled(!isToggled)}
+              />
+            ) : (
+              <ToggleIcon
+                isToggled={isToggled}
+                onClick={() => setIsToggled(!isToggled)}
+              />
+            )}
+          </LogoSection>
 
-          <S.Nav>
-            <S.HeaderPageSection>
-              <S.Pageli>
+          <Nav isToggled={isToggled}>
+            <HeaderPageSection isToggled={isToggled}>
+              <Pageli>
                 <Link to={'/Reservation'}>
-                  <S.PageliTxt>RESERVATION</S.PageliTxt>
+                  <PageliTxt>RESERVATION</PageliTxt>
                 </Link>
-              </S.Pageli>
-              <S.Pageli>
+              </Pageli>
+              <Pageli>
                 <Link to={'/Menu'}>
-                  <S.PageliTxt>MENU</S.PageliTxt>
+                  <PageliTxt>MENU</PageliTxt>
                 </Link>
-              </S.Pageli>
-              <S.Pageli>
+              </Pageli>
+              <Pageli>
                 <Link to={'/Location'}>
-                  <S.PageliTxt>LOCATION</S.PageliTxt>
+                  <PageliTxt>LOCATION</PageliTxt>
                 </Link>
-              </S.Pageli>
-            </S.HeaderPageSection>
+              </Pageli>
+            </HeaderPageSection>
 
-            <S.HeaderLoginSection>
+            <HeaderLoginSection isToggled={isToggled}>
               {/*비 로그인 시 카트 클릭시 로그인 이동 */}
               {checkAuth ? (
-                <S.Loginli onClick={handleDelete}>
-                  <S.LoginImg src={Flower} />
-                  <S.LoginliTxt>LOGOUT</S.LoginliTxt>
-                </S.Loginli>
+                <Loginli onClick={handleDelete}>
+                  <LoginImg src={Flower} />
+                  <LoginliTxt>LOGOUT</LoginliTxt>
+                </Loginli>
               ) : (
-                <S.Loginli>
+                <Loginli>
                   <Link to={'/Login'}>
-                    <S.LoginImg src={Flower} />
-                    <S.LoginliTxt>LOGIN</S.LoginliTxt>
+                    <LoginImg src={Flower} />
+                    <LoginliTxt>LOGIN</LoginliTxt>
                   </Link>
-                </S.Loginli>
+                </Loginli>
               )}
               {!checkAuth ? (
                 <>
-                  <S.Loginli onClick={CheckToLogin}>
-                    <S.LoginImg src={Leaf} />
-                    <S.MypageliTxt>MY PAGE</S.MypageliTxt>
-                  </S.Loginli>
-                  <S.Loginli onClick={CheckToLogin}>
-                    <S.LoginImg src={Door} />
-                    <S.CartliTxt>CART</S.CartliTxt>
-                  </S.Loginli>
+                  <Loginli onClick={CheckToLogin}>
+                    <LoginImg src={Leaf} />
+                    <MypageliTxt>MY PAGE</MypageliTxt>
+                  </Loginli>
+                  <Loginli onClick={CheckToLogin}>
+                    <LoginImg src={Door} />
+                    <CartliTxt>CART</CartliTxt>
+                  </Loginli>
                 </>
               ) : (
                 <>
-                  <S.Loginli onClick={() => navigate(`/Mypage`)}>
-                    <S.LoginImg src={Leaf} />
-                    <S.MypageliTxt>MY PAGE</S.MypageliTxt>
-                  </S.Loginli>
-                  <S.Loginli onClick={() => navigate(`/Cart`)}>
-                    <S.LoginImg src={Door} />
-                    <S.CartliTxt>CART</S.CartliTxt>
-                  </S.Loginli>
+                  <Loginli onClick={() => navigate(`/Mypage`)}>
+                    <LoginImg src={Leaf} />
+                    <MypageliTxt>MY PAGE</MypageliTxt>
+                  </Loginli>
+                  <Loginli onClick={() => navigate(`/Cart`)}>
+                    <LoginImg src={Door} />
+                    <CartliTxt>CART</CartliTxt>
+                  </Loginli>
                 </>
               )}
-              {/* {!checkAuth ? (
-              ) : (
-              )} */}
-            </S.HeaderLoginSection>
-          </S.Nav>
+            </HeaderLoginSection>
+          </Nav>
         </CommonStyles>
-      </S.HeaderWrapper>
+      </HeaderWrapper>
     </>
   );
 }
+
+export const HeaderWrapper = styled.header`
+  height: 70px;
+  padding: 10px 0px;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  border-bottom: 1px solid #ddd;
+  background: #fdfaf7;
+`;
+
+export const LogoSection = styled.div`
+  float: left;
+  font-size: 0;
+  margin-right: 200px;
+  @media screen and (max-width: 1200px) {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 17px;
+  }
+`;
+
+export const LogoImg = styled.img`
+  width: 130px;
+  height: 40px;
+  object-fit: contain;
+  background-size: 80px auto;
+  display: inline-block;
+  margin: 12px 0;
+`;
+export const Nav = styled.nav`
+  @media screen and (max-width: 1200px) {
+    display: ${(props) => (props.isToggled ? 'flex' : 'none')};
+    background-color: ${(props) => (props.isToggled ? '#fdfaf7' : 'none')};
+    padding: ${(props) => (props.isToggled ? '10px 0px' : 'none')};
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    position: relative;
+  }
+`;
+export const HeaderPageSection = styled.ul`
+  display: block;
+  float: left;
+  margin-right: 200px;
+  @media screen and (max-width: 1200px) {
+    display: ${(props) => (props.isToggled ? 'flex' : 'none')};
+    flex-direction: column;
+    margin-right: 0px;
+    align-items: center;
+  }
+`;
+export const Pageli = styled.li`
+  display: inline-block;
+  margin-right: 60px;
+  line-height: 60px;
+  font-weight: 500;
+  @media screen and (max-width: 1200px) {
+    margin-right: 0px;
+  }
+`;
+export const PageliTxt = styled.a`
+  font-size: 18px;
+  line-height: 70px;
+  font-weight: 500;
+  &:hover {
+    color: #ffa0c5;
+  }
+`;
+
+export const HeaderLoginSection = styled.ul`
+  float: right;
+  @media screen and (max-width: 1200px) {
+    display: ${(props) => (props.isToggled ? 'flex' : 'none')};
+    flex-direction: column;
+    align-items: center;
+  }
+`;
+export const Loginli = styled.li`
+  display: inline-block;
+  margin: 10px 15px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  @media screen and (max-width: 1200px) {
+    margin: 0px;
+  }
+`;
+export const LoginImg = styled.img`
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  margin-top: 8px;
+  margin: 0 auto;
+  @media screen and (max-width: 1200px) {
+    display: none;
+  }
+`;
+export const LoginliTxt = styled.a`
+  &:hover {
+    color: #ffa0c5;
+  }
+  @media screen and (max-width: 1200px) {
+    font-size: 18px;
+    line-height: 70px;
+    font-weight: 500;
+  }
+`;
+export const MypageliTxt = styled.a`
+  &:hover {
+    color: #ffa0c5;
+  }
+  @media screen and (max-width: 1200px) {
+    font-size: 18px;
+    line-height: 70px;
+    font-weight: 500;
+  }
+`;
+export const CartliTxt = styled.a`
+  &:hover {
+    color: #ffa0c5;
+  }
+  @media screen and (max-width: 1200px) {
+    font-size: 18px;
+    line-height: 70px;
+    font-weight: 500;
+  }
+`;
+export const CartWrap = styled.div``;
+export const ToggleIcon = styled(PiListBold)`
+  cursor: pointer;
+  display: none;
+  width: 40px;
+  height: 40px;
+  margin: 0px 12px;
+  @media screen and (max-width: 1200px) {
+    display: ${(props) => (props.isToggled ? 'none' : 'block')};
+  }
+`;
+export const CancelIcon = styled(RxCross2)`
+  cursor: pointer;
+  display: none;
+  width: 40px;
+  height: 40px;
+  @media screen and (max-width: 1200px) {
+    display: ${(props) => (props.isToggled ? 'block' : 'none')};
+  }
+`;

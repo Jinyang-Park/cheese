@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import CommonStyles from '../../utils/CommonStyles';
 import styled from 'styled-components';
@@ -21,6 +21,7 @@ function Menudetail() {
   const cake = location.state.cake;
   const navigate = useNavigate();
 
+  console.log(cake);
   // dispatch 로직
   const dispatch = useDispatch();
 
@@ -75,6 +76,12 @@ function Menudetail() {
       navigate(`/Cart/`);
     }
   };
+
+  // 디테일 페이지 오면 맨위로 스크롤되서 페이지 마운트됨
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [cake]);
+
   return (
     <>
       <CommonStyles>
@@ -96,7 +103,9 @@ function Menudetail() {
               {/*이미지 란 */}
               <CakedetailInform01>
                 <CakedetailImgDiv>
-                  <CakedetailImg src={cake.image} />
+                  {cake && <CakedetailImg src={cake.image} />}
+
+                  {/* <CakedetailImg src={cake.image} /> */}
                 </CakedetailImgDiv>
               </CakedetailInform01>
               {/*케익이름, 영어이름, 가격 정보란 */}
