@@ -4,11 +4,16 @@ import styled from 'styled-components';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function Arrow(props) {
   const { className, style, onClick, direction } = props;
   const Icon = direction === 'right' ? FaChevronRight : FaChevronLeft;
+
+  // 화면 크기가 1200px 미만일 때는 아무것도 렌더링하지 않음
+  if (window.innerWidth < 1200) {
+    return null;
+  }
 
   return (
     <Icon
@@ -20,6 +25,9 @@ function Arrow(props) {
 }
 
 function WeddingCakeSlider({ cakes }) {
+  const { type } = useParams();
+  console.log(type);
+
   const navigate = useNavigate();
   // console.log(cakes);
   const settings = {
@@ -32,6 +40,15 @@ function WeddingCakeSlider({ cakes }) {
     prevArrow: <Arrow direction='left' />,
     initialSlide: 0,
     responsive: [
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4,
+          infinite: true,
+          dots: true,
+        },
+      },
       {
         breakpoint: 1024,
         settings: {
@@ -69,9 +86,12 @@ function WeddingCakeSlider({ cakes }) {
               <SliderDiv
                 key={cake.id}
                 onClick={() =>
-                  navigate(`/Reservation/date/menupick/Menudetail/${cake.id}`, {
-                    state: { cake },
-                  })
+                  navigate(
+                    `/Reservation/date/${type}/menupick/Menudetail/?type=${cake.type}/?id=${cake.id}`,
+                    {
+                      state: { cake },
+                    }
+                  )
                 }
               >
                 <Sliderimg src={cake.image} />
@@ -104,6 +124,10 @@ export const Sliderimg = styled.img`
   border-radius: 10px;
   background-color: #ccc;
   margin-bottom: 15px;
+  @media screen and (max-width: 1200px) {
+    width: 270px;
+    height: 270px;
+  }
 `;
 export const SliderTxt = styled.div`
   display: flex;

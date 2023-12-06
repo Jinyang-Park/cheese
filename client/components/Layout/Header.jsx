@@ -17,7 +17,7 @@ export default function Header() {
   const [isToggled, setIsToggled] = useState(false);
   // pathname 변경 시 토글 닫아주기
   const { pathname } = useLocation();
-  console.log(pathname);
+
   const navigate = useNavigate();
 
   axios.defaults.withCredentials = true;
@@ -99,8 +99,8 @@ export default function Header() {
 
   return (
     <>
-      <HeaderWrapper>
-        <CommonStyles>
+      <CommonStyles>
+        <HeaderWrapper>
           <LogoSection>
             <Link to={'/'}>
               <LogoImg src={Logo} />
@@ -178,8 +178,8 @@ export default function Header() {
               )}
             </HeaderLoginSection>
           </Nav>
-        </CommonStyles>
-      </HeaderWrapper>
+        </HeaderWrapper>
+      </CommonStyles>
     </>
   );
 }
@@ -208,6 +208,15 @@ export const LogoSection = styled.div`
     justify-content: space-between;
     padding-bottom: 17px;
   }
+  @media screen and (max-width: 1024px) {
+    width: 99%;
+  }
+  @media screen and (max-width: 600px) {
+    width: 95%;
+  }
+  @media screen and (max-width: 400px) {
+    width: 95%;
+  }
 `;
 
 export const LogoImg = styled.img`
@@ -225,7 +234,7 @@ export const Nav = styled.nav`
     padding: ${(props) => (props.isToggled ? '10px 0px' : 'none')};
     flex-direction: column;
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
     justify-content: center;
     align-items: center;
     display: flex;
@@ -335,6 +344,7 @@ export const CancelIcon = styled(RxCross2)`
   display: none;
   width: 40px;
   height: 40px;
+  margin: 0px 12px;
   @media screen and (max-width: 1200px) {
     display: ${(props) => (props.isToggled ? 'block' : 'none')};
   }

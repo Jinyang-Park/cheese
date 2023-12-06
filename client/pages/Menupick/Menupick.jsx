@@ -4,11 +4,13 @@ import styled from 'styled-components';
 import { PiWarningCircleFill } from 'react-icons/pi';
 import { FiSearch } from 'react-icons/fi';
 import { CakeList } from '../../common/CakeList';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { reset, setCake } from '../../redux/modules/ReservationsCakeDetail';
 
 function Menupick() {
+  const { type } = useParams();
+  console.log(type);
   // 카테고리
   const [selectedCategory, setSelectedCategory] = useState('전체');
   // 검색어 필터링
@@ -35,6 +37,21 @@ function Menupick() {
     setSearchKeyword(searchKeyword);
   };
 
+  // const HandleCakeClick = (cake) => {
+  //   console.log(cake);
+  //   // 상태 초기화
+  //   dispatch(reset());
+
+  //   // cake 전체를 상태에 저장
+  //   dispatch(setCake(cake));
+
+  //   // 페이지 이동 및 cake 정보 넘겨주기
+  //   navigate({
+  //     pathname: '/Reservation/date/menupick/Menudetail/',
+  //     search: `?id=${cake.id}`,
+  //     state: { cake },
+  //   });
+  // };
   return (
     <>
       <CommonStyles>
@@ -108,6 +125,7 @@ function Menupick() {
                   return (
                     <CakeLi key={cake.id}>
                       <CakeClickWrap
+                        // onClick={() => HandleCakeClick(cake)}
                         onClick={() => {
                           // 상태 초기화
                           dispatch(reset());
@@ -117,7 +135,7 @@ function Menupick() {
 
                           // 페이지 이동 및 cake 정보 넘겨주기
                           navigate(
-                            `/Reservation/date/menupick/Menudetail/${cake.id}`,
+                            `/Reservation/date/${type}/menupick/Menudetail/?type=${cake.type}/?id=${cake.id}`,
                             { state: { cake } }
                           );
                         }}
@@ -127,7 +145,6 @@ function Menupick() {
                         </CakeDiv>
                         <Cakename>{cake.Koname}</Cakename>
                         <Cakeprice>
-                          {' '}
                           {Number(cake.price).toLocaleString()}원
                         </Cakeprice>
                       </CakeClickWrap>

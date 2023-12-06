@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import CommonStyles from '../../utils/CommonStyles';
 import styled from 'styled-components';
 import { AiOutlineDown } from 'react-icons/ai';
@@ -12,16 +12,17 @@ import { addToCart } from '../../redux/modules/ReservationsCakeDetail';
 import { AuthContext } from '../../contexts/AuthContext';
 
 function Menudetail() {
-  // 픽업 케이크 선택 시 테이스팅 컴포넌트 제거 context api
-  const { ReservationCake, setReservationCake } = useContext(AuthContext);
-  console.log(ReservationCake);
+  // Reservation 컴포넌트에서 reserve인지 pickup인지 구분해주는 로직
+  const { type } = useParams();
+  console.log(type);
 
   // usevaigater로 케익의 정보를 받아오는 로직
   const location = useLocation();
   const cake = location.state.cake;
+
+  // navaigate
   const navigate = useNavigate();
 
-  console.log(cake);
   // dispatch 로직
   const dispatch = useDispatch();
 
@@ -41,17 +42,19 @@ function Menudetail() {
 
   // 주문하기
   const handlegotoCartClick = () => {
-    console.log('어디야', ReservationCake);
+    if (type === 'undefined') {
+      alert('웨딩 케이크 또는 일반 케이크인지 선택주세요.');
+      navigate(`/Reservation`);
+      return;
+    }
     if (layer === null) {
       alert('케이크 단을 선택해주세요.');
       return;
       // tastes &&를 추가하여 tastes가 undefined 또는 null이 아닌 경우에만 length 속성을 확인하도록 수정
     }
-    if (ReservationCake) {
-      if (!tastes || tastes.length < 3) {
-        alert('테이스팅 3가지 맛을 선택해주세요.');
-        return;
-      }
+    if (!tastes || tastes.length < 3) {
+      alert('테이스팅 3가지 맛을 선택해주세요.');
+      return;
     }
     if (
       window.confirm(
@@ -140,7 +143,7 @@ function Menudetail() {
                 {/*케이크 단 선택란 */}
                 <SelectedLayers />
                 {/*테이스팅 단 선택란 */}
-                {ReservationCake ? <TastingSelection /> : ''}
+                {type === 'reserve' ? <TastingSelection /> : ''}
 
                 {/*수량 선택란 */}
                 <QuantitySelection cake={cake} />

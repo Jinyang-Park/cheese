@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import CommonStyles from '../../utils/CommonStyles';
 import styled from 'styled-components';
 import CakeMain from '../../public/assets/main2.png';

@@ -22,10 +22,16 @@ const Router = () => {
       <Routes>
         <Route path='/' element={<Main />}></Route>
         <Route path='/Reservation' element={<Reservation />}></Route>
-        <Route path='/Reservation/date' element={<ReservationDate />}></Route>
-        <Route path='/Reservation/date/menupick' element={<Menupick />}></Route>
         <Route
-          path='/Reservation/date/menupick/menudetail/:id'
+          path='/Reservation/date/:type'
+          element={<ReservationDate />}
+        ></Route>
+        <Route
+          path='/Reservation/date/:type/menupick'
+          element={<Menupick />}
+        ></Route>
+        <Route
+          path='/Reservation/date/:type/menupick/menudetail'
           element={<Menudetail />}
         ></Route>
         <Route path='/Cart' element={<ShoppingCart />}></Route>
