@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CommonStyles from './../../utils/CommonStyles';
 import styled from 'styled-components';
@@ -10,6 +10,7 @@ import { AuthContext } from './../../contexts/AuthContext';
 
 function Reservation() {
   const { checkAuth, setCheckAuth } = useContext(AuthContext);
+
   const navigate = useNavigate();
   const { isOpenModal, selectedTitle, clickModal, closeModal } = useModal();
 
@@ -26,6 +27,24 @@ function Reservation() {
   const openCakeModalClick = () => {
     clickModal('케이크 예약이란?');
   };
+
+  const changeQueryStringClick = (e) => {
+    const value = e.target.value;
+    if (value === 'ReserveCake') {
+      navigate('/Reservation/date/reserve');
+    } else {
+      navigate('/Reservation/date/pickup');
+    }
+  };
+
+  // const ReservationCakeClick = () => {
+  //   setReservationCake(true);
+  //   navigate(`/Reservation/date`);
+  // };
+  // const PickupCakeClick = () => {
+  //   setReservationCake(false);
+  //   navigate(`/Reservation/date`);
+  // };
 
   return (
     <>
@@ -51,7 +70,8 @@ function Reservation() {
               ) : (
                 <ReWeddingBtn
                   type='button'
-                  onClick={() => navigate(`/Reservation/date`)}
+                  value='ReserveCake'
+                  onClick={changeQueryStringClick}
                 >
                   웨딩 케이크 상담 예약
                 </ReWeddingBtn>
@@ -77,7 +97,13 @@ function Reservation() {
                   케이크 예약
                 </ReWeddingBtn>
               ) : (
-                <ReWeddingBtn type='button'>케이크 예약</ReWeddingBtn>
+                <ReWeddingBtn
+                  type='button'
+                  value='pickupCake'
+                  onClick={changeQueryStringClick}
+                >
+                  케이크 예약
+                </ReWeddingBtn>
               )}
               <ReWeddingP>
                 일반 케이크는 상담 없이
@@ -115,7 +141,7 @@ export const ReservationSection = styled.div`
 `;
 export const ReservationUl = styled.ul`
   font-size: 0;
-  margin-bottom: 80px;
+  margin-bottom: 120px;
   display: flex;
   align-items: center;
 `;

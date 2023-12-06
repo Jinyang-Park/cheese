@@ -11,6 +11,10 @@ const useAuth = () => {
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
 
+  // 닉네임 변경
+  const [newUserNameInput, setNewUserNameInput] = useState('');
+  const nickNameRef = useRef();
+
   // 이메일 입력받는 함수
   const changeEmail = (event) => {
     setEmail(event.target.value);
@@ -31,6 +35,38 @@ const useAuth = () => {
     setUserName(event.target.value);
   };
 
+  // 닉네임 변경 입력받는 함수
+  const changeNickName = (event) => {
+    setNewUserNameInput(event.target.value);
+  };
+
+  // 닉네임 변경 유효성 검사 함수
+  const checkNickNameValidation = () => {
+    const checkNickNameValidation = newUserNameInput.match(nameRegex);
+
+    // 닉네임 길이는 이름처럼 조건이 되지않아
+    // 닉네임의 길이의 조건문을 추가해서 위로 올렸더니 성공하였다.
+    //닉네임 길이 확인 조건 추가
+    if (newUserNameInput.length > 3) {
+      alert('닉네임은 3글자를 넘을 수 없습니다.');
+      nickNameRef.current.focus();
+      return false;
+    }
+    // 닉네임
+    if (!newUserNameInput || !checkNickNameValidation) {
+      if (!newUserNameInput) {
+        alert('이름을 입력해주세요.');
+        nickNameRef.current.focus();
+        return false;
+      } else {
+        alert('한글 3글자 이상 입력해 주세요.');
+        nickNameRef.current.focus();
+        return false;
+      }
+    }
+    return true;
+  };
+
   // 이름 유효성 검사 함수
   const checkNameValidation = () => {
     const checkNameValidation = userName.match(nameRegex);
@@ -46,7 +82,6 @@ const useAuth = () => {
         return false;
       }
     }
-    // return true로 설정해야된다.
     return true;
   };
 
@@ -111,16 +146,21 @@ const useAuth = () => {
     userName,
     setUserName,
     changeName,
+    newUserNameInput,
+    setNewUserNameInput,
     nameRef,
     emailRef,
     passwordRef,
     confirmPasswordRef,
+    nickNameRef,
     changeEmail,
     changePassword,
     changeConfirmPassword,
     checkValidation,
     checkValidationForSignUp,
     checkNameValidation,
+    changeNickName,
+    checkNickNameValidation,
   };
 };
 

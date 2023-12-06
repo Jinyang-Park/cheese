@@ -110,7 +110,7 @@ export const CartItemImg = styled.img`
   border-radius: 50px;
 `;
 export const CartItemWrap = styled.div`
-  width: 55%;
+  width: 65%;
   display: flex;
   align-items: center;
 `;
@@ -121,7 +121,7 @@ export const CartItemMiddleWrap = styled.div`
   width: 8%;
   display: flex;
   align-items: center;
-  margin-right: -200px;
+  margin-right: -150px;
 `;
 export const CartItemliTitle = styled.h3`
   margin-left: 10px;

@@ -69,6 +69,7 @@ export default Location;
 export const LocationSection = styled.section`
   position: relative;
   min-height: calc(100vh - 161px);
+  margin-bottom: 120px;
   /* padding-top: 60px; */
 `;
 export const LocationWrap = styled.div`
