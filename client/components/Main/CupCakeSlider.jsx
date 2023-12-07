@@ -10,10 +10,11 @@ function Arrow(props) {
   const { className, style, onClick, direction } = props;
   const Icon = direction === 'right' ? FaChevronRight : FaChevronLeft;
 
-  // 화면 크기가 1200px 미만일 때는 아무것도 렌더링하지 않음
-  if (window.innerWidth < 1200) {
+  // 화면 크기가 1300px 미만일 때는 아무것도 렌더링하지 않음
+  if (window.innerWidth < 1300) {
     return null;
   }
+
   return (
     <Icon
       className={className}
@@ -125,6 +126,11 @@ export const Sliderimg = styled.img`
     width: 270px;
     height: 270px;
   }
+  @media screen and (max-width: 480px) {
+    width: 60%;
+    height: 60%;
+    margin-left: 20%;
+  }
 `;
 export const SliderTxt = styled.div`
   margin-bottom: 10px;
@@ -144,4 +150,7 @@ export const SliderWeddingCakeTtile = styled.h1`
   margin-left: 20px;
   font-size: 25px;
   margin-bottom: 20px;
+  @media screen and (max-width: 480px) {
+    margin-left: 35px;
+  }
 `;

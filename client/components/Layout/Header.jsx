@@ -185,8 +185,7 @@ export default function Header() {
 }
 
 export const HeaderWrapper = styled.header`
-  height: 70px;
-  padding: 10px 0px;
+  padding: 10px 10px;
   align-items: center;
   position: fixed;
   top: 0;
@@ -195,6 +194,15 @@ export const HeaderWrapper = styled.header`
   z-index: 1000;
   border-bottom: 1px solid #ddd;
   background: #fdfaf7;
+  @media screen and (max-width: 1200px) {
+    padding: 0px;
+  }
+  @media screen and (max-width: 600px) {
+    padding: 0px;
+  }
+  @media screen and (max-width: 480px) {
+    padding: 0px;
+  }
 `;
 
 export const LogoSection = styled.div`
@@ -206,16 +214,16 @@ export const LogoSection = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-bottom: 17px;
+    border-bottom: 1px solid #ddd;
   }
   @media screen and (max-width: 1024px) {
-    width: 99%;
+    border-bottom: 1px solid #ddd;
   }
   @media screen and (max-width: 600px) {
-    width: 95%;
+    border-bottom: 1px solid #ddd;
   }
   @media screen and (max-width: 400px) {
-    width: 95%;
+    border-bottom: 1px solid #ddd;
   }
 `;
 
@@ -226,6 +234,15 @@ export const LogoImg = styled.img`
   background-size: 80px auto;
   display: inline-block;
   margin: 12px 0;
+  @media screen and (max-width: 1200px) {
+    padding-left: 10px;
+  }
+  @media screen and (max-width: 600px) {
+    padding-left: 10px;
+  }
+  @media screen and (max-width: 480px) {
+    padding-left: 10px;
+  }
 `;
 export const Nav = styled.nav`
   @media screen and (max-width: 1200px) {
@@ -234,7 +251,6 @@ export const Nav = styled.nav`
     padding: ${(props) => (props.isToggled ? '10px 0px' : 'none')};
     flex-direction: column;
     width: 100%;
-    /* height: 100%; */
     justify-content: center;
     align-items: center;
     display: flex;
@@ -337,6 +353,13 @@ export const ToggleIcon = styled(PiListBold)`
   margin: 0px 12px;
   @media screen and (max-width: 1200px) {
     display: ${(props) => (props.isToggled ? 'none' : 'block')};
+    padding-right: 10px;
+  }
+  @media screen and (max-width: 600px) {
+    padding-right: 10px;
+  }
+  @media screen and (max-width: 480px) {
+    padding-right: 10px;
   }
 `;
 export const CancelIcon = styled(RxCross2)`
@@ -347,5 +370,12 @@ export const CancelIcon = styled(RxCross2)`
   margin: 0px 12px;
   @media screen and (max-width: 1200px) {
     display: ${(props) => (props.isToggled ? 'block' : 'none')};
+    padding-right: 10px;
+  }
+  @media screen and (max-width: 600px) {
+    padding-right: 10px;
+  }
+  @media screen and (max-width: 480px) {
+    padding-right: 10px;
   }
 `;

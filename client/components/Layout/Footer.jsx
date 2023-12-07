@@ -13,9 +13,11 @@ function Footer() {
             <CompanyBoss>대표이사: 변니스들</CompanyBoss>
             <CompanyAddress>주소: 청주시 서원구 천석로 14번길 1</CompanyAddress>
           </FooterTxtdiv>
-          <CommpanyCopyright>
-            Copyright ⓒ 2023 Cheesbon. All Rigths Reserved.
-          </CommpanyCopyright>
+          <CommpanyCopyrightWrap>
+            <CommpanyCopyright>
+              Copyright ⓒ 2023 Cheesbon. All Rigths Reserved.
+            </CommpanyCopyright>
+          </CommpanyCopyrightWrap>
         </FooterTxtWrapper>
       </CommonStyles>
     </FooterWrapper>
@@ -32,6 +34,18 @@ export const FooterTxtWrapper = styled.div`
 export const FooterTxtdiv = styled.div`
   display: flex;
   padding: 25px 20px 10px 20px;
+  @media screen and (max-width: 600px) {
+    display: flex;
+    padding: 20px 8px 8px 8px;
+    flex-direction: column;
+    align-items: center;
+  }
+  @media screen and (max-width: 480px) {
+    display: flex;
+    padding: 20px 8px 8px 8px;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 export const CompanyTitle = styled.p`
   font-size: 14px;
@@ -48,6 +62,13 @@ export const CompanyBoss = styled.p`
     vertical-align: 1px;
     margin: 0 20px;
   }
+  @media screen and (max-width: 480px) {
+    &::before {
+      content: '| ';
+      vertical-align: 1px;
+      margin: 0 10px;
+    }
+  }
 `;
 export const CompanyAddress = styled.p`
   font-weight: 500;
@@ -59,10 +80,32 @@ export const CompanyAddress = styled.p`
     vertical-align: 1px;
     margin: 0 20px;
   }
+  @media screen and (max-width: 480px) {
+    &::before {
+      content: '| ';
+      vertical-align: 1px;
+      margin: 0 10px;
+    }
+  }
 `;
 export const CommpanyCopyright = styled.p`
   font-weight: 500;
   font-size: 14px;
   color: #b9b9ba;
   padding: 0px 0px 0px 20px;
+  @media screen and (max-width: 600px) {
+    padding: 0px;
+  }
+  @media screen and (max-width: 480px) {
+    padding: 0px;
+  }
+`;
+export const CommpanyCopyrightWrap = styled.div`
+  display: flex;
+  @media screen and (max-width: 600px) {
+    justify-content: center;
+  }
+  @media screen and (max-width: 480px) {
+    justify-content: center;
+  }
 `;

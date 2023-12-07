@@ -38,7 +38,7 @@ const Router = () => {
         <Route path='/Mypage' element={<Mypage />}></Route>
         <Route path='/Menu' element={<Menu />}></Route>
         <Route
-          path='/Menu/menuinformationdetail/:id'
+          path='/Menu/menuinformationdetail'
           element={<MenuInformationDetail />}
         ></Route>
         <Route path='/Location' element={<Location />}></Route>

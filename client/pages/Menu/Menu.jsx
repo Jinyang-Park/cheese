@@ -113,9 +113,12 @@ function Menu() {
                           dispatch(setCake(cake));
 
                           // 페이지 이동 및 cake 정보 넘겨주기
-                          navigate(`/Menu/menuinformationdetail/${cake.id}`, {
-                            state: { cake },
-                          });
+                          navigate(
+                            `/Menu/menuinformationdetail?id=${cake.id}`,
+                            {
+                              state: { cake },
+                            }
+                          );
                         }}
                       >
                         <CakeDiv>

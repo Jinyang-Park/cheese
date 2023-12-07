@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { PiWarningCircleFill } from 'react-icons/pi';
 import { FiSearch } from 'react-icons/fi';
 import { CakeList } from '../../common/CakeList';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { reset, setCake } from '../../redux/modules/ReservationsCakeDetail';
 
@@ -135,7 +135,7 @@ function Menupick() {
 
                           // 페이지 이동 및 cake 정보 넘겨주기
                           navigate(
-                            `/Reservation/date/${type}/menupick/Menudetail/?type=${cake.type}/?id=${cake.id}`,
+                            `/Reservation/date/${type}/menupick/Menudetail?type=${cake.type}&?id=${cake.id}`,
                             { state: { cake } }
                           );
                         }}

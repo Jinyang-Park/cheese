@@ -9,16 +9,14 @@ import TastingSelection from '../../components/Menudetail/TastingSelection';
 import QuantitySelection from '../../components/Menudetail/QuantitySelection';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../redux/modules/ReservationsCakeDetail';
-import { AuthContext } from '../../contexts/AuthContext';
 
 function Menudetail() {
   // Reservation 컴포넌트에서 reserve인지 pickup인지 구분해주는 로직
   const { type } = useParams();
-  console.log(type);
 
   // usevaigater로 케익의 정보를 받아오는 로직
   const location = useLocation();
-  const cake = location.state.cake;
+  const { cake } = location.state;
 
   // navaigate
   const navigate = useNavigate();

@@ -33,6 +33,15 @@ export default Main;
 export const MainWrapper = styled.div`
   position: relative;
   padding-top: 90px;
+  @media screen and (max-width: 1200px) {
+    padding-top: 65px;
+  }
+  @media screen and (max-width: 600px) {
+    padding-top: 65px;
+  }
+  @media screen and (max-width: 480px) {
+    padding-top: 65px;
+  }
 `;
 export const MainImg = styled.img`
   display: block;

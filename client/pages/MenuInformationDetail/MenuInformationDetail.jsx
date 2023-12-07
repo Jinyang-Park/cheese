@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import CommonStyles from '../../utils/CommonStyles';
 import styled from 'styled-components';
 import { AiOutlineDown } from 'react-icons/ai';
 import { AiOutlineUp } from 'react-icons/ai';
-import { useDispatch, useSelector } from 'react-redux';
+
 function MenuInformationDetail() {
   // usevaigater로 케익의 정보를 받아오는 로직
   const location = useLocation();
-  const cake = location.state.cake;
+  const { cake } = location.state;
 
   // 토글 메뉴
   const [isOpen, setIsOpen] = useState(false);
