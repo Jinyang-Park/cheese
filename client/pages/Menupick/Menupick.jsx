@@ -176,6 +176,9 @@ export const ReservationInner = styled.div`
   margin: 0 auto;
   position: relative;
   margin-bottom: 120px;
+  @media screen and (max-width: 1400px) {
+    width: 90%;
+  }
 `;
 export const ReservationTabUl = styled.ul`
   display: grid;
@@ -318,6 +321,12 @@ export const ReservationMenuList = styled.ul`
   -moz-column-gap: 20px;
   column-gap: 20px;
   padding: 20px;
+  @media screen and (max-width: 600px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media screen and (max-width: 480px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
 export const CakeLi = styled.li`
   text-align: center;

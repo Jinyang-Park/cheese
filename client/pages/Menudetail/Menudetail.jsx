@@ -176,6 +176,9 @@ export const ReservationInner = styled.div`
   margin: 0 auto;
   position: relative;
   margin-bottom: 120px;
+  @media screen and (max-width: 1400px) {
+    width: 90%;
+  }
 `;
 export const ReservationTabUl = styled.ul`
   display: grid;
@@ -221,6 +224,10 @@ export const CakedetailInner = styled.div`
   grid-template-columns: 400px 1fr;
   -moz-column-gap: 40px;
   column-gap: 40px;
+  @media screen and (max-width: 900px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 export const ReservationDateWrap = styled.div`
   border: 3px solid #f1e4ab;
@@ -235,10 +242,17 @@ export const CakedetailImgDiv = styled.div`
 `;
 export const CakedetailImg = styled.img`
   width: 100%;
-  height: auto;
+
+  @media screen and (max-width: 900px) {
+    width: 80%;
+    margin: 0 auto;
+  }
 `;
 export const CakedetailInform02 = styled.div`
   padding: 15px 0 30px;
+  @media screen and (max-width: 900px) {
+    padding: 30px 0 30px;
+  }
 `;
 export const CakedetailPrice = styled.ul`
   margin-bottom: 30px;
@@ -249,19 +263,34 @@ export const CakedatailTitleLi = styled.li`
 export const CakedetailH2 = styled.h2`
   font-size: 2.6rem;
   font-weight: 500;
+  @media screen and (max-width: 1200px) {
+    font-size: 1.5rem;
+  }
+  @media screen and (max-width: 1024px) {
+    font-size: 1.2rem;
+  }
 `;
 export const CakedeatailLi = styled.li`
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   margin-top: 8px;
   line-height: 1.2;
   &:nth-child(3) {
     font-size: 1.8rem;
     margin: 20px 0 0;
   }
+  @media screen and (max-width: 1024px) {
+    &:nth-child(3) {
+      font-size: 1.5rem;
+      margin: 20px 0 0;
+    }
+  }
 `;
 export const CakedetailInformation = styled.ul``;
 export const CakedeatailLitxt = styled.li`
   margin-bottom: 20px;
+  @media screen and (max-width: 1024px) {
+    font-size: 14px;
+  }
 `;
 export const CakedetailAllergy = styled.li`
   position: relative;
@@ -274,6 +303,9 @@ export const CakedetailAllergycause = styled.h3`
   font-size: 18px;
   font-weight: 500;
   display: inline-block;
+  @media screen and (max-width: 1024px) {
+    font-size: 14px;
+  }
 `;
 export const CakedetailDownIcon = styled(AiOutlineDown)`
   position: absolute;
@@ -296,6 +328,9 @@ export const CakedetailAllergydes = styled.p`
   font-weight: 500;
   margin-bottom: 15px;
   color: #7c7a7a;
+  @media screen and (max-width: 1024px) {
+    font-size: 14px;
+  }
 `;
 export const CakedetailIcon = styled.div``;
 export const TotallOrderBtnWrap = styled.div`
