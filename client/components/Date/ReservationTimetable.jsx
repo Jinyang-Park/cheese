@@ -83,6 +83,18 @@ function ReservationTimetable() {
           );
         })}
       </ReservationtimetableLi>
+      <ReservationSelect2>
+        <ReservationUl>
+          <ReservationLi>
+            <ReservationSelectBtn></ReservationSelectBtn>
+            선택
+          </ReservationLi>
+          <ReservationLi>
+            <ReservationDisabledBtn></ReservationDisabledBtn>
+            불가
+          </ReservationLi>
+        </ReservationUl>
+      </ReservationSelect2>
     </ReservationtimetableUl>
   );
 }
@@ -108,4 +120,40 @@ export const ReservationtimeBtn = styled.button`
   &:hover {
     border: 1px solid #ffa0c5;
   }
+  @media screen and (max-width: 480px) {
+    width: 100px;
+    margin: 10px 22px;
+  }
+`;
+export const ReservationSelect2 = styled.div`
+  /* position: absolute; */
+  text-align: right;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  display: inline-block;
+`;
+export const ReservationUl = styled.ul`
+  width: 95%;
+  margin: 0 auto;
+`;
+export const ReservationLi = styled.li`
+  display: inline-block;
+  line-height: 20px;
+`;
+export const ReservationSelectBtn = styled.div`
+  border-radius: 50px;
+  background-color: #ffa0c5;
+  width: 20px;
+  height: 20px;
+  margin: 0 10px 0 0;
+  float: left;
+`;
+export const ReservationDisabledBtn = styled.div`
+  border-radius: 50px;
+  background-color: #ddd;
+  width: 20px;
+  height: 20px;
+  margin: 0 10px 0 20px;
+  float: left;
 `;

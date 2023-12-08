@@ -114,7 +114,7 @@ function ReservationDate() {
               <ReservationTimetable />
             </ReservationTime>
             {/* 선택, 비활성화 버튼 */}
-            <ReservationSelect2>
+            {/* <ReservationSelect2>
               <ReservationUl>
                 <ReservationLi>
                   <ReservationSelectBtn></ReservationSelectBtn>
@@ -125,7 +125,7 @@ function ReservationDate() {
                   불가
                 </ReservationLi>
               </ReservationUl>
-            </ReservationSelect2>
+            </ReservationSelect2> */}
             {/*예약 주의사항 */}
             <ReservationInfo>
               <ReservationFlex>
@@ -167,6 +167,9 @@ export const ReservationInner = styled.div`
   margin: 0 auto;
   position: relative;
   margin-bottom: 120px;
+  @media screen and (max-width: 1400px) {
+    width: 90%;
+  }
 `;
 export const ReservationTabUl = styled.ul`
   display: grid;
@@ -216,6 +219,18 @@ export const ReservationDatediv = styled.div`
   width: 700px;
   /* float: left; */
   padding: 20px;
+  @media screen and (max-width: 1200px) {
+    width: 60%;
+  }
+  @media screen and (max-width: 1000px) {
+    width: 700px;
+  }
+  @media screen and (max-width: 740px) {
+    width: 100%;
+  }
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
 `;
 export const ReservationSelect = styled.div`
   position: absolute;
@@ -225,17 +240,32 @@ export const ReservationSelect = styled.div`
   margin-bottom: 20px;
   display: inline-block;
 `;
-export const ReservationSelect2 = styled.div`
-  position: absolute;
-  text-align: right;
-  width: 100%;
-  top: 340px;
-  margin-bottom: 20px;
-  display: inline-block;
-`;
+// export const ReservationSelect2 = styled.div`
+//   position: absolute;
+//   text-align: right;
+//   width: 100%;
+//   top: 340px;
+//   margin-bottom: 20px;
+//   display: inline-block;
+//   @media screen and (max-width: 1400px) {
+//     top: 440px;
+//   }
+// `;
 export const ReservationUl = styled.ul`
   width: 90%;
   margin: 0 auto;
+  @media screen and (max-width: 1400px) {
+    width: 100%;
+  }
+  @media screen and (max-width: 1200px) {
+    width: 110%;
+  }
+  @media screen and (max-width: 1000px) {
+    width: 130%;
+  }
+  @media screen and (max-width: 740px) {
+    width: 170%;
+  }
 `;
 export const ReservationLi = styled.li`
   display: inline-block;
@@ -262,13 +292,26 @@ export const ReservationTime = styled.div`
   /* float: right; */
   padding: 20px 20px 30px 30px;
   margin-top: 10px;
+  @media screen and (max-width: 480px) {
+    padding: 20px 20px;
+    margin-top: 10px;
+  }
 `;
+
 export const ReservationInfo = styled.div`
   position: absolute;
   top: 590px;
   padding-left: 20px;
   /* text-indent: -10px; */
   margin: 20px 0 30px;
+  @media screen and (max-width: 1000px) {
+    top: 80%;
+    width: 95%;
+  }
+  @media screen and (max-width: 480px) {
+    top: 84%;
+    width: 95%;
+  }
 `;
 export const ReservationInfoH2 = styled.h2`
   padding-left: 8px;
@@ -281,6 +324,9 @@ export const ReservationInfoH2 = styled.h2`
 export const ReservationInfoP = styled.p`
   margin-bottom: 5px;
   line-height: 1.6;
+  @media screen and (max-width: 480px) {
+    font-size: 13px;
+  }
 `;
 export const PiWarningIcon = styled(PiWarningCircleFill)`
   font-size: 30px;
@@ -306,4 +352,9 @@ export const ReservationBtn = styled.button`
 `;
 export const ReservationWrapper = styled.div`
   display: flex;
+  @media screen and (max-width: 1000px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `;

@@ -173,11 +173,17 @@ export const ReWeddingBtn = styled.button`
     content: '(클릭!)';
     margin-left: 5px;
   }
+  @media screen and (max-width: 480px) {
+    font-size: 0.6rem;
+  }
 `;
 export const ReWeddingP = styled.p`
   line-height: 22px;
   font-size: 1rem;
   margin-top: 20px;
+  @media screen and (max-width: 480px) {
+    font-size: 0.9rem;
+  }
 `;
 export const ReWeddingP2 = styled.p``;
 export const ReWeddingModalBtn = styled.button`
@@ -188,4 +194,7 @@ export const ReWeddingModalBtn = styled.button`
   text-decoration: underline;
   background-color: transparent;
   margin-top: 10px;
+  @media screen and (max-width: 480px) {
+    font-size: 0.9rem;
+  }
 `;

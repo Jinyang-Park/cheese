@@ -104,6 +104,18 @@ export const ModalWrap = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   padding-bottom: 50px;
+  @media screen and (max-width: 1024px) {
+    /* padding-bottom: 0px; */
+    width: 50%;
+  }
+  @media screen and (max-width: 720px) {
+    padding-bottom: 10px;
+  }
+  @media screen and (max-width: 480px) {
+    width: 70%;
+    padding-bottom: 10px;
+    min-height: 0px;
+  }
 `;
 export const ModalTitle = styled.h2`
   position: absolute;
@@ -115,6 +127,12 @@ export const ModalTitle = styled.h2`
   font-size: 1.2rem;
   font-weight: 600;
   width: 100%;
+  @media screen and (max-width: 720px) {
+    font-size: 14px;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 12px;
+  }
 `;
 export const ModalcloseBtn = styled(GrClose)`
   width: 30px;
@@ -124,6 +142,12 @@ export const ModalcloseBtn = styled(GrClose)`
   top: 25px;
   right: 30px;
   cursor: pointer;
+  @media screen and (max-width: 480px) {
+    width: 20px;
+    height: 20px;
+    top: 28px;
+    right: 25px;
+  }
 `;
 export const ModalReserveInfo = styled.div`
   width: 90%;
@@ -131,10 +155,20 @@ export const ModalReserveInfo = styled.div`
   height: calc(100% - 80px);
   margin: 0 auto;
   margin-top: 110px;
+  @media screen and (max-width: 720px) {
+    margin-top: 80px;
+  }
 `;
 export const ModalUl = styled.ul`
   margin-top: 50px;
   padding-bottom: 30px;
+  @media screen and (max-width: 970px) {
+    /* padding-bottom: 0px; */
+    padding-bottom: 30px;
+  }
+  @media screen and (max-width: 720px) {
+    padding-bottom: 0px;
+  }
 `;
 export const ModalLi = styled.li`
   background-color: #f1e5a8;
@@ -146,17 +180,41 @@ export const ModalLi = styled.li`
   text-align: center;
   font-size: 1rem;
   line-height: 20px;
+  @media screen and (max-width: 480px) {
+    font-size: 0.9rem;
+  }
 `;
 export const Modallip = styled.p`
   line-height: 20px;
   padding-left: 40px;
   margin-bottom: 20px;
+  @media screen and (max-width: 970px) {
+    /* padding-bottom: 0px; */
+    font-size: 14px;
+  }
+  @media screen and (max-width: 720px) {
+    font-size: 12px;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 10px;
+    padding-left: 30px;
+  }
 `;
 export const ModalWarings = styled.h3`
   border-top: 1px solid #ddd;
   padding-top: 30px;
   margin-bottom: 15px;
   font-weight: 600;
+  @media screen and (max-width: 970px) {
+    font-size: 14px;
+  }
+  @media screen and (max-width: 720px) {
+    font-size: 14px;
+    padding-top: 10px;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 12px;
+  }
 `;
 export const ModalWaringsInfo = styled.p`
   margin-bottom: 10px;
@@ -168,5 +226,17 @@ export const ModalWaringsInfo = styled.p`
     content: '-';
     margin-left: -10px;
     margin-right: 5px;
+  }
+  @media screen and (max-width: 1024x) {
+    font-size: 12px;
+  }
+  @media screen and (max-width: 970px) {
+    font-size: 12px;
+  }
+  @media screen and (max-width: 720px) {
+    font-size: 12px;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 10px;
   }
 `;
