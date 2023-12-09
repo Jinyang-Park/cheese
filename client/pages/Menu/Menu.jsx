@@ -158,6 +158,9 @@ export const ReservationInner = styled.div`
   margin: 0 auto;
   position: relative;
   margin-bottom: 120px;
+  @media screen and (max-width: 1400px) {
+    width: 90%;
+  }
 `;
 export const ReservationTabUl = styled.ul`
   display: grid;
@@ -280,6 +283,12 @@ export const ReservationMenuList = styled.ul`
   -moz-column-gap: 20px;
   column-gap: 20px;
   padding: 20px;
+  @media screen and (max-width: 600px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media screen and (max-width: 480px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
 export const CakeLi = styled.li`
   text-align: center;
@@ -324,6 +333,9 @@ export const ReservtionCategory = styled.div`
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
+  }
 `;
 export const CategoryBtn = styled.button`
   padding: 0 15px;
