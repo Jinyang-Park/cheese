@@ -156,7 +156,8 @@ export const CartItemMiddleWrap = styled.div`
     width: 28%;
   }
   @media screen and (max-width: 480px) {
-    margin-right: -10px;
+    /* margin-right: -10px; */
+    margin-right: -30px;
   }
 `;
 export const CartItemliTitle = styled.h3`

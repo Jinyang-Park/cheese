@@ -102,6 +102,9 @@ export const OrderListBtn = styled.button`
   color: white;
   padding: 12px 18px;
   border-radius: 50px;
+  @media screen and (max-width: 480px) {
+    font-size: 14px;
+  }
 `;
 export const OrderListDTWrap = styled.div`
   border-radius: 20px;

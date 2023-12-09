@@ -5,6 +5,7 @@ import NickName from '../../components/Mypage/NickName';
 import axios from 'axios';
 import OrderListGroup from '../../components/Mypage/OrderListGroup';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
+
 function Mypage() {
   const [cartInfor, setCartInfor] = useState(null);
   console.log('cartInfor', cartInfor);
