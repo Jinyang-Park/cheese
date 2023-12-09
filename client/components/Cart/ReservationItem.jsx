@@ -10,9 +10,9 @@ import {
   removeFromCart,
   setCartItemQuantity,
 } from '../../redux/modules/ReservationsCakeDetail';
-function ReservationItem({ item }) {
-  console.log('아이템', item);
+import { useParams } from 'react-router-dom';
 
+function ReservationItem({ item }) {
   const dispatch = useDispatch();
 
   // useEffect(() => {
@@ -69,6 +69,7 @@ function ReservationItem({ item }) {
         <CartItemResponsive>
           <CartItemLeftli>{item.layer.Layer}</CartItemLeftli>
           <CartItemLeftli>/</CartItemLeftli>
+
           <CartItemLeftli>{item.tastes.join(', ')}</CartItemLeftli>
         </CartItemResponsive>
       </CartItemWrap>

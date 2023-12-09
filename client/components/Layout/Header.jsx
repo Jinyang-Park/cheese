@@ -4,7 +4,7 @@ import Logo from '../../public/assets/logo.png';
 import Flower from '../../public/assets/flower.png';
 import Leaf from '../../public/assets/leaf.png';
 import Door from '../../public/assets/door.png';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import CommonStyles from '../../utils/CommonStyles';
 import axios from 'axios';
 import { AuthContext } from '../../contexts/AuthContext';
@@ -12,6 +12,8 @@ import { PiListBold } from 'react-icons/pi';
 import { RxCross2 } from 'react-icons/rx';
 
 export default function Header() {
+  const { type } = useParams();
+
   const { checkAuth, setCheckAuth } = useContext(AuthContext);
   // 반응형 토글
   const [isToggled, setIsToggled] = useState(false);
@@ -170,7 +172,7 @@ export default function Header() {
                     <LoginImg src={Leaf} />
                     <MypageliTxt>MY PAGE</MypageliTxt>
                   </Loginli>
-                  <Loginli onClick={() => navigate(`/Cart`)}>
+                  <Loginli onClick={() => navigate(`/Cart/${type}`)}>
                     <LoginImg src={Door} />
                     <CartliTxt>CART</CartliTxt>
                   </Loginli>

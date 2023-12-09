@@ -34,7 +34,7 @@ const Router = () => {
           path='/Reservation/date/:type/menupick/menudetail'
           element={<Menudetail />}
         ></Route>
-        <Route path='/Cart' element={<ShoppingCart />}></Route>
+        <Route path='/Cart/:type' element={<ShoppingCart />}></Route>
         <Route path='/Mypage' element={<Mypage />}></Route>
         <Route path='/Menu' element={<Menu />}></Route>
         <Route

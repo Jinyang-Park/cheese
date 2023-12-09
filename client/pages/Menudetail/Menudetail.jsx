@@ -50,9 +50,12 @@ function Menudetail() {
       return;
       // tastes &&를 추가하여 tastes가 undefined 또는 null이 아닌 경우에만 length 속성을 확인하도록 수정
     }
-    if (!tastes || tastes.length < 3) {
-      alert('테이스팅 3가지 맛을 선택해주세요.');
-      return;
+    // type이 reserve이면 해당 아래 if문 실행
+    if (type === 'reserve') {
+      if (tastes.length < 3) {
+        alert('테이스팅 3가지 맛을 선택해주세요.');
+        return;
+      }
     }
     if (
       window.confirm(
@@ -74,7 +77,7 @@ function Menudetail() {
       }
       // 만약 조건문에 다 통과되면 cake, lyaer, price, quantity가 업데이트 되므로 useSelector가 새로 호출이 되며 addToCart액션을 디스패치하여 액션의 payload에는 업데이트 된 cake, layer, price, quantity, tastes 포함된다.'
       dispatch(addToCart(cake, layer, price, quantity, tastes));
-      navigate(`/Cart/`);
+      navigate(`/Cart/${type}?type=${cake.type}&?id=${cake.id}`);
     }
   };
 

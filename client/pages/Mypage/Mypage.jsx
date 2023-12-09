@@ -84,6 +84,9 @@ export const ReservationInner = styled.div`
   margin: 0 auto;
   position: relative;
   margin-bottom: 120px;
+  @media screen and (max-width: 1400px) {
+    width: 90%;
+  }
 `;
 export const ReservationTabUl = styled.ul`
   display: grid;

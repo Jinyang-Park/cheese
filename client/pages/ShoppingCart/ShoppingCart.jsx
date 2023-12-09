@@ -4,7 +4,7 @@ import CommonStyles from '../../utils/CommonStyles';
 import ReservationSetDT from '../../components/Cart/ReservationSetDT';
 import { useDispatch, useSelector } from 'react-redux';
 import ReservationItem from '../../components/Cart/ReservationItem';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { cartReset } from '../../redux/modules/ReservationsCakeDetail';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
@@ -12,6 +12,8 @@ import { dtReset } from '../../redux/modules/ReservationsDT';
 import { AuthContext } from '../../contexts/AuthContext';
 
 function ShoppingCart() {
+  const { type } = useParams();
+  console.log('예약 상품 추각 콘솔로그', type);
   // 결제완료 후 시간 버튼 비활성화 context api
   const { PaidTime, setPaidTime } = useContext(AuthContext);
 
@@ -116,7 +118,7 @@ function ShoppingCart() {
             <CartItemBtnWrap>
               <CartItemAddToProuductBtn
                 onClick={() => {
-                  navigate(`/Reservation/date/menupick/`);
+                  navigate(`/Reservation/date/${type}/menupick`);
                 }}
               >
                 예약상품추가
