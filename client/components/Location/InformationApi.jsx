@@ -41,11 +41,17 @@ export const InformationTitle = styled.h3`
   font-weight: 500;
   margin-bottom: 20px;
   display: inline-block;
+  @media screen and (max-width: 1400px) {
+    margin-top: 50px;
+  }
 `;
 export const Inforarray = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 5px;
+  @media screen and (max-width: 1400px) {
+    justify-content: center;
+  }
 `;
 
 export const InformationCall = styled(IoCallOutline)`
