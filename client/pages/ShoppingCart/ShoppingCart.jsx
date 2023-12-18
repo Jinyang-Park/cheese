@@ -86,6 +86,10 @@ function ShoppingCart() {
       .catch((error) => console.error(error));
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <CommonStyles>

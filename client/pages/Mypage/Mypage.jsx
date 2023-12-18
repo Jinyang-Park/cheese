@@ -26,6 +26,7 @@ function Mypage() {
 
   useEffect(() => {
     fetchCartData();
+    window.scrollTo(0, 0);
   }, []);
 
   return (
