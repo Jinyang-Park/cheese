@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CommonStyles from '../../utils/CommonStyles';
 import styled from 'styled-components';
 import { PiWarningCircleFill } from 'react-icons/pi';
@@ -10,7 +10,7 @@ import { reset, setCake } from '../../redux/modules/ReservationsCakeDetail';
 
 function Menupick() {
   const { type } = useParams();
-  console.log(type);
+
   // 카테고리
   const [selectedCategory, setSelectedCategory] = useState('전체');
   // 검색어 필터링
@@ -37,6 +37,9 @@ function Menupick() {
     setSearchKeyword(searchKeyword);
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   // const HandleCakeClick = (cake) => {
   //   console.log(cake);
   //   // 상태 초기화

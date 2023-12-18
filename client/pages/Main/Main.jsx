@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CommonStyles from '../../utils/CommonStyles';
 import styled from 'styled-components';
 import CakeMain from '../../public/assets/main2.png';
@@ -6,9 +6,9 @@ import WeddingCakeSlider from './../../components/Main/WeddingCakeSlider';
 import CupCakeSlider from '../../components/Main/CupCakeSlider';
 import { CakeList } from '../../common/CakeList';
 function Main() {
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  // }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <MainWrapper>

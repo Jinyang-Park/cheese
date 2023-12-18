@@ -84,7 +84,7 @@ function Menudetail() {
   // 디테일 페이지 오면 맨위로 스크롤되서 페이지 마운트됨
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [cake]);
+  }, []);
 
   return (
     <>

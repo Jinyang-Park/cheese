@@ -145,7 +145,9 @@ export const SliderWeddingCakeTtile = styled.h1`
   font-size: 25px;
   margin-bottom: 20px;
   @media screen and (max-width: 480px) {
-    margin-left: 35px;
+    display: flex;
+    justify-content: center;
+    margin-left: 0px;
   }
 `;
 export const SliderKoname = styled.p`

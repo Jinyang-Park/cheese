@@ -9,7 +9,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 function ReservationDate() {
   const { type } = useParams();
-  console.log(type);
+
   // 여러 개의 상태 값을 선택하고 싶을 때는 useSelector를 여러 번 사용하면 됩니다
   // 선택한 날짜와 시간을 불러오는 코드 부분
   const ReservationCakeTime = useSelector((state) => state.ReservationsDT.time);
@@ -75,6 +75,10 @@ function ReservationDate() {
   //     window.removeEventListener('beforeunload', preventClose);
   //   };
   // }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <CommonStyles>
       <ReservationWrap>
