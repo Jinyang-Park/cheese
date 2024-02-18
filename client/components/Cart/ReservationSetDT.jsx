@@ -1,10 +1,14 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { cartReset } from '../../redux/modules/ReservationsCakeDetail';
+import { dtReset } from '../../redux/modules/ReservationsDT';
 
 function ReservationSetDT() {
   const navigate = useNavigate();
+  // 날짜 변경 시 disptch로 장바구니 리셋시키기
+  const dispatch = useDispatch();
 
   // 1. const ReservationSetTime = useSelector((state) => state.ReservationsDT.time)
   // 2.  {!ReservationSetTime.time || !ReservationSetlDate ? 이 부분에서  Cannot read properties of null (reading 'time')
@@ -30,6 +34,9 @@ function ReservationSetDT() {
       // 확인을 눌르면 모든 예약 정보 삭제
       localStorage.clear();
       navigate(`/Reservation`);
+      // 장바구니, 날짜 리셋
+      dispatch(cartReset());
+      dispatch(dtReset());
     }
   };
   return (
