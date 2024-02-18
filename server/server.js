@@ -12,6 +12,7 @@ const mysql = require('mysql');
 // 로그인 쿠키
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
+const { ifError } = require('assert');
 
 // JSON 파일
 const InformationJSON = fs.readFileSync('./CheeseInformation.json');
@@ -28,7 +29,7 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: 'http://localhost:3000',
-    methods: ['GET', 'POST'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
     //서버간의 통신에서 쿠키를 사용하기 때문 true로 설정
     credentials: true,
   })
@@ -80,6 +81,7 @@ const verifyUser = (req, res, next) => {
         // name 키를 가지고 있고 원래 변수 name의 값을 포함하는것이다.
         // const token = jwt.sign({ name }, 'jwt-secret-key', { expiresIn: '1d',});
         req.name = decoded.name;
+        req.userid = decoded.userid;
         // console.log(req.name); // 로그인시 username이 찍힌다.
         next();
       }
@@ -89,7 +91,9 @@ const verifyUser = (req, res, next) => {
 
 // 메인화면
 app.get('/header', verifyUser, (req, res) => {
-  return res.status(200).send({ message: 'success', name: req.name });
+  return res
+    .status(200)
+    .send({ message: 'success', name: req.name, userid: req.userid });
 });
 
 // MYSQL 회원가입 및 이메일 중복 검사
@@ -145,12 +149,13 @@ app.post('/login', (req, res) => {
       }
       if (results.length > 0) {
         // 성공했을 경우
+        const userid = results[0].id;
         const name = results[0].username;
-        const token = jwt.sign({ name }, 'jwt-secret-key', {
+        const token = jwt.sign({ name, userid }, 'jwt-secret-key', {
           expiresIn: '1d',
         });
         res.cookie('token', token);
-        res.status(200).send({ message: 'success' });
+        res.status(200).send({ message: 'success', userid });
       } else {
         // 입력한 이메일 주소가 일치하지 않을 경우
         res.status(401).send({ message: 'user-not-found' });
@@ -179,6 +184,59 @@ app.post('/cart', (req, res) => {
     } else {
       console.log('cart_date', cart);
       res.status(200).send({ message: 'Cart saved successfully' });
+    }
+  });
+});
+
+// 장바구니 정보 가져오기
+app.get('/getPaidCart', (req, res) => {
+  const query = 'SELECT * FROM cart';
+
+  db.query(query, (error, result) => {
+    if (error) {
+      console.log(error);
+      res.status(500).send({ message: 'Server Error' });
+    } else {
+      const parseCartResults = result.map((result) => {
+        return {
+          ...result,
+          cart_data: JSON.parse(result.cart_data),
+        };
+      });
+      // 결과를 클라이언트에게 반환
+      res.status(200).send({ cartdata: parseCartResults });
+    }
+  });
+});
+
+// 결제 상품 취소
+app.delete('/delete/:id', (req, res) => {
+  const itemId = parseInt(req.params.id);
+
+  const query = 'DELETE FROM cart WHERE id = ?';
+
+  db.query(query, [itemId], (error, result) => {
+    if (error) {
+      console.log(error);
+      res.status(500).send({ message: 'Server Error' });
+    } else {
+      res.status(200).send({ message: 'Successfully deleted' });
+    }
+  });
+});
+
+// 결제 날짜 시간 취소
+app.delete('/deleteDateTime/:id', (req, res) => {
+  const DateTimeId = parseInt(req.params.id);
+
+  const query = 'DELETE FROM paidTime WHERE id = ?';
+
+  db.query(query, [DateTimeId], (error, result) => {
+    if (error) {
+      console.log(error);
+      res.status(500).send({ message: 'Server Error' });
+    } else {
+      res.status(200).send({ message: 'Successfully deleted' });
     }
   });
 });
@@ -221,6 +279,26 @@ app.get('/getPaidTime', (req, res) => {
       res.status(200).send({ dateTime: parsedResults });
     }
   });
+});
+
+// 닉네임 변경
+app.post('/changeUsername', (req, res) => {
+  const userId = req.body.userId;
+  const newUsername = req.body.NewUsername;
+
+  db.query(
+    'UPDATE users SET username = ? WHERE id =?',
+    [newUsername, userId],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        res.status(500).send({ message: 'Server Error' });
+      } else {
+        console.log('NewUsername changed successful');
+        res.status(200).send({ message: 'username-updated' });
+      }
+    }
+  );
 });
 
 // 크롤링 JSON

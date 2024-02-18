@@ -55,12 +55,16 @@ function ReservationSetDT() {
 export default ReservationSetDT;
 export const ReservationDate = styled.div`
   border: 1px solid #ffdb7e;
+  display: flex;
   width: 100%;
-  /* padding: 15px;
-  border-radius: 500px; */
   border-radius: 100px;
   height: 45px;
   padding: 8px 20px;
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
+    align-items: center;
+    height: 120px;
+  }
 `;
 export const ReservationBox = styled.div`
   padding: 15px 10px;
@@ -71,18 +75,27 @@ export const ReservationTitle = styled.h3`
   font-size: 16px;
   font-weight: 600;
   display: inline-block;
+  @media screen and (max-width: 480px) {
+    font-size: 14px;
+  }
 `;
 export const ReservationFinalDate = styled.h3`
   margin-left: 10px;
   font-size: 16px;
   font-weight: 400;
   display: inline-block;
+  @media screen and (max-width: 480px) {
+    font-size: 14px;
+  }
 `;
 export const ReservationFinalTime = styled.h3`
   margin-left: 8px;
   font-size: 16px;
   font-weight: 400;
   display: inline-block;
+  @media screen and (max-width: 480px) {
+    font-size: 14px;
+  }
 `;
 export const ChangeDTBtn = styled.button`
   margin-left: 20px;
@@ -92,6 +105,9 @@ export const ChangeDTBtn = styled.button`
   max-width: 60px;
   padding: 5px 0px;
   border-radius: 50px;
+  @media screen and (max-width: 480px) {
+    margin: 5px 0px 0px 0px;
+  }
 `;
 export const ReservationemptyDT = styled.h3`
   margin-left: 10px;

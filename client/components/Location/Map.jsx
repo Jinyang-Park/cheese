@@ -1,7 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 export default function Map({ post }) {
+  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
+
+  // 지도 반응형
+  useEffect(() => {
+    const handleResize = () => {
+      setViewportWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   useEffect(() => {
     const { naver } = window;
 
@@ -21,7 +34,6 @@ export default function Map({ post }) {
         position: naver.maps.Position.TOP_RIGHT,
       },
     });
-
     // 이미지 마커 생성
     const markerOptions = {
       position: location,
@@ -48,7 +60,9 @@ export default function Map({ post }) {
           '}',
           '</div>',
         ].join(''),
+        //마커의 크기 지정
         size: new naver.maps.Size(38, 58),
+        //마커의 기준위치 지정
         anchor: new naver.maps.Point(50, 58),
       },
     };
@@ -76,7 +90,12 @@ export default function Map({ post }) {
     <div
       id='map'
       className='map'
-      style={{ width: '100%', height: '390px' }}
+      // viewportWidth가 756이 되면 지도 반응형
+      style={
+        viewportWidth < 756
+          ? { width: '90%', height: '290px' }
+          : { width: '100%', height: '390px' }
+      }
     ></div>
   );
 }

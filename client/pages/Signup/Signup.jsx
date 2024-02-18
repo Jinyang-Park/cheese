@@ -172,7 +172,6 @@ export const LoginPasswordDiv = styled.div`
   padding: 15px 0;
 `;
 export const LoginPasswordLabel = styled.label`
-  width: 25%;
   min-width: 60px;
   display: inline-block;
 `;

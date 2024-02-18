@@ -106,11 +106,18 @@ export const CakedeTastingSelectionBtn = styled.button`
     background-color: #ffa0c5;
     color: #ffffff;
   }
+  @media screen and (max-width: 1024px) {
+    padding: 10px 10px;
+    font-size: 12px;
+  }
 `;
 export const CakedetailTastingSelectionTitle = styled.h3`
   font-size: 18px;
   font-weight: 500;
   display: inline-block;
+  @media screen and (max-width: 1024px) {
+    font-size: 14px;
+  }
 `;
 export const CakedetailDownIcon = styled(AiOutlineDown)`
   position: absolute;
@@ -133,4 +140,7 @@ export const Cakedetailselectdes = styled.h3`
   font-weight: 500;
   margin-bottom: 15px;
   color: #7c7a7a;
+  @media screen and (max-width: 1024px) {
+    font-size: 14px;
+  }
 `;

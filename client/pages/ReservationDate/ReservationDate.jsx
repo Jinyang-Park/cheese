@@ -5,10 +5,11 @@ import ReservationCalendar from '../../components/Date/ReservationCalendar ';
 import ReservationTimetable from '../../components/Date/ReservationTimetable';
 import { PiWarningCircleFill } from 'react-icons/pi';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import history from '../../common/history';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function ReservationDate() {
+  const { type } = useParams();
+
   // 여러 개의 상태 값을 선택하고 싶을 때는 useSelector를 여러 번 사용하면 됩니다
   // 선택한 날짜와 시간을 불러오는 코드 부분
   const ReservationCakeTime = useSelector((state) => state.ReservationsDT.time);
@@ -26,7 +27,7 @@ function ReservationDate() {
       alert('예약시간을 선택해주세요.');
       return;
     } else {
-      navigate('/Reservation/date/menupick');
+      navigate(`/Reservation/date/${type}/menupick`);
     }
   };
 
@@ -74,6 +75,10 @@ function ReservationDate() {
   //     window.removeEventListener('beforeunload', preventClose);
   //   };
   // }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <CommonStyles>
       <ReservationWrap>
@@ -91,10 +96,29 @@ function ReservationDate() {
         </ReservationTabUl>
         {/* 예약 날짜, 시간 */}
         <ReservationDateWrap>
-          <ReservationDatediv>
-            <ReservationCalendar />
+          <ReservationWrapper>
+            <ReservationDatediv>
+              <ReservationCalendar />
+              {/* 선택, 비활성화 버튼 */}
+              <ReservationSelect>
+                <ReservationUl>
+                  <ReservationLi>
+                    <ReservationSelectBtn></ReservationSelectBtn>
+                    선택
+                  </ReservationLi>
+                  <ReservationLi>
+                    <ReservationDisabledBtn></ReservationDisabledBtn>
+                    불가
+                  </ReservationLi>
+                </ReservationUl>
+              </ReservationSelect>
+            </ReservationDatediv>
+            {/* 시간 버튼 */}
+            <ReservationTime>
+              <ReservationTimetable />
+            </ReservationTime>
             {/* 선택, 비활성화 버튼 */}
-            <ReservationSelect>
+            {/* <ReservationSelect2>
               <ReservationUl>
                 <ReservationLi>
                   <ReservationSelectBtn></ReservationSelectBtn>
@@ -105,42 +129,25 @@ function ReservationDate() {
                   불가
                 </ReservationLi>
               </ReservationUl>
-            </ReservationSelect>
-          </ReservationDatediv>
-          {/* 시간 버튼 */}
-          <ReservationTime>
-            <ReservationTimetable />
-          </ReservationTime>
-          {/* 선택, 비활성화 버튼 */}
-          <ReservationSelect2>
-            <ReservationUl>
-              <ReservationLi>
-                <ReservationSelectBtn></ReservationSelectBtn>
-                선택
-              </ReservationLi>
-              <ReservationLi>
-                <ReservationDisabledBtn></ReservationDisabledBtn>
-                불가
-              </ReservationLi>
-            </ReservationUl>
-          </ReservationSelect2>
-          {/*예약 주의사항 */}
+            </ReservationSelect2> */}
+            {/*예약 주의사항 */}
+            <ReservationInfo>
+              <ReservationFlex>
+                <PiWarningIcon />
+                <ReservationInfoH2>예약주의사항</ReservationInfoH2>
+              </ReservationFlex>
+              <ReservationInfoP>
+                예약은 최소 2일 전 ~ 최대 7일 전에만 가능합니다.
+              </ReservationInfoP>
+            </ReservationInfo>
+          </ReservationWrapper>
+          {/* 예약  버튼*/}
+          <ReservationBtnWrap>
+            <ReservationBtn onClick={hanldeReservationButtonClick}>
+              예약시간 설정하기
+            </ReservationBtn>
+          </ReservationBtnWrap>
         </ReservationDateWrap>
-        <ReservationInfo>
-          <ReservationFlex>
-            <PiWarningIcon />
-            <ReservationInfoH2>예약주의사항</ReservationInfoH2>
-          </ReservationFlex>
-          <ReservationInfoP>
-            예약은 최소 2일 전 ~ 최대 7일 전에만 가능합니다.
-          </ReservationInfoP>
-        </ReservationInfo>
-        {/* 예약  버튼*/}
-        <ReservationBtnWrap>
-          <ReservationBtn onClick={hanldeReservationButtonClick}>
-            예약시간 설정하기
-          </ReservationBtn>
-        </ReservationBtnWrap>
       </ReservationInner>
     </CommonStyles>
   );
@@ -163,6 +170,10 @@ export const ReservationInner = styled.div`
   width: 1366px;
   margin: 0 auto;
   position: relative;
+  margin-bottom: 120px;
+  @media screen and (max-width: 1400px) {
+    width: 90%;
+  }
 `;
 export const ReservationTabUl = styled.ul`
   display: grid;
@@ -203,8 +214,8 @@ export const ReservationStep2Li = styled.li`
 `;
 export const ReservationA = styled.a``;
 export const ReservationDateWrap = styled.div`
-  display: flex;
-  padding-bottom: 100px;
+  /* display: flex; */
+  padding-bottom: 20px;
   border: 3px solid #f1e4ab;
   border-width: 0 3px 3px 3px;
 `;
@@ -212,6 +223,18 @@ export const ReservationDatediv = styled.div`
   width: 700px;
   /* float: left; */
   padding: 20px;
+  @media screen and (max-width: 1200px) {
+    width: 60%;
+  }
+  @media screen and (max-width: 1000px) {
+    width: 700px;
+  }
+  @media screen and (max-width: 740px) {
+    width: 100%;
+  }
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
 `;
 export const ReservationSelect = styled.div`
   position: absolute;
@@ -221,17 +244,32 @@ export const ReservationSelect = styled.div`
   margin-bottom: 20px;
   display: inline-block;
 `;
-export const ReservationSelect2 = styled.div`
-  position: absolute;
-  text-align: right;
-  width: 100%;
-  top: 340px;
-  margin-bottom: 20px;
-  display: inline-block;
-`;
+// export const ReservationSelect2 = styled.div`
+//   position: absolute;
+//   text-align: right;
+//   width: 100%;
+//   top: 340px;
+//   margin-bottom: 20px;
+//   display: inline-block;
+//   @media screen and (max-width: 1400px) {
+//     top: 440px;
+//   }
+// `;
 export const ReservationUl = styled.ul`
   width: 90%;
   margin: 0 auto;
+  @media screen and (max-width: 1400px) {
+    width: 100%;
+  }
+  @media screen and (max-width: 1200px) {
+    width: 110%;
+  }
+  @media screen and (max-width: 1000px) {
+    width: 130%;
+  }
+  @media screen and (max-width: 740px) {
+    width: 170%;
+  }
 `;
 export const ReservationLi = styled.li`
   display: inline-block;
@@ -258,13 +296,26 @@ export const ReservationTime = styled.div`
   /* float: right; */
   padding: 20px 20px 30px 30px;
   margin-top: 10px;
+  @media screen and (max-width: 480px) {
+    padding: 20px 20px;
+    margin-top: 10px;
+  }
 `;
+
 export const ReservationInfo = styled.div`
   position: absolute;
   top: 590px;
   padding-left: 20px;
   /* text-indent: -10px; */
   margin: 20px 0 30px;
+  @media screen and (max-width: 1000px) {
+    top: 80%;
+    width: 95%;
+  }
+  @media screen and (max-width: 480px) {
+    top: 84%;
+    width: 95%;
+  }
 `;
 export const ReservationInfoH2 = styled.h2`
   padding-left: 8px;
@@ -277,6 +328,9 @@ export const ReservationInfoH2 = styled.h2`
 export const ReservationInfoP = styled.p`
   margin-bottom: 5px;
   line-height: 1.6;
+  @media screen and (max-width: 480px) {
+    font-size: 13px;
+  }
 `;
 export const PiWarningIcon = styled(PiWarningCircleFill)`
   font-size: 30px;
@@ -287,7 +341,7 @@ export const ReservationFlex = styled.div`
 `;
 export const ReservationBtnWrap = styled.div`
   text-align: center;
-  margin: 50px auto 20px;
+  margin: 100px auto 0px;
 `;
 export const ReservationBtn = styled.button`
   background: #ffdb7e;
@@ -299,4 +353,12 @@ export const ReservationBtn = styled.button`
   margin: 3px 1px;
   border-radius: 500px;
   font-size: 1em;
+`;
+export const ReservationWrapper = styled.div`
+  display: flex;
+  @media screen and (max-width: 1000px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `;

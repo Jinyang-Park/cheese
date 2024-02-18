@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import CommonStyles from '../../utils/CommonStyles';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import useAuth from '../../hooks/useAuth';
+import { useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
 
 function Login() {
   const auth = useAuth();
+
+  // 유저의 id를 전역으로 쓰기 위한 context api
+  const { userId, setUsetId } = useContext(AuthContext);
+
   const navigate = useNavigate();
 
   axios.defaults.withCredentials = true;
@@ -27,6 +33,7 @@ function Login() {
         if (res.status === 200) {
           alert('환영합니다!');
           navigate('/');
+          setUsetId(res.data.userid); // 로그인 성공 후 userid 정보 가져오기
         }
       })
       .catch((err) => {

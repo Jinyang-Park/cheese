@@ -12,6 +12,8 @@ import Menupick from './../pages/Menupick/Menupick';
 import Menudetail from '../pages/Menudetail/Menudetail';
 import ShoppingCart from '../pages/ShoppingCart/ShoppingCart';
 import Mypage from '../pages/Mypage/Mypage';
+import MenuInformationDetail from '../pages/MenuInformationDetail/MenuInformationDetail';
+import Footer from '../components/Layout/Footer';
 
 const Router = () => {
   return (
@@ -20,19 +22,30 @@ const Router = () => {
       <Routes>
         <Route path='/' element={<Main />}></Route>
         <Route path='/Reservation' element={<Reservation />}></Route>
-        <Route path='/Reservation/date' element={<ReservationDate />}></Route>
-        <Route path='/Reservation/date/menupick' element={<Menupick />}></Route>
         <Route
-          path='/Reservation/date/menupick/menudetail/:id'
+          path='/Reservation/date/:type'
+          element={<ReservationDate />}
+        ></Route>
+        <Route
+          path='/Reservation/date/:type/menupick'
+          element={<Menupick />}
+        ></Route>
+        <Route
+          path='/Reservation/date/:type/menupick/menudetail'
           element={<Menudetail />}
         ></Route>
-        <Route path='/Cart' element={<ShoppingCart />}></Route>
+        <Route path='/Cart/:type' element={<ShoppingCart />}></Route>
         <Route path='/Mypage' element={<Mypage />}></Route>
         <Route path='/Menu' element={<Menu />}></Route>
+        <Route
+          path='/Menu/menuinformationdetail'
+          element={<MenuInformationDetail />}
+        ></Route>
         <Route path='/Location' element={<Location />}></Route>
         <Route path='/Login' element={<Login />}></Route>
         <Route path='/Signup' element={<Signup />}></Route>
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 };

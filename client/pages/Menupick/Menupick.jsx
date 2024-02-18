@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CommonStyles from '../../utils/CommonStyles';
 import styled from 'styled-components';
 import { PiWarningCircleFill } from 'react-icons/pi';
 import { FiSearch } from 'react-icons/fi';
 import { CakeList } from '../../common/CakeList';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { reset, setCake } from '../../redux/modules/ReservationsCakeDetail';
 
 function Menupick() {
+  const { type } = useParams();
+
   // 카테고리
   const [selectedCategory, setSelectedCategory] = useState('전체');
   // 검색어 필터링
@@ -35,6 +37,24 @@ function Menupick() {
     setSearchKeyword(searchKeyword);
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  // const HandleCakeClick = (cake) => {
+  //   console.log(cake);
+  //   // 상태 초기화
+  //   dispatch(reset());
+
+  //   // cake 전체를 상태에 저장
+  //   dispatch(setCake(cake));
+
+  //   // 페이지 이동 및 cake 정보 넘겨주기
+  //   navigate({
+  //     pathname: '/Reservation/date/menupick/Menudetail/',
+  //     search: `?id=${cake.id}`,
+  //     state: { cake },
+  //   });
+  // };
   return (
     <>
       <CommonStyles>
@@ -108,6 +128,7 @@ function Menupick() {
                   return (
                     <CakeLi key={cake.id}>
                       <CakeClickWrap
+                        // onClick={() => HandleCakeClick(cake)}
                         onClick={() => {
                           // 상태 초기화
                           dispatch(reset());
@@ -117,7 +138,7 @@ function Menupick() {
 
                           // 페이지 이동 및 cake 정보 넘겨주기
                           navigate(
-                            `/Reservation/date/menupick/Menudetail/${cake.id}`,
+                            `/Reservation/date/${type}/menupick/Menudetail?type=${cake.type}&?id=${cake.id}`,
                             { state: { cake } }
                           );
                         }}
@@ -126,7 +147,9 @@ function Menupick() {
                           <CakeImg src={cake.image} />
                         </CakeDiv>
                         <Cakename>{cake.Koname}</Cakename>
-                        <Cakeprice>{cake.price}원</Cakeprice>
+                        <Cakeprice>
+                          {Number(cake.price).toLocaleString()}원
+                        </Cakeprice>
                       </CakeClickWrap>
                     </CakeLi>
                   );
@@ -155,6 +178,10 @@ export const ReservationInner = styled.div`
   width: 1366px;
   margin: 0 auto;
   position: relative;
+  margin-bottom: 120px;
+  @media screen and (max-width: 1400px) {
+    width: 90%;
+  }
 `;
 export const ReservationTabUl = styled.ul`
   display: grid;
@@ -195,7 +222,7 @@ export const ReservationStep2Li = styled.li`
 `;
 export const ReservationA = styled.a``;
 export const ReservationDateWrap = styled.div`
-  padding-bottom: 100px;
+  padding-bottom: 20px;
   border: 3px solid #f1e4ab;
   border-width: 0 3px 3px 3px;
 `;
@@ -297,6 +324,12 @@ export const ReservationMenuList = styled.ul`
   -moz-column-gap: 20px;
   column-gap: 20px;
   padding: 20px;
+  @media screen and (max-width: 600px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media screen and (max-width: 480px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
 export const CakeLi = styled.li`
   text-align: center;

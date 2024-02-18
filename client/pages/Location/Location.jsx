@@ -69,11 +69,16 @@ export default Location;
 export const LocationSection = styled.section`
   position: relative;
   min-height: calc(100vh - 161px);
+  margin-bottom: 120px;
   /* padding-top: 60px; */
 `;
 export const LocationWrap = styled.div`
   display: flex;
   padding-bottom: 50px;
+  @media screen and (max-width: 1400px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 export const LocationTxt = styled.h1`
   padding-top: 200px;
@@ -95,6 +100,9 @@ export const LocationImgSection = styled.div`
 `;
 export const LocationImfor = styled.div`
   width: calc(100% - 300px);
+  @media screen and (max-width: 1400px) {
+    display: contents;
+  }
 `;
 
 export const LocationImfor1 = styled.div`
@@ -104,14 +112,27 @@ export const LocationImfor1 = styled.div`
   /* padding-top: 100%;
   overflow: hidden; */
   float: left;
+  @media screen and (max-width: 1400px) {
+    width: 600px;
+    display: flex;
+    justify-content: center;
+    margin: 0px;
+    float: none;
+  }
 `;
 export const LocationImg = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
+  @media screen and (max-width: 756px) {
+    width: 80%;
+  }
+  @media screen and (max-width: 480px) {
+    width: 60%;
+  }
 `;
 export const LocationImfor2 = styled.div`
   margin-bottom: 50px;
-  width: 100%;
-  float: right;
+  display: flex;
+  justify-content: center;
 `;
