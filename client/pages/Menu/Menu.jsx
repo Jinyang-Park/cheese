@@ -35,6 +35,9 @@ function Menu() {
     setSearchKeyword(searchKeyword);
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <CommonStyles>
