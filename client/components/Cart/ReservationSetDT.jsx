@@ -29,7 +29,7 @@ function ReservationSetDT() {
     ) {
       // 확인을 눌르면 모든 예약 정보 삭제
       localStorage.clear();
-      navigate(`/Reservation/date`);
+      navigate(`/Reservation`);
     }
   };
   return (
