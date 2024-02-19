@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development",
+    "start": "node server/server.js",
     "build": "webpack --progress --mode production",
-    "server": "nodemon server/server.js",
-    "dev": "concurrently \"npm run server\" \"npm run start\""
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:start\"",
+    "dev:start": "webpack-dev-server --mode development",
+    "dev:server": "nodemon server/server.js"
   },
   "author": "",
   "license": "ISC",
