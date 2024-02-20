@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const PORT = process.env.PORT || 5000;
@@ -6,13 +7,14 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const parsing = require('../server/api.js');
 const fs = require('fs');
+
 // MYSQL
 const mysql = require('mysql');
 
 // 로그인 쿠키
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
-const { ifError } = require('assert');
+// const { ifError } = require('assert');
 
 // JSON 파일
 const InformationJSON = fs.readFileSync('./CheeseInformation.json');
@@ -37,10 +39,10 @@ app.use(
 
 // MYSQL
 const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'Wlsdid!92',
-  database: 'singupdb',
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
 });
 
 // connetct를 추가해야 된다.

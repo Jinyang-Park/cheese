@@ -2,9 +2,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const webpack = require('webpack');
-// const dotenv = require('dotenv-webpack');
-const Dotenv = require('dotenv-webpack');
-// dotenv.config();
+// const Dotenv = require('dotenv-webpack');
+require('dotenv').config();
 
 module.exports = {
   mode: 'development', // 실서비스: production
@@ -70,13 +69,16 @@ module.exports = {
       template: './client/public/index.html', // 템플릿 설정
       minify: true, // 압축 설정
     }),
-    new Dotenv(),
+    // new Dotenv(),
     new CleanWebpackPlugin(),
     // dotenv 사용을 위한 설정
-    // new webpack.EnvironmentPlugin([
-    //   'REACT_APP_NAVER_CLIENT_ID',
-    //   'REACT_APP_ACCESS_SECRET',
-    // ]),
+    new webpack.DefinePlugin({
+      'process.env.DB_HOST': JSON.stringify(process.env.DB_HOST),
+      'process.env.DB_USER': JSON.stringify(process.env.DB_USER),
+      'process.env.DB_PASSWORD': JSON.stringify(process.env.DB_PASSWORD),
+      'process.env.DB_NAME': JSON.stringify(process.env.DB_NAME),
+      'process.env.PORT': JSON.stringify(process.env.PORT),
+    }),
     new webpack.ProvidePlugin({
       Buffer: ['buffer', 'Buffer'],
       process: 'process/browser',
