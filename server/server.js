@@ -11,7 +11,7 @@ const fs = require('fs');
 // MYSQL
 // const mysql = require('mysql');
 
-const mysql = require('mysql2/promise');
+const mysql = require('mysql2');
 
 // 로그인 쿠키
 const cookieParser = require('cookie-parser');
