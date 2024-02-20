@@ -49,12 +49,6 @@ const db = mysql.createConnection({
 // connetct를 추가해야 된다.
 db.connect();
 
-// axios로 받을때 작성했던 코드
-// pending이 떠서 await 비동기 처리함
-// const parsingData = async () => {
-//   const parsed = await parsing();
-// };
-
 // verifyUser
 const verifyUser = (req, res, next) => {
   // const token = req.cooies.token; // 스펠링이 에러의 원인
