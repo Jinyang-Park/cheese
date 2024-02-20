@@ -296,6 +296,9 @@ app.get('/api', (req, res) => {
 });
 
 // PORT 확인
-app.listen(PORT, () => {
-  console.log(`Server is running on port {PORT}`);
+// app.listen(PORT, () => {
+//   console.log(`Server is running on port {PORT}`);
+// });
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server is running on port ${PORT}`);
 });
