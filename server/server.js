@@ -9,7 +9,9 @@ const parsing = require('../server/api.js');
 const fs = require('fs');
 
 // MYSQL
-const mysql = require('mysql');
+// const mysql = require('mysql');
+
+const mysql = require('mysql2/promise');
 
 // 로그인 쿠키
 const cookieParser = require('cookie-parser');
