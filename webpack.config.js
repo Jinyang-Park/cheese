@@ -73,12 +73,12 @@ module.exports = {
     new CleanWebpackPlugin(),
     // dotenv 사용을 위한 설정
     new webpack.DefinePlugin({
-      'process.env.DB_HOST': JSON.stringify(process.env.DB_HOST),
+      'process.env.MYSQLHOST': JSON.stringify(process.env.MYSQLHOST),
+      'process.env.MYSQLPORT': JSON.stringify(process.env.MYSQLPORT),
+      'process.env.MYSQLUSER': JSON.stringify(process.env.MYSQLUSER),
+      'process.env.MYSQLPASSWORD': JSON.stringify(process.env.MYSQLPASSWORD),
+      'process.env.MYSQLDATABASE': JSON.stringify(process.env.MYSQLDATABASE),
       'process.env.PORT': JSON.stringify(process.env.PORT),
-      'process.env.DB_USER': JSON.stringify(process.env.DB_USER),
-      'process.env.DB_PASSWORD': JSON.stringify(process.env.DB_PASSWORD),
-      'process.env.DB_DATABASE': JSON.stringify(process.env.DB_DATABASE),
-      'process.env.DB_PORT': JSON.stringify(process.env.DB_PORT),
     }),
     new webpack.ProvidePlugin({
       Buffer: ['buffer', 'Buffer'],
