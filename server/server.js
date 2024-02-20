@@ -49,15 +49,6 @@ const db = mysql.createConnection({
 // connetct를 추가해야 된다.
 db.connect();
 
-// db.query('select * from users', (err, results, fields) => {
-//   if (err) {
-//     console.log(err);
-//   }
-//   console.log(results);
-// });
-
-// db.end();
-
 // axios로 받을때 작성했던 코드
 // pending이 떠서 await 비동기 처리함
 // const parsingData = async () => {
