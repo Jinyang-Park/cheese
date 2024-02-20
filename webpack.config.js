@@ -74,10 +74,11 @@ module.exports = {
     // dotenv 사용을 위한 설정
     new webpack.DefinePlugin({
       'process.env.DB_HOST': JSON.stringify(process.env.DB_HOST),
+      'process.env.PORT': JSON.stringify(process.env.PORT),
       'process.env.DB_USER': JSON.stringify(process.env.DB_USER),
       'process.env.DB_PASSWORD': JSON.stringify(process.env.DB_PASSWORD),
       'process.env.DB_NAME': JSON.stringify(process.env.DB_NAME),
-      'process.env.PORT': JSON.stringify(process.env.PORT),
+      'process.env.PORT': JSON.stringify(process.env.DB_PORT),
     }),
     new webpack.ProvidePlugin({
       Buffer: ['buffer', 'Buffer'],
