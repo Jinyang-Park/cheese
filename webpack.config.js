@@ -78,7 +78,7 @@ module.exports = {
       'process.env.DB_USER': JSON.stringify(process.env.DB_USER),
       'process.env.DB_PASSWORD': JSON.stringify(process.env.DB_PASSWORD),
       'process.env.DB_DATABASE': JSON.stringify(process.env.DB_DATABASE),
-      'process.env.PORT': JSON.stringify(process.env.DB_PORT),
+      'process.env.DB_PORT': JSON.stringify(process.env.DB_PORT),
     }),
     new webpack.ProvidePlugin({
       Buffer: ['buffer', 'Buffer'],
