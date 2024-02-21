@@ -3,7 +3,7 @@ import GlobalStyle from './utils/globalStyles';
 import Router from './shared/Router';
 import { AuthProvider } from './contexts/AuthContext';
 
-function app() {
+function App() {
   return (
     <>
       <AuthProvider>
@@ -14,4 +14,4 @@ function app() {
   );
 }
 
-export default app;
+export default App;
