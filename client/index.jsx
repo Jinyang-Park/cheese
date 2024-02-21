@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+// import app from './app';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -26,7 +26,7 @@ root.render(
   <Provider store={store}>
     <React.StrictMode>
       <PersistGate loading={null} persistor={persistor}>
-        <App />
+        <app />
       </PersistGate>
     </React.StrictMode>
   </Provider>
