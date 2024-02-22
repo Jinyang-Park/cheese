@@ -21,12 +21,8 @@ const jwt = require('jsonwebtoken');
 // JSON 파일
 const InformationJSON = fs.readFileSync('./CheeseInformation.json');
 
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
-
-// app.use(express.json());
+app.use(express.static(path.join(__dirname, 'dist'))); // 웹팩 빌드 결과물을 제공합니다.
 app.use(express.urlencoded({ extended: true }));
-
 // cors
 app.use(express.json());
 app.use(cookieParser());
@@ -295,6 +291,10 @@ app.post('/changeUsername', (req, res) => {
 // Location 으로 InfromationJSON 전달
 app.get('/api', (req, res) => {
   res.send(InformationJSON);
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html')); // 모든 요청에 대해 index.html을 반환합니다.
 });
 
 // PORT 확인
