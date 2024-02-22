@@ -2,9 +2,8 @@
   "name": "cheese",
   "version": "1.0.0",
   "description": "",
-  "main": "app/index.js",
+  "main": "client/index.js",
   "scripts": {
-    "start": "node app/index.js",
     "build": "webpack --progress --mode production",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:start\"",
     "dev:start": "webpack-dev-server --mode development",
