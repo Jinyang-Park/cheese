@@ -2,7 +2,7 @@
   "name": "cheese",
   "version": "1.0.0",
   "description": "",
-  "main": "client/index.js",
+  "main": "client/index.jsx",
   "scripts": {
     "start": "webpack-dev-server --mode development",
     "build": "webpack --progress --mode production",

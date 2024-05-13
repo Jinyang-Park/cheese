@@ -3,33 +3,34 @@ import styled from 'styled-components';
 import { IoCallOutline } from 'react-icons/io5';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { IoLocationOutline } from 'react-icons/io5';
+import CheeseInformation from '../../../CheeseInformation.json';
 
-function InformationApi({ post }) {
+function InformationApi() {
   return (
     <>
-      <InformationTitle>{post.Title}</InformationTitle>
+      <InformationTitle>{CheeseInformation[0].Title}</InformationTitle>
       <Informationli>
         <Inforarray>
           <InformationCall />
           전화번호
         </Inforarray>
-        <InformationNumber>{post.Number}</InformationNumber>
+        <InformationNumber>{CheeseInformation[0].Number}</InformationNumber>
       </Informationli>
       <Informationli>
         <Inforarray>
           <InformationLoaction />
           주소
         </Inforarray>
-        <InformationAddress>{post.Address}</InformationAddress>
+        <InformationAddress>{CheeseInformation[0].Address}</InformationAddress>
       </Informationli>
       <Informationli>
         <Inforarray>
           <Informationclock />
           영업 시간
         </Inforarray>
-        <InformationTime>{post.Time}</InformationTime>
+        <InformationTime>{CheeseInformation[0].Time}</InformationTime>
       </Informationli>
-      <div>{post.Time2}</div>
+      <div>{CheeseInformation[0].Time2}</div>
     </>
   );
 }
