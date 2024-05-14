@@ -26,18 +26,10 @@ const parsing = async () => {
   const dataArr = [];
   const dataPath = './CheeseInformation.json';
 
-  // div하나가 빠져서 자꾸 빈배열이 나온것이다...ㅅㅂ
-  // const $cheesebon = $('#place-main-section-root > section > div > div ');
   const $cheesebon = $('#place-main-section-root > div > section > div > div ');
-  // console.log($cheesebon);
 
   $cheesebon.each((idx, node) => {
     const Title = $(node).find('.Fc1rA').text();
-    // const Img = $(node)
-    //   .find('.K0PDV._div')
-    //   .attr('style')
-    //   .match(/url\(["']?(.*?)["']?\)/)[1];
-    // console.log(Img);
     const Address = $(node).find('.LDgIH').text();
     const Time = $(node).find('.U7pYf').text().substring(0, 12);
     const Number = $(node).find('.xlx7Q').text();
@@ -49,20 +41,10 @@ const parsing = async () => {
       dataObject.Address = Address;
       dataObject.Time = Time;
       dataObject.Number = Number;
-      // dataArr2.push({ Address, Number, Time });
     }
-    // 오브젝트 형식으로 배열에 담기
-    // dataArr.push({
-    //   Title,
-    //   Address,
-    //   Time,
-    //   Number,
-    // });
   });
-  // console.log(dataObject);
+
   dataArr.push(dataObject);
-  console.log(dataArr);
-  // console.log(dataArr2);
   return fs.writeFileSync(dataPath, JSON.stringify(dataArr));
 };
 module.exports = parsing;
