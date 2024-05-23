@@ -42,7 +42,7 @@ function ShoppingCart() {
     }
     axios
       // 객체에 cart, cartDT 정보 보내주기
-      .post('http://atelier-de-cheesebon.com/cart/cart', { cart, cartDT })
+      .post('https://atelier-de-cheesebon.com/cart/cart', { cart, cartDT })
       .then((response) => {
         if (response.status === 200) {
         }
@@ -54,7 +54,7 @@ function ShoppingCart() {
         // 나는 처음에 위에 이미 정보를 저장하기 때문에 굳이 따로 저장할 필요가 없다고 생각했다.
         // 페이지를 새로고침하거나 다른 사용자가 사이트에 접속했을 때 결제 완료된
         // 시간과 날짜를 유지하기 위해 저장하는 방법이다.
-        axios.post('http://atelier-de-cheesebon.com/cart/savePaidTime', {
+        axios.post('https://atelier-de-cheesebon.com/cart/savePaidTime', {
           dateTime: cartDT,
         });
       })

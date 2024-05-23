@@ -27,7 +27,7 @@ export default function Header() {
   // 서버 응답 추가 코드문
   useEffect(() => {
     axios
-      .get('http://atelier-de-cheesebon.com/main/header')
+      .get('https://atelier-de-cheesebon.com/main/header')
       .then((res) => {
         if (res.status === 200) {
           setCheckAuth(true);
@@ -42,7 +42,7 @@ export default function Header() {
 
   const handleDelete = () => {
     axios
-      .post('http://atelier-de-cheesebon.com/main/logout')
+      .post('https://atelier-de-cheesebon.com/main/logout')
       .then((res) => {
         if (res.status === 200) {
           setCheckAuth(false);

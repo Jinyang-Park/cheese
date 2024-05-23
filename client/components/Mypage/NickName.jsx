@@ -24,7 +24,7 @@ function NickName() {
 
       // 서버 불러오기
       axios
-        .post('http://atelier-de-cheesebon.com/main/changeUsername', {
+        .post('https://atelier-de-cheesebon.com/main/changeUsername', {
           NewUsername: auth.newUserNameInput,
           userId,
         })
@@ -44,7 +44,7 @@ function NickName() {
   // 서버 응답 추가 코드문
   useEffect(() => {
     axios
-      .get('http://atelier-de-cheesebon.com/main/header')
+      .get('https://atelier-de-cheesebon.com/main/header')
       .then((res) => {
         if (res.status === 200) {
           console.log(res.data);
