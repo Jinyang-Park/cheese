@@ -94,17 +94,18 @@ module.exports = {
     },
     proxy: {
       '/api': {
-        target: 'https://localhost:80',
+        target: 'https://localhost:443', // HTTPS 포트로 변경
         changeOrigin: true,
         pathRewrite: {
           '^/api': '',
         },
       },
     },
-    port: 80,
+    port: 443, // HTTPS 포트로 변경
     hot: true, // 핫 모듈 교체 활성화
     compress: true, // 압축 유무
     open: true, // 기본 브라우저에서 실행
     historyApiFallback: true, // connect-history-api-fallback error 방지
+    https: true, // HTTPS 활성화
   },
 };
