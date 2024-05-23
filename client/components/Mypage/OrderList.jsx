@@ -2,37 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 function OrderList({ cart }) {
-  console.log('카트', cart);
-
-  // const handleOrederCancelClick = async (itemId) => {
-  //   const isConfirmed = window.confirm('주문을 취소하시겠습니까?');
-  //   if (!isConfirmed) {
-  //     return; // 사용자가 '취소'를 누르면 여기서 함수를 종료합니다.
-  //   }
-  //   try {
-  //     const response = await axios.delete(
-  //       `http://localhost:5000/delete/${itemId}`
-  //     );
-  //     if (response.status === 200) {
-  //       // 클릭한 상품이 삭제되면 fetchCartData 함수를 불러 새로 페이지를 생성한다
-  //       fetchCartData();
-
-  //       // 결제 날짜와 시간 삭제 api 호출
-  //       axios
-  //         .delete(`http://localhost:5000/deleteDateTime/${itemId}`)
-  //         .then((response) => {
-  //           if (response.status !== 200) {
-  //             console.log('Failed to delete the date and time');
-  //           }
-  //         })
-  //         .catch((error) => {
-  //           console.log('Failed to delete the date and time', error);
-  //         });
-  //     }
-  //   } catch (error) {
-  //     console.log('Failed to cancel the order', error);
-  //   }
-  // };
   return (
     <>
       <CartItemUl>

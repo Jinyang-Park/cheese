@@ -22,7 +22,7 @@ function Signup() {
     if (!auth.checkValidationForSignUp()) return;
 
     axios
-      .post('http://localhost:5000/signup', {
+      .post('http://localhost/signup', {
         Email: auth.email,
         UserName: auth.userName,
         Password: auth.password,

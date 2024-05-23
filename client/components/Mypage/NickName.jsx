@@ -24,7 +24,7 @@ function NickName() {
 
       // 서버 불러오기
       axios
-        .post('http://localhost:5000/changeUsername', {
+        .post('http://localhost/changeUsername', {
           NewUsername: auth.newUserNameInput,
           userId,
         })
@@ -44,7 +44,7 @@ function NickName() {
   // 서버 응답 추가 코드문
   useEffect(() => {
     axios
-      .get('http://localhost:5000/header')
+      .get('http://localhost/header')
       .then((res) => {
         if (res.status === 200) {
           console.log(res.data);

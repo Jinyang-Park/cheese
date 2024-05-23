@@ -95,17 +95,13 @@ module.exports = {
     proxy: {
       '/api': {
         target: 'http://localhost:5000',
-        // target: 'https://search.naver.com',
         changeOrigin: true,
         pathRewrite: {
           '^/api': '',
         },
       },
     },
-    // static: {
-    //   directory: path.resolve(__dirname, 'dist'),
-    // },
-    port: 3000,
+    port: 80,
     hot: true, // 핫 모듈 교체 활성화
     compress: true, // 압축 유무
     open: true, // 기본 브라우저에서 실행
