@@ -17,14 +17,18 @@ function OrderListGroup({ items, fetchCartData }) {
       return; // 사용자가 '취소'를 누르면 여기서 함수를 종료합니다.
     }
     try {
-      const response = await axios.delete(`http://localhost/delete/${itemId}`);
+      const response = await axios.delete(
+        `http://atelier-de-cheesebon.com/cart/delete/${itemId}`
+      );
       if (response.status === 200) {
         // 클릭한 상품이 삭제되면 fetchCartData 함수를 불러 새로 페이지를 생성한다
         fetchCartData();
 
         // 결제 날짜와 시간 삭제 api 호출
         axios
-          .delete(`http://localhost/deleteDateTime/${itemId}`)
+          .delete(
+            `http://atelier-de-cheesebon.com/cart/deleteDateTime/${itemId}`
+          )
           .then((response) => {
             if (response.status !== 200) {
               console.log('Failed to delete the date and time');

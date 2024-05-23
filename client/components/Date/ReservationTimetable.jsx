@@ -27,7 +27,9 @@ function ReservationTimetable() {
   // 페이지를 로드할때 마다 서버에서 결제한 날짜와 시간 정보를 가져오는 함수
   const fetchPaidTimeData = async () => {
     try {
-      const response = await axios.get('http://localhost/getPaidTime');
+      const response = await axios.get(
+        'http://atelier-de-cheesebon.com/cart/getPaidTime'
+      );
       setPaidTime(response.data.dateTime);
     } catch (error) {
       console.log('Failed to fetch paid time data', error);

@@ -22,7 +22,7 @@ function Signup() {
     if (!auth.checkValidationForSignUp()) return;
 
     axios
-      .post('http://localhost/signup', {
+      .post('http://atelier-de-cheesebon.com/main/signup', {
         Email: auth.email,
         UserName: auth.userName,
         Password: auth.password,
