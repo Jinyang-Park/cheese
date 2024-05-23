@@ -44,7 +44,7 @@ function Signup() {
     <CommonStyles>
       <LoginWrap>
         <LoginTitle>회원가입</LoginTitle>
-        <LoginForm onSubmit={submitSingupHandler}>
+        <LoginForm onSubmit={submitSingupHandler} method='POST'>
           <LoginNameDiv>
             <LoginNameLabel htmlFor='Name'>이름</LoginNameLabel>
             <LoginNameInput

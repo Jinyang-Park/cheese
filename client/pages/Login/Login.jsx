@@ -48,7 +48,7 @@ function Login() {
     <CommonStyles>
       <LoginWrap>
         <LoginTitle>로그인</LoginTitle>
-        <LoginForm onSubmit={submitLoginHandler}>
+        <LoginForm onSubmit={submitLoginHandler} method='GET'>
           <LoginEmailDiv>
             <LoginEmailLabel htmlFor='email'>이메일</LoginEmailLabel>
             <LoginEmailInput
