@@ -21,7 +21,7 @@ function Signup() {
     // 비밀번호 일치여부 확인
     if (!auth.checkValidationForSignUp()) return;
     await axios
-      .post('https://api/atelier-de-cheesebon.com/api/users/signup', {
+      .post('https://api.atelier-de-cheesebon.com/api/users/signup', {
         Email: auth.email,
         UserName: auth.userName,
         Password: auth.password,

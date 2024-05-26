@@ -12,7 +12,7 @@ function Mypage() {
   const fetchCartData = async () => {
     try {
       const response = await axios.get(
-        'https://api/atelier-de-cheesebon.com/api/cart/items'
+        'https://api.atelier-de-cheesebon.com/api/cart/items'
       );
       setCartInfor(response.data.cartdata);
     } catch (error) {

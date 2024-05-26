@@ -42,7 +42,7 @@ function ShoppingCart() {
     }
     axios
       // 객체에 cart, cartDT 정보 보내주기
-      .post('https://api/atelier-de-cheesebon.com/api/cart/add', {
+      .post('https://api.atelier-de-cheesebon.com/api/cart/add', {
         cart,
         cartDT,
       })
@@ -53,7 +53,7 @@ function ShoppingCart() {
         navigate(`/Mypage`);
         dispatch(cartReset());
         dispatch(dtReset());
-        axios.post('https://api/atelier-de-cheesebon.com/api/cart/save-time', {
+        axios.post('https://api.atelier-de-cheesebon.com/api/cart/save-time', {
           dateTime: cartDT,
         });
       })

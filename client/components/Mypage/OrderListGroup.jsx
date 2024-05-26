@@ -18,7 +18,7 @@ function OrderListGroup({ items, fetchCartData }) {
     }
     try {
       const response = await axios.delete(
-        `https://api/atelier-de-cheesebon.com/api/cart/${itemId}`
+        `https://api.atelier-de-cheesebon.com/api/cart/${itemId}`
       );
       if (response.status === 200) {
         // 클릭한 상품이 삭제되면 fetchCartData 함수를 불러 새로 페이지를 생성한다
@@ -27,7 +27,7 @@ function OrderListGroup({ items, fetchCartData }) {
         // 결제 날짜와 시간 삭제 api 호출
         axios
           .delete(
-            `https://api/atelier-de-cheesebon.com/api/cart/paid-time/${itemId}`
+            `https://api.atelier-de-cheesebon.com/api/cart/paid-time/${itemId}`
           )
           .then((response) => {
             if (response.status !== 200) {
