@@ -8,12 +8,11 @@ import { AiOutlineShoppingCart } from 'react-icons/ai';
 
 function Mypage() {
   const [cartInfor, setCartInfor] = useState(null);
-  console.log('cartInfor', cartInfor);
 
   const fetchCartData = async () => {
     try {
       const response = await axios.get(
-        'https://atelier-de-cheesebon.com/cart/getPaidCart'
+        'https://api/atelier-de-cheesebon.com/api/cart/items'
       );
       setCartInfor(response.data.cartdata);
     } catch (error) {

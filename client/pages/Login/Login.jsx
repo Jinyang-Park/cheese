@@ -25,7 +25,7 @@ function Login() {
     if (!auth.checkValidation()) return;
 
     axios
-      .post('https://atelier-de-cheesebon.com/main/login', {
+      .post('https://api/atelier-de-cheesebon.com/api/users/login', {
         Email: auth.email,
         Password: auth.password,
       })

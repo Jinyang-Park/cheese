@@ -28,7 +28,7 @@ function ReservationTimetable() {
   const fetchPaidTimeData = async () => {
     try {
       const response = await axios.get(
-        'https://atelier-de-cheesebon.com/cart/getPaidTime'
+        'https://api/atelier-de-cheesebon.com/api/cart/paid-time'
       );
       setPaidTime(response.data.dateTime);
     } catch (error) {
