@@ -13,7 +13,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 
 function ShoppingCart() {
   const { type } = useParams();
-  console.log('예약 상품 추각 콘솔로그', type);
+
   // 결제완료 후 시간 버튼 비활성화 context api
   const { PaidTime, setPaidTime } = useContext(AuthContext);
 
