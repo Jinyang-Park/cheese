@@ -4,39 +4,8 @@ import Storeimg from '../../public/assets/Storeimg.jpg';
 import styled from 'styled-components';
 import InformationApi from '../../components/Location/InformationApi';
 import Map from '../../components/Location/Map';
-import CheeseInformation from '../../../CheeseInformation.json';
 
 function Location() {
-  // const [Data, setData] = useState([]);
-
-  // useEffect(() => {
-  //   const requestOptions = {
-  //     method: 'GET',
-  //     Headers: { 'Content-Type': 'application/json' },
-  //     redirect: 'follow',
-  //   };
-  //   fetch('http://localhost:5000/api', requestOptions)
-  //     .then((response) => response.json())
-  //     .then((data) => setData(data));
-  // }, []);
-
-  // axios로 server에서 json 자동 변환에서 에러가 뜨고 막혀서 json파일을 따로 만들어서 fetch 방법을 사용함
-  // const fetchStoreInformations = async () => {
-  //   try {
-  //     const { data } = await axios.get('http://localhost:5000/api');
-  //     console.log(data);
-  //     setData(data);
-  //   } catch (error) {
-  //     let message = 'Unknown Error';
-  //     if (error instanceof Error) message = error.message;
-  //     console.log(message);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchStoreInformations();
-  // }, []);
-
   return (
     <>
       <CommonStyles>
@@ -49,9 +18,6 @@ function Location() {
                   <LocationImg src={Storeimg} />
                 </LocationImfor1>
                 <LocationImfor>
-                  {/* {CheeseInformation.map((post) => {
-                    return <InformationApi key={post.id} post={post} />;
-                  })} */}
                   <InformationApi />
                 </LocationImfor>
               </LocationWrap>

@@ -9,7 +9,7 @@ function Signup() {
   const auth = useAuth();
   const navigate = useNavigate();
 
-  const submitSingupHandler = (event) => {
+  const submitSingupHandler = async (event) => {
     event.preventDefault();
 
     // 이름 유효성 검사 확인
@@ -20,9 +20,8 @@ function Signup() {
 
     // 비밀번호 일치여부 확인
     if (!auth.checkValidationForSignUp()) return;
-
-    axios
-      .post('http://localhost:5000/signup', {
+    await axios
+      .post('https://api.atelier-de-cheesebon.com/api/users/signup', {
         Email: auth.email,
         UserName: auth.userName,
         Password: auth.password,
@@ -44,7 +43,7 @@ function Signup() {
     <CommonStyles>
       <LoginWrap>
         <LoginTitle>회원가입</LoginTitle>
-        <LoginForm onSubmit={submitSingupHandler}>
+        <LoginForm onSubmit={submitSingupHandler} method='POST'>
           <LoginNameDiv>
             <LoginNameLabel htmlFor='Name'>이름</LoginNameLabel>
             <LoginNameInput

@@ -27,7 +27,7 @@ export default function Header() {
   // 서버 응답 추가 코드문
   useEffect(() => {
     axios
-      .get('http://localhost:5000/header')
+      .get('https://api.atelier-de-cheesebon.com/api/users/header')
       .then((res) => {
         if (res.status === 200) {
           setCheckAuth(true);
@@ -42,7 +42,7 @@ export default function Header() {
 
   const handleDelete = () => {
     axios
-      .post('http://localhost:5000/logout')
+      .post('https://api.atelier-de-cheesebon.com/api/users/logout')
       .then((res) => {
         if (res.status === 200) {
           setCheckAuth(false);
@@ -62,32 +62,6 @@ export default function Header() {
     // Mypage나 Cart는 pathname이 바뀌면 토글 닫기
     setIsToggled(false);
   };
-  // 서버 응답 코드 추가하지 않은 코드문
-  // useEffect(() => {
-  //   axios
-  //     .get('http://localhost:5000/header')
-  //     .then((res) => {
-  //       const message = res.data.message || '';
-  //       if (message.includes('success')) {
-  //         setCheckAuth(true);
-  //       } else {
-  //         setCheckAuth(false);
-  //       }
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, [navigate]);
-
-  // const handleDelete = () => {
-  //   axios
-  //     .post('http://localhost:5000/logout') // 변경된 부분
-  //     .then((res) => {
-  //       // location.reload();
-  //       setCheckAuth(false);
-  //       alert('로그아웃 되었습니다. 다시 만나요!');
-  //       navigate('/');
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
 
   // pathname이 바뀔때 마다 토클 닫아주기
   useEffect(() => {

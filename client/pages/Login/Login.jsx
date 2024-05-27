@@ -25,7 +25,7 @@ function Login() {
     if (!auth.checkValidation()) return;
 
     axios
-      .post('http://localhost:5000/login', {
+      .post('https://api.atelier-de-cheesebon.com/api/users/login', {
         Email: auth.email,
         Password: auth.password,
       })
@@ -44,35 +44,11 @@ function Login() {
       });
   };
 
-  // 서버 응답 코드 추가하지 않은 코드문
-  // const submitLoginHandler = (event) => {
-  //   event.preventDefault();
-
-  //   // 이메일, 비밀번호 유효성 검사 확인
-  //   if (!auth.checkValidation()) return;
-
-  //   axios
-  //     .post('http://localhost:5000/login', {
-  //       Email: auth.email,
-  //       Password: auth.password,
-  //     })
-  //     .then((res) => {
-  //       const message = res.data.message || '';
-  //       if (message.includes('user-not-found')) {
-  //         alert('회원을 찾을 수 없습니다. 회원가입을 먼저 진행해 주세요.');
-  //         navigate('/Signup');
-  //       } else if (message.includes('success')) {
-  //         alert('환영합니다!');
-  //         navigate('/');
-  //       }
-  //     });
-  // };
-
   return (
     <CommonStyles>
       <LoginWrap>
         <LoginTitle>로그인</LoginTitle>
-        <LoginForm onSubmit={submitLoginHandler}>
+        <LoginForm onSubmit={submitLoginHandler} method='GET'>
           <LoginEmailDiv>
             <LoginEmailLabel htmlFor='email'>이메일</LoginEmailLabel>
             <LoginEmailInput
