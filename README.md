@@ -8,7 +8,7 @@
 
 ## 📢 프로젝트 소개
 
-### Crafting Unique Wedding Cakes for Your Special Day🧡
+### Crafting unique wedding cakes for your special day🧡
 * **Express, MySQL**을 사용한 케이크 예약 시스템 서비스입니다.
 * 날짜와 시간을 선택해 웨딩케이크 상담 예약과 일반 케이크 예약을 **빠르고 편리**하게 할 수 있습니다.
 * Naver Map을 통해 가게 위치를 확인할 수 있으며, 유니크하고 시즌에 맞는 케이크 제작 서비스를 제공합니다.
