@@ -1,7 +1,7 @@
 # 📖 
 
 
-**프로젝트 기간**  : 2024.02.10 ~ 2024.05.04
+**프로젝트 기간**  : 
 
 🔗 [서비스 배포 링크](https://atelier-de-cheesebon.com/)
 <br/>
@@ -39,120 +39,62 @@
 ## 🗂 디렉토리 구조
 
 ```
-📦src
- ┣ 📂apis
- ┣ 📂app
- ┃ ┣ 📂(auth)
- ┃ ┃ ┣ 📂login
- ┃ ┃ ┃ ┗ 📜page.tsx
- ┃ ┃ ┗ 📂signup
- ┃ ┃ ┃ ┗ 📜page.tsx
- ┃ ┣ 📂@auth
- ┃ ┃ ┣ 📂(.)login
- ┃ ┃ ┃ ┗ 📜page.tsx
- ┃ ┃ ┣ 📂(.)signup
- ┃ ┃ ┃ ┗ 📜page.tsx
- ┃ ┃ ┗ 📜default.tsx
- ┃ ┣ 📂auth
- ┃ ┃ ┗ 📂callback
- ┃ ┃ ┃ ┗ 📜route.ts
- ┃ ┣ 📂best
- ┃ ┃ ┗ 📜page.tsx
- ┃ ┣ 📂cart
- ┃ ┃ ┗ 📜page.tsx
- ┃ ┣ 📂category
- ┃ ┃ ┗ 📜page.tsx
- ┃ ┣ 📂community
- ┃ ┃ ┣ 📂(detail)
- ┃ ┃ ┃ ┗ 📂detail
- ┃ ┃ ┃ ┃ ┣ 📂bookBuying
- ┃ ┃ ┃ ┃ ┃ ┗ 📂[doc_id]
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
- ┃ ┃ ┃ ┃ ┣ 📂bookMeeting
- ┃ ┃ ┃ ┃ ┃ ┗ 📂[doc_id]
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
- ┃ ┃ ┃ ┃ ┣ 📂bookReport
- ┃ ┃ ┃ ┃ ┃ ┗ 📂[doc_id]
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
- ┃ ┃ ┃ ┃ ┗ 📂bookSelling
- ┃ ┃ ┃ ┃ ┃ ┗ 📂[doc_id]
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
- ┃ ┃ ┣ 📂(post)
- ┃ ┃ ┃ ┗ 📂post
- ┃ ┃ ┃ ┃ ┗ 📂new
- ┃ ┃ ┃ ┃ ┃ ┣ 📂bookBuying
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
- ┃ ┃ ┃ ┃ ┃ ┣ 📂bookMeeting
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
- ┃ ┃ ┃ ┃ ┃ ┣ 📂bookReport
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
- ┃ ┃ ┃ ┃ ┃ ┣ 📂bookSelling
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
- ┃ ┃ ┃ ┃ ┃ ┗ 📜layout.tsx
- ┃ ┃ ┣ 📂(update)
- ┃ ┃ ┃ ┗ 📂update
- ┃ ┃ ┃ ┃ ┣ 📂bookBuying
- ┃ ┃ ┃ ┃ ┃ ┗ 📂[docId]
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
- ┃ ┃ ┃ ┃ ┣ 📂bookMeeting
- ┃ ┃ ┃ ┃ ┃ ┗ 📂[docId]
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
- ┃ ┃ ┃ ┃ ┣ 📂bookReport
- ┃ ┃ ┃ ┃ ┃ ┗ 📂[docId]
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
- ┃ ┃ ┃ ┃ ┣ 📂bookSelling
- ┃ ┃ ┃ ┃ ┃ ┗ 📂[docId]
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
- ┃ ┃ ┃ ┃ ┗ 📜layout.tsx
- ┃ ┃ ┗ 📂(view)
- ┃ ┃ ┃ ┣ 📂bookBuying
- ┃ ┃ ┃ ┃ ┗ 📜page.tsx
- ┃ ┃ ┃ ┣ 📂bookMeeting
- ┃ ┃ ┃ ┃ ┗ 📜page.tsx
- ┃ ┃ ┃ ┣ 📂bookReport
- ┃ ┃ ┃ ┃ ┗ 📜page.tsx
- ┃ ┃ ┃ ┣ 📂bookSelling
- ┃ ┃ ┃ ┃ ┗ 📜page.tsx
- ┃ ┃ ┃ ┣ 📜error.tsx
- ┃ ┃ ┃ ┗ 📜layout.tsx
- ┃ ┣ 📂detail
- ┃ ┃ ┗ 📂[doc.id]
- ┃ ┃ ┃ ┗ 📜page.tsx
- ┃ ┣ 📂mypage
- ┃ ┃ ┗ 📜page.tsx
- ┃ ┣ 📂new
- ┃ ┃ ┗ 📜page.tsx
- ┃ ┣ 📂orderComplete
- ┃ ┃ ┗ 📂[orderId]
- ┃ ┃ ┃ ┗ 📜page.tsx
- ┃ ┣ 📂search
- ┃ ┃ ┗ 📜page.tsx
- ┃ ┣ 📂theme
- ┃ ┃ ┣ 📂[slug]
- ┃ ┃ ┃ ┗ 📜page.tsx
- ┃ ┃ ┗ 📜page.tsx
- ┃ ┣ 📂used
- ┃ ┃ ┗ 📜page.tsx
- ┃ ┣ 📜layout.tsx
- ┃ ┣ 📜not-found.tsx
- ┃ ┗ 📜page.tsx
- ┣ 📂assets
+📦client
+ ┣ 📂common
  ┣ 📂components
+ ┃ ┣ 📂Cart
+ ┃ ┣ 📂Date
+ ┃ ┣ 📂Layout
+ ┃ ┣ 📂Location
+ ┃ ┣ 📂Main
+ ┃ ┣ 📂Menudetail
+ ┃ ┗ 📂Mypage
+ ┣ 📂contexts
  ┣ 📂hooks
- ┣ 📂recoil
- ┣ 📂styles
- ┣ 📂types
- ┗ 📂utils
+ ┣ 📂pages
+ ┃ ┣ 📂Location
+ ┃ ┃ ┣ 📜Location.jsx
+ ┃ ┃ ┗ 📜Location.style.jsx
+ ┃ ┣ 📂Login
+ ┃ ┃ ┗ 📜Login.jsx
+ ┃ ┣ 📂Main
+ ┃ ┃ ┗ 📜Main.jsx
+ ┃ ┣ 📂Menu
+ ┃ ┃ ┗ 📜Menu.jsx
+ ┃ ┣ 📂Menudetail
+ ┃ ┃ ┗ 📜Menudetail.jsx
+ ┃ ┣ 📂MenuInformationDetail
+ ┃ ┃ ┗ 📜MenuInformationDetail.jsx
+ ┃ ┣ 📂Menupick
+ ┃ ┃ ┗ 📜Menupick.jsx
+ ┃ ┣ 📂Mypage
+ ┃ ┃ ┗ 📜Mypage.jsx
+ ┃ ┣ 📂Reservation
+ ┃ ┃ ┣ 📜Modal.jsx
+ ┃ ┃ ┗ 📜Reservation.jsx
+ ┃ ┣ 📂ReservationDate
+ ┃ ┃ ┗ 📜ReservationDate.jsx
+ ┃ ┣ 📂ShoppingCart
+ ┃ ┃ ┗ 📜ShoppingCart.jsx
+ ┃ ┗ 📂Signup
+ ┃ ┃ ┗ 📜Signup.jsx
+ ┣ 📂public
+ ┣ 📂redux
+ ┣ 📂service
+ ┣ 📂shared
+ ┣ 📂utils
+ ┣ 📜App.jsx
+ ┗ 📜index.jsx
 ```
 
 - `apis`: api 호출 관련 파일
-- `app/files`: 각 페이지 관련 파일
-- `assets`: 로고 및 이미지 관련 파일
+- `common`: 공통적으로 사용되는 파일
 - `components`: 각 페이지 내부 컴포넌트
+- `contexts`: 컨텍스트 관련 파일
 - `hooks`: 커스텀 훅 파일
-- `recoil`: 리코일 관련 파일
-- `styles`: 스타일 관련 파일
-- `types`: 타입 관련 파일
+- `pages`: 각 페이지 관련 파일
+- `redux`: 리덕스 관련 파일
+- `shared`: 공통으로 사용되는 파일
 - `utils`: 기타 특정 작업 수행하는 함수 파일
 <br/>
 <br/>
