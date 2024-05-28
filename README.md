@@ -1,8 +1,6 @@
 # 🎂 atelier-de-cheesebon🧡 
 ![CHEESEBONIMAGE](https://github.com/Jinyang-Park/cheese/assets/80263801/09b37e50-5f14-4a34-97c0-d020515ba182)
 
-**프로젝트 기간**  : 
-
 🔗 [서비스 배포 링크](https://atelier-de-cheesebon.com/)
 <br/>
 <br/>
