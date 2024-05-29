@@ -17,7 +17,8 @@
 <br/>
 
 ## 🖥 기술 스택
-![다이어그램](https://github.com/Jinyang-Park/cheese/assets/80263801/95862ffb-1b20-431a-bc83-bbec8065f830)
+![shot](https://github.com/Jinyang-Park/cheese/assets/80263801/e7e9eaa0-1ba5-4732-afed-400ec00ee14e)
+
 
 
 | 구분                 | 사용 기술          |
