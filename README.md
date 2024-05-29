@@ -2,7 +2,7 @@
 ![CHEESEBONIMAGEupdate](https://github.com/Jinyang-Park/cheese/assets/80263801/41aba3cc-b1c5-499e-80be-9814aba0911d)
 
 
-🔗 [서비스 배포 링크](https://atelier-de-cheesebon.com/)
+🔗 [아뜰리에 드 치즈본 서비스 배포 링크](https://atelier-de-cheesebon.com/)
 <br/>
 <br/>
 
@@ -17,8 +17,7 @@
 <br/>
 
 ## 🖥 기술 스택
-![shot](https://github.com/Jinyang-Park/cheese/assets/80263801/e7e9eaa0-1ba5-4732-afed-400ec00ee14e)
-
+![shot](https://github.com/Jinyang-Park/cheese/assets/80263801/b8b2a0a0-3942-4e80-a75b-fc2d27c8650b)
 
 
 | 구분                 | 사용 기술          |
