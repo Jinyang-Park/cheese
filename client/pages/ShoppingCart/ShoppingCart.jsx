@@ -38,7 +38,7 @@ function ShoppingCart() {
     // 사용자에게 결제 확인 얼럿을 먼저 보여줍니다.
     const isConfirmed = window.confirm('결제를 하시겠습니까?');
     if (!isConfirmed) {
-      return; // 사용자가 '취소'를 누르면 여기서 함수를 종료합니다.
+      return; // 사용자가 '취소'를 누르면 여기서 함수를 종료합니다.z
     }
     axios
       // 객체에 cart, cartDT 정보 보내주기

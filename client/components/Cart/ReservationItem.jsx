@@ -45,7 +45,6 @@ function ReservationItem({ item }) {
   // input 수량 함수 로직
   const handleCartChangeQuantityInput = (e) => {
     let newValue = parseInt(e.target.value);
-    console.log(newValue);
     if (isNaN(newValue)) {
       newValue = '';
     } else if (newValue === 0) {
