@@ -2,11 +2,10 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const webpack = require('webpack');
-// const Dotenv = require('dotenv-webpack');
 require('dotenv').config();
 
 module.exports = {
-  mode: 'development', // 실서비스: production
+  mode: 'production',
   resolve: {
     extensions: ['.js', '.jsx'],
     fallback: {
@@ -19,13 +18,8 @@ module.exports = {
       assert: require.resolve('assert'),
       util: require.resolve('util/'),
     },
-    // alias: {
-    //   './App': path.resolve(__dirname, 'client/App'),
-    // },
   },
-  entry:
-    // 합쳐질 파일 요소들 입력
-    './client/index.jsx',
+  entry: './client/index.jsx', // 합쳐질 파일 요소들 입력
   output: {
     filename: 'bundle.js', // 웹팩 빌드 후 최종적으로 만들어질 파일
     path: path.resolve(__dirname, 'dist'), // 빌드 위치
@@ -35,7 +29,6 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/, // 대상 설정 정규식
-        // exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
           presets: ['@babel/preset-env', '@babel/preset-react'],
@@ -57,11 +50,6 @@ module.exports = {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
-      // {
-      //   test: /\.json$/,
-      //   loader: 'json5-loader',
-      //   type: 'javascript/auto',
-      // },
     ],
   },
   plugins: [
