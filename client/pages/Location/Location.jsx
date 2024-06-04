@@ -11,6 +11,7 @@ function Location() {
       <CommonStyles>
         <LocationSection>
           <LocationTxt>매장안내</LocationTxt>
+          <LocationTxt>매장안내</LocationTxt>
           <LocationvView>
             <LocationImgSection>
               <LocationWrap>
