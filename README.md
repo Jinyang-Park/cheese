@@ -1,8 +1,6 @@
 # 🎂 atelier-de-cheesebon🧡 
 ![CHEESEBONIMAGEupdate](https://github.com/Jinyang-Park/cheese/assets/80263801/41aba3cc-b1c5-499e-80be-9814aba0911d)
 
-
-🔗 [아뜰리에 드 치즈본 서비스 배포 링크](https://atelier-de-cheesebon.com/)
 <br/>
 <br/>
 
@@ -100,26 +98,37 @@
 
 ## 💡 구현 기능
 ### 로그인/ 회원가입
-![로그인녹화](https://github.com/Jinyang-Park/cheese/assets/80263801/3f714ecf-7c2c-4311-9c0a-1c823dabd093)
-![로그인녹화2](https://github.com/Jinyang-Park/cheese/assets/80263801/2ac54302-9369-4464-a8dc-16233322450f)
+ <img src="https://github.com/Jinyang-Park/cheese/assets/80263801/3f714ecf-7c2c-4311-9c0a-1c823dabd093" alt="로그인 녹화" class="resized-gif" width='250px' height='500px'>
+ 
 * Express와 MySQL을 활용한 유효성 검사와 회원가입 기능 구현
 
 ### 예약 페이지
+ <img src="https://github.com/Jinyang-Park/cheese/assets/80263801/64bbda32-4697-4fce-9d85-bb6efe9d3b12" alt="로그인 녹화" class="resized-gif" width='250px' height='500px'>
+
+
 * 웨딩케이크 상담 및 일반 케이크 예약 가능
 * 약 시 날짜와 시간 선택, 케이크 단과 수량 조절, 테이스팅 종류 3가지 중 선택 가능
 
 ### 마이페이지
-* 닉네임 변경 능
-* 주문한 상품의 취소 기능
+ <img src="https://github.com/Jinyang-Park/cheese/assets/80263801/e8a30b6b-8856-4be5-8d8f-f480839c3226" alt="로그인 녹화" class="resized-gif" width='250px' height='500px'>
+
+* 닉네임 변경
+* 주문한 상품 취소 기능
 
 ### 장바구니 
+<img src="https://github.com/Jinyang-Park/cheese/assets/80263801/7be7f5a5-8d74-4f78-b431-cc5dbd9372b2" alt="로그인 녹화" class="resized-gif" width='250px' height='500px'>
+
 * 예약 날짜, 시간 변경 가능
 * 주문 수량 조절 및 예약 상품 추가 기능
 
 ### 위치페이지
+<img src="https://github.com/Jinyang-Park/cheese/assets/80263801/0bf02864-df02-4d11-84a3-41182ee04a0c" alt="로그인 녹화" class="resized-gif" width='250px' height='500px'>
+
 * Naver Map API를 이용해 가게 위치 확인 및 네이버 가게 정보 페이지로의 이동 가능
   
 ### 메뉴패이지
+<img src="https://github.com/Jinyang-Park/cheese/assets/80263801/606980cb-b18d-448e-b6cc-55ea03084776" alt="로그인 녹화" class="resized-gif" width='250px' height='500px'>
+
 * 검색 기능을 통한 원하는 케이크 상품 조회
 * 케이크 종류별로 상품 확인 가능
   
