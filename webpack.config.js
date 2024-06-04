@@ -97,6 +97,6 @@ module.exports = {
     compress: true, // 압축 유무
     open: true, // 기본 브라우저에서 실행
     historyApiFallback: true, // connect-history-api-fallback error 방지
-    https: true, // HTTPS 활성화
+    // https: true, // HTTPS 활성화
   },
 };
