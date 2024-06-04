@@ -74,6 +74,9 @@ module.exports = {
     }),
   ],
   devServer: {
+    server: {
+      type: 'https',
+    },
     client: {
       overlay: {
         errors: true,
