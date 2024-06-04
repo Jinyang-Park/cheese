@@ -19,11 +19,6 @@ jobs:
         with:
           node-version: '18.x'
 
-  - name: Use Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18.x'
-
       - name: Check Node v # Node v 확인
         run: node -v
 
@@ -34,10 +29,8 @@ jobs:
         run: npm run build
         env:
           CI: ''
-          
+
       - name: zip create
-        # zip 파일을 만듭니다(파일명은 자유, 대신 아래 workflow에 적을 파일명과 동일하게 맞춰주세요).
-        # 여기서는 build-app.zip
         run: zip -qq -r ./build-app.zip .
         shell: bash
 
@@ -63,6 +56,3 @@ jobs:
           MYSQLHOST: ${{ secrets.MYSQLHOST }}
           MYSQLPORT: ${{ secrets.MYSQLPORT }}
           MYSQLUSER: ${{ secrets.MYSQLUSER }}
-          MYSQLPASSWORD: ${{ secrets.MYSQLPASSWORD }}
-          MYSQLDATABASE: ${{ secrets.MYSQLDATABASE }}
-          PORT: ${{ secrets.PORT }}
