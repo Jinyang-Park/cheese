@@ -49,7 +49,7 @@ module.exports = {
             options: {
               limit: 8192, // 파일 크기가 이 값(단위: 바이트) 미만이면 Base64 URL로 변환합니다.
               name: '[name].[ext]',
-              outputPath: 'assets/', // 이미지가 저장될 경로를 지정합니다.
+              outputPath: 'assets', // 이미지가 저장될 경로를 지정합니다.
               fallback: require.resolve('file-loader'), // url-loader가 파일 크기 제한을 초과하는 경우 file-loader를 사용하도록 설정
             },
           },
