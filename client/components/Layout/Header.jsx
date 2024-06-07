@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Logo from '../../public/assets/Logo.png';
-import Flower from '../../public/assets/Flower.png';
-import Leaf from '../../public/assets/Leaf.png';
-import Door from '../../public/assets/Door.png';
+import Logo from '../../public/assets/Logo.webp';
+import Flower from '../../public/assets/Flower.webp';
+import Leaf from '../../public/assets/Leaf.webp';
+import Door from '../../public/assets/Door.webp';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import CommonStyles from '../../utils/CommonStyles';
 import axios from 'axios';
