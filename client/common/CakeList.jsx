@@ -9,7 +9,7 @@ export const CakeList = [
     date: '2023-06-25',
     price: '150000',
     image:
-      '/assets/Choco-Classic.webp || ../../public/assets/Choco-Classic.webp || https://i.ibb.co/QmftnRz/Choco-Classic.jpg',
+      '/assets/Choco-Classic.webp || ../../public/assets/Choco-Classic.webp || https://i.ibb.co/mRcRShS/Choco-Classic.jpg',
     allergy: ['밀', '우유', '대두', '계란', '돼지고기 함유'],
   },
   {
