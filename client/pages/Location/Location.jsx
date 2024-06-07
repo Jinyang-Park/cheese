@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import CommonStyles from '../../utils/CommonStyles';
-import Storeimg from '../../public/assets/Storeimg.jpg';
+import Storeimg from '../../public/assets/Storeimg.webp';
 import styled from 'styled-components';
 import InformationApi from '../../components/Location/InformationApi';
 import Map from '../../components/Location/Map';

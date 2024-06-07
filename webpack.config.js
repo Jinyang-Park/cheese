@@ -35,19 +35,13 @@ module.exports = {
         },
       },
       {
-        test: /\.(jpg|png|svg)$/,
+        test: /\.(jpg|png|svg|webp)$/,
         use: [
           {
             loader: 'file-loader',
             options: {
               name: '[name].[ext]',
               outputPath: 'assets', // 이미지가 저장될 경로를 지정합니다.
-            },
-          },
-          {
-            loader: 'webp-loader',
-            options: {
-              quality: 75,
             },
           },
         ],

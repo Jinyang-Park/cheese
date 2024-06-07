@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import CommonStyles from '../../utils/CommonStyles';
 import styled from 'styled-components';
-import CakeMain from '../../public/assets/main2.png';
+import CakeMain from '../../public/assets/main2.webp';
 import WeddingCakeSlider from './../../components/Main/WeddingCakeSlider';
 import CupCakeSlider from '../../components/Main/CupCakeSlider';
 import { CakeList } from '../../common/CakeList';
